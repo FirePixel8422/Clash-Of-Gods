@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TurnManager : NetworkBehaviour
 {
@@ -14,6 +15,8 @@ public class TurnManager : NetworkBehaviour
     public bool isMyTurn;
     public ulong localClientId;
     public ulong clientOnTurnId;
+
+    public UnityEvent OnTurnChangedEvent;
 
 
 
@@ -55,6 +58,9 @@ public class TurnManager : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void NextTurn_ServerRPC()
     {
+        OnTurnChangedEvent.Invoke();
+
+
         ulong nextClientOnTurnId = clientOnTurnId + 1;
 
         if((int)nextClientOnTurnId == NetworkManager.ConnectedClientsIds.Count)

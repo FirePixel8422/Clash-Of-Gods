@@ -8,13 +8,7 @@ public struct GridObjectData
 
     public TowerCore tower;
 
-    public bool full
-    {
-        get
-        {
-            return tower != null;
-        }
-    }
+    public bool full;
 
     public int coreType;
     public int type;

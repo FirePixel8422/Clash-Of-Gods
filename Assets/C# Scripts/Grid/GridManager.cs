@@ -97,19 +97,21 @@ public class GridManager : NetworkBehaviour
         return grid[gridPos.x, gridPos.y];
     }
 
-    public void UpdateGridDataFieldType(Vector2Int gridPos, int newType)
+    public void UpdateGridDataFullState(Vector2Int gridPos, bool newFullState)
     {
-        grid[gridPos.x, gridPos.y].type = newType;
+        grid[gridPos.x, gridPos.y].full = newFullState;
     }
     public void ResetGridDataFieldType(Vector2Int gridPos)
     {
         grid[gridPos.x, gridPos.y].type = grid[gridPos.x, gridPos.y].coreType;
         grid[gridPos.x, gridPos.y].tower = null;
     }
-    public void UpdateGridDataFieldType(Vector2Int gridPos, int newType, TowerCore tower)
+    public void UpdateGridDataFieldType(Vector2Int gridPos, int newType, TowerCore tower = default)
     {
         grid[gridPos.x, gridPos.y].type = newType;
         grid[gridPos.x, gridPos.y].tower = tower;
+
+        grid[gridPos.x, gridPos.y].full = tower != null;
     }
 
 

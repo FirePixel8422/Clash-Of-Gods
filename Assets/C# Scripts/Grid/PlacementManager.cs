@@ -1,9 +1,5 @@
-using JetBrains.Annotations;
-using Newtonsoft.Json;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.Resources;
+using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -41,6 +37,22 @@ public class PlacementManager : NetworkBehaviour
     private GridObjectData selectedGridTileData;
     private Vector3 mousePos;
 
+
+
+    public TextMeshProUGUI currencyTextObj;
+
+    public float Currency
+    {
+        get
+        {
+            return currency;
+        }
+        set
+        {
+            currency = value;
+            //currencyTextObj.text = Mathf.RoundToInt(currency).ToString();
+        }
+    }
     public float currency;
 
 
@@ -58,11 +70,6 @@ public class PlacementManager : NetworkBehaviour
 
     public void OnConfirm(InputAction.CallbackContext ctx)
     {
-        if (TurnManager.Instance.isMyTurn == false)
-        {
-            return;
-        }
-
         if (ctx.performed)
         {
             PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
@@ -76,7 +83,7 @@ public class PlacementManager : NetworkBehaviour
                 return;
             }
 
-            if (isPlacingTower)
+            if (isPlacingTower && TurnManager.Instance.isMyTurn)
             {
                 TryPlaceTower();
             }
@@ -164,6 +171,9 @@ public class PlacementManager : NetworkBehaviour
         {
             if (currency >= selectedPreviewTower.cost)
             {
+                GridManager.Instance.UpdateGridDataFullState(selectedGridTileData.gridPos, true);
+                selectedGridTileData.full = true;
+
                 PlaceTower();
             }
             else
@@ -186,6 +196,12 @@ public class PlacementManager : NetworkBehaviour
         selectedPreviewTower.transform.localPosition = Vector3.zero;
         UpdateTowerPreviewServerRPC(Vector3.zero, true);
         isPlacingTower = false;
+
+        if (towerSelected)
+        {
+            selectedTower.SelectOrDeselectTower(false);
+            towerSelected = false;
+        }
 
         PlaceTower_ServerRPC(selectedGridTileData.worldPos);
 
@@ -220,7 +236,7 @@ public class PlacementManager : NetworkBehaviour
     private void TrySelectTower()
     {
         Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, 100, GridManager.Instance.p1 + GridManager.Instance.p2))
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, 100, placeableLayer))
         {
             GridObjectData gridData = GridManager.Instance.GridObjectFromWorldPoint(hitInfo.point);
             if (gridData.tower != null && gridData.tower.towerCompleted)
@@ -233,11 +249,19 @@ public class PlacementManager : NetworkBehaviour
 
                 //select tower
                 selectedTower = gridData.tower;
+
+                selectedTower.SelectOrDeselectTower(true);
                 towerSelected = true;
+
                 return;
             }
         }
-        towerSelected = false;
+
+        if (towerSelected)
+        {
+            selectedTower.SelectOrDeselectTower(false);
+            towerSelected = false;
+        }
     }
 
 
