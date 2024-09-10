@@ -101,14 +101,8 @@ public class GridManager : NetworkBehaviour
     {
         grid[gridPos.x, gridPos.y].type = newType;
     }
-    public void UpdateGridDataFieldType(Vector2Int gridPos, float addedCurrency)
-    {
-        grid[gridPos.x, gridPos.y].currency += addedCurrency;
-    }
     public void ResetGridDataFieldType(Vector2Int gridPos)
     {
-        grid[gridPos.x, gridPos.y].currency = 0;
-
         grid[gridPos.x, gridPos.y].type = grid[gridPos.x, gridPos.y].coreType;
         grid[gridPos.x, gridPos.y].tower = null;
     }

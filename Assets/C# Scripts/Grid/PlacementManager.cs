@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -61,7 +62,7 @@ public class PlacementManager : NetworkBehaviour
         {
             return;
         }
-        print("l");
+
         if (ctx.performed)
         {
             PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
@@ -122,7 +123,7 @@ public class PlacementManager : NetworkBehaviour
         if (isPlacingTower)
         {
             selectedPreviewTower.transform.localPosition = Vector3.zero;
-            UpdateTowerPreviewServerRPC(Vector3.zero);
+            UpdateTowerPreviewServerRPC(Vector3.zero, true);
         }
         if (towerSelected)
         {
@@ -153,6 +154,9 @@ public class PlacementManager : NetworkBehaviour
     #endregion
 
 
+
+    #region Place Tower
+
     public void TryPlaceTower()
     {
         //place tower system
@@ -171,7 +175,7 @@ public class PlacementManager : NetworkBehaviour
     private void CancelTowerPlacement()
     {
         selectedPreviewTower.transform.localPosition = Vector3.zero;
-        UpdateTowerPreviewServerRPC(Vector3.zero);
+        UpdateTowerPreviewServerRPC(Vector3.zero, true);
         isPlacingTower = false;
     }
     private void PlaceTower()
@@ -180,20 +184,38 @@ public class PlacementManager : NetworkBehaviour
         selectedPreviewTower.UpdateTowerPreviewColor(Color.white);
 
         selectedPreviewTower.transform.localPosition = Vector3.zero;
-        UpdateTowerPreviewServerRPC(Vector3.zero);
+        UpdateTowerPreviewServerRPC(Vector3.zero, true);
         isPlacingTower = false;
 
-        selectedTower = Instantiate(selectedPreviewTower.towerPrefab, selectedGridTileData.worldPos, selectedPreviewTower.transform.rotation).GetComponent<TowerCore>();
-
-        selectedTower.CoreInit();
-
-        GridManager.Instance.UpdateGridDataFieldType(selectedGridTileData.gridPos, 3, selectedTower);
-        GridManager.Instance.UpdateGridDataFieldType(selectedGridTileData.gridPos, (float)selectedTower.cost);
+        PlaceTower_ServerRPC(selectedGridTileData.worldPos);
 
 
         TurnManager.Instance.isMyTurn = false;
         TurnManager.Instance.NextTurn_ServerRPC();
     }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void PlaceTower_ServerRPC(Vector3 pos)
+    {
+        TowerCore spawnedTower = Instantiate(selectedPreviewTower.towerPrefab, pos, selectedPreviewTower.transform.rotation).GetComponent<TowerCore>();
+        spawnedTower.NetworkObject.SpawnWithOwnership(localClientId, true);
+
+        PlaceTower_ClientRPC(spawnedTower.NetworkObjectId);
+    }
+
+    [ClientRpc(RequireOwnership = false)]
+    private void PlaceTower_ClientRPC(ulong spawnedTowerNetworkObjectId)
+    {
+        selectedTower = NetworkManager.SpawnManager.SpawnedObjects[spawnedTowerNetworkObjectId].GetComponent<TowerCore>();
+
+        selectedTower.CoreInit();
+
+        GridManager.Instance.UpdateGridDataFieldType(selectedGridTileData.gridPos, 3, selectedTower);
+    }
+    #endregion
+
+
+
 
     private void TrySelectTower()
     {
@@ -237,7 +259,7 @@ public class PlacementManager : NetworkBehaviour
         {
             selectedGridTileData = GridManager.Instance.GridObjectFromWorldPoint(hitInfo.point);
 
-            if (selectedGridTileData.full && currency >= selectedPreviewTower.cost)
+            if (selectedGridTileData.full == false && currency >= selectedPreviewTower.cost)
             {
                 selectedPreviewTower.towerPreviewRenderer.color = new Color(0.7619722f, 0.8740168f, 0.9547169f);
                 selectedPreviewTower.UpdateTowerPreviewColor(Color.white);
@@ -254,12 +276,12 @@ public class PlacementManager : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void UpdateTowerPreviewServerRPC(Vector3 pos, ServerRpcParams rpcParams = default)
+    private void UpdateTowerPreviewServerRPC(Vector3 pos, bool resetPos = false, ServerRpcParams rpcParams = default)
     {
-        UpdateTowerPreviewClientRPC(rpcParams.Receive.SenderClientId, pos);
+        UpdateTowerPreviewClientRPC(rpcParams.Receive.SenderClientId, pos, resetPos);
     }
     [ClientRpc(RequireOwnership = false)]
-    private void UpdateTowerPreviewClientRPC(ulong fromClientId, Vector3 pos)
+    private void UpdateTowerPreviewClientRPC(ulong fromClientId, Vector3 pos, bool resetPos)
     {
         if (localClientId == fromClientId)
         {
@@ -269,6 +291,13 @@ public class PlacementManager : NetworkBehaviour
         selectedPreviewTower.towerPreviewRenderer.color = new Color(0.7619722f, 0.8740168f, 0.9547169f);
         selectedPreviewTower.UpdateTowerPreviewColor(Color.white);
 
-        selectedPreviewTower.transform.position = pos;
+        if (resetPos)
+        {
+            selectedPreviewTower.transform.localPosition = Vector3.zero;
+        }
+        else
+        {
+            selectedPreviewTower.transform.position = pos;
+        }
     }
 }

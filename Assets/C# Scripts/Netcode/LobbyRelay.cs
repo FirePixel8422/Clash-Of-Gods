@@ -27,7 +27,6 @@ public class LobbyRelay : NetworkBehaviour
     public string playerName;
 
     public TMP_InputField lobbyNameField;
-    public TMP_InputField maxPlayersField;
 
     public TMP_InputField searchedlobbyNameField;
 
@@ -163,15 +162,9 @@ public class LobbyRelay : NetworkBehaviour
 
     public async void CreateLobby()
     {
-        int maxPlayers = 4;
-        if (!string.IsNullOrEmpty(maxPlayersField.text))
-        {
-            maxPlayers = Mathf.Clamp(int.Parse(maxPlayersField.text),2,15);
-        }
-
         try
         {
-            Allocation allocation = await Relay.Instance.CreateAllocationAsync(maxPlayers - 1);
+            Allocation allocation = await Relay.Instance.CreateAllocationAsync(1);
             _hostData = new RelayHostData
             {
                 Key = allocation.Key,
@@ -202,7 +195,7 @@ public class LobbyRelay : NetworkBehaviour
                 },
             };
 
-            var lobby = await Lobbies.Instance.CreateLobbyAsync(lobbyName, maxPlayers, options);
+            var lobby = await Lobbies.Instance.CreateLobbyAsync(lobbyName, 2, options);
 
             _lobbyId = lobby.Id;
 

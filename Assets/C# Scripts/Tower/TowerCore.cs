@@ -1,8 +1,9 @@
 using System.Collections;
+using Unity.Netcode;
 using UnityEngine;
 
 
-public class TowerCore : MonoBehaviour
+public class TowerCore : NetworkBehaviour
 {
     [HideInInspector]
     public DissolveController[] dissolves;

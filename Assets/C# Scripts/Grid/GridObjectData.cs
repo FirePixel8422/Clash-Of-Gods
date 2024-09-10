@@ -18,6 +18,4 @@ public struct GridObjectData
 
     public int coreType;
     public int type;
-
-    public float currency;
 }
