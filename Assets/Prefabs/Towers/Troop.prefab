@@ -542,7 +542,7 @@ MonoBehaviour:
   dissolveMaterial: {fileID: 0}
   startDelay: 0
   startDissolveEffectState: 0.6
-  dissolveSpeed: 1
+  dissolveSpeed: 2
   endDisolveValue: -1.3
 --- !u!1 &5522389368488236916
 GameObject:

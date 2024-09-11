@@ -31,8 +31,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2429424297901936379}
   - {fileID: 7198010318730475994}
+  - {fileID: 2429424297901936379}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &567083023134197584
@@ -73,8 +73,10 @@ MonoBehaviour:
   cDissolves: 0
   cost: 0
   movement: 0
+  moveSpeed: 0
   towerPreviewRenderer: {fileID: 0}
   towerMoveArrowsAnim: {fileID: 0}
+  moveArrowColors: []
   anim: {fileID: 0}
   towerCompleted: 0
   mineSpeed: 3
@@ -262,5 +264,5 @@ MonoBehaviour:
   dissolveMaterial: {fileID: 0}
   startDelay: 0
   startDissolveEffectState: 0.6
-  dissolveSpeed: 1
+  dissolveSpeed: 2
   endDisolveValue: -1.3

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using TMPro;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -206,29 +207,29 @@ public class PlacementManager : NetworkBehaviour
             towerSelected = false;
         }
 
-        PlaceTower_ServerRPC(selectedGridTileData.worldPos);
+        PlaceTower_ServerRPC(selectedGridTileData.worldPos, selectedGridTileData.gridPos);
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void PlaceTower_ServerRPC(Vector3 pos, ServerRpcParams rpcParams = default)
+    private void PlaceTower_ServerRPC(Vector3 pos, Vector2Int gridPos, ServerRpcParams rpcParams = default)
     {
         TowerCore spawnedTower = Instantiate(selectedPreviewTower.towerPrefab, pos, selectedPreviewTower.transform.rotation).GetComponent<TowerCore>();
 
         ulong fromClientId = rpcParams.Receive.SenderClientId;
         spawnedTower.NetworkObject.SpawnWithOwnership(fromClientId, true);
 
-        PlaceTower_ClientRPC(fromClientId, spawnedTower.NetworkObjectId);
+        PlaceTower_ClientRPC(fromClientId, gridPos, spawnedTower.NetworkObjectId);
     }
 
     [ClientRpc(RequireOwnership = false)]
-    private void PlaceTower_ClientRPC(ulong fromClientId, ulong spawnedTowerNetworkObjectId)
+    private void PlaceTower_ClientRPC(ulong fromClientId, Vector2Int gridPos, ulong spawnedTowerNetworkObjectId)
     {
         selectedTower = NetworkManager.SpawnManager.SpawnedObjects[spawnedTowerNetworkObjectId].GetComponent<TowerCore>();
         selectedTower.CoreInit();
 
-        selectedTower.GetComponentInChildren<MeshRenderer>().material.color = playerColors[fromClientId];
+        selectedTower.transform.GetComponentInChildren<MeshRenderer>(true).material.SetColor(Shader.PropertyToID("_Base_Color"), playerColors[fromClientId]);
 
-        GridManager.Instance.UpdateGridDataFieldType(selectedGridTileData.gridPos, selectedTower);
+        GridManager.Instance.UpdateGridDataFieldType(gridPos, selectedTower);
     }
     #endregion
 

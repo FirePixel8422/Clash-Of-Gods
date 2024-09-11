@@ -114,9 +114,8 @@ public class GridManager : NetworkBehaviour
     }
     public void UpdateGridDataFieldType(Vector2Int gridPos, TowerCore tower)
     {
-        print("called");
         grid[gridPos.x, gridPos.y].tower = tower;
-
+        
         grid[gridPos.x, gridPos.y].full = tower != null;
     }
 
