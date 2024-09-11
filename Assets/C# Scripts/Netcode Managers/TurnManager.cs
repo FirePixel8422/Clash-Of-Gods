@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
@@ -34,17 +32,26 @@ public class TurnManager : NetworkBehaviour
         }
         else
         {
-            RequestClientOnTurnId_ServerRPC();
+            StartGame_ServerRPC();
         }
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    private void RequestClientOnTurnId_ServerRPC()
+    private void Update()
     {
-        RequestClientOnTurnId_ClientRPC(clientOnTurnId);
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            NextTurn_ServerRPC();
+        }
+    }
+
+
+    [ServerRpc(RequireOwnership = false)]
+    private void StartGame_ServerRPC()
+    {
+        StartGame_ClientRPC(clientOnTurnId);
     }
     [ClientRpc(RequireOwnership = false)]
-    private void RequestClientOnTurnId_ClientRPC(ulong _clientOnTurnId)
+    private void StartGame_ClientRPC(ulong _clientOnTurnId)
     {
         clientOnTurnId = _clientOnTurnId;
 
@@ -53,6 +60,7 @@ public class TurnManager : NetworkBehaviour
             isMyTurn = true;
         }
     }
+
 
 
     [ServerRpc(RequireOwnership = false)]

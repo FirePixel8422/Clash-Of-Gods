@@ -150,8 +150,8 @@ Transform:
   m_GameObject: {fileID: 60962334}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.75, y: 0, z: 0}
-  m_LocalScale: {x: 0.85, y: 1, z: 1.1}
+  m_LocalPosition: {x: -4.7703, y: 0, z: 0}
+  m_LocalScale: {x: 0.84592, y: 1, z: 1.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1501788695}
@@ -400,8 +400,8 @@ Transform:
   m_GameObject: {fileID: 314270962}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.75, y: 0, z: 0}
-  m_LocalScale: {x: 0.85, y: 1, z: 1.1}
+  m_LocalPosition: {x: 4.7644, y: 0, z: 0}
+  m_LocalScale: {x: 0.84719735, y: 1, z: 1.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1501788695}
@@ -1860,9 +1860,12 @@ MonoBehaviour:
   p2:
     serializedVersion: 2
     m_Bits: 128
+  obstruction:
+    serializedVersion: 2
+    m_Bits: 0
   drawMasterGizmos: 1
   drawTileGizmos: 1
-  drawTileDataGizmos: 0
+  drawTileDataGizmos: 1
   gridPosition: {x: 0, y: 0, z: 0}
   gridSize: {x: 11, y: 0, z: 5}
   tileSize: 1
@@ -1894,6 +1897,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localClientId: 0
+  playerColors:
+  - {r: 0.08235294, g: 0.6, b: 0.11764707, a: 1}
+  - {r: 0.1137255, g: 0.1254902, b: 0.6, a: 1}
   placeableLayer:
     serializedVersion: 2
     m_Bits: 0

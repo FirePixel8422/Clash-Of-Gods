@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
@@ -16,6 +17,8 @@ public class PlacementManager : NetworkBehaviour
     }
 
     public ulong localClientId;
+
+    public Color[] playerColors;
 
 
     public static GraphicRaycaster gfxRayCaster;
@@ -167,7 +170,7 @@ public class PlacementManager : NetworkBehaviour
     public void TryPlaceTower()
     {
         //place tower system
-        if (selectedGridTileData.full == false)
+        if (selectedGridTileData.full == false && selectedGridTileData.type == (int)localClientId)
         {
             if (currency >= selectedPreviewTower.cost)
             {
@@ -199,34 +202,33 @@ public class PlacementManager : NetworkBehaviour
 
         if (towerSelected)
         {
-            selectedTower.SelectOrDeselectTower(false);
+            selectedTower.DeSelectTower();
             towerSelected = false;
         }
 
         PlaceTower_ServerRPC(selectedGridTileData.worldPos);
-
-
-        TurnManager.Instance.isMyTurn = false;
-        TurnManager.Instance.NextTurn_ServerRPC();
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void PlaceTower_ServerRPC(Vector3 pos)
+    private void PlaceTower_ServerRPC(Vector3 pos, ServerRpcParams rpcParams = default)
     {
         TowerCore spawnedTower = Instantiate(selectedPreviewTower.towerPrefab, pos, selectedPreviewTower.transform.rotation).GetComponent<TowerCore>();
-        spawnedTower.NetworkObject.SpawnWithOwnership(localClientId, true);
 
-        PlaceTower_ClientRPC(spawnedTower.NetworkObjectId);
+        ulong fromClientId = rpcParams.Receive.SenderClientId;
+        spawnedTower.NetworkObject.SpawnWithOwnership(fromClientId, true);
+
+        PlaceTower_ClientRPC(fromClientId, spawnedTower.NetworkObjectId);
     }
 
     [ClientRpc(RequireOwnership = false)]
-    private void PlaceTower_ClientRPC(ulong spawnedTowerNetworkObjectId)
+    private void PlaceTower_ClientRPC(ulong fromClientId, ulong spawnedTowerNetworkObjectId)
     {
         selectedTower = NetworkManager.SpawnManager.SpawnedObjects[spawnedTowerNetworkObjectId].GetComponent<TowerCore>();
-
         selectedTower.CoreInit();
 
-        GridManager.Instance.UpdateGridDataFieldType(selectedGridTileData.gridPos, 3, selectedTower);
+        selectedTower.GetComponentInChildren<MeshRenderer>().material.color = playerColors[fromClientId];
+
+        GridManager.Instance.UpdateGridDataFieldType(selectedGridTileData.gridPos, selectedTower);
     }
     #endregion
 
@@ -236,21 +238,21 @@ public class PlacementManager : NetworkBehaviour
     private void TrySelectTower()
     {
         Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, 100, placeableLayer))
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, 100))
         {
             GridObjectData gridData = GridManager.Instance.GridObjectFromWorldPoint(hitInfo.point);
-            if (gridData.tower != null && gridData.tower.towerCompleted)
+            if (gridData.tower != null && gridData.tower.towerCompleted && localClientId == gridData.tower.OwnerClientId)
             {
                 //deselect older selected tower
                 if (towerSelected)
                 {
-                    selectedTower.SelectOrDeselectTower(false);
+                    selectedTower.DeSelectTower();
                 }
 
                 //select tower
                 selectedTower = gridData.tower;
 
-                selectedTower.SelectOrDeselectTower(true);
+                selectedTower.SelectTower();
                 towerSelected = true;
 
                 return;
@@ -259,12 +261,14 @@ public class PlacementManager : NetworkBehaviour
 
         if (towerSelected)
         {
-            selectedTower.SelectOrDeselectTower(false);
+            selectedTower.DeSelectTower();
             towerSelected = false;
         }
     }
 
 
+
+    #region Tower/Troop Placement Preview
 
     private void Update()
     {
@@ -283,7 +287,7 @@ public class PlacementManager : NetworkBehaviour
         {
             selectedGridTileData = GridManager.Instance.GridObjectFromWorldPoint(hitInfo.point);
 
-            if (selectedGridTileData.full == false && currency >= selectedPreviewTower.cost)
+            if (selectedGridTileData.type == (int)localClientId && currency >= selectedPreviewTower.cost)
             {
                 selectedPreviewTower.towerPreviewRenderer.color = new Color(0.7619722f, 0.8740168f, 0.9547169f);
                 selectedPreviewTower.UpdateTowerPreviewColor(Color.white);
@@ -324,4 +328,6 @@ public class PlacementManager : NetworkBehaviour
             selectedPreviewTower.transform.position = pos;
         }
     }
+    #endregion
+
 }

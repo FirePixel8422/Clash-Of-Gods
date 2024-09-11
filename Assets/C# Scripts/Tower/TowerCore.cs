@@ -5,25 +5,38 @@ using UnityEngine;
 
 public class TowerCore : NetworkBehaviour
 {
+    #region Dissolve Variables
+
     [HideInInspector]
     public DissolveController[] dissolves;
     [HideInInspector]
     public int amountOfDissolves;
     [HideInInspector]
     public int cDissolves;
+    #endregion
+
 
     public int cost;
 
+    public int movement;
+    public float moveSpeed;
+
+
+    [HideInInspector]
+    public SpriteRenderer towerPreviewRenderer;
+
+    public Animator towerMoveArrowsAnim;
+    private SpriteRenderer[] towerMoveArrowRenderers;
+    public Color[] moveArrowColors;
+
+    [HideInInspector]
+    public Animator anim;
 
     [HideInInspector]
     public bool towerCompleted;
 
-    [HideInInspector]
-    public SpriteRenderer towerPreviewRenderer;
-    [HideInInspector]
-    public Animator anim;
-    public int onHitEffectIndex = -1;
 
+    #region Tower Setup
 
     public virtual void Start()
     {
@@ -33,8 +46,15 @@ public class TowerCore : NetworkBehaviour
     private void SetupTower()
     {
         dissolves = GetComponentsInChildren<DissolveController>();
-        towerPreviewRenderer = GetComponentInChildren<SpriteRenderer>();
         anim = GetComponent<Animator>();
+
+        towerPreviewRenderer = GetComponentInChildren<SpriteRenderer>();
+
+        towerMoveArrowsAnim = GetComponentInChildren<Animator>();
+        if (towerMoveArrowsAnim != null)
+        {
+            towerMoveArrowRenderers = towerMoveArrowsAnim.GetComponentsInChildren<SpriteRenderer>();
+        }
     }
     public virtual void CoreInit()
     {
@@ -45,25 +65,62 @@ public class TowerCore : NetworkBehaviour
         {
             dissolve.StartDissolve(this);
         }
-
-        towerPreviewRenderer.enabled = false;
         Init();
     }
     public virtual void Init()
     {
 
     }
-
-    public virtual void SelectOrDeselectTower(bool select)
+    public virtual void OnTowerCompleted()
     {
-        towerPreviewRenderer.enabled = select;
+
+    }
+    #endregion
+
+
+    #region Tower Select/Deselect
+
+    public virtual void SelectTower()
+    {
+        if (movement != 0)
+        {
+            towerMoveArrowsAnim.SetBool("Enabled", true);
+
+            foreach (var sprite in towerMoveArrowRenderers)
+            {
+                sprite.color = moveArrowColors[TurnManager.Instance.isMyTurn ? 0 : 1];
+            }
+        }
+        else
+        {
+            towerPreviewRenderer.enabled = true;
+        }
 
         foreach (var d in dissolves)
         {
-            d.dissolveMaterial.SetInt("_Selected", select ? 1 : 0);
+            d.dissolveMaterial.SetInt("_Selected", 1);
         }
     }
+    public virtual void DeSelectTower()
+    {
+        if (movement != 0)
+        {
+            towerMoveArrowsAnim.SetBool("Enabled", false);
+        }
+        else
+        {
+            towerPreviewRenderer.enabled = false;
+        }
 
+        foreach (var d in dissolves)
+        {
+            d.dissolveMaterial.SetInt("_Selected", 0);
+        }
+    }
+    #endregion
+
+
+    #region Dissolve And Preview
 
     public void UpdateTowerPreviewColor(Color color)
     {
@@ -72,7 +129,6 @@ public class TowerCore : NetworkBehaviour
             d.dissolveMaterial.SetColor("_PreviewColor", color);
         }
     }
-
 
     public void DissolveCompleted()
     {
@@ -83,6 +139,7 @@ public class TowerCore : NetworkBehaviour
             OnTowerCompleted();
         }
     }
+
     public void RevertCompleted()
     {
         cDissolves -= 1;
@@ -91,8 +148,57 @@ public class TowerCore : NetworkBehaviour
             Destroy(gameObject);
         }
     }
-    public virtual void OnTowerCompleted()
-    {
+    #endregion
 
+
+    public virtual void MoveTower(Vector2Int currentGridPos, Vector2Int newGridPos)
+    {
+        if (TurnManager.Instance.isMyTurn == false)
+        {
+            return;
+        }
+        TurnManager.Instance.isMyTurn = false;
+
+
+        GridManager.Instance.UpdateGridDataFullState(currentGridPos, false);
+        GridManager.Instance.UpdateGridDataFieldType(newGridPos, this);
+
+
+        StartCoroutine(MoveTowerAnimation(currentGridPos, newGridPos));
+
+        MoveTower_ServerRPC(currentGridPos, newGridPos);
+    }
+
+
+    [ServerRpc(RequireOwnership = false)]
+    private void MoveTower_ServerRPC(Vector2Int currentGridPos, Vector2Int newGridPos, ServerRpcParams rpcParams = default)
+    {
+        ulong fromClientId = rpcParams.Receive.SenderClientId;
+        MoveTower_ClientRPC(fromClientId, currentGridPos, newGridPos);
+    }
+
+    [ClientRpc(RequireOwnership = false)]
+    private void MoveTower_ClientRPC(ulong fromClientId, Vector2Int currentGridPos, Vector2Int newGridPos)
+    {
+        if (TurnManager.Instance.localClientId != fromClientId)
+        {
+            StartCoroutine(MoveTowerAnimation(currentGridPos, newGridPos));
+        }
+    }
+
+    private IEnumerator MoveTowerAnimation(Vector2Int currentGridPos, Vector2Int newGridPos)
+    {
+        GridManager.Instance.UpdateGridDataFullState(currentGridPos, false);
+        GridManager.Instance.UpdateGridDataFieldType(newGridPos, this);
+
+
+        Vector3 newPos = GridManager.Instance.GetGridData(newGridPos).worldPos;
+        newPos = new Vector3(newPos.x, transform.position.y, newPos.z);
+
+        while (Vector3.Distance(transform.position, newPos) > 0.001f)
+        {
+            yield return null;
+            transform.position = VectorLogic.InstantMoveTowards(transform.position, newPos, moveSpeed * Time.deltaTime);
+        }
     }
 }

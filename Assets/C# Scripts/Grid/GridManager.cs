@@ -12,6 +12,7 @@ public class GridManager : NetworkBehaviour
 
     public LayerMask p1;
     public LayerMask p2;
+    public LayerMask obstruction;
 
 
     public bool drawMasterGizmos;
@@ -53,14 +54,18 @@ public class GridManager : NetworkBehaviour
             {
                 Vector3 _worldPos = worldBottomLeft + Vector3.right * (x * tileSize + tileSize / 2) + Vector3.forward * (z * tileSize + tileSize / 2);
 
-                int _type = 0;
+                int _type = 10;
                 if (Physics.Raycast(_worldPos + Vector3.up, Vector3.down, 20, p1))
                 {
-                    _type = 1;
+                    _type = 0;
                 }
                 else if (Physics.Raycast(_worldPos + Vector3.up, Vector3.down, 20, p2))
                 {
-                    _type = 2;
+                    _type = 1;
+                }
+                else if (Physics.Raycast(_worldPos + Vector3.up, Vector3.down, 20, obstruction))
+                {
+                    _type = 5;
                 }
 
                 grid[x, z] = new GridObjectData()
@@ -69,6 +74,7 @@ public class GridManager : NetworkBehaviour
                     worldPos = _worldPos,
                     coreType = _type,
                     type = _type,
+                    full = _type == 5,
                 };
             }
         }
@@ -106,12 +112,17 @@ public class GridManager : NetworkBehaviour
         grid[gridPos.x, gridPos.y].type = grid[gridPos.x, gridPos.y].coreType;
         grid[gridPos.x, gridPos.y].tower = null;
     }
-    public void UpdateGridDataFieldType(Vector2Int gridPos, int newType, TowerCore tower = default)
+    public void UpdateGridDataFieldType(Vector2Int gridPos, TowerCore tower)
     {
-        grid[gridPos.x, gridPos.y].type = newType;
+        print("called");
         grid[gridPos.x, gridPos.y].tower = tower;
 
         grid[gridPos.x, gridPos.y].full = tower != null;
+    }
+
+    public bool IsInGrid(Vector2Int gridPos)
+    {
+        return gridPos.x >= 0 && gridPos.x < gridSizeX && gridPos.y >= 0 && gridPos.y < gridSizeZ;
     }
 
 
@@ -145,13 +156,21 @@ public class GridManager : NetworkBehaviour
             {
                 for (int z = 0; z < gridSizeZ; z++)
                 {
-                    if (grid[x, z].type == 1)
+                    if (grid[x, z].full)
                     {
-                        Gizmos.color = Color.red;
+                        Gizmos.color = Color.gray;
                     }
-                    else
+                    else if (grid[x, z].type == 10)
+                    {
+                        Gizmos.color = Color.black;
+                    }
+                    else if (grid[x, z].type == 0)
                     {
                         Gizmos.color = Color.green;
+                    }
+                    else if (grid[x, z].type == 1)
+                    {
+                        Gizmos.color = Color.blue;
                     }
                     Gizmos.DrawCube(worldBottomLeft + Vector3.right * (x * tileSize + tileSize / 2) + Vector3.forward * (z * tileSize + tileSize / 2), new Vector3(tileSize / 2, tileSize / 2, tileSize / 2));
                 }
