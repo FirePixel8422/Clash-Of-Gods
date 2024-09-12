@@ -138,6 +138,7 @@ public class PlacementManager : NetworkBehaviour
         }
         if (towerSelected)
         {
+            selectedTower.DeSelectTower();
             towerSelected = false;
         }
 
