@@ -58,7 +58,14 @@ public class DirectionArrow : ClickableCollider
         GridObjectData gridObjectData = GridManager.Instance.GridObjectFromWorldPoint(troop.transform.position);
 
 
-        troop.MoveTower(gridObjectData.gridPos, gridObjectData.gridPos + dir);
+        if (validAttack)
+        {
+            //if(GridManager.)
+        }
+        else
+        {
+            troop.MoveTower(gridObjectData.gridPos, gridObjectData.gridPos + dir);
+        }
 
         troop.DeSelectTower();
 

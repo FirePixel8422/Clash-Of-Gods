@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 60962338}
   - component: {fileID: 60962337}
   - component: {fileID: 60962336}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: p1 extension collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -384,7 +384,7 @@ GameObject:
   - component: {fileID: 314270966}
   - component: {fileID: 314270965}
   - component: {fileID: 314270964}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: p2 extension collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1442,7 +1442,7 @@ GameObject:
   - component: {fileID: 1133767437}
   - component: {fileID: 1133767436}
   - component: {fileID: 1133767435}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: p - neutral
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1506,7 +1506,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 72b10f950f0cfa74abb326b533681ce7, type: 2}
+  - {fileID: 2100000, guid: 21ecb1131162a3141a3f5ac162d35a34, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1547,7 +1547,7 @@ GameObject:
   - component: {fileID: 1205328533}
   - component: {fileID: 1205328535}
   - component: {fileID: 1205328534}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: p2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1835,6 +1835,7 @@ GameObject:
   - component: {fileID: 1588799943}
   - component: {fileID: 1588799940}
   - component: {fileID: 1588799942}
+  - component: {fileID: 1588799944}
   m_Layer: 0
   m_Name: GridManager
   m_TagString: Untagged
@@ -1856,13 +1857,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   p1:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 128
   p2:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 256
+  neutral:
+    serializedVersion: 2
+    m_Bits: 64
   obstruction:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   drawMasterGizmos: 1
   drawTileGizmos: 1
   drawTileDataGizmos: 1
@@ -1900,9 +1904,6 @@ MonoBehaviour:
   playerColors:
   - {r: 0.08235294, g: 0.6, b: 0.11764707, a: 1}
   - {r: 0.1137255, g: 0.1254902, b: 0.6, a: 1}
-  placeableLayer:
-    serializedVersion: 2
-    m_Bits: 0
   isPlacingTower: 0
   towerSelected: 0
   towerPreviewHolder: {fileID: 1071027059}
@@ -1931,6 +1932,21 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &1588799944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588799939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa90c625f104eb64e921429694be16aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacles:
+  - {fileID: 8721721265966261937, guid: 65ebbd278ea16bd439b319e3d394a296, type: 3}
+  obstacleAmount: 4
 --- !u!1 &1597329088
 GameObject:
   m_ObjectHideFlags: 0
@@ -1942,7 +1958,7 @@ GameObject:
   - component: {fileID: 1597329089}
   - component: {fileID: 1597329091}
   - component: {fileID: 1597329090}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: p1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

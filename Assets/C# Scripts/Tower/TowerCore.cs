@@ -151,6 +151,8 @@ public class TowerCore : NetworkBehaviour
     #endregion
 
 
+    #region Move Tower
+
     public virtual void MoveTower(Vector2Int currentGridPos, Vector2Int newGridPos)
     {
         if (TurnManager.Instance.isMyTurn == false)
@@ -160,8 +162,8 @@ public class TowerCore : NetworkBehaviour
         TurnManager.Instance.isMyTurn = false;
 
 
-        GridManager.Instance.UpdateGridDataFullState(currentGridPos, false);
-        GridManager.Instance.UpdateGridDataFieldType(newGridPos, this);
+        GridManager.Instance.UpdateTowerData(currentGridPos, null);
+        GridManager.Instance.UpdateTowerData(newGridPos, this);
 
 
         StartCoroutine(MoveTowerAnimation(currentGridPos, newGridPos));
@@ -188,8 +190,8 @@ public class TowerCore : NetworkBehaviour
 
     private IEnumerator MoveTowerAnimation(Vector2Int currentGridPos, Vector2Int newGridPos)
     {
-        GridManager.Instance.UpdateGridDataFullState(currentGridPos, false);
-        GridManager.Instance.UpdateGridDataFieldType(newGridPos, this);
+        GridManager.Instance.UpdateTowerData(currentGridPos, null);
+        GridManager.Instance.UpdateTowerData(newGridPos, this);
 
 
         Vector3 newPos = GridManager.Instance.GetGridData(newGridPos).worldPos;
@@ -201,4 +203,5 @@ public class TowerCore : NetworkBehaviour
             transform.position = VectorLogic.InstantMoveTowards(transform.position, newPos, moveSpeed * Time.deltaTime);
         }
     }
+    #endregion
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ public class GridManager : NetworkBehaviour
 
     public LayerMask p1;
     public LayerMask p2;
+    public LayerMask neutral;
     public LayerMask obstruction;
 
 
@@ -27,16 +29,19 @@ public class GridManager : NetworkBehaviour
 
     [SerializeField] private GridObjectData[,] grid;
 
+    public List<GridObjectData> p1GridTiles = new List<GridObjectData>();
+    public List<GridObjectData> p2GridTiles = new List<GridObjectData>();
 
 
-    private void Start()
-    {
-        CreateGrid();
-    }
+
 
     public override void OnNetworkSpawn()
     {
-        PlacementManager.Instance.Init(NetworkManager.LocalClientId == 0 ? p1 : p2, NetworkManager.LocalClientId);
+        CreateGrid();
+
+        PlacementManager.Instance.Init(NetworkManager.LocalClientId == 0 ? p1 : p2, neutral, p1 + p2 + neutral, NetworkManager.LocalClientId);
+
+        ObstacleGenerator.Instance.CreateObstacles();
     }
 
     private void CreateGrid()
@@ -54,18 +59,46 @@ public class GridManager : NetworkBehaviour
             {
                 Vector3 _worldPos = worldBottomLeft + Vector3.right * (x * tileSize + tileSize / 2) + Vector3.forward * (z * tileSize + tileSize / 2);
 
+
                 int _type = 10;
-                if (Physics.Raycast(_worldPos + Vector3.up, Vector3.down, 20, p1))
+                //neutral
+
+                if (Physics.Raycast(_worldPos + Vector3.up, Vector3.down, 20, obstruction))
+                {
+                    _type = 5;
+                    //obstruction
+                }
+                else if (Physics.Raycast(_worldPos + Vector3.up, Vector3.down, 20, p1))
                 {
                     _type = 0;
+
+                    p1GridTiles.Add(
+                        new GridObjectData()
+                        {
+                            gridPos = new Vector2Int(x, z),
+                            worldPos = _worldPos,
+                            coreType = _type,
+                            type = _type,
+                            full = false,
+                        });
+
+                    //player 1
                 }
                 else if (Physics.Raycast(_worldPos + Vector3.up, Vector3.down, 20, p2))
                 {
                     _type = 1;
-                }
-                else if (Physics.Raycast(_worldPos + Vector3.up, Vector3.down, 20, obstruction))
-                {
-                    _type = 5;
+
+                    p2GridTiles.Add(
+                        new GridObjectData()
+                        {
+                            gridPos = new Vector2Int(x, z),
+                            worldPos = _worldPos,
+                            coreType = _type,
+                            type = _type,
+                            full = false,
+                        });
+
+                    //player 2
                 }
 
                 grid[x, z] = new GridObjectData()
@@ -112,18 +145,24 @@ public class GridManager : NetworkBehaviour
         grid[gridPos.x, gridPos.y].type = grid[gridPos.x, gridPos.y].coreType;
         grid[gridPos.x, gridPos.y].tower = null;
     }
-    public void UpdateGridDataFieldType(Vector2Int gridPos, TowerCore tower)
+    public void UpdateTowerData(Vector2Int gridPos, TowerCore tower)
     {
         grid[gridPos.x, gridPos.y].tower = tower;
         
         grid[gridPos.x, gridPos.y].full = tower != null;
     }
 
+    public void UpdateObstacleData(Vector2Int gridPos, Obstacle obstacle)
+    {
+        grid[gridPos.x, gridPos.y].obstacle = obstacle;
+
+        grid[gridPos.x, gridPos.y].full = obstacle != null;
+    }
+
     public bool IsInGrid(Vector2Int gridPos)
     {
         return gridPos.x >= 0 && gridPos.x < gridSizeX && gridPos.y >= 0 && gridPos.y < gridSizeZ;
     }
-
 
 
     public void OnDrawGizmos()

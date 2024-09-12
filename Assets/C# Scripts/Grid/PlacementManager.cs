@@ -25,7 +25,9 @@ public class PlacementManager : NetworkBehaviour
     public static GraphicRaycaster gfxRayCaster;
     private Camera mainCam;
 
-    public LayerMask placeableLayer;
+    private LayerMask ownFieldLayers;
+    private LayerMask neutralLayers;
+    private LayerMask fullFieldLayers;
 
 
     public bool isPlacingTower;
@@ -62,11 +64,14 @@ public class PlacementManager : NetworkBehaviour
 
 
 
-    public void Init(LayerMask _placeableLayer, ulong _localClientId)
+    public void Init(LayerMask _ownFieldLayers, LayerMask _neutralLayers, LayerMask _fullFieldLayers, ulong _localClientId)
     {
         towerPreviews = towerPreviewHolder.GetComponentsInChildren<TowerPreview>();
 
-        placeableLayer = _placeableLayer;
+        ownFieldLayers = _ownFieldLayers;
+        neutralLayers = _neutralLayers;
+        fullFieldLayers = _fullFieldLayers;
+
         localClientId = _localClientId;
         mainCam = Camera.main;
     }
@@ -230,7 +235,7 @@ public class PlacementManager : NetworkBehaviour
 
         selectedTower.transform.GetComponentInChildren<MeshRenderer>(true).material.SetColor(Shader.PropertyToID("_Base_Color"), playerColors[fromClientId]);
 
-        GridManager.Instance.UpdateGridDataFieldType(gridPos, selectedTower);
+        GridManager.Instance.UpdateTowerData(gridPos, selectedTower);
     }
     #endregion
 
@@ -240,7 +245,7 @@ public class PlacementManager : NetworkBehaviour
     private void TrySelectTower()
     {
         Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, 100))
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, 100, fullFieldLayers))
         {
             GridObjectData gridData = GridManager.Instance.GridObjectFromWorldPoint(hitInfo.point);
             if (gridData.tower != null && gridData.tower.towerCompleted && localClientId == gridData.tower.OwnerClientId)
@@ -285,11 +290,11 @@ public class PlacementManager : NetworkBehaviour
     {
         Ray ray = mainCam.ScreenPointToRay(mousePos);
 
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, 100, placeableLayer))
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, 100, ownFieldLayers))
         {
             selectedGridTileData = GridManager.Instance.GridObjectFromWorldPoint(hitInfo.point);
 
-            if (selectedGridTileData.type == (int)localClientId && currency >= selectedPreviewTower.cost)
+            if (selectedGridTileData.full == false && selectedGridTileData.type == (int)localClientId && currency >= selectedPreviewTower.cost)
             {
                 selectedPreviewTower.towerPreviewRenderer.color = new Color(0.7619722f, 0.8740168f, 0.9547169f);
                 selectedPreviewTower.UpdateTowerPreviewColor(Color.white);
