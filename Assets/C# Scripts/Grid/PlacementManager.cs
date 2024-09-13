@@ -18,6 +18,7 @@ public class PlacementManager : NetworkBehaviour
     }
 
     public ulong localClientId;
+    public int towerForwardRotationY;
 
     public Color[] playerColors;
 
@@ -73,7 +74,17 @@ public class PlacementManager : NetworkBehaviour
         fullFieldLayers = _fullFieldLayers;
 
         localClientId = _localClientId;
+        towerForwardRotationY = localClientId == 0 ? 90 : -90;
+
         mainCam = Camera.main;
+
+        selectedGridTileData = new GridObjectData
+        {
+            full = true,
+            type = -1,
+            gridPos = new Vector2Int(-1, -1),
+            worldPos = new Vector3(0, 2, 0),
+        };
     }
 
 
@@ -120,6 +131,7 @@ public class PlacementManager : NetworkBehaviour
             if (isPlacingTower)
             {
                 selectedPreviewTower.transform.localPosition = Vector3.zero;
+                UpdateTowerPreviewServerRPC(Vector3.zero, 0, true);
                 isPlacingTower = false;
             }
         }
@@ -136,11 +148,13 @@ public class PlacementManager : NetworkBehaviour
             return;
         }
 
-        if (isPlacingTower)
+
+        if (isPlacingTower && selectedPreviewTower != towerPreviews[id])
         {
             selectedPreviewTower.transform.localPosition = Vector3.zero;
-            UpdateTowerPreviewServerRPC(Vector3.zero, true);
+            UpdateTowerPreviewServerRPC(Vector3.zero, 0, true);
         }
+
         if (towerSelected)
         {
             selectedTower.DeSelectTower();
@@ -192,20 +206,22 @@ public class PlacementManager : NetworkBehaviour
             }
         }
     }
+
     private void CancelTowerPlacement()
     {
         selectedPreviewTower.transform.localPosition = Vector3.zero;
-        UpdateTowerPreviewServerRPC(Vector3.zero, true);
+        UpdateTowerPreviewServerRPC(Vector3.zero, 0, true);
         isPlacingTower = false;
     }
+
     private void PlaceTower()
     {
         selectedPreviewTower.towerPreviewRenderer.color = new Color(0.7619722f, 0.8740168f, 0.9547169f);
         selectedPreviewTower.UpdateTowerPreviewColor(Color.white);
 
         selectedPreviewTower.transform.localPosition = Vector3.zero;
-        UpdateTowerPreviewServerRPC(Vector3.zero, true);
-        isPlacingTower = false;
+        UpdateTowerPreviewServerRPC(Vector3.zero, 0, true);
+
 
         if (towerSelected)
         {
@@ -213,13 +229,14 @@ public class PlacementManager : NetworkBehaviour
             towerSelected = false;
         }
 
-        PlaceTower_ServerRPC(selectedGridTileData.worldPos, selectedGridTileData.gridPos);
+        isPlacingTower = false;
+        PlaceTower_ServerRPC(selectedGridTileData.worldPos, localClientId == 0 ? 90 : -90, selectedGridTileData.gridPos);
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void PlaceTower_ServerRPC(Vector3 pos, Vector2Int gridPos, ServerRpcParams rpcParams = default)
+    private void PlaceTower_ServerRPC(Vector3 pos, int rotY, Vector2Int gridPos, ServerRpcParams rpcParams = default)
     {
-        TowerCore spawnedTower = Instantiate(selectedPreviewTower.towerPrefab, pos, selectedPreviewTower.transform.rotation).GetComponent<TowerCore>();
+        TowerCore spawnedTower = Instantiate(selectedPreviewTower.towerPrefab, pos, Quaternion.Euler(0, rotY, 0)).GetComponent<TowerCore>();
 
         ulong fromClientId = rpcParams.Receive.SenderClientId;
         spawnedTower.NetworkObject.SpawnWithOwnership(fromClientId, true);
@@ -233,7 +250,11 @@ public class PlacementManager : NetworkBehaviour
         selectedTower = NetworkManager.SpawnManager.SpawnedObjects[spawnedTowerNetworkObjectId].GetComponent<TowerCore>();
         selectedTower.CoreInit();
 
-        selectedTower.transform.GetComponentInChildren<MeshRenderer>(true).material.SetColor(Shader.PropertyToID("_Base_Color"), playerColors[fromClientId]);
+        MeshRenderer[] renderers = selectedTower.transform.GetComponentsInChildren<MeshRenderer>(true);
+        foreach (MeshRenderer renderer in renderers)
+        {
+            renderer.material.SetColor(Shader.PropertyToID("_Base_Color"), playerColors[fromClientId]);
+        }
 
         GridManager.Instance.UpdateTowerData(gridPos, selectedTower);
     }
@@ -275,7 +296,7 @@ public class PlacementManager : NetworkBehaviour
 
 
 
-    #region Tower/Troop Placement Preview
+    #region Tower/Troop Preview Update
 
     private void Update()
     {
@@ -299,24 +320,28 @@ public class PlacementManager : NetworkBehaviour
                 selectedPreviewTower.towerPreviewRenderer.color = new Color(0.7619722f, 0.8740168f, 0.9547169f);
                 selectedPreviewTower.UpdateTowerPreviewColor(Color.white);
 
-                UpdateTowerPreviewServerRPC(selectedGridTileData.worldPos);
+                UpdateTowerPreviewServerRPC(selectedGridTileData.worldPos, towerForwardRotationY);
             }
             else
             {
                 selectedPreviewTower.towerPreviewRenderer.color = new Color(0.8943396f, 0.2309691f, 0.09955848f);
                 selectedPreviewTower.UpdateTowerPreviewColor(Color.red);
             }
+
             selectedPreviewTower.transform.position = selectedGridTileData.worldPos;
+            selectedPreviewTower.transform.rotation = Quaternion.Euler(0, towerForwardRotationY, 0);
         }
     }
 
+
     [ServerRpc(RequireOwnership = false)]
-    private void UpdateTowerPreviewServerRPC(Vector3 pos, bool resetPos = false, ServerRpcParams rpcParams = default)
+    private void UpdateTowerPreviewServerRPC(Vector3 pos, int rotY, bool resetPos = false, ServerRpcParams rpcParams = default)
     {
-        UpdateTowerPreviewClientRPC(rpcParams.Receive.SenderClientId, pos, resetPos);
+        UpdateTowerPreviewClientRPC(rpcParams.Receive.SenderClientId, pos, rotY, resetPos);
     }
+
     [ClientRpc(RequireOwnership = false)]
-    private void UpdateTowerPreviewClientRPC(ulong fromClientId, Vector3 pos, bool resetPos)
+    private void UpdateTowerPreviewClientRPC(ulong fromClientId, Vector3 pos, int rotY, bool resetPos)
     {
         if (localClientId == fromClientId)
         {
@@ -332,7 +357,7 @@ public class PlacementManager : NetworkBehaviour
         }
         else
         {
-            selectedPreviewTower.transform.position = pos;
+            selectedPreviewTower.transform.SetPositionAndRotation(pos, Quaternion.Euler(0, rotY, 0));
         }
     }
     #endregion

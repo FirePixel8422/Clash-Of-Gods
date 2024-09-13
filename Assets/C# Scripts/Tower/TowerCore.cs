@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -21,11 +22,19 @@ public class TowerCore : NetworkBehaviour
     public int movement;
     public float moveSpeed;
 
+    public int health;
+    public int dmg;
+
+    public List<TowerCore> targets;
+
 
     [HideInInspector]
     public SpriteRenderer towerPreviewRenderer;
 
     public Animator towerMoveArrowsAnim;
+
+    public Animator towerUnderAttackArrowAnim;
+
     private SpriteRenderer[] towerMoveArrowRenderers;
     public Color[] moveArrowColors;
 
@@ -53,6 +62,7 @@ public class TowerCore : NetworkBehaviour
         towerMoveArrowsAnim = GetComponentInChildren<Animator>();
         if (towerMoveArrowsAnim != null)
         {
+            towerMoveArrowsAnim.transform.rotation = Quaternion.identity;
             towerMoveArrowRenderers = towerMoveArrowsAnim.GetComponentsInChildren<SpriteRenderer>();
         }
     }
@@ -73,7 +83,7 @@ public class TowerCore : NetworkBehaviour
     }
     public virtual void OnTowerCompleted()
     {
-
+        
     }
     #endregion
 
@@ -112,6 +122,12 @@ public class TowerCore : NetworkBehaviour
             towerPreviewRenderer.enabled = false;
         }
 
+        foreach (TowerCore target in targets)
+        {
+            target.GetTargetted(false);
+        }
+        targets.Clear();
+
         foreach (var d in dissolves)
         {
             d.dissolveMaterial.SetInt("_Selected", 0);
@@ -149,6 +165,24 @@ public class TowerCore : NetworkBehaviour
         }
     }
     #endregion
+
+    public virtual void OnGrantTurn()
+    {
+
+    }
+    public virtual void OnLoseTurn()
+    {
+
+    }
+
+    public void GetTargetted(bool state)
+    {
+        towerUnderAttackArrowAnim.SetBool("Enabled", state);
+    }
+    public void GetAttacked()
+    {
+        towerUnderAttackArrowAnim.SetBool("Enabled", false);
+    }
 
 
     #region Move Tower

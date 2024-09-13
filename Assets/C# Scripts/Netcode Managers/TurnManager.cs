@@ -38,7 +38,7 @@ public class TurnManager : NetworkBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.PageDown))
         {
             NextTurn_ServerRPC();
         }

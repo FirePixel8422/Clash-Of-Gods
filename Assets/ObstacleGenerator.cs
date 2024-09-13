@@ -70,7 +70,7 @@ public class ObstacleGenerator : NetworkBehaviour
             GameObject obj = Instantiate(obstacles[Random.Range(0, obstacles.Length)], positions[i], Quaternion.Euler(0, Random.Range(1, 5) * 90, 0));
 
             NetworkObject networkObject = obj.GetComponent<NetworkObject>();
-            networkObject.Spawn(true);
+            networkObject.SpawnWithOwnership(1000, true);
 
             networkObjectIds[i] = networkObject.NetworkObjectId;
         }
@@ -94,7 +94,8 @@ public class ObstacleGenerator : NetworkBehaviour
         {
             Obstacle obstacle = NetworkManager.SpawnManager.SpawnedObjects[networkObjectIds[i]].GetComponent<Obstacle>();
 
-            GridManager.Instance.UpdateObstacleData(gridPositions[i], obstacle);
+            GridManager.Instance.UpdateTowerData(gridPositions[i], obstacle);
+            GridManager.Instance.UpdateGridDataType(gridPositions[i], -1000);
         }
     }
 }

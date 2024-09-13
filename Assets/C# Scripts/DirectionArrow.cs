@@ -36,8 +36,10 @@ public class DirectionArrow : ClickableCollider
 
         if (validAttack)
         {
-            gameObject.SetActive(true);
-            spriteRenderer.color = troop.moveArrowColors[2];
+            gameObject.SetActive(false);
+
+            troop.targets.Add(arrow_GridObjectData.tower);
+            arrow_GridObjectData.tower.GetTargetted(true);
         }
         else
         {
@@ -56,11 +58,12 @@ public class DirectionArrow : ClickableCollider
         }
 
         GridObjectData gridObjectData = GridManager.Instance.GridObjectFromWorldPoint(troop.transform.position);
+        GridObjectData arrow_GridObjectData = GridManager.Instance.GetGridData(gridObjectData.gridPos + dir);
 
 
         if (validAttack)
         {
-            //if(GridManager.)
+            arrow_GridObjectData.tower.GetAttacked();
         }
         else
         {

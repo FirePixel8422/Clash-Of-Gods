@@ -7,7 +7,6 @@ public struct GridObjectData
     public Vector3 worldPos;
 
     public TowerCore tower;
-    public Obstacle obstacle;
 
     public bool full;
 

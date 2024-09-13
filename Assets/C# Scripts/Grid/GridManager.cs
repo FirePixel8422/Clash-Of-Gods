@@ -140,6 +140,10 @@ public class GridManager : NetworkBehaviour
     {
         grid[gridPos.x, gridPos.y].full = newFullState;
     }
+    public void UpdateGridDataType(Vector2Int gridPos, int type)
+    {
+        grid[gridPos.x, gridPos.y].type = type;
+    }
     public void ResetGridDataFieldType(Vector2Int gridPos)
     {
         grid[gridPos.x, gridPos.y].type = grid[gridPos.x, gridPos.y].coreType;
@@ -150,13 +154,6 @@ public class GridManager : NetworkBehaviour
         grid[gridPos.x, gridPos.y].tower = tower;
         
         grid[gridPos.x, gridPos.y].full = tower != null;
-    }
-
-    public void UpdateObstacleData(Vector2Int gridPos, Obstacle obstacle)
-    {
-        grid[gridPos.x, gridPos.y].obstacle = obstacle;
-
-        grid[gridPos.x, gridPos.y].full = obstacle != null;
     }
 
     public bool IsInGrid(Vector2Int gridPos)
