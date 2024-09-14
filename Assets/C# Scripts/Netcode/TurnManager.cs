@@ -15,6 +15,7 @@ public class TurnManager : NetworkBehaviour
     public ulong clientOnTurnId;
 
     public UnityEvent OnTurnChangedEvent;
+    public UnityEvent OnMyTurnStartedEvent;
 
 
 
@@ -42,6 +43,11 @@ public class TurnManager : NetworkBehaviour
         {
             NextTurn_ServerRPC();
         }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            clientOnTurnId = 0;
+            isMyTurn = true;
+        }
     }
 
 
@@ -66,9 +72,6 @@ public class TurnManager : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void NextTurn_ServerRPC()
     {
-        OnTurnChangedEvent.Invoke();
-
-
         ulong nextClientOnTurnId = clientOnTurnId + 1;
 
         if((int)nextClientOnTurnId == NetworkManager.ConnectedClientsIds.Count)
@@ -82,11 +85,14 @@ public class TurnManager : NetworkBehaviour
     [ClientRpc(RequireOwnership = false)]
     private void NextTurn_ClientRPC(ulong nextClientOnTurnId)
     {
+        OnTurnChangedEvent.Invoke();
+
         clientOnTurnId = nextClientOnTurnId;
 
         if (nextClientOnTurnId == localClientId)
         {
             isMyTurn = true;
+            OnMyTurnStartedEvent.Invoke();
         }
     }
 }

@@ -6,9 +6,9 @@ public class GoldMine : TowerCore
 {
     public float mineSpeed;
 
-    public override void Init()
+
+    protected override void OnSetupTower()
     {
-        base.Init();
         TurnManager.Instance.OnTurnChangedEvent.AddListener(() => GenerateCoins());
     }
 

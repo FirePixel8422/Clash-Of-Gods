@@ -155,17 +155,13 @@ MonoBehaviour:
   amountOfDissolves: 0
   cDissolves: 0
   cost: 0
-  movement: 0
-  moveSpeed: 0
   health: 0
   dmg: 0
+  underAttackArrowAnim: {fileID: 4363910885737740328}
   targets: []
-  towerPreviewRenderer: {fileID: 0}
-  towerMoveArrowsAnim: {fileID: 0}
-  towerUnderAttackArrowAnim: {fileID: 4363910885737740328}
-  moveArrowColors: []
   anim: {fileID: 0}
   towerCompleted: 0
+  useSelectionFlicker: 0
 --- !u!1001 &6344618254679133487
 PrefabInstance:
   m_ObjectHideFlags: 0

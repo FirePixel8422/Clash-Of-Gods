@@ -4,27 +4,41 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class AttackTower : TowerCore
+public class Tower : TowerCore
 {
     public Transform rotPoint;
 
     public Transform lookAtTransform;
 
+    [HideInInspector]
+    public SpriteRenderer towerPreviewRenderer;
+
     public float rotSpeed;
 
 
 
-    public override void Start()
+    protected override void OnSetupTower()
     {
-        base.Start();
+        towerPreviewRenderer = GetComponentInChildren<SpriteRenderer>();
+
         StartCoroutine(LookAtTarget_UpdateLoop());
     }
 
 
-    public override void OnGrantTurn()
+    #region Tower Select/Deselect
+
+    protected override void OnSelectTower()
     {
-        base.OnGrantTurn();
+
     }
+
+    protected override void OnDeSelectTower()
+    {
+
+    }
+    #endregion
+
+
 
 
     private IEnumerator LookAtTarget_UpdateLoop()

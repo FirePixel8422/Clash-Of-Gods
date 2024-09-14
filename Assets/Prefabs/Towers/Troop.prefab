@@ -404,7 +404,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6423061158740057057}
   - component: {fileID: 567083023134197584}
-  - component: {fileID: 252119404997219836}
+  - component: {fileID: 1002189246433661348}
   m_Layer: 0
   m_Name: Troop
   m_TagString: Untagged
@@ -451,7 +451,7 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &252119404997219836
+--- !u!114 &1002189246433661348
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -460,27 +460,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 4292093675666858036}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e48c7027ddc33b4f82739ee780052fc, type: 3}
+  m_Script: {fileID: 11500000, guid: a4ca8832d34ff0d4b9b8b47d4b4c7a92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dissolves: []
   amountOfDissolves: 0
   cDissolves: 0
   cost: 0
-  movement: 1
-  moveSpeed: 9
   health: 0
   dmg: 0
+  underAttackArrowAnim: {fileID: 6574641665154293509}
+  selectStateAnim: {fileID: 8925339680116198658}
   targets: []
-  towerPreviewRenderer: {fileID: 0}
-  towerMoveArrowsAnim: {fileID: 8925339680116198658}
-  towerUnderAttackArrowAnim: {fileID: 0}
+  anim: {fileID: 0}
+  towerCompleted: 0
+  useSelectionFlicker: 0
+  animatedMoveSpeed: 10
   moveArrowColors:
   - {r: 0.23921569, g: 0.58431375, b: 0.8627451, a: 1}
   - {r: 0.8627451, g: 0.2509804, b: 0.23921569, a: 1}
-  - {r: 0.8627451, g: 0.6313726, b: 0.23921569, a: 1}
-  anim: {fileID: 0}
-  towerCompleted: 0
 --- !u!1 &4387032243335528866
 GameObject:
   m_ObjectHideFlags: 0
@@ -938,11 +936,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 217d09214c24e614da700e2235454094, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 217d09214c24e614da700e2235454094, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 217d09214c24e614da700e2235454094, type: 3}
       propertyPath: m_LocalPosition.z

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class DirectionArrow : ClickableCollider
 {
-    private TowerCore troop;
+    private Troop troop;
     private SpriteRenderer spriteRenderer;
 
     public Vector2Int dir;
@@ -16,7 +16,7 @@ public class DirectionArrow : ClickableCollider
     public override void Start()
     {
         base.Start();
-        troop = GetComponentInParent<TowerCore>();
+        troop = GetComponentInParent<Troop>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -31,7 +31,7 @@ public class DirectionArrow : ClickableCollider
 
         bool validMovement = inGrid && (arrow_GridObjectData.full == false);
 
-        validAttack = inGrid && arrow_GridObjectData.full && arrow_GridObjectData.type != (int)troop.OwnerClientId;
+        validAttack = inGrid && arrow_GridObjectData.full && arrow_GridObjectData.tower.OwnerClientId != troop.OwnerClientId;
 
 
         if (validAttack)

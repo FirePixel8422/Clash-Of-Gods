@@ -351,7 +351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60bae8d50d58edb428e44418b3e4c6ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerPrefab: {fileID: 252119404997219836, guid: a2e374a6f5cc01d4abe6463c772df7fb, type: 3}
+  towerPrefab: {fileID: 1002189246433661348, guid: a2e374a6f5cc01d4abe6463c772df7fb, type: 3}
   cost: 0
   dissolves: []
   towerPreviewRenderer: {fileID: 0}
@@ -1603,13 +1603,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1279687314}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -3, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1015244953}
-  m_Father: {fileID: 1504324056}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1281980188
 GameObject:
@@ -1814,7 +1814,6 @@ Transform:
   - {fileID: 2018467953}
   - {fileID: 1588799941}
   - {fileID: 132022733}
-  - {fileID: 1279687315}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1588799939
@@ -2352,6 +2351,9 @@ MonoBehaviour:
   localClientId: 0
   clientOnTurnId: 0
   OnTurnChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnMyTurnStartedEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!4 &2018467953
@@ -2985,7 +2987,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.059999943, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 303284584980855407}
@@ -3189,6 +3191,7 @@ SceneRoots:
   - {fileID: 963194228}
   - {fileID: 705507995}
   - {fileID: 1504324056}
+  - {fileID: 1279687315}
   - {fileID: 1071027059}
   - {fileID: 2016323067}
   - {fileID: 1501788695}
