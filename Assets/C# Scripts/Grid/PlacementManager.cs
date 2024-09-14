@@ -17,6 +17,8 @@ public class PlacementManager : NetworkBehaviour
         gfxRayCaster = FindObjectOfType<GraphicRaycaster>();
     }
 
+
+
     public ulong localClientId;
     public int towerForwardRotationY;
 
@@ -25,6 +27,8 @@ public class PlacementManager : NetworkBehaviour
 
     public static GraphicRaycaster gfxRayCaster;
     private Camera mainCam;
+
+    public Transform selectionSprite;
 
     private LayerMask ownFieldLayers;
     private LayerMask neutralLayers;
@@ -277,20 +281,29 @@ public class PlacementManager : NetworkBehaviour
                     selectedTower.DeSelectTower();
                 }
 
-                //select tower
-                selectedTower = gridData.tower;
+                if (selectedTower != gridData.tower)
+                {
+                    //select tower
+                    selectedTower = gridData.tower;
 
-                selectedTower.SelectTower();
-                towerSelected = true;
+                    selectedTower.SelectTower();
+                    towerSelected = true;
+                }
+                else
+                {
+                    selectedTower = null;
+                    towerSelected = false;
+                }
 
                 return;
             }
         }
-
+        
         if (towerSelected)
         {
             selectedTower.DeSelectTower();
             towerSelected = false;
+            selectedTower = null;
         }
     }
 
@@ -300,7 +313,7 @@ public class PlacementManager : NetworkBehaviour
 
     private void Update()
     {
-        if (isPlacingTower && Input.mousePosition != mousePos)
+        if (Input.mousePosition != mousePos)
         {
             mousePos = Input.mousePosition;
             UpdateTowerPlacementPreview();
@@ -315,21 +328,31 @@ public class PlacementManager : NetworkBehaviour
         {
             selectedGridTileData = GridManager.Instance.GridObjectFromWorldPoint(hitInfo.point);
 
-            if (selectedGridTileData.full == false && selectedGridTileData.type == (int)localClientId && currency >= selectedPreviewTower.cost)
+            if (isPlacingTower)
             {
-                selectedPreviewTower.towerPreviewRenderer.color = new Color(0.7619722f, 0.8740168f, 0.9547169f);
-                selectedPreviewTower.UpdateTowerPreviewColor(Color.white);
+                if (selectedGridTileData.full == false && selectedGridTileData.type == (int)localClientId && currency >= selectedPreviewTower.cost)
+                {
+                    selectedPreviewTower.towerPreviewRenderer.color = new Color(0.7619722f, 0.8740168f, 0.9547169f);
+                    selectedPreviewTower.UpdateTowerPreviewColor(Color.white);
 
-                UpdateTowerPreviewServerRPC(selectedGridTileData.worldPos, towerForwardRotationY);
-            }
-            else
-            {
-                selectedPreviewTower.towerPreviewRenderer.color = new Color(0.8943396f, 0.2309691f, 0.09955848f);
-                selectedPreviewTower.UpdateTowerPreviewColor(Color.red);
+                    UpdateTowerPreviewServerRPC(selectedGridTileData.worldPos, towerForwardRotationY);
+                }
+                else
+                {
+                    selectedPreviewTower.towerPreviewRenderer.color = new Color(0.8943396f, 0.2309691f, 0.09955848f);
+                    selectedPreviewTower.UpdateTowerPreviewColor(Color.red);
+                }
+
+                selectedPreviewTower.transform.position = selectedGridTileData.worldPos;
+                selectedPreviewTower.transform.rotation = Quaternion.Euler(0, towerForwardRotationY, 0);
             }
 
-            selectedPreviewTower.transform.position = selectedGridTileData.worldPos;
-            selectedPreviewTower.transform.rotation = Quaternion.Euler(0, towerForwardRotationY, 0);
+
+            selectionSprite.position = selectedGridTileData.worldPos;
+        }
+        else
+        {
+            selectionSprite.position = new Vector3(0, -3, 0);
         }
     }
 

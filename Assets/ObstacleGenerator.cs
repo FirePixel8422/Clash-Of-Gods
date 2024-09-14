@@ -69,6 +69,12 @@ public class ObstacleGenerator : NetworkBehaviour
         {
             GameObject obj = Instantiate(obstacles[Random.Range(0, obstacles.Length)], positions[i], Quaternion.Euler(0, Random.Range(1, 5) * 90, 0));
 
+            MeshRenderer[] renderers = obj.GetComponentsInChildren<MeshRenderer>();
+            foreach (MeshRenderer renderer in renderers)
+            {
+                renderer.material.SetColor(Shader.PropertyToID("_Base_Color"), PlacementManager.Instance.playerColors[i < obstacleAmount ? 0 : 1]);
+            }
+
             NetworkObject networkObject = obj.GetComponent<NetworkObject>();
             networkObject.SpawnWithOwnership(1000, true);
 
