@@ -155,12 +155,17 @@ MonoBehaviour:
   amountOfDissolves: 0
   cDissolves: 0
   cost: 0
-  health: 0
+  health: 1
   dmg: 0
   underAttackArrowAnim: {fileID: 4363910885737740328}
+  underAttackArrowColors:
+  - {r: 0.8627451, g: 0.2509804, b: 0.23921569, a: 1}
+  selectStateAnim: {fileID: 0}
   targets: []
   anim: {fileID: 0}
   towerCompleted: 0
+  stunned: 0
+  canTakeAction: 0
   useSelectionFlicker: 0
 --- !u!1001 &6344618254679133487
 PrefabInstance:

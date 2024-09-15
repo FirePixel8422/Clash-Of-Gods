@@ -5,74 +5,57 @@ using UnityEngine;
 
 public class DirectionArrow : ClickableCollider
 {
-    private Troop troop;
-    private SpriteRenderer spriteRenderer;
+    private TowerCore tower;
 
     public Vector2Int dir;
 
-    private bool validAttack;
+    [HideInInspector]
+    public bool validAttack;
 
 
     public override void Start()
     {
         base.Start();
-        troop = GetComponentInParent<Troop>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        tower = GetComponentInParent<TowerCore>();
     }
 
 
-    public void VaidateMovementAndAttacks()
+    public virtual void OnValidateArrow()
     {
-        GridObjectData troop_GridObjectData = GridManager.Instance.GridObjectFromWorldPoint(troop.transform.position);
+        GridObjectData troop_GridObjectData = GridManager.Instance.GridObjectFromWorldPoint(tower.transform.position);
         GridObjectData arrow_GridObjectData = GridManager.Instance.GetGridData(troop_GridObjectData.gridPos + dir);
 
 
         bool inGrid = GridManager.Instance.IsInGrid(arrow_GridObjectData.gridPos);
 
-        bool validMovement = inGrid && (arrow_GridObjectData.full == false);
-
-        validAttack = inGrid && arrow_GridObjectData.full && arrow_GridObjectData.tower.OwnerClientId != troop.OwnerClientId;
+        validAttack = inGrid && arrow_GridObjectData.full && arrow_GridObjectData.tower.OwnerClientId != tower.OwnerClientId;
 
 
         if (validAttack)
         {
-            gameObject.SetActive(false);
-
-            troop.targets.Add(arrow_GridObjectData.tower);
-            arrow_GridObjectData.tower.GetTargetted(true);
-        }
-        else
-        {
-            gameObject.SetActive(validMovement);
+            tower.targets.Add(arrow_GridObjectData.tower);
+            arrow_GridObjectData.tower.GetTargetted(true, tower.canTakeAction);
         }
     }
 
 
-    public override void OnClick()
+    protected override void OnClick()
     {
         base.OnClick();
 
-        if (TurnManager.Instance.isMyTurn == false)
+        if (TurnManager.Instance.isMyTurn == false || tower.canTakeAction == false || tower.stunned || validAttack == false)
         {
             return;
         }
 
-        GridObjectData gridObjectData = GridManager.Instance.GridObjectFromWorldPoint(troop.transform.position);
+        GridObjectData gridObjectData = GridManager.Instance.GridObjectFromWorldPoint(tower.transform.position);
         GridObjectData arrow_GridObjectData = GridManager.Instance.GetGridData(gridObjectData.gridPos + dir);
 
 
-        if (validAttack)
-        {
-            arrow_GridObjectData.tower.GetAttacked();
-        }
-        else
-        {
-            troop.MoveTower(gridObjectData.gridPos, gridObjectData.gridPos + dir);
-        }
+        arrow_GridObjectData.tower.GetAttacked(tower.dmg, GodCore.Instance.RandomStunChane());
 
-        troop.DeSelectTower();
+        tower.DeSelectTower();
 
-        TurnManager.Instance.isMyTurn = false;
-        TurnManager.Instance.NextTurn_ServerRPC();
+        tower.LoseTurn();
     }
 }

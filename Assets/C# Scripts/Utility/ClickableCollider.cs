@@ -3,7 +3,10 @@ using UnityEngine.Events;
 
 public class ClickableCollider : MonoBehaviour
 {
+    [HideInInspector]
     public UnityEvent OnClickEvent;
+
+    public bool interactable = true;
 
     public bool triggerAnimator;
     private Animator anim;
@@ -16,14 +19,14 @@ public class ClickableCollider : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if (triggerAnimator)
+        if (interactable && triggerAnimator)
         {
             anim.SetTrigger("Highlighted");
         }
     }
     private void OnMouseExit()
     {
-        if (triggerAnimator)
+        if (interactable && triggerAnimator)
         {
             anim.SetTrigger("Normal");
         }
@@ -31,7 +34,7 @@ public class ClickableCollider : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (interactable && Input.GetKeyDown(KeyCode.Mouse0))
         {
             OnClick();
 
@@ -42,7 +45,7 @@ public class ClickableCollider : MonoBehaviour
         }
     }
 
-    public virtual void OnClick()
+    protected virtual void OnClick()
     {
         OnClickEvent.Invoke();
     }

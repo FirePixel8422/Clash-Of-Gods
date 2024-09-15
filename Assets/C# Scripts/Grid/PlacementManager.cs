@@ -128,8 +128,7 @@ public class PlacementManager : NetworkBehaviour
         {
             if (towerSelected)
             {
-                towerSelected = false;
-                selectedTower = null;
+                DeSelectTower();
             }
 
             if (isPlacingTower)
@@ -162,13 +161,13 @@ public class PlacementManager : NetworkBehaviour
         if (towerSelected)
         {
             selectedTower.DeSelectTower();
+            
             towerSelected = false;
         }
 
         selectedPreviewTower = towerPreviews[id];
         SelectTowerPreview_ServerRPC(id);
 
-        selectedTower = null;
         isPlacingTower = true;
     }
 
@@ -227,12 +226,6 @@ public class PlacementManager : NetworkBehaviour
         UpdateTowerPreviewServerRPC(Vector3.zero, 0, true);
 
 
-        if (towerSelected)
-        {
-            selectedTower.DeSelectTower();
-            towerSelected = false;
-        }
-
         isPlacingTower = false;
         PlaceTower_ServerRPC(selectedGridTileData.worldPos, localClientId == 0 ? 90 : -90, selectedGridTileData.gridPos);
     }
@@ -273,7 +266,7 @@ public class PlacementManager : NetworkBehaviour
         if (Physics.Raycast(ray, out RaycastHit hitInfo, 100, fullFieldLayers))
         {
             GridObjectData gridData = GridManager.Instance.GridObjectFromWorldPoint(hitInfo.point);
-            if (gridData.tower != null && gridData.tower.towerCompleted && localClientId == gridData.tower.OwnerClientId)
+            if (gridData.tower != null && localClientId == gridData.tower.OwnerClientId)
             {
                 //deselect older selected tower
                 if (towerSelected)
@@ -281,7 +274,7 @@ public class PlacementManager : NetworkBehaviour
                     selectedTower.DeSelectTower();
                 }
 
-                if (selectedTower != gridData.tower)
+                if (towerSelected == false || selectedTower != gridData.tower)
                 {
                     //select tower
                     selectedTower = gridData.tower;
@@ -291,22 +284,23 @@ public class PlacementManager : NetworkBehaviour
                 }
                 else
                 {
-                    selectedTower = null;
                     towerSelected = false;
                 }
 
                 return;
             }
         }
-        
+
         if (towerSelected)
         {
-            selectedTower.DeSelectTower();
-            towerSelected = false;
-            selectedTower = null;
+            DeSelectTower();
         }
     }
-
+    private void DeSelectTower()
+    {
+        selectedTower.DeSelectTower();
+        towerSelected = false;
+    }
 
 
     #region Tower/Troop Preview Update

@@ -24,6 +24,9 @@ public class TowerCore : NetworkBehaviour
 
     public Animator underAttackArrowAnim;
 
+    protected MeshRenderer underAttackArrowRenderer;
+    public List<Color> underAttackArrowColors;
+
     public Animator selectStateAnim;
 
 
@@ -36,6 +39,9 @@ public class TowerCore : NetworkBehaviour
     [HideInInspector]
     public bool towerCompleted;
 
+    public bool stunned;
+    public bool canTakeAction;
+
     public bool useSelectionFlicker;
 
 
@@ -44,10 +50,12 @@ public class TowerCore : NetworkBehaviour
 
     public virtual void CoreInit()
     {
-        TurnManager.Instance.OnMyTurnStartedEvent.AddListener(() => OnGrantTurn());
+        TurnManager.Instance.OnMyTurnStartedEvent.AddListener(() => GrantTurn());
+
+        underAttackArrowRenderer = underAttackArrowAnim.GetComponentInChildren<MeshRenderer>();
+        underAttackArrowColors.Add(PlacementManager.Instance.playerColors[NetworkObject.OwnerClientId]);
 
         anim = GetComponent<Animator>();
-
 
         dissolves = GetComponentsInChildren<DissolveController>();
 
@@ -112,7 +120,7 @@ public class TowerCore : NetworkBehaviour
 
         foreach (TowerCore target in targets)
         {
-            target.GetTargetted(false);
+            target.GetTargetted(false, canTakeAction);
         }
         targets.Clear();
 
@@ -157,22 +165,51 @@ public class TowerCore : NetworkBehaviour
     #endregion
 
 
-    public virtual void OnGrantTurn()
+
+    #region On Grant/Lose Turn
+
+    public void GrantTurn()
+    {
+        if (stunned)
+        {
+            stunned = false;
+            return;
+        }
+
+        canTakeAction = true;
+        OnGrantTurn();
+    }
+    protected virtual void OnGrantTurn()
     {
         return;
+    }
+
+    public void LoseTurn()
+    {
+        canTakeAction = false;
+        OnLoseTurn();
     }
     public virtual void OnLoseTurn()
     {
         return;
     }
+    #endregion
 
 
-    public void GetTargetted(bool state)
+
+    #region Get Targetted and Attacked And Animation
+
+    public void GetTargetted(bool state, bool canAttackerAttack)
     {
         underAttackArrowAnim.SetBool("Enabled", state);
+
+        underAttackArrowRenderer.material.SetColor(Shader.PropertyToID("_Base_Color"), underAttackArrowColors[canAttackerAttack ? 1 : 0]);
     }
-    public void GetAttacked()
+    public void GetAttacked(int dmg, bool stun)
     {
+        health -= dmg;
+        stunned = stun;
+
         StartCoroutine(GetAttackedAnimation());
     }
 
@@ -181,5 +218,15 @@ public class TowerCore : NetworkBehaviour
         underAttackArrowAnim.SetBool("Enabled", false);
 
         yield return null;
+
+        if (health <= 0)
+        {
+            foreach (var dissolve in dissolves)
+            {
+                dissolve.Revert(this);
+            }
+        }
     }
+    #endregion
+
 }

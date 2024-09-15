@@ -5,5 +5,9 @@ using UnityEngine;
 
 public class Obstacle : TowerCore
 {
-
+    private void Start()
+    {
+        underAttackArrowRenderer = underAttackArrowAnim.GetComponentInChildren<MeshRenderer>();
+        underAttackArrowColors.Add(PlacementManager.Instance.playerColors[NetworkObject.OwnerClientId / 10 - 1]);
+    }
 }

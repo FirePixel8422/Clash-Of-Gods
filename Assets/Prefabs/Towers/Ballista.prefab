@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2383399521
+  GlobalObjectIdHash: 2742807018
   InScenePlacedSourceGlobalObjectIdHash: 2742807018
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -75,13 +75,17 @@ MonoBehaviour:
   amountOfDissolves: 0
   cDissolves: 0
   cost: 0
-  health: 0
-  dmg: 0
+  health: 12
+  dmg: 6
   underAttackArrowAnim: {fileID: 4450063067946549760}
+  underAttackArrowColors:
+  - {r: 0.8627451, g: 0.2509804, b: 0.23921569, a: 1}
   selectStateAnim: {fileID: 2345341419908528947}
   targets: []
   anim: {fileID: 0}
   towerCompleted: 0
+  stunned: 0
+  canTakeAction: 0
   useSelectionFlicker: 0
   rotPoint: {fileID: 5633833325412302971}
   lookAtTransform: {fileID: 0}

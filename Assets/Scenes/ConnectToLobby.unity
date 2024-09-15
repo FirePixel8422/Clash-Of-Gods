@@ -8319,6 +8319,7 @@ GameObject:
   - component: {fileID: 4471398051842191997}
   - component: {fileID: 5890706699179943674}
   - component: {fileID: 5890706699179943673}
+  - component: {fileID: 5890706699179943675}
   m_Layer: 0
   m_Name: NetworkLogic
   m_TagString: Untagged
@@ -9930,6 +9931,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saveData:
     playerName: 
+--- !u!114 &5890706699179943675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2897743915309239659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c73f4054d565a4f4090ac06f7300da87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  athenaTroopStunChance: 0
+  god: 2
 --- !u!114 &5913722082128397995
 MonoBehaviour:
   m_ObjectHideFlags: 0

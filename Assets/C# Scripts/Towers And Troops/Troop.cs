@@ -7,6 +7,11 @@ public class Troop : TowerCore
 {
     public float animatedMoveSpeed;
 
+    public int movesPerTurn;
+    //[HideInInspector]
+    public int movesLeft;
+
+
     private SpriteRenderer[] moveArrowRenderers;
     public Color[] moveArrowColors;
 
@@ -15,11 +20,14 @@ public class Troop : TowerCore
 
     protected override void OnSetupTower()
     {
-        selectStateAnim = GetComponentInChildren<Animator>();
+        moveArrowRenderers = selectStateAnim.GetComponentsInChildren<SpriteRenderer>();
 
         selectStateAnim.transform.rotation = Quaternion.identity;
 
-        moveArrowRenderers = selectStateAnim.GetComponentsInChildren<SpriteRenderer>();
+        if (GodCore.Instance.IsAthena)
+        {
+            GrantTurn();
+        }
     }
 
 
@@ -30,7 +38,7 @@ public class Troop : TowerCore
     {
         foreach (var sprite in moveArrowRenderers)
         {
-            sprite.color = moveArrowColors[TurnManager.Instance.isMyTurn ? 0 : 1];
+            sprite.color = moveArrowColors[(movesLeft != 0 || canTakeAction == false) ? 0 : 1];
         }
     }
     protected override void OnDeSelectTower()
@@ -40,16 +48,18 @@ public class Troop : TowerCore
     #endregion
 
 
+    protected override void OnGrantTurn()
+    {
+        print("trun granted");
+        movesLeft = movesPerTurn;
+    }
+
+
     #region Move Tower
 
     public void MoveTower(Vector2Int currentGridPos, Vector2Int newGridPos)
     {
-        if (TurnManager.Instance.isMyTurn == false)
-        {
-            return;
-        }
-        TurnManager.Instance.isMyTurn = false;
-
+        movesLeft -= 1;
 
         GridManager.Instance.UpdateTowerData(currentGridPos, null);
         GridManager.Instance.UpdateTowerData(newGridPos, this);

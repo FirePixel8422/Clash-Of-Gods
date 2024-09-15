@@ -18,7 +18,7 @@ public class DirectionArrowValidator : MonoBehaviour
     {
         foreach (var movementArrow in movementArrows)
         {
-            movementArrow.VaidateMovementAndAttacks();
+            movementArrow.OnValidateArrow();
         }
     }
 }
