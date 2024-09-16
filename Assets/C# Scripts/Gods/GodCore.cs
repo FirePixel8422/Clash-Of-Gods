@@ -29,15 +29,18 @@ public class GodCore : MonoBehaviour
         }
     }
 
-    public float athenaTroopStunChance;
-    public bool RandomStunChane()
+    public float zeusTroopStunChance;
+    public int fails;
+    public bool RandomStunChance()
     {
-        if (IsAthena && Random.Range(0, 100f)  < athenaTroopStunChance)
+        if (god == God.Zeus && (Random.Range(0, 100f) < zeusTroopStunChance * (1 + fails)))
         {
+            fails = 0;
             return true;
         }
         return false;
     }
+
     public bool IsHades
     {
         get

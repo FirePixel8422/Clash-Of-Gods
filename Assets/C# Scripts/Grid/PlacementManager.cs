@@ -43,6 +43,10 @@ public class PlacementManager : NetworkBehaviour
     private TowerPreview[] towerPreviews;
     public TowerPreview selectedPreviewTower;
 
+    public int maxTowerPlacements;
+    [HideInInspector]
+    public int cTowerPlacements;
+
     public TowerCore selectedTower;
 
     private GridObjectData selectedGridTileData;
@@ -71,6 +75,9 @@ public class PlacementManager : NetworkBehaviour
 
     public void Init(LayerMask _ownFieldLayers, LayerMask _neutralLayers, LayerMask _fullFieldLayers, ulong _localClientId)
     {
+        TurnManager.Instance.OnMyTurnStartedEvent.AddListener(() => GrantTurn());
+        cTowerPlacements = maxTowerPlacements;
+
         towerPreviews = towerPreviewHolder.GetComponentsInChildren<TowerPreview>();
 
         ownFieldLayers = _ownFieldLayers;
@@ -146,7 +153,7 @@ public class PlacementManager : NetworkBehaviour
 
     public void SelectTowerPreview(int id)
     {
-        if (TurnManager.Instance.isMyTurn == false)
+        if (TurnManager.Instance.isMyTurn == false || cTowerPlacements == 0)
         {
             return;
         }
@@ -202,6 +209,7 @@ public class PlacementManager : NetworkBehaviour
                 selectedGridTileData.full = true;
 
                 PlaceTower();
+                cTowerPlacements -= 1;
             }
             else
             {
@@ -254,8 +262,15 @@ public class PlacementManager : NetworkBehaviour
         }
 
         GridManager.Instance.UpdateTowerData(gridPos, selectedTower);
+        selectedTower = null;
     }
     #endregion
+
+
+    public void GrantTurn()
+    {
+        cTowerPlacements = maxTowerPlacements;
+    }
 
 
 
@@ -290,15 +305,14 @@ public class PlacementManager : NetworkBehaviour
                 return;
             }
         }
-
-        if (towerSelected)
-        {
-            DeSelectTower();
-        }
+        DeSelectTower();
     }
     private void DeSelectTower()
     {
-        selectedTower.DeSelectTower();
+        if (selectedTower != null)
+        {
+            selectedTower.DeSelectTower();
+        }
         towerSelected = false;
     }
 

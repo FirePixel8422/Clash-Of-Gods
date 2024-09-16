@@ -101,7 +101,6 @@ public class ObstacleGenerator : NetworkBehaviour
 
 
             GridManager.Instance.UpdateTowerData(gridPositions[i], obstacle);
-            GridManager.Instance.UpdateGridDataType(gridPositions[i], -1000);
         }
     }
 }

@@ -39,6 +39,12 @@ public class Tower : TowerCore
     #endregion
 
 
+    protected override IEnumerator AttackTargetAnimation(Vector3 targetPos, float combinedSize, TowerCore target = null)
+    {
+        yield break;
+    }
+
+
 
 
     private IEnumerator LookAtTarget_UpdateLoop()

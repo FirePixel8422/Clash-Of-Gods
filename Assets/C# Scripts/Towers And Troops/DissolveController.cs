@@ -49,7 +49,7 @@ public class DissolveController : MonoBehaviour
         while (cDissolveEffectState < startDissolveEffectState)
         {
             yield return null;
-            cDissolveEffectState += Time.deltaTime * dissolveSpeed * 1.5f;
+            cDissolveEffectState += Time.deltaTime * dissolveSpeed;
             dissolveMaterial.SetFloat("_Disolve_Active", cDissolveEffectState);
         }
         core.RevertCompleted();

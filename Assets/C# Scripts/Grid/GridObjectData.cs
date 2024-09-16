@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
 
+[System.Serializable]
 public struct GridObjectData
 {
     public Vector2Int gridPos;

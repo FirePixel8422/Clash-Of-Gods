@@ -9943,7 +9943,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c73f4054d565a4f4090ac06f7300da87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  athenaTroopStunChance: 0
+  zeusTroopStunChance: 0
   god: 2
 --- !u!114 &5913722082128397995
 MonoBehaviour:

@@ -12,6 +12,9 @@ public class DirectionArrow : ClickableCollider
     [HideInInspector]
     public bool validAttack;
 
+    public GridObjectData troop_GridObjectData;
+    public GridObjectData arrow_GridObjectData;
+
 
     public override void Start()
     {
@@ -22,8 +25,8 @@ public class DirectionArrow : ClickableCollider
 
     public virtual void OnValidateArrow()
     {
-        GridObjectData troop_GridObjectData = GridManager.Instance.GridObjectFromWorldPoint(tower.transform.position);
-        GridObjectData arrow_GridObjectData = GridManager.Instance.GetGridData(troop_GridObjectData.gridPos + dir);
+        troop_GridObjectData = GridManager.Instance.GridObjectFromWorldPoint(tower.transform.position);
+        arrow_GridObjectData = GridManager.Instance.GetGridData(troop_GridObjectData.gridPos + dir);
 
 
         bool inGrid = GridManager.Instance.IsInGrid(arrow_GridObjectData.gridPos);
@@ -52,7 +55,7 @@ public class DirectionArrow : ClickableCollider
         GridObjectData arrow_GridObjectData = GridManager.Instance.GetGridData(gridObjectData.gridPos + dir);
 
 
-        arrow_GridObjectData.tower.GetAttacked(tower.dmg, GodCore.Instance.RandomStunChane());
+        tower.AttackTarget(arrow_GridObjectData.tower);
 
         tower.DeSelectTower();
 

@@ -22,6 +22,10 @@ public class TowerCore : NetworkBehaviour
     public int health;
     public int dmg;
 
+    public Transform centerPoint;
+    public float size;
+    public bool drawSizeGizmos;
+
     public Animator underAttackArrowAnim;
 
     protected MeshRenderer underAttackArrowRenderer;
@@ -73,7 +77,7 @@ public class TowerCore : NetworkBehaviour
     }
     protected virtual void OnTowerCompleted()
     {
-        return; 
+        return;
     }
     #endregion
 
@@ -196,8 +200,42 @@ public class TowerCore : NetworkBehaviour
     #endregion
 
 
+    
 
-    #region Get Targetted and Attacked And Animation
+
+
+    #region Target, Attack and Animation
+
+    public void AttackTarget(TowerCore target)
+    {
+        float combinedSize = (target.size + size) / 2;
+
+        StartCoroutine(AttackTargetAnimation(target.transform.position, combinedSize, target));
+        AttackTarget_ServerRPC(target.transform.position, combinedSize);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void AttackTarget_ServerRPC(Vector3 targetPos, float combinedSize, ServerRpcParams rpcParams = default)
+    {
+        ulong fromClientId = rpcParams.Receive.SenderClientId;
+        AttackTarget_ClientRPC(fromClientId, targetPos, combinedSize);
+    }
+
+    [ClientRpc(RequireOwnership = false)]
+    private void AttackTarget_ClientRPC(ulong fromClientId, Vector3 targetPos, float combinedSize)
+    {
+        if (TurnManager.Instance.localClientId == fromClientId)
+        {
+            return;
+        }
+
+        StartCoroutine(AttackTargetAnimation(targetPos, combinedSize));
+    }
+    protected virtual IEnumerator AttackTargetAnimation(Vector3 targetPos, float combinedSize, TowerCore target = null)
+    {
+        yield break;
+    }
+
 
     public void GetTargetted(bool state, bool canAttackerAttack)
     {
@@ -210,14 +248,8 @@ public class TowerCore : NetworkBehaviour
         health -= dmg;
         stunned = stun;
 
-        StartCoroutine(GetAttackedAnimation());
-    }
-
-    private IEnumerator GetAttackedAnimation()
-    {
         underAttackArrowAnim.SetBool("Enabled", false);
 
-        yield return null;
 
         if (health <= 0)
         {
@@ -225,8 +257,55 @@ public class TowerCore : NetworkBehaviour
             {
                 dissolve.Revert(this);
             }
+            GridObjectData gridObjectData = GridManager.Instance.GridObjectFromWorldPoint(transform.position);
+            GridManager.Instance.UpdateTowerData(gridObjectData.gridPos, null);
+        }
+
+
+        GetAttacked_ServerRPC(dmg, stun);
+    }
+
+
+    [ServerRpc(RequireOwnership = false)]
+    private void GetAttacked_ServerRPC(int dmg, bool stun, ServerRpcParams rpcParams = default)
+    {
+        ulong fromClientId = rpcParams.Receive.SenderClientId;
+        GetAttacked_ClientRPC(fromClientId, dmg, stun);
+    }
+
+    [ClientRpc(RequireOwnership = false)]
+    private void GetAttacked_ClientRPC(ulong fromClientId, int dmg, bool stun)
+    {
+        if (TurnManager.Instance.localClientId == fromClientId)
+        {
+            return;
+        }
+
+        health -= dmg;
+        stunned = stun;
+
+        underAttackArrowAnim.SetBool("Enabled", false);
+
+
+        if (health <= 0)
+        {
+            foreach (var dissolve in dissolves)
+            {
+                dissolve.Revert(this);
+            }
+            GridObjectData gridObjectData = GridManager.Instance.GridObjectFromWorldPoint(transform.position);
+            GridManager.Instance.UpdateTowerData(gridObjectData.gridPos, null);
         }
     }
     #endregion
 
+
+
+    private void OnDrawGizmos()
+    {
+        if (drawSizeGizmos && centerPoint != null && size != 0)
+        {
+            Gizmos.DrawWireCube(centerPoint.position, Vector3.one * size);
+        }
+    }
 }

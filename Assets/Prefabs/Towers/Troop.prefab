@@ -197,6 +197,20 @@ MonoBehaviour:
   triggerAnimator: 1
   dir: {x: 1, y: 0}
   validAttack: 0
+  troop_GridObjectData:
+    gridPos: {x: 0, y: 0}
+    worldPos: {x: 0, y: 0, z: 0}
+    tower: {fileID: 0}
+    full: 0
+    coreType: 0
+    type: 0
+  arrow_GridObjectData:
+    gridPos: {x: 0, y: 0}
+    worldPos: {x: 0, y: 0, z: 0}
+    tower: {fileID: 0}
+    full: 0
+    coreType: 0
+    type: 0
   spriteRenderer: {fileID: 0}
 --- !u!95 &3566772164499094333
 Animator:
@@ -346,6 +360,20 @@ MonoBehaviour:
   triggerAnimator: 1
   dir: {x: 0, y: -1}
   validAttack: 0
+  troop_GridObjectData:
+    gridPos: {x: 0, y: 0}
+    worldPos: {x: 0, y: 0, z: 0}
+    tower: {fileID: 0}
+    full: 0
+    coreType: 0
+    type: 0
+  arrow_GridObjectData:
+    gridPos: {x: 0, y: 0}
+    worldPos: {x: 0, y: 0, z: 0}
+    tower: {fileID: 0}
+    full: 0
+    coreType: 0
+    type: 0
   spriteRenderer: {fileID: 0}
 --- !u!95 &6539209637153927231
 Animator:
@@ -368,6 +396,37 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &4057037602424708668
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 898086536465411847}
+  m_Layer: 0
+  m_Name: centerPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &898086536465411847
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4057037602424708668}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.65, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6423061158740057057}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4292093675666858036
 GameObject:
   m_ObjectHideFlags: 0
@@ -400,6 +459,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2102009416172889662}
+  - {fileID: 898086536465411847}
   - {fileID: 3431143898668380215}
   - {fileID: 6119817490594926150}
   m_Father: {fileID: 0}
@@ -443,6 +503,9 @@ MonoBehaviour:
   cost: 0
   health: 5
   dmg: 4
+  centerPoint: {fileID: 898086536465411847}
+  size: 2
+  drawSizeGizmos: 1
   underAttackArrowAnim: {fileID: 7716587922606764687}
   underAttackArrowColors:
   - {r: 0.8627451, g: 0.2509804, b: 0.23921569, a: 1}
@@ -687,6 +750,20 @@ MonoBehaviour:
   triggerAnimator: 1
   dir: {x: 0, y: 1}
   validAttack: 0
+  troop_GridObjectData:
+    gridPos: {x: 0, y: 0}
+    worldPos: {x: 0, y: 0, z: 0}
+    tower: {fileID: 0}
+    full: 0
+    coreType: 0
+    type: 0
+  arrow_GridObjectData:
+    gridPos: {x: 0, y: 0}
+    worldPos: {x: 0, y: 0, z: 0}
+    tower: {fileID: 0}
+    full: 0
+    coreType: 0
+    type: 0
   spriteRenderer: {fileID: 0}
 --- !u!95 &5387535186056208385
 Animator:
@@ -836,6 +913,20 @@ MonoBehaviour:
   triggerAnimator: 1
   dir: {x: -1, y: 0}
   validAttack: 0
+  troop_GridObjectData:
+    gridPos: {x: 0, y: 0}
+    worldPos: {x: 0, y: 0, z: 0}
+    tower: {fileID: 0}
+    full: 0
+    coreType: 0
+    type: 0
+  arrow_GridObjectData:
+    gridPos: {x: 0, y: 0}
+    worldPos: {x: 0, y: 0, z: 0}
+    tower: {fileID: 0}
+    full: 0
+    coreType: 0
+    type: 0
   spriteRenderer: {fileID: 0}
 --- !u!95 &8290310585088034060
 Animator:

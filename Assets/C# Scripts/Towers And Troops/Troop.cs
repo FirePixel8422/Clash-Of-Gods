@@ -8,7 +8,7 @@ public class Troop : TowerCore
     public float animatedMoveSpeed;
 
     public int movesPerTurn;
-    //[HideInInspector]
+    [HideInInspector]
     public int movesLeft;
 
 
@@ -38,7 +38,7 @@ public class Troop : TowerCore
     {
         foreach (var sprite in moveArrowRenderers)
         {
-            sprite.color = moveArrowColors[(movesLeft != 0 || canTakeAction == false) ? 0 : 1];
+            sprite.color = moveArrowColors[(movesLeft == 0 || canTakeAction == false) ? 1 : 0];
         }
     }
     protected override void OnDeSelectTower()
@@ -50,8 +50,38 @@ public class Troop : TowerCore
 
     protected override void OnGrantTurn()
     {
-        print("trun granted");
         movesLeft = movesPerTurn;
+    }
+
+
+    protected override IEnumerator AttackTargetAnimation(Vector3 targetPos, float combinedSize, TowerCore target = null)
+    {
+        float maxDist = Vector3.Distance(transform.position, targetPos) - combinedSize;
+
+        targetPos = VectorLogic.InstantMoveTowards(transform.position, targetPos, maxDist);
+
+        Vector3 towerStartpos = transform.position;
+        targetPos.y = towerStartpos.y;
+
+
+        while (Vector3.Distance(transform.position, targetPos) > 0.0001f)
+        {
+            yield return null;
+
+            transform.position = VectorLogic.InstantMoveTowards(transform.position, targetPos, animatedMoveSpeed * Time.deltaTime);
+        }
+
+        while (Vector3.Distance(transform.position, towerStartpos) > 0.0001f)
+        {
+            yield return null;
+
+            transform.position = VectorLogic.InstantMoveTowards(transform.position, towerStartpos, animatedMoveSpeed * Time.deltaTime);
+        }
+
+        if (target != null)
+        {
+            target.GetAttacked(dmg, GodCore.Instance.RandomStunChance());
+        }
     }
 
 
