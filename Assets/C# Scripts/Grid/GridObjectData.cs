@@ -11,6 +11,8 @@ public struct GridObjectData
 
     public bool full;
 
+    public int onFire;
+
     public int coreType;
     public int type;
 }

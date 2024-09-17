@@ -23,7 +23,13 @@ public class ObstacleGenerator : NetworkBehaviour
     {
         if (IsServer)
         {
-            List<GridObjectData> gridTiles = GridManager.Instance.p1GridTiles;
+            List<GridObjectData> gridTiles = new List<GridObjectData>(GridManager.Instance.p1GridTiles.Count);
+
+            for (int i = 0; i < GridManager.Instance.p1GridTiles.Count; i++)
+            {
+                gridTiles.Add(GridManager.Instance.p1GridTiles[i]);
+            }
+
 
             Vector3[] positions = new Vector3[obstacleAmount * 2];
             Vector2Int[] gridPositions = new Vector2Int[obstacleAmount * 2];
@@ -41,7 +47,13 @@ public class ObstacleGenerator : NetworkBehaviour
                     gridTiles.RemoveAt(r);
                 }
 
-                gridTiles = GridManager.Instance.p2GridTiles;
+
+                gridTiles = new List<GridObjectData>(GridManager.Instance.p2GridTiles.Count);
+
+                for (int i = 0; i < GridManager.Instance.p2GridTiles.Count; i++)
+                {
+                    gridTiles.Add(GridManager.Instance.p2GridTiles[i]);
+                }
             }
 
             SpawnObstacles_ServerRPC(positions, gridPositions);

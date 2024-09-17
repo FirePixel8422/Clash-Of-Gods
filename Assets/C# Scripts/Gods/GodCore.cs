@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class GodCore : MonoBehaviour
+public class GodCore : NetworkBehaviour
 {
     public static GodCore Instance;
     private void Awake()
@@ -35,7 +36,7 @@ public class GodCore : MonoBehaviour
     {
         if (god == God.Zeus && (Random.Range(0, 100f) < zeusTroopStunChance * (1 + fails)))
         {
-            fails = 0;
+            fails -= 1;
             return true;
         }
         return false;

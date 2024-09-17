@@ -40,8 +40,6 @@ public class GridManager : NetworkBehaviour
         CreateGrid();
 
         PlacementManager.Instance.Init(NetworkManager.LocalClientId == 0 ? p1 : p2, neutral, p1 + p2 + neutral, NetworkManager.LocalClientId);
-
-        ObstacleGenerator.Instance.CreateObstacles();
     }
 
     private void CreateGrid()
@@ -81,7 +79,6 @@ public class GridManager : NetworkBehaviour
                             type = _type,
                             full = false,
                         });
-
                     //player 1
                 }
                 else if (Physics.Raycast(_worldPos + Vector3.up, Vector3.down, 20, p2))
@@ -111,6 +108,8 @@ public class GridManager : NetworkBehaviour
                 };
             }
         }
+
+        ObstacleGenerator.Instance.CreateObstacles();
     }
 
 
@@ -136,9 +135,13 @@ public class GridManager : NetworkBehaviour
         return grid[gridPos.x, gridPos.y];
     }
 
-    public void UpdateGridDataFullState(Vector2Int gridPos, bool newFullState)
+    public void UpdateGridDataFullState(Vector2Int gridPos, bool newState)
     {
-        grid[gridPos.x, gridPos.y].full = newFullState;
+        grid[gridPos.x, gridPos.y].full = newState;
+    }
+    public void UpdateGridDataOnFireState(Vector2Int gridPos, bool newState)
+    {
+        grid[gridPos.x, gridPos.y].onFire += newState ? 1 : -1;
     }
     public void UpdateGridDataType(Vector2Int gridPos, int type)
     {

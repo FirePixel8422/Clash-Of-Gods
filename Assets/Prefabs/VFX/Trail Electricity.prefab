@@ -126,7 +126,7 @@ VisualEffect:
       - m_Value: {x: -0, y: 0, z: 0}
         m_Name: Transform_angles
         m_Overridden: 1
-      - m_Value: {x: -7.26, y: 1, z: 1.26}
+      - m_Value: {x: 0.24, y: 0, z: 0.77}
         m_Name: Transform_position
         m_Overridden: 1
       - m_Value: {x: 1, y: 1, z: 1}
@@ -394,7 +394,7 @@ VisualEffect:
       - m_Value: {x: -0, y: 0, z: 0}
         m_Name: Transform_angles
         m_Overridden: 1
-      - m_Value: {x: -7.26, y: 1, z: 1.26}
+      - m_Value: {x: 0.24, y: 0, z: 0.77}
         m_Name: Transform_position
         m_Overridden: 1
       - m_Value: {x: 1, y: 1, z: 1}

@@ -8319,8 +8319,10 @@ GameObject:
   - component: {fileID: 4471398051842191997}
   - component: {fileID: 5890706699179943674}
   - component: {fileID: 5890706699179943673}
-  - component: {fileID: 5890706699179943675}
   - component: {fileID: 5890706699179943676}
+  - component: {fileID: 5890706699179943675}
+  - component: {fileID: 5890706699179943677}
+  - component: {fileID: 5890706699179943678}
   m_Layer: 0
   m_Name: NetworkLogic
   m_TagString: Untagged
@@ -9959,6 +9961,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39b5c0812ddee1940a8593a4aef7c0c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5890706699179943677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2897743915309239659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e238107c143a4cf4ab1e10cbea121441, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zeusTroopStunChance: 0
+  fails: 0
+  god: 0
+  fireEffectPrefabs:
+  - {fileID: 1457210736911175799, guid: cba13e49f90abdb41b800d7988399a26, type: 3}
+  - {fileID: 4140085967648764649, guid: 0708c7414eb1ff64994422de0eed3044, type: 3}
+  moltenFloorAmount: 3
+  fireLifeTime: 1
+  destroyDelay: 3
+  canSpawnOnFullTile: 1
+  fireEffectList: []
+  fireEffectGridPosList: []
+  fireEffectLifeTimeList: 
+--- !u!114 &5890706699179943678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2897743915309239659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8086c9b97c3cd9a4a90f019e224143a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledPrefabs: []
+  dynamicRefillOnEmpty: 0
 --- !u!114 &5913722082128397995
 MonoBehaviour:
   m_ObjectHideFlags: 0
