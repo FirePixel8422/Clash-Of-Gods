@@ -8320,6 +8320,7 @@ GameObject:
   - component: {fileID: 5890706699179943674}
   - component: {fileID: 5890706699179943673}
   - component: {fileID: 5890706699179943675}
+  - component: {fileID: 5890706699179943676}
   m_Layer: 0
   m_Name: NetworkLogic
   m_TagString: Untagged
@@ -9946,6 +9947,18 @@ MonoBehaviour:
   zeusTroopStunChance: 0
   fails: 0
   god: 2
+--- !u!114 &5890706699179943676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2897743915309239659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39b5c0812ddee1940a8593a4aef7c0c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5913722082128397995
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,7 +9,7 @@ public class TowerPreview : MonoBehaviour
     public int cost;
 
     [HideInInspector]
-    public DissolveController[] dissolves;
+    public XrayController[] xrayControllers;
 
     [HideInInspector]
     public SpriteRenderer towerPreviewRenderer;
@@ -20,11 +20,7 @@ public class TowerPreview : MonoBehaviour
     {
         towerPreviewRenderer = GetComponentInChildren<SpriteRenderer>();
 
-        dissolves = GetComponentsInChildren<DissolveController>();
-        foreach (var d in dissolves)
-        {
-            d.dissolveMaterial.SetInt("_Preview", true ? 1 : 0);
-        }
+        xrayControllers = GetComponentsInChildren<XrayController>();
     }
 
     public void UpdateTowerPreviewColor(Color color)
@@ -34,7 +30,7 @@ public class TowerPreview : MonoBehaviour
             return;
         }
         cColor = color;
-        foreach (var d in dissolves)
+        foreach (var d in xrayControllers)
         {
             d.dissolveMaterial.SetColor("_PreviewColor", color);
         }
