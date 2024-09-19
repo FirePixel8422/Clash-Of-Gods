@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: d7643491976646f47ab70fcb6a59dace, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.389422
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d7643491976646f47ab70fcb6a59dace, type: 3}
       propertyPath: m_LocalPosition.y
@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d7643491976646f47ab70fcb6a59dace, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.575254
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d7643491976646f47ab70fcb6a59dace, type: 3}
       propertyPath: m_LocalRotation.w
@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: c7569aa30d81e7f4facbd65efac2367f, type: 2}
     - target: {fileID: 919132149155446097, guid: d7643491976646f47ab70fcb6a59dace, type: 3}
       propertyPath: m_Name
-      value: Drachma
+      value: Drachma Big
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
