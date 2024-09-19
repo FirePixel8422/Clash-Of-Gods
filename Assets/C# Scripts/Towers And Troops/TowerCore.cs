@@ -163,8 +163,13 @@ public class TowerCore : NetworkBehaviour
         cDissolves -= 1;
         if (cDissolves == 0)
         {
-            Destroy(gameObject);
+            DespawnTower_ServerRPC();
         }
+    }
+    [ServerRpc(RequireOwnership = false)]
+    private void DespawnTower_ServerRPC()
+    {
+        NetworkObject.Despawn(gameObject);
     }
     #endregion
 

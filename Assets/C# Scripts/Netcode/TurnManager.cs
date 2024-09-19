@@ -37,6 +37,7 @@ public class TurnManager : NetworkBehaviour
         }
     }
 
+#if UNITY_EDITOR
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.PageDown))
@@ -49,6 +50,7 @@ public class TurnManager : NetworkBehaviour
             isMyTurn = true;
         }
     }
+#endif
 
 
     [ServerRpc(RequireOwnership = false)]

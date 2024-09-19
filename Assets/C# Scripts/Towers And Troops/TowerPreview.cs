@@ -13,7 +13,7 @@ public class TowerPreview : MonoBehaviour
 
     [HideInInspector]
     public SpriteRenderer towerPreviewRenderer;
-    private Color cColor;
+    private bool cPlaceable;
 
 
     private void Start()
@@ -23,16 +23,16 @@ public class TowerPreview : MonoBehaviour
         xrayControllers = GetComponentsInChildren<XrayController>();
     }
 
-    public void UpdateTowerPreviewColor(Color color)
+    public void UpdateTowerPreviewColor(bool placeable)
     {
-        if (color == cColor)
+        if (placeable == cPlaceable)
         {
             return;
         }
-        cColor = color;
+        cPlaceable = placeable;
         foreach (var d in xrayControllers)
         {
-            d.dissolveMaterial.SetColor("_PreviewColor", color);
+            d.dissolveMaterial.SetInt("_Placable", placeable ? 1 : 0);
         }
     }
 }

@@ -8,6 +8,9 @@ using UnityEngine.VFX;
 
 public class Hades : GodCore
 {
+    public Transform defensiveSelectionSprite;
+    public Transform offensiveSelectionSprite;
+
     public VisualEffect[] fireEffectPrefabs;
 
     public int moltenFloorAmount;
@@ -22,10 +25,16 @@ public class Hades : GodCore
     public List<int> fireEffectLifeTimeList;
 
 
+    private Vector3 mousePos;
+    private Camera mainCam;
+
+    public GridObjectData selectedGridTileData;
+
+
 
     private void Start()
     {
-        god = God.Hades;
+        mainCam = Camera.main;
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -36,6 +45,18 @@ public class Hades : GodCore
             TurnManager.Instance.OnMyTurnStartedEvent.AddListener(() => UseMoltenFloor_ServerRPC());
         }
     }
+
+    public bool usingDefenseAbility;
+    public override void UseDefensiveAbility()
+    {
+
+    }
+    public bool usingOffensiveAbility;
+    public override void UseOffensiveAbility()
+    {
+
+    }
+
 
 
 
@@ -128,5 +149,48 @@ public class Hades : GodCore
     private void UseMoltenFloor_ClientRPC(Vector2Int gridPos, bool newState)
     {
         GridManager.Instance.UpdateGridDataOnFireState(gridPos, newState);
+    }
+
+
+
+    private void Update()
+    {
+        if (Input.mousePosition != mousePos)
+        {
+            mousePos = Input.mousePosition;
+            UpdateSelectionSprite();
+        }
+    }
+
+    private void UpdateSelectionSprite()
+    {
+        if (usingDefenseAbility)
+        {
+            Ray ray = mainCam.ScreenPointToRay(mousePos);
+
+            if (Physics.Raycast(ray, out RaycastHit hitInfo, 100, PlacementManager.Instance.ownFieldLayers))
+            {
+                selectedGridTileData = GridManager.Instance.GridObjectFromWorldPoint(hitInfo.point);
+
+                if (selectedGridTileData.type == (int)TurnManager.Instance.localClientId)
+                {
+                    defensiveSelectionSprite.position = new Vector3(selectedGridTileData.worldPos.x, 0, 0);
+                }
+            }
+        }
+        if (usingOffensiveAbility)
+        {
+            Ray ray = mainCam.ScreenPointToRay(mousePos);
+
+            if (Physics.Raycast(ray, out RaycastHit hitInfo, 100, PlacementManager.Instance.fullFieldLayers))
+            {
+                selectedGridTileData = GridManager.Instance.GridObjectFromWorldPoint(hitInfo.point);
+
+                if (selectedGridTileData.type == (int)TurnManager.Instance.localClientId)
+                {
+                    defensiveSelectionSprite.position = selectedGridTileData.worldPos;
+                }
+            }
+        }
     }
 }

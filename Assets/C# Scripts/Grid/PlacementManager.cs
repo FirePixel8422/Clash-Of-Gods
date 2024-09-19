@@ -19,6 +19,33 @@ public class PlacementManager : NetworkBehaviour
 
 
 
+    [SerializeField] private bool interactable;
+
+    public bool Interactable
+    {
+        get
+        {
+            return interactable;
+        }
+        set
+        {
+            interactable = value;
+            if (interactable == false)
+            {
+                DeSelectTower();
+
+                if (isPlacingTower)
+                {
+                    selectedPreviewTower.transform.localPosition = Vector3.zero;
+                    UpdateTowerPreviewServerRPC(Vector3.zero, 0, true);
+                    isPlacingTower = false;
+                }
+            }
+        }
+    }
+
+
+
     public ulong localClientId;
     public int towerForwardRotationY;
 
@@ -30,9 +57,9 @@ public class PlacementManager : NetworkBehaviour
 
     public Transform selectionSprite;
 
-    private LayerMask ownFieldLayers;
-    private LayerMask neutralLayers;
-    private LayerMask fullFieldLayers;
+    public LayerMask ownFieldLayers;
+    public LayerMask neutralLayers;
+    public LayerMask fullFieldLayers;
 
 
     public bool isPlacingTower;
@@ -101,6 +128,11 @@ public class PlacementManager : NetworkBehaviour
 
     public void OnConfirm(InputAction.CallbackContext ctx)
     {
+        if (TurnManager.Instance.isMyTurn == false || interactable == false)
+        {
+            return;
+        }
+
         if (ctx.performed)
         {
             PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
@@ -126,17 +158,14 @@ public class PlacementManager : NetworkBehaviour
     }
     public void OnCancel(InputAction.CallbackContext ctx)
     {
-        if (TurnManager.Instance.isMyTurn == false)
+        if (TurnManager.Instance.isMyTurn == false || interactable == false)
         {
             return;
         }
 
         if (ctx.performed)
         {
-            if (towerSelected)
-            {
-                DeSelectTower();
-            }
+            DeSelectTower();
 
             if (isPlacingTower)
             {
@@ -153,7 +182,7 @@ public class PlacementManager : NetworkBehaviour
 
     public void SelectTowerPreview(int id)
     {
-        if (TurnManager.Instance.isMyTurn == false || cTowerPlacements == 0)
+        if (interactable == false || TurnManager.Instance.isMyTurn == false || cTowerPlacements == 0)
         {
             return;
         }
@@ -228,7 +257,7 @@ public class PlacementManager : NetworkBehaviour
     private void PlaceTower()
     {
         selectedPreviewTower.towerPreviewRenderer.color = new Color(0.7619722f, 0.8740168f, 0.9547169f);
-        //selectedPreviewTower.UpdateTowerPreviewColor(Color.white);
+        selectedPreviewTower.UpdateTowerPreviewColor(true);
 
         selectedPreviewTower.transform.localPosition = Vector3.zero;
         UpdateTowerPreviewServerRPC(Vector3.zero, 0, true);
@@ -341,14 +370,14 @@ public class PlacementManager : NetworkBehaviour
                 if (selectedGridTileData.full == false && selectedGridTileData.type == (int)localClientId && currency >= selectedPreviewTower.cost)
                 {
                     selectedPreviewTower.towerPreviewRenderer.color = new Color(0.7619722f, 0.8740168f, 0.9547169f);
-                    //selectedPreviewTower.UpdateTowerPreviewColor(Color.white);
+                    selectedPreviewTower.UpdateTowerPreviewColor(true);
 
                     UpdateTowerPreviewServerRPC(selectedGridTileData.worldPos, towerForwardRotationY);
                 }
                 else
                 {
                     selectedPreviewTower.towerPreviewRenderer.color = new Color(0.8943396f, 0.2309691f, 0.09955848f);
-                    //selectedPreviewTower.UpdateTowerPreviewColor(Color.red);
+                    selectedPreviewTower.UpdateTowerPreviewColor(false);
                 }
 
                 selectedPreviewTower.transform.position = selectedGridTileData.worldPos;
@@ -360,7 +389,7 @@ public class PlacementManager : NetworkBehaviour
         }
         else
         {
-            selectionSprite.position = new Vector3(0, -3, 0);
+            selectionSprite.position = new Vector3(0, 100, 0);
         }
     }
 
@@ -380,7 +409,7 @@ public class PlacementManager : NetworkBehaviour
         }
 
         selectedPreviewTower.towerPreviewRenderer.color = new Color(0.7619722f, 0.8740168f, 0.9547169f);
-        //selectedPreviewTower.UpdateTowerPreviewColor(Color.white);
+        selectedPreviewTower.UpdateTowerPreviewColor(true);
 
         if (resetPos)
         {
