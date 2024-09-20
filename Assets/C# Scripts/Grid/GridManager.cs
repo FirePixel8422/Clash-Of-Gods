@@ -25,7 +25,7 @@ public class GridManager : NetworkBehaviour
     public Vector3 gridSize;
     public float tileSize;
 
-    private int gridSizeX, gridSizeZ;
+    public int gridSizeX, gridSizeZ;
 
     [SerializeField] private GridObjectData[,] grid;
 

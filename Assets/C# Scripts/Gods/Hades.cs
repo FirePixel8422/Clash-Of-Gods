@@ -2,14 +2,31 @@
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.VFX;
 
 
 public class Hades : GodCore
 {
-    public Transform defensiveSelectionSprite;
+    public Transform fireWallSelectionSprite;
+
+    public GameObject[] fireWallEffectPrefabs;
+
+    public float fwAnimationMoveSpeed;
+    public int fireWallCharges;
+    public int fireWallLifeTime;
+
+    public List<GameObject> fireWallEffectList;
+    public List<Vector2Int> fireWallEffectGridPosList;
+    public List<int> fireWallEffectLifeTimeList;
+
+
+
     public Transform offensiveSelectionSprite;
+
 
     public VisualEffect[] fireEffectPrefabs;
 
@@ -34,31 +51,93 @@ public class Hades : GodCore
 
     private void Start()
     {
-        mainCam = Camera.main;
         SceneManager.sceneLoaded += OnSceneLoaded;
+
+        targetFireWallPos = fireWallSelectionSprite.position;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        mainCam = Camera.main;
+
+        if(PlacementManager.Instance != null)
+        {
+            PlacementManager.Instance.OnConfirmEvent.AddListener(() => OnConfirm());
+            PlacementManager.Instance.OnCancelEvent.AddListener(() => OnCancel());
+        }
+
         if (TurnManager.Instance != null)
         {
-            TurnManager.Instance.OnMyTurnStartedEvent.AddListener(() => UseMoltenFloor_ServerRPC());
+            TurnManager.Instance.OnMyTurnStartedEvent.AddListener(() => OnTurnChanged());
         }
     }
+
+
+
+
+    public void OnConfirm()
+    {
+        if (TurnManager.Instance.isMyTurn == false)
+        {
+            return;
+        }
+
+        if (usingDefenseAbility)
+        {
+            Ray ray = mainCam.ScreenPointToRay(mousePos);
+            if (Physics.Raycast(ray, out RaycastHit hitInfo, 100, PlacementManager.Instance.ownFieldLayers + PlacementManager.Instance.neutralLayers))
+            {
+                PlaceFireWall_ServerRPC(fireWallSelectionSprite.position);
+
+                usingDefenseAbility = false;
+                fireWallSelectionSprite.localPosition = Vector3.zero;
+            }
+        }
+    }
+
+    public void OnCancel()
+    {
+        if (TurnManager.Instance.isMyTurn == false)
+        {
+            return;
+        }
+
+        usingDefenseAbility = false;
+        fireWallSelectionSprite.localPosition = Vector3.zero;
+        usingOffensiveAbility = false;
+        offensiveSelectionSprite.localPosition = Vector3.zero;
+    }
+
+
+    public void OnTurnChanged()
+    {
+        CheckForDiscardFireWall_ServerRPC();
+        UseMoltenFloor_ServerRPC();
+    }
+
 
     public bool usingDefenseAbility;
     public override void UseDefensiveAbility()
     {
+        usingDefenseAbility = true;
+        usingOffensiveAbility = false;
 
+        offensiveSelectionSprite.localPosition = Vector3.zero;
     }
+
     public bool usingOffensiveAbility;
     public override void UseOffensiveAbility()
     {
+        usingOffensiveAbility = true;
+        usingDefenseAbility = false;
 
+        fireWallSelectionSprite.localPosition = Vector3.zero;
     }
 
 
 
+
+    #region MoltenFloor
 
     [ServerRpc(RequireOwnership = false)]
     private void UseMoltenFloor_ServerRPC(ServerRpcParams rpcParams = default)
@@ -72,7 +151,7 @@ public class Hades : GodCore
                 fireEffectList[i].Stop();
 
                 GridManager.Instance.UpdateGridDataOnFireState(fireEffectGridPosList[i], false);
-                UseMoltenFloor_ClientRPC(fireEffectGridPosList[i], false);
+                SetFireState_ClientRPC(fireEffectGridPosList[i], false);
 
                 StartCoroutine(DestroyDelay(fireEffectList[i].GetComponent<NetworkObject>()));
 
@@ -109,7 +188,7 @@ public class Hades : GodCore
             {
                 int rTile = Random.Range(0, gridTilesOwnField.Count);
 
-                if ((GridManager.Instance.GetGridData(gridTilesOwnField[rTile].gridPos).onFire > 0) 
+                if ((GridManager.Instance.GetGridData(gridTilesOwnField[rTile].gridPos).onFire > 0)
                     || (GridManager.Instance.GetGridData(gridTilesOwnField[rTile].gridPos).full == true && canSpawnOnFullTile == false))
                 {
                     gridTilesOwnField.RemoveAt(rTile);
@@ -131,7 +210,7 @@ public class Hades : GodCore
 
 
                 GridManager.Instance.UpdateGridDataOnFireState(gridTilesOwnField[rTile].gridPos, true);
-                UseMoltenFloor_ClientRPC(gridTilesOwnField[rTile].gridPos, true);
+                SetFireState_ClientRPC(gridTilesOwnField[rTile].gridPos, true);
 
                 break;
             }
@@ -144,40 +223,65 @@ public class Hades : GodCore
 
         networkObject.Despawn(true);
     }
-
-    [ClientRpc(RequireOwnership = false)]
-    private void UseMoltenFloor_ClientRPC(Vector2Int gridPos, bool newState)
-    {
-        GridManager.Instance.UpdateGridDataOnFireState(gridPos, newState);
-    }
-
+    #endregion
 
 
     private void Update()
     {
-        if (Input.mousePosition != mousePos)
-        {
-            mousePos = Input.mousePosition;
-            UpdateSelectionSprite();
-        }
+        UpdateSelectionSprite(Input.mousePosition != mousePos);
+        mousePos = Input.mousePosition;
     }
 
-    private void UpdateSelectionSprite()
+
+    private Vector3 targetFireWallPos;
+    private Vector3 savedFireWallpos;
+
+    private void UpdateSelectionSprite(bool mouseMoved)
     {
-        if (usingDefenseAbility)
+        if (usingDefenseAbility && mouseMoved)
         {
             Ray ray = mainCam.ScreenPointToRay(mousePos);
 
-            if (Physics.Raycast(ray, out RaycastHit hitInfo, 100, PlacementManager.Instance.ownFieldLayers))
+            if (Physics.Raycast(ray, out RaycastHit hitInfo, 100, PlacementManager.Instance.ownFieldLayers + PlacementManager.Instance.neutralLayers))
             {
                 selectedGridTileData = GridManager.Instance.GridObjectFromWorldPoint(hitInfo.point);
 
-                if (selectedGridTileData.type == (int)TurnManager.Instance.localClientId)
+                float posZOffset = 0;
+
+                if (selectedGridTileData.gridPos.y == (GridManager.Instance.gridSizeZ - 1))
                 {
-                    defensiveSelectionSprite.position = new Vector3(selectedGridTileData.worldPos.x, 0, 0);
+                    posZOffset = -GridManager.Instance.tileSize;
+                }
+                if (selectedGridTileData.gridPos.y == 0)
+                {
+                    posZOffset = GridManager.Instance.tileSize;
+                }
+
+
+                if (fireWallSelectionSprite.localPosition == Vector3.zero)
+                {
+                    fireWallSelectionSprite.position = selectedGridTileData.worldPos + new Vector3(0, 0, posZOffset);
+                }
+                else if (mouseMoved)
+                {
+                    targetFireWallPos = selectedGridTileData.worldPos + new Vector3(0, 0, posZOffset);
+                    savedFireWallpos = fireWallSelectionSprite.position;
                 }
             }
         }
+
+
+        if (usingDefenseAbility)
+        {
+            float _fireWallMoveSpeed = fwAnimationMoveSpeed * (Vector3.Distance(savedFireWallpos, targetFireWallPos) / GridManager.Instance.tileSize);
+
+            if (Vector3.Distance(fireWallSelectionSprite.position, targetFireWallPos) > 0.0001f)
+            {
+                fireWallSelectionSprite.position = VectorLogic.InstantMoveTowards(fireWallSelectionSprite.position, targetFireWallPos, _fireWallMoveSpeed * Time.deltaTime);
+            }
+        }
+
+
         if (usingOffensiveAbility)
         {
             Ray ray = mainCam.ScreenPointToRay(mousePos);
@@ -188,9 +292,77 @@ public class Hades : GodCore
 
                 if (selectedGridTileData.type == (int)TurnManager.Instance.localClientId)
                 {
-                    defensiveSelectionSprite.position = selectedGridTileData.worldPos;
+                    offensiveSelectionSprite.position = selectedGridTileData.worldPos;
                 }
             }
         }
+    }
+    
+
+
+    #region Place/Discard FireWall On Network
+
+    [ServerRpc(RequireOwnership = false)]
+    private void CheckForDiscardFireWall_ServerRPC()
+    {
+        for (int i = 0; i < fireWallEffectList.Count; i++)
+        {
+            fireWallEffectLifeTimeList[i] -= 1;
+
+            if (fireWallEffectLifeTimeList[i] <= 0)
+            {
+                foreach (VisualEffect vfx in fireWallEffectList[i].GetComponentsInChildren<VisualEffect>())
+                {
+                    vfx.Stop();
+                }
+                
+
+                GridManager.Instance.UpdateGridDataOnFireState(fireWallEffectGridPosList[i], false);
+                GridManager.Instance.UpdateGridDataOnFireState(fireWallEffectGridPosList[i] + Vector2Int.up, false);
+                GridManager.Instance.UpdateGridDataOnFireState(fireWallEffectGridPosList[i] + Vector2Int.down, false);
+
+                SetFireState_ClientRPC(fireWallEffectGridPosList[i], false);
+                SetFireState_ClientRPC(fireWallEffectGridPosList[i] + Vector2Int.up, false);
+                SetFireState_ClientRPC(fireWallEffectGridPosList[i] + Vector2Int.down, false);
+
+                StartCoroutine(DestroyDelay(fireWallEffectList[i].GetComponent<NetworkObject>()));
+
+                fireWallEffectList.RemoveAt(i);
+                fireWallEffectGridPosList.RemoveAt(i);
+                fireWallEffectLifeTimeList.RemoveAt(i);
+
+                i--;
+            }
+        }
+    }
+
+
+    [ServerRpc(RequireOwnership = false)]
+    private void PlaceFireWall_ServerRPC(Vector3 pos)
+    {
+        int rPrefab = Random.Range(0, fireWallEffectPrefabs.Length);
+
+        GameObject effect = Instantiate(fireWallEffectPrefabs[rPrefab], pos, Quaternion.identity);
+        effect.GetComponent<NetworkObject>().Spawn(true);
+
+        Vector2Int gridPos = GridManager.Instance.GridObjectFromWorldPoint(pos).gridPos;
+
+        fireWallEffectList.Add(effect);
+        fireWallEffectGridPosList.Add(gridPos);
+        fireWallEffectLifeTimeList.Add(fireWallLifeTime);
+
+
+        SetFireState_ClientRPC(gridPos, true);
+        SetFireState_ClientRPC(gridPos + Vector2Int.up, true);
+        SetFireState_ClientRPC(gridPos + Vector2Int.down, true);
+    }
+    #endregion
+
+
+
+    [ClientRpc(RequireOwnership = false)]
+    private void SetFireState_ClientRPC(Vector2Int gridPos, bool newState)
+    {
+        GridManager.Instance.UpdateGridDataOnFireState(gridPos, newState);
     }
 }

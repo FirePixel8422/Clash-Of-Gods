@@ -16,7 +16,7 @@ public class LobbyUIMananager : MonoBehaviour
         }
 
         activeLobbyUISlots = lobbies.Count;
-        for (int i = 0; i < lobbies.Count; i++)
+        for (int i = 0; i < Mathf.Min(lobbies.Count, lobbyUISlots.Length); i++)
         {
             lobbyUISlots[i].mainUI.SetActive(true);
             lobbyUISlots[i].lobbyName.text = lobbies[i].Name;
@@ -25,7 +25,7 @@ public class LobbyUIMananager : MonoBehaviour
             int maxPlayers = lobbies[i].MaxPlayers;
             bool full = lobbies[i].AvailableSlots == 0;
 
-            lobbyUISlots[i].amountOfPlayersInLobby.text = (maxPlayers - lobbies[i].AvailableSlots).ToString() + "/" + maxPlayers.ToString() + (full ? "Full!" : "");
+            lobbyUISlots[i].amountOfPlayersInLobby.text = (maxPlayers - lobbies[i].AvailableSlots).ToString() + "/" + maxPlayers.ToString() + (full ? "Full" : "");
             lobbyUISlots[i].Full = full;
         }
     }

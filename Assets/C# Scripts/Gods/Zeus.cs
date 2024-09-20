@@ -35,8 +35,13 @@ public class Zeus : GodCore
             return;
         }
 
-        usingDefenseAbility = false;
-        usingOffensiveAbility = false;
+        if (ctx.performed)
+        {
+            usingDefenseAbility = false;
+            defensiveSelectionSprite.localPosition = Vector3.zero;
+            usingOffensiveAbility = false;
+            offensiveSelectionSprite.localPosition = Vector3.zero;
+        }
     }
 
 
@@ -47,7 +52,7 @@ public class Zeus : GodCore
         usingDefenseAbility = true;
         usingOffensiveAbility = false;
 
-        offensiveSelectionSprite.position = new Vector3(0, 100, 0);
+        offensiveSelectionSprite.localPosition = Vector3.zero;
     }
 
     public bool usingOffensiveAbility;
@@ -56,7 +61,7 @@ public class Zeus : GodCore
         usingOffensiveAbility = true;
         usingDefenseAbility = false;
 
-        defensiveSelectionSprite.position = new Vector3(0, 100, 0);
+        defensiveSelectionSprite.localPosition = Vector3.zero;
     }
 
 
@@ -81,10 +86,7 @@ public class Zeus : GodCore
             {
                 selectedGridTileData = GridManager.Instance.GridObjectFromWorldPoint(hitInfo.point);
 
-                if (selectedGridTileData.type == (int)TurnManager.Instance.localClientId)
-                {
-                    defensiveSelectionSprite.position = new Vector3(selectedGridTileData.worldPos.x, 0, 0);
-                }
+                defensiveSelectionSprite.position = new Vector3(selectedGridTileData.worldPos.x, 0, 0);
             }
         }
         if (usingOffensiveAbility)

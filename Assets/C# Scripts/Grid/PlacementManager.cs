@@ -4,6 +4,7 @@ using TMPro;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -128,53 +129,66 @@ public class PlacementManager : NetworkBehaviour
 
     public void OnConfirm(InputAction.CallbackContext ctx)
     {
-        if (TurnManager.Instance.isMyTurn == false || interactable == false)
+        if (ctx.performed)
+        {
+            OnConfirmEvent.Invoke();
+        }
+
+
+        if (TurnManager.Instance.isMyTurn == false || interactable == false || ctx.performed == false)
         {
             return;
         }
 
-        if (ctx.performed)
+
+        PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
+        pointerEventData.position = Input.mousePosition;
+
+        var results = new List<RaycastResult>();
+        gfxRayCaster.Raycast(pointerEventData, results);
+
+        if (results.Count > 0)
         {
-            PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
-            pointerEventData.position = Input.mousePosition;
+            return;
+        }
 
-            var results = new List<RaycastResult>();
-            gfxRayCaster.Raycast(pointerEventData, results);
-
-            if (results.Count > 0)
-            {
-                return;
-            }
-
-            if (isPlacingTower && TurnManager.Instance.isMyTurn)
-            {
-                TryPlaceTower();
-            }
-            else
-            {
-                TrySelectTower();
-            }
+        if (isPlacingTower && TurnManager.Instance.isMyTurn)
+        {
+            TryPlaceTower();
+        }
+        else
+        {
+            TrySelectTower();
         }
     }
+
+
+    public UnityEvent OnConfirmEvent;
+
     public void OnCancel(InputAction.CallbackContext ctx)
     {
-        if (TurnManager.Instance.isMyTurn == false || interactable == false)
+        if (ctx.performed)
+        {
+            OnCancelEvent.Invoke();
+        }
+
+        if (TurnManager.Instance.isMyTurn == false || interactable == false || ctx.performed == false)
         {
             return;
         }
 
-        if (ctx.performed)
-        {
-            DeSelectTower();
 
-            if (isPlacingTower)
-            {
-                selectedPreviewTower.transform.localPosition = Vector3.zero;
-                UpdateTowerPreviewServerRPC(Vector3.zero, 0, true);
-                isPlacingTower = false;
-            }
+        DeSelectTower();
+
+        if (isPlacingTower)
+        {
+            selectedPreviewTower.transform.localPosition = Vector3.zero;
+            UpdateTowerPreviewServerRPC(Vector3.zero, 0, true);
+            isPlacingTower = false;
         }
     }
+
+    public UnityEvent OnCancelEvent;
 
 
 
