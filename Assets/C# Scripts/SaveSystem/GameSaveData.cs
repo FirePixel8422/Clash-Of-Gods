@@ -5,10 +5,17 @@ using UnityEngine;
 [System.Serializable]
 public class GameSaveData
 {
-    public string playerName;
+    public float volume;
+
+    public int rWidth;
+    public int rHeight;
+    public bool fullScreen;
 
     public GameSaveData(GameSaveLoadFunctions p)
     {
-        playerName = p.saveData.playerName;
+        volume = p.saveData.volume;
+        rWidth = p.saveData.rWidth;
+        rHeight = p.saveData.rHeight;
+        fullScreen = p.saveData.fullScreen;
     }
 }

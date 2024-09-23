@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/ConnectToLobby.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/Marijn.unity
+    guid: 5b97beb01453c7441840fd865ca18a3e
   - enabled: 1
     path: Assets/Scenes/MainGame.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab

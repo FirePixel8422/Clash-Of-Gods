@@ -15,8 +15,9 @@ public class LobbyUIMananager : MonoBehaviour
             lobbyUISlots[i].mainUI.SetActive(false);
         }
 
-        activeLobbyUISlots = lobbies.Count;
-        for (int i = 0; i < Mathf.Min(lobbies.Count, lobbyUISlots.Length); i++)
+        activeLobbyUISlots = Mathf.Min(lobbies.Count, lobbyUISlots.Length);
+
+        for (int i = 0; i < activeLobbyUISlots; i++)
         {
             lobbyUISlots[i].mainUI.SetActive(true);
             lobbyUISlots[i].lobbyName.text = lobbies[i].Name;
