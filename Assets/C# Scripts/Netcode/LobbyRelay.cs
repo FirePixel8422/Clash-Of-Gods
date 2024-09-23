@@ -82,6 +82,7 @@ public class LobbyRelay : NetworkBehaviour
     }
     public async void FindLobbies()
     {
+        print("searched");
         try
         {
             QueryLobbiesOptions queryOptions = new QueryLobbiesOptions
