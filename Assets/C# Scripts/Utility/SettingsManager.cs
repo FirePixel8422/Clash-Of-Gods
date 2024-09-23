@@ -41,20 +41,17 @@ public class SettingsManager : NetworkBehaviour
     private IEnumerator FrameDelay()
     {
         yield return new WaitForEndOfFrame();
-        yield return null;
-
 
         if (GameSaveLoadFunctions.Instance.saveData.rWidth != 0)
         {
             Screen.SetResolution(GameSaveLoadFunctions.Instance.saveData.rWidth, GameSaveLoadFunctions.Instance.saveData.rHeight, GameSaveLoadFunctions.Instance.saveData.fullScreen);
-
-            Debug.LogError("NO DATA FOUND");
 
             audioSlider.value = GameSaveLoadFunctions.Instance.saveData.volume;
         }
         else
         {
             GameSaveLoadFunctions.Instance.SaveScreenData();
+            Debug.LogError("NO DATA FOUND");
 
             GameSaveLoadFunctions.Instance.SaveVolume(100);
         }

@@ -5648,9 +5648,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff6ea765b6f497545988bdde9680d3bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settingsMenu: {fileID: 0}
   dropdown: {fileID: 7343578483163985381}
   audioSlider: {fileID: 5567628780684558829}
   fullscreenButtonText: {fileID: 6088145240471759606}
+  displayRefreshRate: 0
 --- !u!222 &4267195088941976275
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Tower : TowerCore
 {
+    public Animator attackAnimator;
+
     public Transform rotPoint;
 
     public Transform lookAtTransform;
@@ -15,11 +16,16 @@ public class Tower : TowerCore
 
     public float rotSpeed;
 
+    public Transform projectileTransform;
+    public float animShootTime;
+
 
 
     protected override void OnSetupTower()
     {
         towerPreviewRenderer = GetComponentInChildren<SpriteRenderer>();
+
+        attackAnimator.transform.rotation = Quaternion.identity;
 
         StartCoroutine(LookAtTarget_UpdateLoop());
     }
@@ -29,19 +35,28 @@ public class Tower : TowerCore
 
     protected override void OnSelectTower()
     {
-
+        attackAnimator.SetBool("Enabled", true);
     }
 
     protected override void OnDeSelectTower()
     {
-
+        attackAnimator.SetBool("Enabled", false);
     }
     #endregion
 
 
     protected override IEnumerator AttackTargetAnimation(Vector3 targetPos, float combinedSize, TowerCore target = null)
     {
-        yield break;
+        lookAtTransform = target.centerPoint;
+
+        anim.SetTrigger("Attack");
+
+        yield return new WaitForSeconds(animShootTime);
+
+        if (target != null)
+        {
+            target.GetAttacked(dmg, GodCore.Instance.RandomStunChance());
+        }
     }
 
 

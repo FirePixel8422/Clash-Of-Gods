@@ -215,8 +215,9 @@ public class TowerCore : NetworkBehaviour
     {
         float combinedSize = (target.size + size) / 2;
 
-        StartCoroutine(AttackTargetAnimation(target.transform.position, combinedSize, target));
         AttackTarget_ServerRPC(target.transform.position, combinedSize);
+
+        StartCoroutine(AttackTargetAnimation(target.transform.position, combinedSize, target));
     }
 
     [ServerRpc(RequireOwnership = false)]

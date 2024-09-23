@@ -6,11 +6,8 @@ using UnityEngine;
 public class TEMP_ResolutionFixer : MonoBehaviour
 {
 
-
     private void Start()
     {
-        Screen.SetResolution(Display.main.systemWidth, Display.main.systemHeight, true);
-
         if (Screen.currentResolution.width == 2560 && Screen.currentResolution.height == 1600)
         {
             Screen.SetResolution(2560, 1440, true);

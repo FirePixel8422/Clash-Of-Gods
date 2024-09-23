@@ -133,4 +133,6 @@ public class Troop : TowerCore
         }
     }
     #endregion
+
+
 }
