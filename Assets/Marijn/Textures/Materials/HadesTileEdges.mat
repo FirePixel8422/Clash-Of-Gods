@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-5317674918232598694
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 7
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -20,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Spear
+  m_Name: HadesTileEdges
   m_Shader: {fileID: -6465566751694194690, guid: b06ce0cad3a949c47bf05eba102c611b, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -37,7 +24,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Albedo_Texture:
-        m_Texture: {fileID: 2800000, guid: f9cdc65b7292d9e4e85e6eb330129fd4, type: 3}
+        m_Texture: {fileID: 2800000, guid: b2a2b34690cd16443ac0e706c656b1a6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Ambient_Occlusion_Texture:
@@ -45,11 +32,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: f9cdc65b7292d9e4e85e6eb330129fd4, type: 3}
+        m_Texture: {fileID: 2800000, guid: 68eaa7a4d135a0d428202c2806a12174, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 117960580cee148428d28f12d6738cce, type: 3}
+        m_Texture: {fileID: 2800000, guid: feacc472db35b314c8e0b37c18b7629f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -73,19 +60,19 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: f9cdc65b7292d9e4e85e6eb330129fd4, type: 3}
+        m_Texture: {fileID: 2800000, guid: 68eaa7a4d135a0d428202c2806a12174, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: 1820ea4d31e93144fa8ff68f14e53df6, type: 3}
+        m_Texture: {fileID: 2800000, guid: e0e2cfe1213839f4d9e8f170f7257d18, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Metallic_Texture:
-        m_Texture: {fileID: 2800000, guid: 1820ea4d31e93144fa8ff68f14e53df6, type: 3}
+        m_Texture: {fileID: 2800000, guid: b3b9dddf596146e4bbe41deb6b0c75bf, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normal_Map:
-        m_Texture: {fileID: 2800000, guid: 117960580cee148428d28f12d6738cce, type: 3}
+        m_Texture: {fileID: 2800000, guid: 90250a3756f0eec4a9ec7ac986aa8002, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -165,3 +152,16 @@ Material:
     - _PreviewColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
+--- !u!114 &6587325574982090006
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 7
