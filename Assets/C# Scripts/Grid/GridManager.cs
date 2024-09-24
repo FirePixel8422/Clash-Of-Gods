@@ -97,6 +97,10 @@ public class GridManager : NetworkBehaviour
 
                     //player 2
                 }
+                else
+                {
+                    _type = 100;
+                }
 
                 grid[x, z] = new GridObjectData()
                 {
@@ -104,7 +108,7 @@ public class GridManager : NetworkBehaviour
                     worldPos = _worldPos,
                     coreType = _type,
                     type = _type,
-                    full = _type == 5,
+                    full = _type == 5 || _type == 100,
                 };
             }
         }
@@ -210,6 +214,11 @@ public class GridManager : NetworkBehaviour
                     {
                         Gizmos.color = Color.blue;
                     }
+                    else if (grid[x, z].type == 100)
+                    {
+                        Gizmos.color = Color.white;
+                    }
+                    
                     Gizmos.DrawCube(worldBottomLeft + Vector3.right * (x * tileSize + tileSize / 2) + Vector3.forward * (z * tileSize + tileSize / 2), new Vector3(tileSize / 2, tileSize / 2, tileSize / 2));
                 }
             }

@@ -298,10 +298,13 @@ public class PlacementManager : NetworkBehaviour
         selectedTower = NetworkManager.SpawnManager.SpawnedObjects[spawnedTowerNetworkObjectId].GetComponent<TowerCore>();
         selectedTower.CoreInit();
 
-        MeshRenderer[] renderers = selectedTower.transform.GetComponentsInChildren<MeshRenderer>(true);
-        foreach (MeshRenderer renderer in renderers)
+        if(selectedTower.TryGetComponent(out Troop _))
         {
-            renderer.material.SetColor(Shader.PropertyToID("_Base_Color"), playerColors[fromClientId]);
+            MeshRenderer[] renderers = selectedTower.transform.GetComponentsInChildren<MeshRenderer>(true);
+            foreach (MeshRenderer renderer in renderers)
+            {
+                renderer.material.SetColor(Shader.PropertyToID("_Base_Color"), playerColors[fromClientId]);
+            }
         }
 
         GridManager.Instance.UpdateTowerData(gridPos, selectedTower);
@@ -371,7 +374,7 @@ public class PlacementManager : NetworkBehaviour
         }
     }
 
-    private void UpdateTowerPlacementPreview()
+    public void UpdateTowerPlacementPreview()
     {
         Ray ray = mainCam.ScreenPointToRay(mousePos);
 

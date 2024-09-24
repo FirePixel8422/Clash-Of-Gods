@@ -79,7 +79,9 @@ public class ObstacleGenerator : NetworkBehaviour
 
         for (int i = 0; i < positions.Length; i++)
         {
-            GameObject obj = Instantiate(obstacles[Random.Range(0, obstacles.Length)], positions[i], Quaternion.Euler(0, Random.Range(1, 5) * 90, 0));
+            int r = Random.Range(0, obstacles.Length);
+
+            GameObject obj = Instantiate(obstacles[r], positions[i] + obstacles[r].transform.position, Quaternion.Euler(0, Random.Range(1, 5) * 90, 0));
 
             NetworkObject networkObject = obj.GetComponent<NetworkObject>();
             networkObject.SpawnWithOwnership((ulong)(i < obstacleAmount ? 10 : 20), true);

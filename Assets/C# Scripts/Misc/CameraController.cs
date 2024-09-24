@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 public class CameraController : MonoBehaviour
 {
-    /*public static CameraController Instance;
+    public static CameraController Instance;
     private void Awake()
     {
         Instance = this;
@@ -68,7 +69,7 @@ public class CameraController : MonoBehaviour
                 pointerEventData.position = Input.mousePosition;
 
                 var results = new List<RaycastResult>();
-                SelectionManager.gfxRayCaster.Raycast(pointerEventData, results);
+                PlacementManager.gfxRayCaster.Raycast(pointerEventData, results);
 
                 if (results.Count > 0)
                 {
@@ -126,19 +127,19 @@ public class CameraController : MonoBehaviour
             if (Mathf.Abs(centerRotY) > 0.01f)
             {
                 RotateCam();
-                SelectionManager.Instance.UpdateTowerPlacementPreview();
+                PlacementManager.Instance.UpdateTowerPlacementPreview();
             }
 
             if (camMoveDir.sqrMagnitude > 0.01f)
             {
                 MoveCam();
-                SelectionManager.Instance.UpdateTowerPlacementPreview();
+                PlacementManager.Instance.UpdateTowerPlacementPreview();
             }
 
             if (animatePanChanged)
             {
                 AnimatePanCam();
-                SelectionManager.Instance.UpdateTowerPlacementPreview();
+                PlacementManager.Instance.UpdateTowerPlacementPreview();
             }
         }
         if (altRotating)
@@ -161,6 +162,7 @@ public class CameraController : MonoBehaviour
 
             animatePanChanged = true;
             cScroll = 0;
+            AnimatePanCam();
 
 
             if (camCenter.localRotation == Quaternion.identity && camCenter.localPosition == Vector3.zero)
@@ -198,7 +200,7 @@ public class CameraController : MonoBehaviour
         cam.localRotation = Quaternion.Lerp(cam.localRotation, Quaternion.Euler(camRot), zoomSpeed * Time.deltaTime);
         cam.localPosition = Vector3.Lerp(cam.localPosition, camPos, zoomSpeed * Time.deltaTime);
 
-        if(cam.localPosition == camPos && cam.localRotation == Quaternion.Euler(camRot))
+        if (cam.localPosition == camPos && cam.localRotation == Quaternion.Euler(camRot))
         {
             animatePanChanged = false;
         }
@@ -216,5 +218,5 @@ public class CameraController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(transform.position + camConfinementOffset, camConfinementSize);
-    }*/
+    }
 }
