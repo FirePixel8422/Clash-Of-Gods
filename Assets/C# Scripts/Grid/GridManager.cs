@@ -15,6 +15,7 @@ public class GridManager : NetworkBehaviour
     public LayerMask p2;
     public LayerMask neutral;
     public LayerMask obstruction;
+    public LayerMask pBase;
 
 
     public bool drawMasterGizmos;
@@ -40,6 +41,17 @@ public class GridManager : NetworkBehaviour
         CreateGrid();
 
         PlacementManager.Instance.Init(NetworkManager.LocalClientId == 0 ? p1 : p2, neutral, p1 + p2 + neutral, NetworkManager.LocalClientId);
+
+        if (NetworkManager.LocalClientId == 0)
+        {
+            GridLines.Instance.SetColor(0, 0);
+            GridLines.Instance.SetColor(1, 1);
+        }
+        else
+        {
+            GridLines.Instance.SetColor(0, 1);
+            GridLines.Instance.SetColor(1, 0);
+        }
     }
 
     private void CreateGrid()
@@ -97,7 +109,7 @@ public class GridManager : NetworkBehaviour
 
                     //player 2
                 }
-                else
+                else if(Physics.Raycast(_worldPos + Vector3.up, Vector3.down, 20, pBase))
                 {
                     _type = 100;
                 }
@@ -110,7 +122,7 @@ public class GridManager : NetworkBehaviour
                     type = _type,
                     full = _type == 5 || _type == 100,
                 };
-            }
+}
         }
 
         ObstacleGenerator.Instance.CreateObstacles();

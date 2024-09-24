@@ -183,9 +183,16 @@ public class CameraController : MonoBehaviour
     private void MoveCam()
     {
         Vector3 targetPosition = camCenter.localPosition + camCenter.TransformDirection(camMoveDir);
-        camCenter.localPosition = Vector3.MoveTowards(camCenter.localPosition, targetPosition, -moveSpeed * Time.deltaTime);
 
-        camCenter.localPosition = VectorLogic.Clamp(camCenter.localPosition, -camConfinementSize, camConfinementSize);
+        Vector3 minBounds = camConfinementOffset - (camConfinementSize / 2);
+        Vector3 maxBounds = camConfinementOffset + (camConfinementSize / 2);
+
+        camCenter.localPosition = Vector3.MoveTowards(camCenter.localPosition, targetPosition, moveSpeed * Time.deltaTime);
+        camCenter.localPosition = new Vector3(
+            Mathf.Clamp(camCenter.localPosition.x, minBounds.x, maxBounds.x),
+            Mathf.Clamp(camCenter.localPosition.y, minBounds.y, maxBounds.y),
+            Mathf.Clamp(camCenter.localPosition.z, minBounds.z, maxBounds.z)
+        );
     }
 
     //move camera down/up rotating upwards/downwards following a smooth animation curve

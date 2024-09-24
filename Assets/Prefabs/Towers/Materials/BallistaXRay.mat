@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TroopXray
+  m_Name: BallistaXRay
   m_Shader: {fileID: -6465566751694194690, guid: 3d294a3e4e128704c867463e148b2af5, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -97,7 +97,7 @@ Material:
     m_Floats:
     - _AlphaClip: 0
     - _AlphaToMask: 0
-    - _Blend: 3
+    - _Blend: 2
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
     - _CastShadows: 1
@@ -117,7 +117,7 @@ Material:
     - _Metallic: 0
     - _NoiseAmount: 1
     - _NoisePower: 0.8
-    - _NoiseScale: 2
+    - _NoiseScale: 0.5
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _Placable: 1
@@ -137,11 +137,11 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 5.019844, g: 12.339344, b: 23.968624, a: 1}
-    - _DefaultColor: {r: 0.6648625, g: 2.6960783, b: 3.0641508, a: 1}
+    - _DefaultColor: {r: 0.834339, g: 2.1185474, b: 0.72097164, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _NoiseSpeed: {r: 1, g: 2, b: 0, a: 0}
-    - _NoiseTiling: {r: 5, g: 5, b: 0, a: 0}
+    - _NoiseTiling: {r: 5, g: 10, b: 0, a: 0}
     - _PreviewColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _UnPlacableColor: {r: 3.0641508, g: 0.8087289, b: 0.6737922, a: 1}
+    - _UnPlacableColor: {r: 2.9960787, g: 1.0554433, b: 1.0196079, a: 1}
   m_BuildTextureStacks: []

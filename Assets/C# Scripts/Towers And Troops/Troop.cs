@@ -6,6 +6,7 @@ using UnityEngine;
 public class Troop : TowerCore
 {
     public float animatedMoveSpeed;
+    public float attackAnimationTime;
 
     public int movesPerTurn;
     [HideInInspector]
@@ -38,7 +39,14 @@ public class Troop : TowerCore
     {
         foreach (var sprite in moveArrowRenderers)
         {
-            sprite.color = moveArrowColors[(movesLeft == 0 || canTakeAction == false) ? 1 : 0];
+            if (movesLeft == 0 || actionsLeft == 0)
+            {
+                sprite.color = moveArrowColors[0];
+            }
+            else
+            {
+                sprite.color = moveArrowColors[Mathf.Min(movesLeft, moveArrowColors.Length - 1)];
+            }
         }
     }
     protected override void OnDeSelectTower()
@@ -64,6 +72,7 @@ public class Troop : TowerCore
         targetPos.y = towerStartpos.y;
 
 
+        anim.SetTrigger("Attack");
         while (Vector3.Distance(transform.position, targetPos) > 0.0001f)
         {
             yield return null;
@@ -71,12 +80,17 @@ public class Troop : TowerCore
             transform.position = VectorLogic.InstantMoveTowards(transform.position, targetPos, animatedMoveSpeed * Time.deltaTime);
         }
 
+        anim.SetTrigger("MoveAttack");
+        yield return new WaitForSeconds(attackAnimationTime);
+
         while (Vector3.Distance(transform.position, towerStartpos) > 0.0001f)
         {
             yield return null;
 
             transform.position = VectorLogic.InstantMoveTowards(transform.position, towerStartpos, animatedMoveSpeed * Time.deltaTime);
         }
+
+        anim.SetTrigger("MoveAttack");
 
         if (target != null)
         {
@@ -119,6 +133,8 @@ public class Troop : TowerCore
 
     private IEnumerator MoveTowerAnimation(Vector2Int currentGridPos, Vector2Int newGridPos)
     {
+        anim.SetTrigger("Move");
+
         GridManager.Instance.UpdateTowerData(currentGridPos, null);
         GridManager.Instance.UpdateTowerData(newGridPos, this);
 
@@ -131,6 +147,8 @@ public class Troop : TowerCore
             yield return null;
             transform.position = VectorLogic.InstantMoveTowards(transform.position, newPos, animatedMoveSpeed * Time.deltaTime);
         }
+
+        anim.SetTrigger("MoveEnd");
     }
     #endregion
 

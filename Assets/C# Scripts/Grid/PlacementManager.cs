@@ -58,8 +58,12 @@ public class PlacementManager : NetworkBehaviour
 
     public Transform selectionSprite;
 
+
+    [HideInInspector]
     public LayerMask ownFieldLayers;
+    [HideInInspector]
     public LayerMask neutralLayers;
+    [HideInInspector]
     public LayerMask fullFieldLayers;
 
 
@@ -84,7 +88,7 @@ public class PlacementManager : NetworkBehaviour
 
     public TextMeshProUGUI currencyTextObj;
 
-    public float Currency
+    public int Currency
     {
         get
         {
@@ -93,11 +97,12 @@ public class PlacementManager : NetworkBehaviour
         set
         {
             currency = value;
-            //currencyTextObj.text = Mathf.RoundToInt(currency).ToString();
+            currencyTextObj.text = useGreekCurrency ? RomanNumeralConverter.IntToRoman(currency) : currency.ToString();
         }
     }
-    public float currency;
-
+    public int currency;
+    public int currencyGeneration;
+    public bool useGreekCurrency;
 
 
 
@@ -124,6 +129,8 @@ public class PlacementManager : NetworkBehaviour
             gridPos = new Vector2Int(-1, -1),
             worldPos = new Vector3(0, 2, 0),
         };
+
+        Currency += 0;
     }
 
 
@@ -162,8 +169,8 @@ public class PlacementManager : NetworkBehaviour
         }
     }
 
-
     public UnityEvent OnConfirmEvent;
+
 
     public void OnCancel(InputAction.CallbackContext ctx)
     {
@@ -248,6 +255,8 @@ public class PlacementManager : NetworkBehaviour
         {
             if (currency >= selectedPreviewTower.cost)
             {
+                Currency -= selectedPreviewTower.cost;
+
                 GridManager.Instance.UpdateGridDataFullState(selectedGridTileData.gridPos, true);
                 selectedGridTileData.full = true;
 
@@ -300,10 +309,13 @@ public class PlacementManager : NetworkBehaviour
 
         if(selectedTower.TryGetComponent(out Troop _))
         {
-            MeshRenderer[] renderers = selectedTower.transform.GetComponentsInChildren<MeshRenderer>(true);
-            foreach (MeshRenderer renderer in renderers)
+            Renderer[] renderers = selectedTower.transform.GetComponentsInChildren<Renderer>(true);
+            foreach (Renderer renderer in renderers)
             {
-                renderer.material.SetColor(Shader.PropertyToID("_Base_Color"), playerColors[fromClientId]);
+                if (renderer.gameObject.CompareTag("TeamColor"))
+                {
+                    renderer.material.SetColor(Shader.PropertyToID("_Base_Color"), playerColors[fromClientId]);
+                }
             }
         }
 
@@ -316,6 +328,8 @@ public class PlacementManager : NetworkBehaviour
     public void GrantTurn()
     {
         cTowerPlacements = maxTowerPlacements;
+
+        Currency += currencyGeneration;
     }
 
 

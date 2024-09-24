@@ -44,7 +44,10 @@ public class TowerCore : NetworkBehaviour
     public bool towerCompleted;
 
     public bool stunned;
-    public bool canTakeAction;
+
+    public int actionsPerTurn;
+    [HideInInspector]
+    public int actionsLeft;
 
     public bool useSelectionFlicker;
 
@@ -124,7 +127,7 @@ public class TowerCore : NetworkBehaviour
 
         foreach (TowerCore target in targets)
         {
-            target.GetTargetted(false, canTakeAction);
+            target.GetTargetted(false, actionsLeft != 0);
         }
         targets.Clear();
 
@@ -185,7 +188,7 @@ public class TowerCore : NetworkBehaviour
             return;
         }
 
-        canTakeAction = true;
+        actionsLeft = actionsPerTurn;
         OnGrantTurn();
     }
     protected virtual void OnGrantTurn()
@@ -193,12 +196,12 @@ public class TowerCore : NetworkBehaviour
         return;
     }
 
-    public void LoseTurn()
+    public void LoseAction()
     {
-        canTakeAction = false;
-        OnLoseTurn();
+        actionsLeft -= 1;
+        OnLoseAction();
     }
-    public virtual void OnLoseTurn()
+    public virtual void OnLoseAction()
     {
         return;
     }
@@ -249,24 +252,11 @@ public class TowerCore : NetworkBehaviour
 
         underAttackArrowRenderer.material.SetColor(Shader.PropertyToID("_Base_Color"), underAttackArrowColors[canAttackerAttack ? 1 : 0]);
     }
+
+
     public void GetAttacked(int dmg, bool stun)
     {
-        health -= dmg;
-        stunned = stun;
-
-        underAttackArrowAnim.SetBool("Enabled", false);
-
-
-        if (health <= 0)
-        {
-            foreach (var dissolve in dissolves)
-            {
-                dissolve.Revert(this);
-            }
-            GridObjectData gridObjectData = GridManager.Instance.GridObjectFromWorldPoint(transform.position);
-            GridManager.Instance.UpdateTowerData(gridObjectData.gridPos, null);
-        }
-
+        StartCoroutine(GetAttackedAnimations(dmg, stun));
 
         GetAttacked_ServerRPC(dmg, stun);
     }
@@ -287,11 +277,18 @@ public class TowerCore : NetworkBehaviour
             return;
         }
 
+        StartCoroutine(GetAttackedAnimations(dmg, stun));
+    }
+
+
+    private IEnumerator GetAttackedAnimations(int dmg, bool stun)
+    {
         health -= dmg;
         stunned = stun;
 
         underAttackArrowAnim.SetBool("Enabled", false);
 
+        yield return null;
 
         if (health <= 0)
         {

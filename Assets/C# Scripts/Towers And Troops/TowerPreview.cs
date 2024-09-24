@@ -13,7 +13,7 @@ public class TowerPreview : MonoBehaviour
 
     [HideInInspector]
     public SpriteRenderer towerPreviewRenderer;
-    private bool cPlaceable;
+    private int cPlaceable = 2;
 
 
     private void Start()
@@ -25,14 +25,14 @@ public class TowerPreview : MonoBehaviour
 
     public void UpdateTowerPreviewColor(bool placeable)
     {
-        if (placeable == cPlaceable)
+        if ((placeable ? 1 : 0) == cPlaceable)
         {
             return;
         }
-        cPlaceable = placeable;
+        cPlaceable = placeable ? 1 : 0;
         foreach (var d in xrayControllers)
         {
-            d.dissolveMaterial.SetInt("_Placable", placeable ? 1 : 0);
+            d.dissolveMaterial.SetInt(Shader.PropertyToID("_Placable"), placeable ? 1 : 0);
         }
     }
 }

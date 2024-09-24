@@ -107,7 +107,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 2.75, y: 2.75, z: 0.1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: -0.25}
 --- !u!114 &2925165307343458246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,7 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1588782175
+  GlobalObjectIdHash: 2383399521
   InScenePlacedSourceGlobalObjectIdHash: 2742807018
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -240,9 +240,9 @@ MonoBehaviour:
   dissolves: []
   amountOfDissolves: 0
   cDissolves: 0
-  cost: 0
+  cost: 5
   health: 12
-  dmg: 6
+  dmg: 8
   centerPoint: {fileID: 3162386608883240074}
   size: 1.8
   drawSizeGizmos: 1
@@ -254,7 +254,8 @@ MonoBehaviour:
   anim: {fileID: 0}
   towerCompleted: 0
   stunned: 0
-  canTakeAction: 0
+  actionsPerTurn: 1
+  actionsLeft: 0
   useSelectionFlicker: 0
   attackAnimator: {fileID: 5571818498768809007}
   rotPoint: {fileID: 5633833325412302971}
@@ -391,7 +392,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 2.75, y: 2.75, z: 0.1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: -0.25}
 --- !u!114 &6736448183933620488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -555,7 +556,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 2.75, y: 2.75, z: 0.1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: -0.25}
 --- !u!114 &4990849461897171026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -719,7 +720,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 2.75, y: 2.75, z: 0.1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: -0.25}
 --- !u!114 &3742636500912014166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1296,7 +1297,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 2.75, y: 2.75, z: 0.1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: -0.25}
 --- !u!114 &5751127061002496992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1798,7 +1799,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 2.75, y: 2.75, z: 0.1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: -0.25}
 --- !u!114 &4000924258937467345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1962,7 +1963,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 2.75, y: 2.75, z: 0.1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: -0.25}
 --- !u!114 &5596284861305872322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2126,7 +2127,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 2.75, y: 2.75, z: 0.1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: -0.25}
 --- !u!114 &5104644795925662189
 MonoBehaviour:
   m_ObjectHideFlags: 0

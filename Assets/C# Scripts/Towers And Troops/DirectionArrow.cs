@@ -31,13 +31,13 @@ public class DirectionArrow : ClickableCollider
 
         bool inGrid = GridManager.Instance.IsInGrid(arrow_GridObjectData.gridPos);
 
-        validAttack = inGrid && arrow_GridObjectData.full && arrow_GridObjectData.tower.OwnerClientId != tower.OwnerClientId;
+        validAttack = inGrid && arrow_GridObjectData.full && arrow_GridObjectData.tower != null && arrow_GridObjectData.tower.OwnerClientId != tower.OwnerClientId;
 
 
         if (validAttack)
         {
             tower.targets.Add(arrow_GridObjectData.tower);
-            arrow_GridObjectData.tower.GetTargetted(true, tower.canTakeAction);
+            arrow_GridObjectData.tower.GetTargetted(true, tower.actionsLeft != 0);
         }
     }
 
@@ -46,7 +46,7 @@ public class DirectionArrow : ClickableCollider
     {
         base.OnClick();
 
-        if (TurnManager.Instance.isMyTurn == false || tower.canTakeAction == false || tower.stunned || validAttack == false)
+        if (TurnManager.Instance.isMyTurn == false || tower.actionsLeft == 0 || tower.stunned || validAttack == false)
         {
             return;
         }
@@ -59,6 +59,6 @@ public class DirectionArrow : ClickableCollider
 
         tower.DeSelectTower();
 
-        tower.LoseTurn();
+        tower.LoseAction();
     }
 }

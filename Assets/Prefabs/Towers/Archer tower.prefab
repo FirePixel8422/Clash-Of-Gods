@@ -107,7 +107,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 2.75, y: 2.75, z: 0.1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: -0.25}
 --- !u!114 &7323365897230842400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,7 +271,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 2.75, y: 2.75, z: 0.1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: -0.25}
 --- !u!114 &5066654572496488674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -435,7 +435,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 2.75, y: 2.75, z: 0.1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: -0.25}
 --- !u!114 &1521870261252364196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -599,7 +599,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 2.75, y: 2.75, z: 0.1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: -0.25}
 --- !u!114 &2461355066857576361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -943,7 +943,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 2.75, y: 2.75, z: 0.1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: -0.25}
 --- !u!114 &3300491965396519841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1107,7 +1107,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 2.75, y: 2.75, z: 0.1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: -0.25}
 --- !u!114 &87192051575711395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1271,7 +1271,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 2.75, y: 2.75, z: 0.1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: -0.25}
 --- !u!114 &3852274721619209536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1466,7 +1466,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 2.75, y: 2.75, z: 0.1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: -0.25}
 --- !u!114 &2126158630333816358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1688,6 +1688,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8e5ed062fd4f4fa4a88adfb797c68d89, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6230911748676805975}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8e5ed062fd4f4fa4a88adfb797c68d89, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7760853491214676331}
     - targetCorrespondingSourceObject: {fileID: 1704172975412102838, guid: 8e5ed062fd4f4fa4a88adfb797c68d89, type: 3}
       insertIndex: -1
       addedObject: {fileID: 588733380641014029}
@@ -1763,9 +1766,9 @@ MonoBehaviour:
   dissolves: []
   amountOfDissolves: 0
   cDissolves: 0
-  cost: 0
-  health: 25
-  dmg: 0
+  cost: 8
+  health: 20
+  dmg: 5
   centerPoint: {fileID: 6421080980380361639}
   size: 2.2
   drawSizeGizmos: 1
@@ -1777,7 +1780,8 @@ MonoBehaviour:
   anim: {fileID: 0}
   towerCompleted: 0
   stunned: 0
-  canTakeAction: 0
+  actionsPerTurn: 2
+  actionsLeft: 0
   useSelectionFlicker: 0
   attackAnimator: {fileID: 837659766498736537}
   rotPoint: {fileID: 0}
@@ -1786,6 +1790,27 @@ MonoBehaviour:
   rotSpeed: 0
   projectileTransform: {fileID: 0}
   animShootTime: 1
+--- !u!95 &7760853491214676331
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8064960651027087991}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 43fdc174cd8ce994cbb544866ad4cf84, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8397919593463970192 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1704172975412102838, guid: 8e5ed062fd4f4fa4a88adfb797c68d89, type: 3}
@@ -1807,4 +1832,4 @@ MonoBehaviour:
   startDelay: 0
   startDissolveEffectState: 0.6
   dissolveSpeed: 2
-  endDisolveValue: -0.8
+  endDisolveValue: -0.9
