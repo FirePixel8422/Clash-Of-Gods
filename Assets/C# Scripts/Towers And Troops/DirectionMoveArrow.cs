@@ -41,7 +41,7 @@ public class DirectionMoveArrow : DirectionArrow
     {
         base.OnClick();
 
-        if (TurnManager.Instance.isMyTurn == false || troop.actionsLeft == 0 || troop.stunned || troop.movesLeft == 0)
+        if (TurnManager.Instance.isMyTurn == false || troop.stunned || troop.movesLeft == 0 || validAttack)
         {
             return;
         }

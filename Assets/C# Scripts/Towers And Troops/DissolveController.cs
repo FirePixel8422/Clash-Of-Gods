@@ -9,6 +9,7 @@ public class DissolveController : MonoBehaviour
 
     private float cDissolveEffectState;
     public float startDelay;
+    public float revertDelay;
     public float startDissolveEffectState;
     public float dissolveSpeed;
     public float endDisolveValue;
@@ -19,7 +20,7 @@ public class DissolveController : MonoBehaviour
     {
         dissolveMaterial = GetComponent<Renderer>().material;
     }
-    public void StartDissolve(TowerCore core)
+    public void StartDissolve(TowerCore core = null)
     {
         dissolveMaterial = GetComponent<Renderer>().material;
         StartCoroutine(Dissolve(core));
@@ -42,10 +43,15 @@ public class DissolveController : MonoBehaviour
             cDissolveEffectState -= Time.deltaTime * dissolveSpeed;
             dissolveMaterial.SetFloat("_Disolve_Active", cDissolveEffectState);
         }
-        core.DissolveCompleted();
+        if (core != null)
+        {
+            core.DissolveCompleted();
+        }
     }
     private IEnumerator RevertDissolve(TowerCore core)
     {
+        yield return new WaitForSeconds(revertDelay);
+
         while (cDissolveEffectState < startDissolveEffectState)
         {
             yield return null;
@@ -53,5 +59,22 @@ public class DissolveController : MonoBehaviour
             dissolveMaterial.SetFloat("_Disolve_Active", cDissolveEffectState);
         }
         core.RevertCompleted();
+    }
+
+    public void RevertPercent(TowerCore core, float percent)
+    {
+        StartCoroutine(RevertDissolvePercent(core, percent));
+    }
+
+    private IEnumerator RevertDissolvePercent(TowerCore core, float percent)
+    {
+        float _endDissolveValue = endDisolveValue / startDissolveEffectState * percent;
+
+        while (cDissolveEffectState < _endDissolveValue)
+        {
+            yield return null;
+            cDissolveEffectState += Time.deltaTime * dissolveSpeed;
+            dissolveMaterial.SetFloat("_Disolve_Active", cDissolveEffectState);
+        }
     }
 }

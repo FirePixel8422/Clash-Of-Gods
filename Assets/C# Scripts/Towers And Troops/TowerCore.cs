@@ -59,7 +59,7 @@ public class TowerCore : NetworkBehaviour
     {
         TurnManager.Instance.OnMyTurnStartedEvent.AddListener(() => GrantTurn());
 
-        underAttackArrowRenderer = underAttackArrowAnim.GetComponentInChildren<MeshRenderer>();
+        underAttackArrowRenderer = underAttackArrowAnim.GetComponentInChildren<MeshRenderer>(true);
         underAttackArrowColors.Add(PlacementManager.Instance.playerColors[NetworkObject.OwnerClientId]);
 
         anim = GetComponent<Animator>();
@@ -151,7 +151,7 @@ public class TowerCore : NetworkBehaviour
         }
     }
 
-    public void DissolveCompleted()
+    public virtual void DissolveCompleted()
     {
         cDissolves += 1;
         if (cDissolves == amountOfDissolves)
@@ -161,7 +161,7 @@ public class TowerCore : NetworkBehaviour
         }
     }
 
-    public void RevertCompleted()
+    public virtual void RevertCompleted()
     {
         cDissolves -= 1;
         if (cDissolves == 0)
@@ -221,6 +221,8 @@ public class TowerCore : NetworkBehaviour
         AttackTarget_ServerRPC(target.transform.position, combinedSize);
 
         StartCoroutine(AttackTargetAnimation(target.transform.position, combinedSize, target));
+
+        PlacementManager.Instance.playedAnything = true;
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -281,7 +283,7 @@ public class TowerCore : NetworkBehaviour
     }
 
 
-    private IEnumerator GetAttackedAnimations(int dmg, bool stun)
+    public virtual IEnumerator GetAttackedAnimations(int dmg, bool stun)
     {
         health -= dmg;
         stunned = stun;
@@ -292,13 +294,18 @@ public class TowerCore : NetworkBehaviour
 
         if (health <= 0)
         {
-            foreach (var dissolve in dissolves)
-            {
-                dissolve.Revert(this);
-            }
-            GridObjectData gridObjectData = GridManager.Instance.GridObjectFromWorldPoint(transform.position);
-            GridManager.Instance.UpdateTowerData(gridObjectData.gridPos, null);
+            OnDeath();
         }
+    }
+    public virtual void OnDeath()
+    {
+        anim.SetTrigger("Death");
+        foreach (var dissolve in dissolves)
+        {
+            dissolve.Revert(this);
+        }
+        GridObjectData gridObjectData = GridManager.Instance.GridObjectFromWorldPoint(transform.position);
+        GridManager.Instance.UpdateTowerData(gridObjectData.gridPos, null);
     }
     #endregion
 

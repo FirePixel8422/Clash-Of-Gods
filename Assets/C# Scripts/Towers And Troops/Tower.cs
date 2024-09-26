@@ -27,7 +27,10 @@ public class Tower : TowerCore
 
         attackAnimator.transform.rotation = Quaternion.identity;
 
-        StartCoroutine(LookAtTarget_UpdateLoop());
+        if (rotPoint != null)
+        {
+            StartCoroutine(LookAtTarget_UpdateLoop());
+        }
     }
 
 

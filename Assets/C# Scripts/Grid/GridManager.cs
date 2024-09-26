@@ -11,6 +11,8 @@ public class GridManager : NetworkBehaviour
         Instance = this;
     }
 
+    public PlayerBase[] bases;
+
     public LayerMask p1;
     public LayerMask p2;
     public LayerMask neutral;
@@ -69,6 +71,7 @@ public class GridManager : NetworkBehaviour
             {
                 Vector3 _worldPos = worldBottomLeft + Vector3.right * (x * tileSize + tileSize / 2) + Vector3.forward * (z * tileSize + tileSize / 2);
 
+                TowerCore _tower = null;
 
                 int _type = 10;
                 //neutral
@@ -109,9 +112,10 @@ public class GridManager : NetworkBehaviour
 
                     //player 2
                 }
-                else if(Physics.Raycast(_worldPos + Vector3.up, Vector3.down, 20, pBase))
+                else if (Physics.Raycast(_worldPos + Vector3.up, Vector3.down,out RaycastHit hit, 20, pBase))
                 {
                     _type = 100;
+                    _tower = (hit.point.x < 0) ? bases[0] : bases[1];
                 }
 
                 grid[x, z] = new GridObjectData()
@@ -121,8 +125,9 @@ public class GridManager : NetworkBehaviour
                     coreType = _type,
                     type = _type,
                     full = _type == 5 || _type == 100,
+                    tower = _tower,
                 };
-}
+            }
         }
 
         ObstacleGenerator.Instance.CreateObstacles();

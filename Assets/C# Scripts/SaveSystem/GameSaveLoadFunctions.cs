@@ -36,11 +36,11 @@ public class GameSaveLoadFunctions : MonoBehaviour
         audioMixer.SetFloat("Volume", Mathf.Log10(volume / 100) * 20);
     }
 
-    public void SaveScreenData()
+    public void SaveScreenData(int width, int height, bool fullScreen)
     {
-        saveData.rWidth = Screen.currentResolution.width;
-        saveData.rHeight = Screen.currentResolution.height;
-        saveData.fullScreen = Screen.fullScreen;
+        saveData.rWidth = width;
+        saveData.rHeight = height;
+        saveData.fullScreen = fullScreen;
     }
 
     private void OnDestroy()

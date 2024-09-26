@@ -102,6 +102,8 @@ public class PlacementManager : NetworkBehaviour
     }
     public int currency;
     public int currencyGeneration;
+    public int skipTurncurrencyGeneration;
+    public bool playedAnything;
     public bool useGreekCurrency;
 
 
@@ -279,6 +281,8 @@ public class PlacementManager : NetworkBehaviour
 
     private void PlaceTower()
     {
+        playedAnything = true;
+
         selectedPreviewTower.towerPreviewRenderer.color = new Color(0.7619722f, 0.8740168f, 0.9547169f);
         selectedPreviewTower.UpdateTowerPreviewColor(true);
 
@@ -330,6 +334,12 @@ public class PlacementManager : NetworkBehaviour
         cTowerPlacements = maxTowerPlacements;
 
         Currency += currencyGeneration;
+
+        if (playedAnything == false)
+        {
+            Currency += skipTurncurrencyGeneration;
+        }
+        playedAnything = false;
     }
 
 

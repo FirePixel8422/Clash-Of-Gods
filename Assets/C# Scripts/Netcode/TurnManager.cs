@@ -1,6 +1,7 @@
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class TurnManager : NetworkBehaviour
 {
@@ -17,11 +18,19 @@ public class TurnManager : NetworkBehaviour
     public UnityEvent OnTurnChangedEvent;
     public UnityEvent OnMyTurnStartedEvent;
 
+    public GameObject endTurnButton;
+    public Animator yourTurnText;
+
 
 
     public override void OnNetworkSpawn()
     {
         localClientId = NetworkManager.LocalClientId;
+
+        endTurnButton.GetComponent<Button>().onClick.AddListener(() => NextTurn_Button());
+        endTurnButton.GetComponent<Button>().onClick.AddListener(() => endTurnButton.SetActive(false));
+
+
         if (IsServer)
         {
             clientOnTurnId = (ulong)Random.Range(0, 2);
@@ -29,6 +38,7 @@ public class TurnManager : NetworkBehaviour
             if (clientOnTurnId == localClientId)
             {
                 isMyTurn = true;
+                endTurnButton.SetActive(true);
             }
         }
         else
@@ -48,6 +58,7 @@ public class TurnManager : NetworkBehaviour
         {
             clientOnTurnId = 0;
             isMyTurn = true;
+            endTurnButton.SetActive(true);
         }
     }
 #endif
@@ -66,10 +77,22 @@ public class TurnManager : NetworkBehaviour
         if (clientOnTurnId == localClientId)
         {
             isMyTurn = true;
+            OnMyTurnStartedEvent.Invoke();
+
+            yourTurnText.SetTrigger("YourTurn");
+            endTurnButton.SetActive(true);
         }
     }
 
 
+    public void NextTurn_Button()
+    {
+        if (isMyTurn)
+        {
+            isMyTurn = false;
+            NextTurn_ServerRPC();
+        }
+    }
 
     [ServerRpc(RequireOwnership = false)]
     public void NextTurn_ServerRPC()
@@ -95,6 +118,9 @@ public class TurnManager : NetworkBehaviour
         {
             isMyTurn = true;
             OnMyTurnStartedEvent.Invoke();
+
+            yourTurnText.SetTrigger("YourTurn");
+            endTurnButton.SetActive(true);
         }
     }
 }

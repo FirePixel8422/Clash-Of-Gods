@@ -82,7 +82,6 @@ public class LobbyRelay : NetworkBehaviour
     }
     public async void FindLobbies()
     {
-        print("searched");
         try
         {
             QueryLobbiesOptions queryOptions = new QueryLobbiesOptions
@@ -152,6 +151,8 @@ public class LobbyRelay : NetworkBehaviour
                 _joinData.HostConnectionData);
 
             NetworkManager.Singleton.StartClient();
+
+            inSearchLobbyScreen = false;
         }
         catch(LobbyServiceException e)
         {
@@ -211,6 +212,8 @@ public class LobbyRelay : NetworkBehaviour
 
             NetworkManager.Singleton.StartHost();
             NetworkManager.SceneManager.LoadScene("MainGame", LoadSceneMode.Single);
+
+            inSearchLobbyScreen = false;
         }
         catch (LobbyServiceException e)
         {

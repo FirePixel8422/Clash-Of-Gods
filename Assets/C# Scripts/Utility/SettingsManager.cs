@@ -29,7 +29,9 @@ public class SettingsManager : NetworkBehaviour
     public void ChangeFullScreenState()
     {
         bool newState = !Screen.fullScreen;
+
         Screen.fullScreen = newState;
+        GameSaveLoadFunctions.Instance.SaveScreenData(GameSaveLoadFunctions.Instance.saveData.rWidth, GameSaveLoadFunctions.Instance.saveData.rHeight, newState);
 
         fullscreenButtonText.text = newState ? "Go Windowed" : "Go Fullscreen";
     }
@@ -50,8 +52,7 @@ public class SettingsManager : NetworkBehaviour
         }
         else
         {
-            GameSaveLoadFunctions.Instance.SaveScreenData();
-            Debug.LogError("NO DATA FOUND");
+            GameSaveLoadFunctions.Instance.SaveScreenData(1920, 1080, true);
 
             GameSaveLoadFunctions.Instance.SaveVolume(100);
         }
@@ -115,9 +116,7 @@ public class SettingsManager : NetworkBehaviour
         Resolution resolution = filterdResolutionList[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
 
-        GameSaveLoadFunctions.Instance.SaveScreenData();
-
-        Debug.LogError(resolution.width + " + " + resolution.height);
+        GameSaveLoadFunctions.Instance.SaveScreenData(resolution.width, resolution.height, Screen.fullScreen);
     }
 
 

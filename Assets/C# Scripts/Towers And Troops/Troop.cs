@@ -39,7 +39,7 @@ public class Troop : TowerCore
     {
         foreach (var sprite in moveArrowRenderers)
         {
-            if (movesLeft == 0 || actionsLeft == 0)
+            if (movesLeft == 0)
             {
                 sprite.color = moveArrowColors[0];
             }
@@ -103,6 +103,8 @@ public class Troop : TowerCore
 
     public void MoveTower(Vector2Int currentGridPos, Vector2Int newGridPos)
     {
+        PlacementManager.Instance.playedAnything = true;
+
         movesLeft -= 1;
 
         GridManager.Instance.UpdateTowerData(currentGridPos, null);
