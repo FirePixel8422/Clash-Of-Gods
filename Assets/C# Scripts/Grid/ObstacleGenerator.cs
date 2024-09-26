@@ -18,6 +18,10 @@ public class ObstacleGenerator : NetworkBehaviour
     public int obstacleAmount;
 
 
+    public FlyingTilesStats flyingTilesStats;
+
+
+
 
     public void CreateObstacles()
     {
@@ -109,6 +113,8 @@ public class ObstacleGenerator : NetworkBehaviour
         {
             Obstacle obstacle = NetworkManager.SpawnManager.SpawnedObjects[networkObjectIds[i]].GetComponent<Obstacle>();
 
+            flyingTilesStats.tileTransformList.Add(obstacle.transform);
+
             MeshRenderer renderer = obstacle.underAttackArrowAnim.GetComponentInChildren<MeshRenderer>();
 
             renderer.material.SetColor(Shader.PropertyToID("_Base_Color"), PlacementManager.Instance.playerColors[i < obstacleAmount ? 0 : 1]);
@@ -116,5 +122,7 @@ public class ObstacleGenerator : NetworkBehaviour
 
             GridManager.Instance.UpdateTowerData(gridPositions[i], obstacle);
         }
+
+        flyingTilesStats.Start();
     }
 }

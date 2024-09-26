@@ -59,7 +59,7 @@ public class TowerCore : NetworkBehaviour
     {
         TurnManager.Instance.OnMyTurnStartedEvent.AddListener(() => GrantTurn());
 
-        underAttackArrowRenderer = underAttackArrowAnim.GetComponentInChildren<MeshRenderer>(true);
+        underAttackArrowRenderer = underAttackArrowAnim.GetComponentInChildren<MeshRenderer>();
         underAttackArrowColors.Add(PlacementManager.Instance.playerColors[NetworkObject.OwnerClientId]);
 
         anim = GetComponent<Animator>();

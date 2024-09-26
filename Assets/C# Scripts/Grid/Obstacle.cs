@@ -5,9 +5,13 @@ using UnityEngine;
 
 public class Obstacle : TowerCore
 {
-    private void Start()
+    public override void OnNetworkSpawn()
     {
-        CoreInit();
+        TurnManager.Instance.OnMyTurnStartedEvent.AddListener(() => GrantTurn());
+
+        anim = GetComponent<Animator>();
+
+        dissolves = GetComponentsInChildren<DissolveController>();
 
         underAttackArrowRenderer = underAttackArrowAnim.GetComponentInChildren<MeshRenderer>();
         underAttackArrowColors.Add(PlacementManager.Instance.playerColors[NetworkObject.OwnerClientId / 10 - 1]);

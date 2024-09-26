@@ -19,6 +19,8 @@ public class DissolveController : MonoBehaviour
     private void Awake()
     {
         dissolveMaterial = GetComponent<Renderer>().material;
+
+        dissolveMaterial.SetVector(Shader.PropertyToID("_NoiseOffset"), new Vector2(Random.Range(-100f, 100f), Random.Range(-100f, 100f)));
     }
     public void StartDissolve(TowerCore core = null)
     {
