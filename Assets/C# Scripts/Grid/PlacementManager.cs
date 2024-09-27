@@ -111,6 +111,8 @@ public class PlacementManager : NetworkBehaviour
     public void Init(LayerMask _ownFieldLayers, LayerMask _neutralLayers, LayerMask _fullFieldLayers, ulong _localClientId)
     {
         TurnManager.Instance.OnMyTurnStartedEvent.AddListener(() => GrantTurn());
+        TurnManager.Instance.OnMyTurnEndedEvent.AddListener(() => EndTurn());
+
         cTowerPlacements = maxTowerPlacements;
 
         towerPreviews = towerPreviewHolder.GetComponentsInChildren<TowerPreview>();
@@ -274,7 +276,10 @@ public class PlacementManager : NetworkBehaviour
 
     private void CancelTowerPlacement()
     {
-        selectedPreviewTower.transform.localPosition = Vector3.zero;
+        if (selectedPreviewTower != null)
+        {
+            selectedPreviewTower.transform.localPosition = Vector3.zero;
+        }
         UpdateTowerPreviewServerRPC(Vector3.zero, 0, true);
         isPlacingTower = false;
     }
@@ -340,6 +345,11 @@ public class PlacementManager : NetworkBehaviour
             Currency += skipTurncurrencyGeneration;
         }
         playedAnything = false;
+    }
+    public void EndTurn()
+    {
+        CancelTowerPlacement();
+        DeSelectTower();
     }
 
 

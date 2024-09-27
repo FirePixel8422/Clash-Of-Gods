@@ -3295,7 +3295,7 @@ MonoBehaviour:
   - {fileID: 715568454}
   - {fileID: 197577870}
   - {fileID: 774715429}
-  addedDissolve: 0.15
+  addedDissolve: -0.1
 --- !u!1 &310332334 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 224003172591573238, guid: 63d199abc17bf7f469e41edf6fe3193e, type: 3}
@@ -3592,7 +3592,7 @@ MonoBehaviour:
   - {fileID: 1621341265}
   - {fileID: 382859921}
   - {fileID: 649698754}
-  addedDissolve: 0.15
+  addedDissolve: -0.1
 --- !u!1 &330805386 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 224003172591573238, guid: 63d199abc17bf7f469e41edf6fe3193e, type: 3}
@@ -4421,7 +4421,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: fe49421601385f9478927bfe6ab9cc3d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d4c4ffe5bae86b54e80892d352f56e48, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -12579,8 +12579,8 @@ MonoBehaviour:
       speeds: []
     - speedMin: 15
       speedMax: 18
-      startDelayMin: 0.75
-      startDelayMax: 1.5
+      startDelayMin: 0.3
+      startDelayMax: 1
       instantMoveTowards: 0
       tiles: []
       speeds: []
@@ -15075,6 +15075,9 @@ MonoBehaviour:
   localClientId: 0
   clientOnTurnId: 0
   OnTurnChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnMyTurnEndedEvent:
     m_PersistentCalls:
       m_Calls: []
   OnMyTurnStartedEvent:
@@ -18582,7 +18585,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: fe49421601385f9478927bfe6ab9cc3d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d4c4ffe5bae86b54e80892d352f56e48, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -22,10 +22,12 @@ public class Tower : TowerCore
 
 
     protected override void OnSetupTower()
-    {
+    {   
         towerPreviewRenderer = GetComponentInChildren<SpriteRenderer>();
 
         attackAnimator.transform.rotation = Quaternion.identity;
+
+        GetComponentInChildren<DirectionArrowValidator>().Init();
 
         if (rotPoint != null)
         {

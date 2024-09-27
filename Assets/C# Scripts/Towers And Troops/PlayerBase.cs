@@ -37,7 +37,7 @@ public class PlayerBase : TowerCore
 
         foreach (var dissolve in dissolves)
         {
-            dissolve.RevertPercent(this, health / maxHealth + addedDissolve);
+            dissolve.RevertPercent((float)health / (float)maxHealth + addedDissolve);
         }
 
 

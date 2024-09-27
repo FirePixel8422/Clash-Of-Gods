@@ -63,12 +63,12 @@ public class DissolveController : MonoBehaviour
         core.RevertCompleted();
     }
 
-    public void RevertPercent(TowerCore core, float percent)
+    public void RevertPercent(float percent)
     {
-        StartCoroutine(RevertDissolvePercent(core, percent));
+        StartCoroutine(RevertDissolvePercent(percent));
     }
 
-    private IEnumerator RevertDissolvePercent(TowerCore core, float percent)
+    private IEnumerator RevertDissolvePercent(float percent)
     {
         float _endDissolveValue = endDisolveValue / startDissolveEffectState * percent;
 

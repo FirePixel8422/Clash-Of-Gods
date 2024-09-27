@@ -16,6 +16,7 @@ public class TurnManager : NetworkBehaviour
     public ulong clientOnTurnId;
 
     public UnityEvent OnTurnChangedEvent;
+    public UnityEvent OnMyTurnEndedEvent;
     public UnityEvent OnMyTurnStartedEvent;
 
     public GameObject endTurnButton;
@@ -90,6 +91,9 @@ public class TurnManager : NetworkBehaviour
         if (isMyTurn)
         {
             isMyTurn = false;
+
+            OnMyTurnEndedEvent.Invoke();
+
             NextTurn_ServerRPC();
         }
     }

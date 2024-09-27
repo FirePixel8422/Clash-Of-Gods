@@ -21,9 +21,11 @@ public class Troop : TowerCore
 
     protected override void OnSetupTower()
     {
-        moveArrowRenderers = selectStateAnim.GetComponentsInChildren<SpriteRenderer>();
-
         selectStateAnim.transform.rotation = Quaternion.identity;
+
+        GetComponentInChildren<DirectionArrowValidator>().Init();
+
+        moveArrowRenderers = selectStateAnim.GetComponentsInChildren<SpriteRenderer>();
 
         if (GodCore.Instance.IsAthena)
         {

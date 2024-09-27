@@ -12,21 +12,24 @@ public class DirectionArrow : ClickableCollider
     [HideInInspector]
     public bool validAttack;
 
-    public GridObjectData troop_GridObjectData;
-    public GridObjectData arrow_GridObjectData;
 
-
-    public override void Start()
+    public void Setup(Vector2Int _dir, Sprite sprite)
     {
-        base.Start();
+        if (sprite != null)
+        {
+            GetComponent<SpriteRenderer>().sprite = sprite;
+        }
+
+        dir = _dir;
+
         tower = GetComponentInParent<TowerCore>();
     }
 
 
     public virtual void OnValidateArrow()
     {
-        troop_GridObjectData = GridManager.Instance.GridObjectFromWorldPoint(tower.transform.position);
-        arrow_GridObjectData = GridManager.Instance.GetGridData(troop_GridObjectData.gridPos + dir);
+        GridObjectData troop_GridObjectData = GridManager.Instance.GridObjectFromWorldPoint(tower.transform.position);
+        GridObjectData arrow_GridObjectData = GridManager.Instance.GetGridData(troop_GridObjectData.gridPos + dir);
 
 
         bool inGrid = GridManager.Instance.IsInGrid(arrow_GridObjectData.gridPos);
