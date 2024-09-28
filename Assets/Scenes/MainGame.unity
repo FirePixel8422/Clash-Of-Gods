@@ -3323,7 +3323,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: -0.7
   dissolveSpeed: 0.2
-  endDisolveValue: 0.5
+  endDisolveValue: 0.55
 --- !u!114 &310332337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3341,7 +3341,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.6
   dissolveSpeed: 0.2
-  endDisolveValue: -0.8
+  endDisolveValue: -0.85
 --- !u!1 &325034594
 GameObject:
   m_ObjectHideFlags: 0
@@ -3638,7 +3638,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.6
   dissolveSpeed: 0.2
-  endDisolveValue: -0.8
+  endDisolveValue: -0.85
 --- !u!114 &330805390
 MonoBehaviour:
   m_ObjectHideFlags: 0

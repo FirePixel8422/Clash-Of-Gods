@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2501937500
+  GlobalObjectIdHash: 3723591728
   InScenePlacedSourceGlobalObjectIdHash: 2501937500
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -156,7 +156,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dissolveMaterial: {fileID: 0}
   startDelay: 0
-  startDissolveEffectState: 0.6
+  revertDelay: 0
+  startDissolveEffectState: 0.65
   dissolveSpeed: 1
   endDisolveValue: -1
 --- !u!95 &1699878941221822740

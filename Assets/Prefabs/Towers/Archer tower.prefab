@@ -532,4 +532,4 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.6
   dissolveSpeed: 2
-  endDisolveValue: -0.9
+  endDisolveValue: -0.95
