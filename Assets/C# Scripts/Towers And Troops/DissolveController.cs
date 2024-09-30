@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class DissolveController : MonoBehaviour
@@ -18,7 +19,19 @@ public class DissolveController : MonoBehaviour
 
     private void Awake()
     {
-        dissolveMaterial = GetComponent<Renderer>().material;
+        Renderer renderer = GetComponent<Renderer>();
+        if (renderer == null)
+        {
+            Image image = GetComponent<Image>();
+            if (image != null)
+            {
+                dissolveMaterial = image.material;
+            }
+        }
+        else
+        {
+            dissolveMaterial = renderer.material;
+        }
 
         dissolveMaterial.SetVector(Shader.PropertyToID("_NoiseOffset"), new Vector2(Random.Range(-100f, 100f), Random.Range(-100f, 100f)));
     }
