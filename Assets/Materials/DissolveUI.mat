@@ -124,8 +124,8 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _Disolve_Active: -1.06
-    - _Dissolve_Width: 0.162
+    - _Disolve_Active: -0.35
+    - _Dissolve_Width: 0.1
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _Emission_Multiplier: 2
@@ -160,10 +160,10 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Base_Color: {r: 0.5849056, g: 0.37853324, b: 0.39471924, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Edge_Color: {r: 0.43188888, g: 0.5666732, b: 1.7185581, a: 1}
+    - _Edge_Color: {r: 1.844186, g: 0.35839832, b: 0.39188313, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Emission_Color: {r: 1, g: 1, b: 1, a: 0}
-    - _NoiseOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _NoiseOffset: {r: 74.21944, g: 70.37375, b: 0, a: 0}
     - _PreviewColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []

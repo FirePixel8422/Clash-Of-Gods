@@ -146,7 +146,7 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Base_Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Edge_Color: {r: 21.361254, g: 21.361254, b: 21.361254, a: 1}
+    - _Edge_Color: {r: 4.237095, g: 4.237095, b: 4.237095, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Emission_Color: {r: 1, g: 1, b: 1, a: 0}
     - _NoiseOffset: {r: 0, g: 0, b: 0, a: 0}
