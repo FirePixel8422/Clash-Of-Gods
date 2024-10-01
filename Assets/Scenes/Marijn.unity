@@ -445,7 +445,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.9273514, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 30.999847, y: -4}
+  m_AnchoredPosition: {x: 30.999817, y: -4}
   m_SizeDelta: {x: 62, y: 26}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &14008610
@@ -11239,8 +11239,15 @@ MonoBehaviour:
   musicPlayer: {fileID: 1540229142}
   musicPlayerAlt: {fileID: 1540229141}
   altMusicPlayerActive: 0
-  mainMenuClip: {fileID: 0}
-  battleFieldClips: []
+  mainMenuClips:
+  - {fileID: 8300000, guid: c3c79497c711dd14184761b282431c9a, type: 3}
+  - {fileID: 8300000, guid: 2b23babe2f7a6ed46b10c8b070ff971d, type: 3}
+  battleFieldClips:
+  - {fileID: 8300000, guid: 47ad0adc376929f4791b712cc4cb8ff9, type: 3}
+  - {fileID: 8300000, guid: d7219fa6f9d1f0741a02729eda78d7a7, type: 3}
+  - {fileID: 8300000, guid: 0eefaf214a67a7a42a6830f6631c8404, type: 3}
+  winMusicClip: {fileID: 8300000, guid: b992fe430a851e642a81c90e9b0124fb, type: 3}
+  loseMusicClip: {fileID: 8300000, guid: e3ce5af33e8503645b54ac121c52ea33, type: 3}
 --- !u!4 &1540229144
 Transform:
   m_ObjectHideFlags: 0

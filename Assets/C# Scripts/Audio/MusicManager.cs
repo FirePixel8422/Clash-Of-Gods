@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class MusicManager : MonoBehaviour
 {
@@ -41,6 +42,16 @@ public class MusicManager : MonoBehaviour
         clipIndex = Random.Range(0, mainMenuClips.Length);
 
         ChangeMusicTrack(true, 0.5f);
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode arg1)
+    {
+        if (scene.name == "MainGame")
+        {
+            ChangeMusicTrack(false, 0.5f);
+        }
     }
 
     public void ChangeMusicTrack(bool mainMenu, float fadeSpeed, int winloseMusic = -1)
@@ -101,17 +112,39 @@ public class MusicManager : MonoBehaviour
         yield return new WaitForSeconds(delay - 0.5f);
         StartCoroutine(FadeChangeMusicTrack(clip, 0.5f));
 
-        if (mainMenu == false)
-        {
-            clip = battleFieldClips[clipIndex];
 
+        if (winloseMusic != -1)
+        {
+            if (winloseMusic == 1)
+            {
+                clip = winMusicClip;
+            }
+            else
+            {
+                clip = loseMusicClip;
+            }
+        }
+        else if (mainMenu)
+        {
+            clipIndex += 1;
+            if (clipIndex >= mainMenuClips.Length)
+            {
+                clipIndex = 0;
+            }
+
+            clip = mainMenuClips[clipIndex];
+        }
+        else
+        {
             clipIndex += 1;
             if (clipIndex >= battleFieldClips.Length)
             {
                 clipIndex = 0;
             }
+
+            clip = battleFieldClips[clipIndex];
         }
-        queNextTrackCO = StartCoroutine(QueNextTracktimer(clip, clip.length, mainMenu, winloseMusic));;
+        queNextTrackCO = StartCoroutine(QueNextTracktimer(clip, clip.length, mainMenu, winloseMusic)); ;
     }
 
     private IEnumerator FadeChangeMusicTrack(AudioClip audioClip, float fadeSpeed)
