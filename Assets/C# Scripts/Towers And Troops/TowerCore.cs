@@ -51,7 +51,7 @@ public class TowerCore : NetworkBehaviour
 
     public bool useSelectionFlicker;
 
-
+    public float soundDelay;
 
     #region Tower Setup And Initialize
 
@@ -220,9 +220,19 @@ public class TowerCore : NetworkBehaviour
 
         AttackTarget_ServerRPC(target.transform.position, combinedSize);
 
+        StartCoroutine(SoundDelay(soundDelay));
+
         StartCoroutine(AttackTargetAnimation(target.transform.position, combinedSize, target));
 
         PlacementManager.Instance.playedAnything = true;
+    }
+
+   
+
+private IEnumerator SoundDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        GetComponent<AudioController>().Play();
     }
 
     [ServerRpc(RequireOwnership = false)]
