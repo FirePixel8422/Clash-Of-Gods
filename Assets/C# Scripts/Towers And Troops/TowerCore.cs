@@ -53,6 +53,8 @@ public class TowerCore : NetworkBehaviour
 
     public float soundDelay;
 
+    public bool underAttack;
+
     #region Tower Setup And Initialize
 
     public virtual void CoreInit()
@@ -216,6 +218,8 @@ public class TowerCore : NetworkBehaviour
 
     public void AttackTarget(TowerCore target)
     {
+        target.underAttack = true;
+
         float combinedSize = (target.size + size) / 2;
 
         AttackTarget_ServerRPC(target.transform.position, combinedSize);
@@ -229,7 +233,7 @@ public class TowerCore : NetworkBehaviour
 
    
 
-private IEnumerator SoundDelay(float delay)
+    private IEnumerator SoundDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
         GetComponent<AudioController>().Play();
@@ -295,6 +299,8 @@ private IEnumerator SoundDelay(float delay)
 
     public virtual IEnumerator GetAttackedAnimations(int dmg, bool stun)
     {
+        underAttack = false;
+
         health -= dmg;
         stunned = stun;
 

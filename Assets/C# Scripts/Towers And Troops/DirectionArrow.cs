@@ -34,7 +34,7 @@ public class DirectionArrow : ClickableCollider
 
         bool inGrid = GridManager.Instance.IsInGrid(arrow_GridObjectData.gridPos);
 
-        validAttack = inGrid && arrow_GridObjectData.full && arrow_GridObjectData.tower != null && arrow_GridObjectData.tower.OwnerClientId != tower.OwnerClientId;
+        validAttack = inGrid && arrow_GridObjectData.full && arrow_GridObjectData.tower != null && arrow_GridObjectData.tower.underAttack == false && arrow_GridObjectData.tower.OwnerClientId != tower.OwnerClientId;
 
 
         if (validAttack)

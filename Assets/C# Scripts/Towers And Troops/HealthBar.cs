@@ -9,9 +9,10 @@ public class HealthBar : NetworkBehaviour
     public Transform healthBarDamage;
 
     private float fullHealthScaleX;
-    private float noHealthPosX;
+    public float noHealthPosX;
 
-    public float damageAnimationSpeed;
+    public float damageAnimationScaleSpeed;
+    public float damageAnimationPosSpeed;
 
 
     private float maxHealth;
@@ -60,7 +61,7 @@ public class HealthBar : NetworkBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            StartCoroutine(UpdateHealthBarAnimation(health - 10));
+            StartCoroutine(UpdateHealthBarAnimation(health - 1));
         }
     }
 
@@ -72,13 +73,13 @@ public class HealthBar : NetworkBehaviour
         Vector3 localPos = healthBar.localPosition;
 
         healthBar.localScale = new Vector3(fullHealthScaleX * (health / maxHealth), localScale.y, localScale.z);
-        healthBar.localPosition = new Vector3(noHealthPosX * (health / maxHealth), localPos.y, localPos.z);
+        healthBar.localPosition = new Vector3(noHealthPosX * (1 - health / maxHealth), localPos.y, localPos.z);
 
-        while (Vector3.Distance(healthBarDamage.localScale, healthBar.localScale) > 0.0001f)
+        while (Vector3.Distance(healthBarDamage.localScale, healthBar.localScale) > 0.0001f || Vector3.Distance(healthBarDamage.localPosition, healthBar.localPosition) > 0.0001f)
         {
             yield return null;
-            healthBarDamage.localScale = VectorLogic.InstantMoveTowards(healthBarDamage.localScale, healthBar.localScale, damageAnimationSpeed * Time.deltaTime);
-            healthBarDamage.localPosition = VectorLogic.InstantMoveTowards(healthBarDamage.localPosition, healthBar.localPosition, damageAnimationSpeed * Time.deltaTime);
+            healthBarDamage.localScale = VectorLogic.InstantMoveTowards(healthBarDamage.localScale, healthBar.localScale, damageAnimationScaleSpeed * Time.deltaTime);
+            healthBarDamage.localPosition = VectorLogic.InstantMoveTowards(healthBarDamage.localPosition, healthBar.localPosition, damageAnimationPosSpeed * Time.deltaTime);
         }
     }
 }

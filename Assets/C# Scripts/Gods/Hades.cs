@@ -279,6 +279,8 @@ public class Hades : GodCore
             {
                 fireWallSelectionSprite.position = VectorLogic.InstantMoveTowards(fireWallSelectionSprite.position, targetFireWallPos, _fireWallMoveSpeed * Time.deltaTime);
             }
+
+            SyncSelectionSprite_ServerRPC(0, fireWallSelectionSprite.position);
         }
 
 
@@ -295,9 +297,36 @@ public class Hades : GodCore
                     offensiveSelectionSprite.position = selectedGridTileData.worldPos;
                 }
             }
+
+            SyncSelectionSprite_ServerRPC(1, offensiveSelectionSprite.position);
         }
     }
-    
+
+    [ServerRpc(RequireOwnership = false)]
+    private void SyncSelectionSprite_ServerRPC(int abilityId, Vector3 pos, ServerRpcParams rpcParams = default)
+    {
+        ulong senderClientId = rpcParams.Receive.SenderClientId;
+        SyncSelectionSprite_ClientRPC(senderClientId, abilityId, pos);
+    }
+
+    [ClientRpc(RequireOwnership = false)]
+    private void SyncSelectionSprite_ClientRPC(ulong clientId, int abilityId, Vector3 pos)
+    {
+        if (NetworkManager.LocalClientId == clientId)
+        {
+            return;
+        }
+
+        if (abilityId == 0)
+        {
+            fireWallSelectionSprite.position = pos;
+        }
+        else
+        {
+            offensiveSelectionSprite.position = pos;
+        }
+    }
+
 
 
     #region Place/Discard FireWall On Network

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 public class Tower : TowerCore
@@ -78,6 +79,25 @@ public class Tower : TowerCore
             Quaternion targetRotation = Quaternion.LookRotation(direction);
 
             rotPoint.rotation = Quaternion.RotateTowards(rotPoint.rotation, targetRotation, rotSpeed * Time.deltaTime);
+
+            SyncYRotationServerRPC(rotPoint.rotation);
         }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void SyncYRotationServerRPC(Quaternion rotation, ServerRpcParams rpcParams = default)
+    {
+        ulong senderClientId = rpcParams.Receive.SenderClientId;
+        SyncYRotation_ClientRPC(senderClientId, rotation);
+    }
+
+    [ClientRpc(RequireOwnership = false)]
+    private void SyncYRotation_ClientRPC(ulong clientId, Quaternion rotation)
+    {
+        if(NetworkManager.LocalClientId == clientId)
+        {
+            return;
+        }
+        rotPoint.rotation = rotation;
     }
 }

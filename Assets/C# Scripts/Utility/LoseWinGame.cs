@@ -36,10 +36,12 @@ public class LoseWinGame : MonoBehaviour
         if (TurnManager.Instance.localClientId == playerIdToWin)
         {
             winGameTextObj.SetActive(true);
+            MusicManager.Instance.ChangeMusicTrack(false, 0.5f, 1);
         }
         else
         {
             loseGameTextObj.SetActive(true);
+            MusicManager.Instance.ChangeMusicTrack(false, 0.5f, 2);
         }
     }
 }
