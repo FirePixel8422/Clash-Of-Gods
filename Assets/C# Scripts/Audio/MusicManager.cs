@@ -16,9 +16,12 @@ public class MusicManager : MonoBehaviour
 
     public bool altMusicPlayerActive;
 
-    public AudioClip mainMenuClip;
+    public AudioClip[] mainMenuClips;
     public AudioClip[] battleFieldClips;
     private int clipIndex;
+
+    public AudioClip winMusicClip;
+    public AudioClip loseMusicClip;
 
     private Coroutine queNextTrackCO;
 
@@ -35,36 +38,65 @@ public class MusicManager : MonoBehaviour
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
-        clipIndex = Random.Range(0, battleFieldClips.Length);
+        clipIndex = Random.Range(0, mainMenuClips.Length);
+
         ChangeMusicTrack(true, 0.5f);
     }
 
-    public void ChangeMusicTrack(bool mainMenu, float fadeSpeed)
+    public void ChangeMusicTrack(bool mainMenu, float fadeSpeed, int winloseMusic = -1)
     {
-        if(queNextTrackCO != null)
+        if (queNextTrackCO != null)
         {
             StopCoroutine(queNextTrackCO);
         }
 
-        AudioClip clip = mainMenuClip;
-        AudioClip queClip = mainMenuClip;
 
-        if (mainMenu == false)
+        AudioClip clip;
+        AudioClip queClip;
+
+        if (winloseMusic != -1)
+        {
+            clip = battleFieldClips[clipIndex];
+
+            if (winloseMusic == 1)
+            {
+                queClip = winMusicClip;
+            }
+            else
+            {
+                queClip = loseMusicClip;
+            }
+        }
+        else if (mainMenu)
+        {
+            clip = mainMenuClips[clipIndex];
+
+            clipIndex += 1;
+            if (clipIndex >= mainMenuClips.Length)
+            {
+                clipIndex = 0;
+            }
+
+            queClip = mainMenuClips[clipIndex];
+        }
+        else
         {
             clip = battleFieldClips[clipIndex];
 
             clipIndex += 1;
-            if(clipIndex >= battleFieldClips.Length)
+            if (clipIndex >= battleFieldClips.Length)
             {
                 clipIndex = 0;
             }
+
             queClip = battleFieldClips[clipIndex];
         }
+
         StartCoroutine(FadeChangeMusicTrack(clip, fadeSpeed));
-        queNextTrackCO = StartCoroutine(QueNextTracktimer(queClip, queClip.length, mainMenu));
+        queNextTrackCO = StartCoroutine(QueNextTracktimer(queClip, queClip.length, mainMenu, winloseMusic));
     }
 
-    private IEnumerator QueNextTracktimer(AudioClip clip, float delay, bool mainMenu)
+    private IEnumerator QueNextTracktimer(AudioClip clip, float delay, bool mainMenu, int winloseMusic = -1)
     {
         yield return new WaitForSeconds(delay - 0.5f);
         StartCoroutine(FadeChangeMusicTrack(clip, 0.5f));
@@ -79,7 +111,7 @@ public class MusicManager : MonoBehaviour
                 clipIndex = 0;
             }
         }
-        queNextTrackCO = StartCoroutine(QueNextTracktimer(clip, clip.length, mainMenu));
+        queNextTrackCO = StartCoroutine(QueNextTracktimer(clip, clip.length, mainMenu, winloseMusic));;
     }
 
     private IEnumerator FadeChangeMusicTrack(AudioClip audioClip, float fadeSpeed)
