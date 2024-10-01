@@ -538,7 +538,7 @@ MonoBehaviour:
   audioSources: []
   audioType: 0
   clips:
-  - {fileID: 8300000, guid: 2a47c30e56c07054a8b72c739fc0c393, type: 3}
+  - {fileID: 8300000, guid: 78250548b902d0449b9c0971b63b35a3, type: 3}
   clipOrder: 0
 --- !u!82 &2692704322753332379
 AudioSource:
