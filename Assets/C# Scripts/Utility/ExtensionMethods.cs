@@ -16,10 +16,21 @@ public static class ExtensionMethods
         mb.StartCoroutine(InvokeRoutine(f, delay));
     }
 
+    public static void Invoke<T>(this MonoBehaviour mb, Action<T> f, T param, float delay)
+    {
+        mb.StartCoroutine(InvokeRoutine(f, param, delay));
+    }
+
     private static IEnumerator InvokeRoutine(Action f, float delay)
     {
         yield return new WaitForSeconds(delay);
         f();
+    }
+
+    private static IEnumerator InvokeRoutine<T>(Action<T> f, T param, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        f(param);
     }
 
 

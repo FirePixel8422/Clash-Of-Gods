@@ -6,10 +6,15 @@ public class GoldMine : TowerCore
 {
     public float mineSpeed;
 
+    public int coinsOnDeath;
+
 
     protected override void OnSetupTower()
     {
-        TurnManager.Instance.OnTurnChangedEvent.AddListener(() => GenerateCoins());
+        if (NetworkManager.LocalClientId == NetworkObject.OwnerClientId)
+        {
+            TurnManager.Instance.OnMyTurnStartedEvent.AddListener(() => GenerateCoins());
+        }
     }
 
 
@@ -24,6 +29,14 @@ public class GoldMine : TowerCore
         {
             PlacementManager.Instance.Currency += (int)generatedCoins;
             generatedCoins -= (int)generatedCoins;
+        }
+    }
+
+    public override void OnDeath()
+    {
+        if (NetworkManager.LocalClientId != NetworkObject.OwnerClientId)
+        {
+            PlacementManager.Instance.Currency += coinsOnDeath;
         }
     }
 }

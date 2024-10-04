@@ -6,6 +6,7 @@ using UnityEngine;
 public class Troop : TowerCore
 {
     public float animatedMoveSpeed;
+    public float animatedRotSpeed;
     public float attackAnimationTime;
 
     public int movesPerTurn;
@@ -29,7 +30,7 @@ public class Troop : TowerCore
 
         if (GodCore.Instance.IsAthena)
         {
-            GrantTurn();
+            movesLeft = movesPerTurn;
         }
     }
 
@@ -74,7 +75,27 @@ public class Troop : TowerCore
         targetPos.y = towerStartpos.y;
 
 
+
+
+
         anim.SetTrigger("Attack");
+
+        Vector3 direction = (targetPos - transform.position).normalized;
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+
+        while (Quaternion.Angle(transform.rotation, targetRotation) > 0.0001f)
+        {
+            yield return null;
+
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, animatedRotSpeed * Time.deltaTime);
+            selectStateAnim.transform.rotation = Quaternion.identity;
+        }
+
+        
+
+
+        anim.SetTrigger("MoveAttack");
+
         while (Vector3.Distance(transform.position, targetPos) > 0.0001f)
         {
             yield return null;
@@ -82,15 +103,29 @@ public class Troop : TowerCore
             transform.position = VectorLogic.InstantMoveTowards(transform.position, targetPos, animatedMoveSpeed * Time.deltaTime);
         }
 
+
+
+
         anim.SetTrigger("MoveAttack");
+
         yield return new WaitForSeconds(attackAnimationTime);
 
-        while (Vector3.Distance(transform.position, towerStartpos) > 0.0001f)
+        direction = (towerStartpos - transform.position).normalized;
+        targetRotation = Quaternion.LookRotation(direction);
+
+        while (Vector3.Distance(transform.position, towerStartpos) > 0.0001f && Quaternion.Angle(transform.rotation, targetRotation) > 0.0001f)
         {
             yield return null;
 
             transform.position = VectorLogic.InstantMoveTowards(transform.position, towerStartpos, animatedMoveSpeed * Time.deltaTime);
+
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, animatedRotSpeed * Time.deltaTime);
+            selectStateAnim.transform.rotation = Quaternion.identity;
         }
+
+
+
+
 
         anim.SetTrigger("MoveAttack");
 

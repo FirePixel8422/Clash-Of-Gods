@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using Unity.Netcode;
+using Unity.Services.Lobbies;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,6 +11,18 @@ using UnityEngine.UI;
 
 public class SettingsManager : NetworkBehaviour
 {
+    public static SettingsManager SingleTon;
+    private void Awake()
+    {
+        if (SingleTon != null)
+        {
+            Destroy(SingleTon);
+        }
+        SingleTon = this;
+    }
+
+
+
     public GameObject settingsMenu;
 
     public TMP_Dropdown dropdown;
@@ -19,11 +33,15 @@ public class SettingsManager : NetworkBehaviour
     private int cresolutionIndex;
     public RefreshRate cRefreshRate;
 
-    public Slider audioSlider;
+    public Slider mainAudioSlider;
+    public Slider sfxAudioSlider;
+    public Slider musicAudioSlider;
 
     public TextMeshProUGUI fullscreenButtonText;
 
     public bool displayRefreshRate;
+
+    public List<AudioController> audioControllers;
 
 
     public void ChangeFullScreenState()
@@ -40,27 +58,42 @@ public class SettingsManager : NetworkBehaviour
     {
         StartCoroutine(FrameDelay());
     }
+
     private IEnumerator FrameDelay()
     {
         yield return new WaitForEndOfFrame();
+        yield return null;
 
         if (GameSaveLoadFunctions.Instance.saveData.rWidth != 0)
         {
             Screen.SetResolution(GameSaveLoadFunctions.Instance.saveData.rWidth, GameSaveLoadFunctions.Instance.saveData.rHeight, GameSaveLoadFunctions.Instance.saveData.fullScreen);
 
-            audioSlider.value = GameSaveLoadFunctions.Instance.saveData.volume;
+            mainAudioSlider.value = GameSaveLoadFunctions.Instance.saveData.mainVolume;
+            sfxAudioSlider.value = GameSaveLoadFunctions.Instance.saveData.sfxVolume;
+            musicAudioSlider.value = GameSaveLoadFunctions.Instance.saveData.musicVolume;
+
+            audioControllers = FindObjectsOfType<AudioController>().ToList();
+
+            UpdateVolume();
         }
         else
         {
             GameSaveLoadFunctions.Instance.SaveScreenData(1920, 1080, true);
 
-            GameSaveLoadFunctions.Instance.SaveVolume(100);
+            GameSaveLoadFunctions.Instance.SaveVolume(1, 1, 1);
+        }
+
+        if (SceneManager.GetActiveScene().name == "Marijn")
+        {
+            MusicManager.Singleton.ChangeMusicTrack(true, 0.5f);
         }
 
 
         fullscreenButtonText.text = Screen.fullScreen ? "Go Windowed" : "Go Fullscreen";
 
-        audioSlider.onValueChanged.AddListener((float value) => GameSaveLoadFunctions.Instance.SaveVolume(value));
+        mainAudioSlider.onValueChanged.AddListener((_) => UpdateVolume());
+        sfxAudioSlider.onValueChanged.AddListener((_) => UpdateVolume());
+        musicAudioSlider.onValueChanged.AddListener((_) => UpdateVolume());
 
 
 
@@ -108,6 +141,24 @@ public class SettingsManager : NetworkBehaviour
 
         dropdown.RefreshShownValue();
     }
+
+
+
+    public void UpdateVolume(bool updateSourceOnly = false)
+    {
+        foreach (AudioController audioController in audioControllers)
+        {
+            audioController.UpdateVolume(mainAudioSlider.value, sfxAudioSlider.value, musicAudioSlider.value);
+        }
+        MusicManager.Singleton.UpdateVolume(mainAudioSlider.value, sfxAudioSlider.value, musicAudioSlider.value);
+
+        if (updateSourceOnly)
+        {
+            return;
+        }
+
+        GameSaveLoadFunctions.Instance.SaveVolume(mainAudioSlider.value, sfxAudioSlider.value, musicAudioSlider.value);
+    }
   
 
 
@@ -138,15 +189,18 @@ public class SettingsManager : NetworkBehaviour
     private void KillMatch_ServerRPC()
     {
         KillMatch_ClientRPC();
+
+        NetworkManager.Shutdown();
+        Lobbies.Instance.DeleteLobbyAsync(LobbyRelay.Instance._lobbyId);
     }
 
     [ClientRpc(RequireOwnership = false)]
     private void KillMatch_ClientRPC()
     {
-        NetworkManager.Shutdown();
-
         Destroy(GodCore.Instance.gameObject);
         Destroy(GameSaveLoadFunctions.Instance.gameObject);
+        Destroy(NetworkManager.gameObject);
+        Destroy(MusicManager.Singleton.gameObject);
 
         SceneManager.LoadScene(0);
     }

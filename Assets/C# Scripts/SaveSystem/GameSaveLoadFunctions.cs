@@ -24,16 +24,20 @@ public class GameSaveLoadFunctions : MonoBehaviour
 
     public void LoadDataFromFile(GameSaveData data)
     {
-        saveData.volume = data.volume;
+        saveData.mainVolume = data.mainVolume;
+        saveData.sfxVolume = data.sfxVolume;
+        saveData.musicVolume = data.musicVolume;
+
         saveData.rWidth = data.rWidth;
         saveData.rHeight = data.rHeight;
         saveData.fullScreen = data.fullScreen;
     }
 
-    public void SaveVolume(float volume)
+    public void SaveVolume(float mainVolume, float sfxVolume, float musicVolume)
     {
-        saveData.volume = volume;
-        audioMixer.SetFloat("Volume", Mathf.Log10(volume / 100) * 20);
+        saveData.mainVolume = mainVolume;
+        saveData.sfxVolume = sfxVolume;
+        saveData.musicVolume = musicVolume;
     }
 
     public void SaveScreenData(int width, int height, bool fullScreen)

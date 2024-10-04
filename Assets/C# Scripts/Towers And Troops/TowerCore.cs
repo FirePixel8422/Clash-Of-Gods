@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-
+[RequireComponent(typeof(AudioController))]
 public class TowerCore : NetworkBehaviour
 {
     #region Dissolve Variables
@@ -30,6 +30,8 @@ public class TowerCore : NetworkBehaviour
 
     protected MeshRenderer underAttackArrowRenderer;
     public List<Color> underAttackArrowColors;
+
+    private AudioController audioController;
 
     public Animator selectStateAnim;
 
@@ -63,6 +65,11 @@ public class TowerCore : NetworkBehaviour
 
         underAttackArrowRenderer = underAttackArrowAnim.GetComponentInChildren<MeshRenderer>();
         underAttackArrowColors.Add(PlacementManager.Instance.playerColors[NetworkObject.OwnerClientId]);
+
+        audioController = GetComponent<AudioController>();
+
+
+        SettingsManager.SingleTon.audioControllers.Add(audioController);
 
         anim = GetComponent<Animator>();
 
@@ -99,7 +106,10 @@ public class TowerCore : NetworkBehaviour
             }
         }
 
-        selectStateAnim.SetBool("Enabled", true);
+        if (selectStateAnim != null)
+        {
+            selectStateAnim.SetBool("Enabled", true);
+        }
 
         //expirimental
         if (anim != null)
@@ -236,7 +246,7 @@ public class TowerCore : NetworkBehaviour
     private IEnumerator SoundDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        GetComponent<AudioController>().Play();
+        audioController.Play();
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -333,5 +343,11 @@ public class TowerCore : NetworkBehaviour
         {
             Gizmos.DrawWireCube(centerPoint.position, Vector3.one * size);
         }
+    }
+
+
+    public override void OnDestroy()
+    {
+        SettingsManager.SingleTon.audioControllers.Remove(audioController);
     }
 }

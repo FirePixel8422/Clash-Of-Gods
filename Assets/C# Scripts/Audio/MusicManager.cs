@@ -6,10 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class MusicManager : MonoBehaviour
 {
-    public static MusicManager Instance;
+    public static MusicManager Singleton;
     private void Awake()
     {
-        Instance = this;
+        if (Singleton != null)
+        {
+            Destroy(Singleton);
+        }
+        Singleton = this;
     }
 
     public AudioSource musicPlayer;
@@ -19,7 +23,7 @@ public class MusicManager : MonoBehaviour
 
     public AudioClip[] mainMenuClips;
     public AudioClip[] battleFieldClips;
-    private int clipIndex;
+    public int clipIndex;
 
     public AudioClip winMusicClip;
     public AudioClip loseMusicClip;
@@ -40,8 +44,6 @@ public class MusicManager : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
         clipIndex = Random.Range(0, mainMenuClips.Length);
-
-        ChangeMusicTrack(true, 0.5f);
 
         SceneManager.sceneLoaded += OnSceneLoaded;
     }

@@ -10,6 +10,6 @@ public class ZeusFlyingTiles : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        flyingTilesStats.Start();
+        flyingTilesStats.Start(this);
     }
 }

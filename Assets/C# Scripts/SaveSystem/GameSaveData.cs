@@ -5,7 +5,9 @@ using UnityEngine;
 [System.Serializable]
 public class GameSaveData
 {
-    public float volume;
+    public float mainVolume;
+    public float sfxVolume;
+    public float musicVolume;
 
     public int rWidth;
     public int rHeight;
@@ -13,7 +15,10 @@ public class GameSaveData
 
     public GameSaveData(GameSaveLoadFunctions p)
     {
-        volume = p.saveData.volume;
+        mainVolume = p.saveData.mainVolume;
+        sfxVolume = p.saveData.sfxVolume;
+        musicVolume = p.saveData.musicVolume;
+
         rWidth = p.saveData.rWidth;
         rHeight = p.saveData.rHeight;
         fullScreen = p.saveData.fullScreen;

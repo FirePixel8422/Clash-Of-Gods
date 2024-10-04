@@ -10,6 +10,7 @@ public class Tower : TowerCore
     public Transform rotPoint;
 
     public Transform lookAtTransform;
+    public Transform shootPoint;
 
     [HideInInspector]
     public SpriteRenderer towerPreviewRenderer;

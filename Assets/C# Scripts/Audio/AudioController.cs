@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
 public class AudioController : MonoBehaviour
 {
-    public AudioSource[] audioSources;
+    private List<AudioSource> audioSources;
 
     public Audio_Type audioType;
     public enum Audio_Type
@@ -15,8 +17,11 @@ public class AudioController : MonoBehaviour
         Music
     };
 
+
     public AudioClip[] clips;
+
     private int clipIndex;
+
     public OrderMode clipOrder;
     public enum OrderMode
     {
@@ -24,10 +29,18 @@ public class AudioController : MonoBehaviour
         FullyRandom
     };
 
+    public bool autoRefillSources;
+
+    private float defVolume;
+    private float defPitch;
+
+
 
     private void Start()
     {
-        audioSources = GetComponents<AudioSource>();
+        audioSources = GetComponents<AudioSource>().ToList();
+        defVolume = audioSources[0].volume;
+        defPitch = audioSources[0].pitch;
     }
 
 
@@ -45,10 +58,18 @@ public class AudioController : MonoBehaviour
                 source.volume *= music;
             }
         }
+        defVolume = audioSources[0].volume; 
+        defPitch = audioSources[0].pitch;
     }
 
-    public void Play()
+
+    public void Play(float volumeMultiplier = -1, float pitchMultiplier = -1)
     {
+        if (clips.Length == 0)
+        {
+            return;
+        }
+
         foreach (AudioSource source in audioSources)
         {
             if (source.isPlaying)
@@ -70,9 +91,30 @@ public class AudioController : MonoBehaviour
                     clipIndex = 0;
                 }
             }
+
+            if (volumeMultiplier > 0)
+            {
+                source.volume = defVolume * volumeMultiplier;
+            }
+            if (pitchMultiplier > 0)
+            {
+                source.pitch = defPitch * pitchMultiplier;
+            }
+
             source.Play();
             return;
         }
-        print("too little audiosources on: " +gameObject.name);
+
+        if (autoRefillSources)
+        {
+            AudioSource addedSource = transform.AddComponent<AudioSource>();
+            audioSources.Add(addedSource);
+
+            addedSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning("too little audiosources on: " + gameObject.name);
+        }
     }
 }

@@ -4,17 +4,9 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class FlyingTiles : MonoBehaviour
+public class FlyingTiles
 {
-    public static FlyingTiles Instance;
-    private void Awake()
-    {
-        Instance = this;
-    }
-
-
-
-    public IEnumerator FlyTilesToPositionY(FlyGroup group, float endPosY)
+    public static IEnumerator FlyTilesToPositionY(FlyGroup group, float endPosY)
     {
         group.speeds = new float[group.tiles.Count];
 
@@ -87,9 +79,9 @@ public class FlyingTilesStats
 
 
 
-    public void Start()
+    public void Start(MonoBehaviour monoBehaviour)
     {
-        int r = 0;
+        int r;
         while (tileTransformList.Count != 0)
         {
             foreach (FlyGroup group in flyGroups)
@@ -114,7 +106,7 @@ public class FlyingTilesStats
 
         foreach (FlyGroup group in flyGroups)
         {
-            FlyingTiles.Instance.StartCoroutine(FlyingTiles.Instance.FlyTilesToPositionY(group, endPosY));
+            monoBehaviour.StartCoroutine(FlyingTiles.FlyTilesToPositionY(group, endPosY));
         }
     }
 }

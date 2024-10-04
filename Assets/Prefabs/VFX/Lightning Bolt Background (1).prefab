@@ -42,21 +42,57 @@ VisualEffect:
   m_GameObject: {fileID: 4104591947991591655}
   m_Enabled: 1
   m_Asset: {fileID: 8926484042661614526, guid: 7f925376dd4030442865725c257f2632, type: 3}
-  m_InitialEventName: OnPlay
-  m_InitialEventNameOverriden: 0
+  m_InitialEventName: 
+  m_InitialEventNameOverriden: 1
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
   m_AllowInstancing: 1
   m_ResourceVersion: 1
   m_PropertySheet:
     m_Float:
-      m_Array: []
+      m_Array:
+      - m_Value: 1.5
+        m_Name: Width
+        m_Overridden: 1
+      - m_Value: 16.28
+        m_Name: Height
+        m_Overridden: 1
+      - m_Value: 0.4
+        m_Name: DistortionAmount
+        m_Overridden: 1
+      - m_Value: 1.25
+        m_Name: LifetimeGlow
+        m_Overridden: 1
+      - m_Value: 15
+        m_Name: NoiseScale
+        m_Overridden: 1
+      - m_Value: 9
+        m_Name: SizeImpactGlow
+        m_Overridden: 1
+      - m_Value: 8
+        m_Name: SizeImpactFlash
+        m_Overridden: 1
+      - m_Value: 8
+        m_Name: SizeFlash
+        m_Overridden: 1
+      - m_Value: 4
+        m_Name: SizeGlow
+        m_Overridden: 1
     m_Vector2f:
-      m_Array: []
+      m_Array:
+      - m_Value: {x: 1, y: -0.15}
+        m_Name: ScrollSpeed
+        m_Overridden: 1
     m_Vector3f:
       m_Array: []
     m_Vector4f:
-      m_Array: []
+      m_Array:
+      - m_Value: {x: 3.4460955, y: 2.1865485, z: 0.703653, w: 1}
+        m_Name: LightningColor
+        m_Overridden: 1
+      - m_Value: {x: 23.999994, y: 8.058469, z: 4.900522, w: 0}
+        m_Name: LigningColorBright
+        m_Overridden: 1
     m_Uint:
       m_Array: []
     m_Int:
@@ -64,7 +100,42 @@ VisualEffect:
     m_Matrix4x4f:
       m_Array: []
     m_AnimationCurve:
-      m_Array: []
+      m_Array:
+      - m_Value:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 62.955025
+            outSlope: 62.955025
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.45007566
+            value: 28.334524
+            inSlope: 45.431602
+            outSlope: 45.431602
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.09020541
+          - serializedVersion: 3
+            time: 1
+            value: 36
+            inSlope: 4.262718
+            outSlope: 4.262718
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.13972904
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        m_Name: LightningScale
+        m_Overridden: 1
     m_Gradient:
       m_Array: []
     m_NamedObject:

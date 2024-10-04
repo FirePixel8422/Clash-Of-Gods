@@ -495,6 +495,7 @@ MonoBehaviour:
   actionsLeft: 0
   useSelectionFlicker: 0
   soundDelay: 2
+  underAttack: 0
   attackAnimator: {fileID: 837659766498736537}
   rotPoint: {fileID: 0}
   lookAtTransform: {fileID: 0}
@@ -535,11 +536,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be5b7b48bffae364c8fc865cf840e5e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSources: []
-  audioType: 0
+  audioType: 1
   clips:
   - {fileID: 8300000, guid: 78250548b902d0449b9c0971b63b35a3, type: 3}
   clipOrder: 0
+  autoRefillSources: 0
 --- !u!82 &2692704322753332379
 AudioSource:
   m_ObjectHideFlags: 0

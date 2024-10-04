@@ -123,6 +123,6 @@ public class ObstacleGenerator : NetworkBehaviour
             GridManager.Instance.UpdateTowerData(gridPositions[i], obstacle);
         }
 
-        flyingTilesStats.Start();
+        flyingTilesStats.Start(this);
     }
 }
