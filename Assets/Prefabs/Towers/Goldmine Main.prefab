@@ -323,7 +323,7 @@ MonoBehaviour:
   centerPoint: {fileID: 3190499162408410763}
   size: 2.4
   drawSizeGizmos: 1
-  underAttackArrowAnim: {fileID: 5242500508511117542}
+  underAttackArrowAnim: {fileID: 414642289494544372}
   underAttackArrowColors:
   - {r: 0.8627451, g: 0.2509804, b: 0.23921569, a: 1}
   selectStateAnim: {fileID: 416043436105067396}
@@ -619,6 +619,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0198a130203560b47afacb8651059a49, type: 3}
+--- !u!95 &414642289494544372 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7242673838742336775, guid: 0198a130203560b47afacb8651059a49, type: 3}
+  m_PrefabInstance: {fileID: 7008233842824526579}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4195732757680550717 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6591021602608630222, guid: 0198a130203560b47afacb8651059a49, type: 3}

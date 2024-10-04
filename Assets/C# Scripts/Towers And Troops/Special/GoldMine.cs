@@ -34,6 +34,7 @@ public class GoldMine : TowerCore
 
     public override void OnDeath()
     {
+        base.OnDeath();
         if (NetworkManager.LocalClientId != NetworkObject.OwnerClientId)
         {
             PlacementManager.Instance.Currency += coinsOnDeath;
