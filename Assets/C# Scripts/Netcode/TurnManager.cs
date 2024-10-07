@@ -24,6 +24,8 @@ public class TurnManager : NetworkBehaviour
 
 
 
+    #region Setup And Start Game
+
     public override void OnNetworkSpawn()
     {
         localClientId = NetworkManager.LocalClientId;
@@ -48,22 +50,6 @@ public class TurnManager : NetworkBehaviour
         }
     }
 
-#if UNITY_EDITOR
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.PageDown))
-        {
-            NextTurn_ServerRPC();
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            clientOnTurnId = 0;
-            isMyTurn = true;
-            endTurnButton.SetActive(true);
-        }
-    }
-#endif
-
 
     [ServerRpc(RequireOwnership = false)]
     private void StartGame_ServerRPC()
@@ -84,7 +70,26 @@ public class TurnManager : NetworkBehaviour
             endTurnButton.SetActive(true);
         }
     }
+    #endregion
 
+
+    #region Grant Next Turn
+
+#if UNITY_EDITOR
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.PageDown))
+        {
+            NextTurn_ServerRPC();
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            clientOnTurnId = 0;
+            isMyTurn = true;
+            endTurnButton.SetActive(true);
+        }
+    }
+#endif
 
     public void NextTurn_Button()
     {
@@ -127,4 +132,5 @@ public class TurnManager : NetworkBehaviour
             endTurnButton.SetActive(true);
         }
     }
+    #endregion
 }
