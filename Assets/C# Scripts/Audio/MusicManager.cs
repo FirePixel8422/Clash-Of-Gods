@@ -44,16 +44,6 @@ public class MusicManager : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
         clipIndex = Random.Range(0, mainMenuClips.Length);
-
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode arg1)
-    {
-        if (scene.name == "MainGame")
-        {
-            ChangeMusicTrack(false, 0.5f);
-        }
     }
 
     public void ChangeMusicTrack(bool mainMenu, float fadeSpeed, int winloseMusic = -1)
@@ -106,7 +96,7 @@ public class MusicManager : MonoBehaviour
         }
 
         StartCoroutine(FadeChangeMusicTrack(clip, fadeSpeed));
-        queNextTrackCO = StartCoroutine(QueNextTracktimer(queClip, queClip.length, mainMenu, winloseMusic));
+        queNextTrackCO = StartCoroutine(QueNextTracktimer(queClip, clip.length, mainMenu, winloseMusic));
     }
 
     private IEnumerator QueNextTracktimer(AudioClip clip, float delay, bool mainMenu, int winloseMusic = -1)

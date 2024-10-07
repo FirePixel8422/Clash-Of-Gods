@@ -430,6 +430,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.65
   dissolveSpeed: 2
+  revertDissolveSpeed: 1.75
   endDisolveValue: -0.8
 --- !u!4 &7252957417636976845 stripped
 Transform:
@@ -499,10 +500,12 @@ MonoBehaviour:
   attackAnimator: {fileID: 837659766498736537}
   rotPoint: {fileID: 0}
   lookAtTransform: {fileID: 0}
+  shootPoint: {fileID: 0}
   towerPreviewRenderer: {fileID: 0}
   rotSpeed: 0
   projectileTransform: {fileID: 0}
   animShootTime: 1
+  lookingAtTarget: 0
 --- !u!95 &7760853491214676331
 Animator:
   serializedVersion: 5
@@ -851,4 +854,5 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.6
   dissolveSpeed: 2
+  revertDissolveSpeed: 1.75
   endDisolveValue: -0.95

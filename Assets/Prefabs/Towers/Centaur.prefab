@@ -5101,6 +5101,7 @@ MonoBehaviour:
   revertDelay: 1
   startDissolveEffectState: 0.55
   dissolveSpeed: 2
+  revertDissolveSpeed: 1.75
   endDisolveValue: -1
 --- !u!1 &4266825974715145108 stripped
 GameObject:
@@ -5124,6 +5125,7 @@ MonoBehaviour:
   revertDelay: 1
   startDissolveEffectState: 0.65
   dissolveSpeed: 2
+  revertDissolveSpeed: 1.75
   endDisolveValue: -1
 --- !u!4 &5779604630732440348 stripped
 Transform:

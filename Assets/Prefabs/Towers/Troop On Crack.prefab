@@ -101,6 +101,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.6
   dissolveSpeed: 2
+  revertDissolveSpeed: 1.75
   endDisolveValue: -1.3
 --- !u!1 &1257667035683625986
 GameObject:
@@ -203,6 +204,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.6
   dissolveSpeed: 2
+  revertDissolveSpeed: 1.75
   endDisolveValue: -1.3
 --- !u!1 &2663679683114936861
 GameObject:
@@ -655,6 +657,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.6
   dissolveSpeed: 2
+  revertDissolveSpeed: 1.75
   endDisolveValue: -1.3
 --- !u!1 &7107600546996544358
 GameObject:
@@ -757,6 +760,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.6
   dissolveSpeed: 2
+  revertDissolveSpeed: 1.75
   endDisolveValue: -1.3
 --- !u!1001 &1123074915512862600
 PrefabInstance:

@@ -83,6 +83,10 @@ public class SettingsManager : NetworkBehaviour
             GameSaveLoadFunctions.Instance.SaveVolume(1, 1, 1);
         }
 
+        if (SceneManager.GetActiveScene().name == "MainGame")
+        {
+            MusicManager.Singleton.ChangeMusicTrack(false, 0.5f);
+        }
         if (SceneManager.GetActiveScene().name == "Marijn")
         {
             MusicManager.Singleton.ChangeMusicTrack(true, 0.5f);
@@ -199,6 +203,7 @@ public class SettingsManager : NetworkBehaviour
     {
         Destroy(GodCore.Instance.gameObject);
         Destroy(GameSaveLoadFunctions.Instance.gameObject);
+        Destroy(LobbyRelay.Instance.gameObject);
         Destroy(NetworkManager.gameObject);
         Destroy(MusicManager.Singleton.gameObject);
 

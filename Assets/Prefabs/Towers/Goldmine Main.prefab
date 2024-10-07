@@ -494,6 +494,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.65
   dissolveSpeed: 2
+  revertDissolveSpeed: 1.75
   endDisolveValue: -1.25
 --- !u!4 &4134030332684826090 stripped
 Transform:
@@ -522,6 +523,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.5
   dissolveSpeed: 0.4
+  revertDissolveSpeed: 0.75
   endDisolveValue: -0.5
 --- !u!1 &5339339646250898404 stripped
 GameObject:
@@ -545,6 +547,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.7
   dissolveSpeed: 0.25
+  revertDissolveSpeed: 0.4
   endDisolveValue: -1.2
 --- !u!1001 &7008233842824526579
 PrefabInstance:

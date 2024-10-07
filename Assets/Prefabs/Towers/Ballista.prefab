@@ -360,7 +360,8 @@ MonoBehaviour:
   towerPreviewRenderer: {fileID: 0}
   rotSpeed: 360
   projectileTransform: {fileID: 0}
-  animShootTime: 1
+  animShootTime: 1.8
+  lookingAtTarget: 0
 --- !u!95 &6033469343024069212
 Animator:
   serializedVersion: 5
@@ -643,6 +644,7 @@ GameObject:
   - component: {fileID: 4631405721343473401}
   - component: {fileID: 8308519259914148318}
   - component: {fileID: 7524703034886826496}
+  - component: {fileID: 5401026584217571243}
   m_Layer: 0
   m_Name: Cube.001
   m_TagString: Untagged
@@ -715,6 +717,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &5401026584217571243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2084609824874840015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7484502d80ba5c4c921a8fb469f952f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dissolveMaterial: {fileID: 0}
+  startDelay: 0
+  revertDelay: 0
+  startDissolveEffectState: 0.7
+  dissolveSpeed: 2
+  revertDissolveSpeed: 1.75
+  endDisolveValue: -0.9
 --- !u!1 &2119128477934551557
 GameObject:
   m_ObjectHideFlags: 0
@@ -821,6 +842,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7422273934399053939}
   - component: {fileID: 8730213944957140923}
+  - component: {fileID: 5467095768210000675}
   m_Layer: 0
   m_Name: Cube.003
   m_TagString: Untagged
@@ -918,6 +940,25 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.0005251141, y: -0.008100076, z: 9.313226e-10}
     m_Extent: {x: 0.0016049298, y: 0.0094900485, z: 0.014603514}
   m_DirtyAABB: 0
+--- !u!114 &5467095768210000675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2619722721769964488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7484502d80ba5c4c921a8fb469f952f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dissolveMaterial: {fileID: 0}
+  startDelay: 0
+  revertDelay: 0
+  startDissolveEffectState: 0.7
+  dissolveSpeed: 2
+  revertDissolveSpeed: 1.75
+  endDisolveValue: -0.9
 --- !u!1 &2803383567909061747
 GameObject:
   m_ObjectHideFlags: 0
@@ -1306,6 +1347,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6842888485166270352}
   - component: {fileID: 8703487166615526453}
+  - component: {fileID: 5280037627731980075}
   m_Layer: 0
   m_Name: Spear Mesh
   m_TagString: Untagged
@@ -1403,6 +1445,25 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.0006410271, y: 0.0063658915, z: -0.000018272374}
     m_Extent: {x: 0.0001792282, y: 0.010204768, z: 0.00066539994}
   m_DirtyAABB: 0
+--- !u!114 &5280037627731980075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7209690839017926612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7484502d80ba5c4c921a8fb469f952f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dissolveMaterial: {fileID: 0}
+  startDelay: 0.65
+  revertDelay: 0
+  startDissolveEffectState: 0.65
+  dissolveSpeed: 2
+  revertDissolveSpeed: 1.75
+  endDisolveValue: -0.85
 --- !u!1 &7551278828742188952
 GameObject:
   m_ObjectHideFlags: 0

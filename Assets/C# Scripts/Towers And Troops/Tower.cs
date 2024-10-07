@@ -57,6 +57,8 @@ public class Tower : TowerCore
 
         anim.SetTrigger("Attack");
 
+        yield return new WaitUntil(() => lookingAtTarget == true || rotPoint == null);
+
         yield return new WaitForSeconds(animShootTime);
 
         if (target != null)
@@ -67,6 +69,7 @@ public class Tower : TowerCore
 
 
 
+    public bool lookingAtTarget;
 
     private IEnumerator LookAtTarget_UpdateLoop()
     {
@@ -80,6 +83,8 @@ public class Tower : TowerCore
             Quaternion targetRotation = Quaternion.LookRotation(direction);
 
             rotPoint.rotation = Quaternion.RotateTowards(rotPoint.rotation, targetRotation, rotSpeed * Time.deltaTime);
+
+            lookingAtTarget = Quaternion.Angle(rotPoint.rotation, targetRotation) < 0.001f;
 
             SyncYRotationServerRPC(rotPoint.rotation);
         }

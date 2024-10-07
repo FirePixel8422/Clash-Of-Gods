@@ -2180,7 +2180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2664,7 +2664,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 8704379221742568061}
         m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
         m_MethodName: QuitToMainMenu
         m_Mode: 1
@@ -2741,6 +2741,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.5
   dissolveSpeed: 0.2
+  revertDissolveSpeed: 0
   endDisolveValue: -1
 --- !u!1 &216255325
 GameObject:
@@ -4797,6 +4798,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: -0.7
   dissolveSpeed: 0.2
+  revertDissolveSpeed: 0
   endDisolveValue: 0.55
 --- !u!114 &310332337
 MonoBehaviour:
@@ -4815,6 +4817,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.6
   dissolveSpeed: 0.2
+  revertDissolveSpeed: 0
   endDisolveValue: -0.9
 --- !u!1 &325034594
 GameObject:
@@ -5102,7 +5105,8 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.5
   dissolveSpeed: 0.2
-  endDisolveValue: -1.1
+  revertDissolveSpeed: 0
+  endDisolveValue: -1.15
 --- !u!114 &330805389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5120,6 +5124,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.6
   dissolveSpeed: 0.2
+  revertDissolveSpeed: 0
   endDisolveValue: -1.1
 --- !u!114 &330805390
 MonoBehaviour:
@@ -6728,6 +6733,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.5
   dissolveSpeed: 0.2
+  revertDissolveSpeed: 0
   endDisolveValue: -1
 --- !u!1001 &473377844
 PrefabInstance:
@@ -7914,6 +7920,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0
   dissolveSpeed: 0
+  revertDissolveSpeed: 0
   endDisolveValue: 0
 --- !u!1001 &580448340
 PrefabInstance:
@@ -8133,6 +8140,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.5
   dissolveSpeed: 0.2
+  revertDissolveSpeed: 0
   endDisolveValue: -1
 --- !u!1001 &598878202
 PrefabInstance:
@@ -8213,6 +8221,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.5
   dissolveSpeed: 0.2
+  revertDissolveSpeed: 0
   endDisolveValue: -1
 --- !u!1 &603325552
 GameObject:
@@ -8805,7 +8814,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -10151,6 +10160,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.5
   dissolveSpeed: 0.2
+  revertDissolveSpeed: 0
   endDisolveValue: -1
 --- !u!1001 &746889724
 PrefabInstance:
@@ -12954,6 +12964,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.5
   dissolveSpeed: 0.2
+  revertDissolveSpeed: 0
   endDisolveValue: -1
 --- !u!1 &939398618
 GameObject:
@@ -13639,6 +13650,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.5
   dissolveSpeed: 0.2
+  revertDissolveSpeed: 0
   endDisolveValue: -1
 --- !u!1 &1015244952
 GameObject:
@@ -14408,6 +14420,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.5
   dissolveSpeed: 0.2
+  revertDissolveSpeed: 0
   endDisolveValue: -1
 --- !u!1 &1050301321
 GameObject:
@@ -15510,6 +15523,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.5
   dissolveSpeed: 0.2
+  revertDissolveSpeed: 0
   endDisolveValue: -1
 --- !u!1001 &1188536211
 PrefabInstance:
@@ -16647,6 +16661,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.5
   dissolveSpeed: 0.2
+  revertDissolveSpeed: 0
   endDisolveValue: -1
 --- !u!1 &1242467718
 GameObject:
@@ -17559,7 +17574,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -18712,6 +18727,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.5
   dissolveSpeed: 0.2
+  revertDissolveSpeed: 0
   endDisolveValue: -1
 --- !u!4 &1393741839 stripped
 Transform:
@@ -19064,6 +19080,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.5
   dissolveSpeed: 0.2
+  revertDissolveSpeed: 0
   endDisolveValue: -1
 --- !u!1 &1406207802
 GameObject:
@@ -19410,6 +19427,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.5
   dissolveSpeed: 0.2
+  revertDissolveSpeed: 0
   endDisolveValue: -1
 --- !u!1001 &1431283384
 PrefabInstance:
@@ -20044,6 +20062,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.5
   dissolveSpeed: 0.2
+  revertDissolveSpeed: 0
   endDisolveValue: -1
 --- !u!1 &1491989718
 GameObject:
@@ -20434,6 +20453,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.5
   dissolveSpeed: 0.2
+  revertDissolveSpeed: 0
   endDisolveValue: -1
 --- !u!1001 &1515435856
 PrefabInstance:
@@ -21205,6 +21225,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.5
   dissolveSpeed: 0.2
+  revertDissolveSpeed: 0
   endDisolveValue: -1
 --- !u!1 &1586017047
 GameObject:
@@ -22110,6 +22131,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.5
   dissolveSpeed: 0.2
+  revertDissolveSpeed: 0
   endDisolveValue: -1
 --- !u!1001 &1653065635
 PrefabInstance:
@@ -23231,6 +23253,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.5
   dissolveSpeed: 0.2
+  revertDissolveSpeed: 0
   endDisolveValue: -1
 --- !u!1001 &1802368991
 PrefabInstance:
@@ -23376,6 +23399,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.5
   dissolveSpeed: 0.2
+  revertDissolveSpeed: 0
   endDisolveValue: -1
 --- !u!1001 &1804925298
 PrefabInstance:
@@ -24086,6 +24110,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.5
   dissolveSpeed: 0.2
+  revertDissolveSpeed: 0
   endDisolveValue: -1
 --- !u!1001 &1856140826
 PrefabInstance:
@@ -24311,6 +24336,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.5
   dissolveSpeed: 0.2
+  revertDissolveSpeed: 0
   endDisolveValue: -1
 --- !u!1 &1899629403
 GameObject:
@@ -25192,6 +25218,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.5
   dissolveSpeed: 0.2
+  revertDissolveSpeed: 0
   endDisolveValue: -1
 --- !u!1001 &1954013008
 PrefabInstance:
@@ -25277,6 +25304,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.5
   dissolveSpeed: 0.2
+  revertDissolveSpeed: 0
   endDisolveValue: -1
 --- !u!1 &1970675876
 GameObject:
@@ -25517,6 +25545,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.5
   dissolveSpeed: 0.2
+  revertDissolveSpeed: 0
   endDisolveValue: -1
 --- !u!1 &1990757641 stripped
 GameObject:
@@ -25779,6 +25808,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.5
   dissolveSpeed: 0.2
+  revertDissolveSpeed: 0
   endDisolveValue: -1
 --- !u!4 &2009822036 stripped
 Transform:
@@ -25802,6 +25832,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.5
   dissolveSpeed: 0.2
+  revertDissolveSpeed: 0
   endDisolveValue: -1
 --- !u!1 &2012498769
 GameObject:
@@ -25985,6 +26016,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.5
   dissolveSpeed: 0.2
+  revertDissolveSpeed: 0
   endDisolveValue: -1
 --- !u!1 &2042812044 stripped
 GameObject:
@@ -26008,6 +26040,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.5
   dissolveSpeed: 0.2
+  revertDissolveSpeed: 0
   endDisolveValue: -1
 --- !u!1 &2044674385 stripped
 GameObject:
@@ -26031,6 +26064,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.5
   dissolveSpeed: 0.2
+  revertDissolveSpeed: 0
   endDisolveValue: -1
 --- !u!4 &2061308925 stripped
 Transform:
@@ -26054,6 +26088,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.5
   dissolveSpeed: 0.2
+  revertDissolveSpeed: 0
   endDisolveValue: -1
 --- !u!1 &2078781226
 GameObject:
@@ -26575,6 +26610,7 @@ MonoBehaviour:
   revertDelay: 0
   startDissolveEffectState: 0.5
   dissolveSpeed: 0.2
+  revertDissolveSpeed: 0
   endDisolveValue: -1
 --- !u!1001 &2124050966
 PrefabInstance:

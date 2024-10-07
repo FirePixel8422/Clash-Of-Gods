@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 
@@ -9,11 +10,19 @@ public class DissolveController : MonoBehaviour
     public Material dissolveMaterial;
 
     private float cDissolveEffectState;
+
     public float startDelay;
     public float revertDelay;
+
     public float startDissolveEffectState;
+
     public float dissolveSpeed;
+    public float revertDissolveSpeed;
+
     public float endDisolveValue;
+
+    protected UnityEvent onDissolveComplete;
+    protected UnityEvent onRevertDissolveComplete;
 
 
 
@@ -34,19 +43,23 @@ public class DissolveController : MonoBehaviour
         }
 
         dissolveMaterial.SetVector(Shader.PropertyToID("_NoiseOffset"), new Vector2(Random.Range(-100f, 100f), Random.Range(-100f, 100f)));
+
+        onDissolveComplete = new UnityEvent();
+        onRevertDissolveComplete = new UnityEvent();
     }
+
     public void StartDissolve(TowerCore core = null)
     {
         dissolveMaterial = GetComponent<Renderer>().material;
         StartCoroutine(Dissolve(core));
     }
-    public void Revert(TowerCore core)
+    public void Revert(TowerCore core = null)
     {
         StartCoroutine(RevertDissolve(core));
     }
 
 
-    private IEnumerator Dissolve(TowerCore core)
+    protected IEnumerator Dissolve(TowerCore core = null)
     {
         dissolveMaterial.SetFloat("_Disolve_Active", startDissolveEffectState);
         yield return new WaitForSeconds(startDelay);
@@ -58,22 +71,35 @@ public class DissolveController : MonoBehaviour
             cDissolveEffectState -= Time.deltaTime * dissolveSpeed;
             dissolveMaterial.SetFloat("_Disolve_Active", cDissolveEffectState);
         }
+        cDissolveEffectState = Mathf.Clamp(cDissolveEffectState, endDisolveValue, startDissolveEffectState);
+        dissolveMaterial.SetFloat("_Disolve_Active", cDissolveEffectState);
+
+        onDissolveComplete.Invoke();
+
         if (core != null)
         {
             core.DissolveCompleted();
         }
     }
-    private IEnumerator RevertDissolve(TowerCore core)
+    protected IEnumerator RevertDissolve(TowerCore core = null)
     {
         yield return new WaitForSeconds(revertDelay);
 
         while (cDissolveEffectState < startDissolveEffectState)
         {
             yield return null;
-            cDissolveEffectState += Time.deltaTime * dissolveSpeed;
+            cDissolveEffectState += Time.deltaTime * revertDissolveSpeed;
             dissolveMaterial.SetFloat("_Disolve_Active", cDissolveEffectState);
         }
-        core.RevertCompleted();
+        cDissolveEffectState = Mathf.Clamp(cDissolveEffectState, endDisolveValue, startDissolveEffectState);
+        dissolveMaterial.SetFloat("_Disolve_Active", cDissolveEffectState);
+
+        onRevertDissolveComplete.Invoke();
+
+        if (core != null)
+        {
+            core.RevertCompleted();
+        }
     }
 
     public void RevertPercent(float percent)

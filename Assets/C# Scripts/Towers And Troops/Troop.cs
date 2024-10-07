@@ -110,17 +110,11 @@ public class Troop : TowerCore
 
         yield return new WaitForSeconds(attackAnimationTime);
 
-        direction = (towerStartpos - transform.position).normalized;
-        targetRotation = Quaternion.LookRotation(direction);
-
-        while (Vector3.Distance(transform.position, towerStartpos) > 0.0001f && Quaternion.Angle(transform.rotation, targetRotation) > 0.0001f)
+        while (Vector3.Distance(transform.position, towerStartpos) > 0.0001f)
         {
             yield return null;
 
             transform.position = VectorLogic.InstantMoveTowards(transform.position, towerStartpos, animatedMoveSpeed * Time.deltaTime);
-
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, animatedRotSpeed * Time.deltaTime);
-            selectStateAnim.transform.rotation = Quaternion.identity;
         }
 
 
@@ -180,6 +174,18 @@ public class Troop : TowerCore
 
         Vector3 newPos = GridManager.Instance.GetGridData(newGridPos).worldPos;
         newPos = new Vector3(newPos.x, transform.position.y, newPos.z);
+
+
+        Vector3 direction = (newPos - transform.position).normalized;
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+
+        while (Quaternion.Angle(transform.rotation, targetRotation) > 0.0001f)
+        {
+            yield return null;
+
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, animatedRotSpeed * Time.deltaTime);
+            selectStateAnim.transform.rotation = Quaternion.identity;
+        }
 
         while (Vector3.Distance(transform.position, newPos) > 0.001f)
         {
