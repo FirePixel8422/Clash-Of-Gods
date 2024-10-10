@@ -8,12 +8,11 @@ public class HealthBar : NetworkBehaviour
     public Transform healthBar;
     public Transform healthBarDamage;
 
-    private float fullHealthScaleX;
-    public float noHealthPosX;
+    private Vector3 initialScale;
+    private Vector3 initialPosition;
 
     public float damageAnimationScaleSpeed;
     public float damageAnimationPosSpeed;
-
 
     private float maxHealth;
     private float health;
@@ -21,7 +20,8 @@ public class HealthBar : NetworkBehaviour
 
     private void Start()
     {
-        fullHealthScaleX = healthBar.localScale.x;
+        initialScale = healthBar.localScale;
+        initialPosition = healthBar.position;
 
         maxHealth = GetComponentInParent<TowerCore>().health;
         health = maxHealth;
@@ -69,11 +69,17 @@ public class HealthBar : NetworkBehaviour
     {
         health = healthLeft;
 
-        Vector3 localScale = healthBar.localScale;
-        Vector3 localPos = healthBar.localPosition;
+        float healthPercentage = health / maxHealth;
 
-        healthBar.localScale = new Vector3(fullHealthScaleX * (health / maxHealth), localScale.y, localScale.z);
-        healthBar.localPosition = new Vector3(noHealthPosX * (1 - health / maxHealth), localPos.y, localPos.z);
+        Vector3 newScale = initialScale;
+        newScale.x = initialScale.x * healthPercentage;
+
+        healthBar.localScale = newScale;
+
+
+        float offsetX = (initialScale.x - newScale.x) / 2.0f;
+        healthBar.position = new Vector3(initialPosition.x - offsetX, initialPosition.y, initialPosition.z);
+    
 
         while (Vector3.Distance(healthBarDamage.localScale, healthBar.localScale) > 0.0001f || Vector3.Distance(healthBarDamage.localPosition, healthBar.localPosition) > 0.0001f)
         {

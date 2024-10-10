@@ -125,7 +125,7 @@ Material:
     - _Metallic: 0
     - _Metallic_Smoothness: 0.5
     - _Noise_Scale: 50
-    - _Normal_Strength: 3
+    - _Normal_Strength: 2
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _Preview: 0

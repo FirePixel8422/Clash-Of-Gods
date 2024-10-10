@@ -53,11 +53,6 @@ public class ChainLightning : MonoBehaviour
             rotTransform.position = targetRotation * coneOffset;
         }
         prevPos = transform.position;
-
-        if(Input.GetKeyDown(KeyCode.O))
-        {
-            Init();
-        }
     }
 
 

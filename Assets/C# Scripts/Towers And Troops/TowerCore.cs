@@ -35,6 +35,8 @@ public class TowerCore : NetworkBehaviour
 
     public Animator selectStateAnim;
 
+    private HealthBar healthBar;
+
 
     [HideInInspector]
     public List<TowerCore> targets;
@@ -62,6 +64,10 @@ public class TowerCore : NetworkBehaviour
     public virtual void CoreInit()
     {
         TurnManager.Instance.OnMyTurnStartedEvent.AddListener(() => GrantTurn());
+        if (GodCore.Instance.IsHades == false)
+        {
+            TurnManager.Instance.OnTurnChangedEvent.AddListener(() => TurnChanged());
+        }
 
         underAttackArrowRenderer = underAttackArrowAnim.GetComponentInChildren<MeshRenderer>();
         underAttackArrowColors.Add(PlacementManager.Instance.playerColors[NetworkObject.OwnerClientId]);
@@ -73,6 +79,8 @@ public class TowerCore : NetworkBehaviour
 
         anim = GetComponent<Animator>();
 
+        healthBar = GetComponent<HealthBar>();
+
         dissolves = GetComponentsInChildren<DissolveController>();
 
         amountOfDissolves = dissolves.Length;
@@ -83,6 +91,8 @@ public class TowerCore : NetworkBehaviour
 
         OnSetupTower();
     }
+
+
     protected virtual void OnSetupTower()
     {
         return;
@@ -208,6 +218,14 @@ public class TowerCore : NetworkBehaviour
         return;
     }
 
+    public void TurnChanged()
+    {
+        if (GridManager.Instance.GridObjectFromWorldPoint(transform.position).onFire > 0)
+        {
+            GetAttacked(GodCore.Instance.fireDamage, false);
+        }
+    }
+
     public void LoseAction()
     {
         actionsLeft -= 1;
@@ -313,6 +331,12 @@ public class TowerCore : NetworkBehaviour
 
         health -= dmg;
         stunned = stun;
+
+        if (healthBar != null)
+        {
+            healthBar.UpdateHealthBar(Mathf.Clamp(health, 0, int.MaxValue));
+        }
+
 
         underAttackArrowAnim.SetBool("Enabled", false);
 

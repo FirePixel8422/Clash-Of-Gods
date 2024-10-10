@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
@@ -42,6 +43,7 @@ public class GodCore : NetworkBehaviour
         return false;
     }
 
+    public int fireDamage;
     public bool IsHades
     {
         get

@@ -13,7 +13,7 @@ public class Random90Rotation : MonoBehaviour
 
         for (int i = 0; i < transforms.Count; i++)
         {
-            transform.rotation = Quaternion.Euler(0, 90 * Random.Range(0, 4), 0);
+            transforms[i].rotation = Quaternion.Euler(0, 90 * Random.Range(0, 4), 0);
         }
     }
 }

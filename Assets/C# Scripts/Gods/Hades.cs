@@ -396,8 +396,8 @@ public class Hades : GodCore
         {
             new Vector2Int(1, 0),
             new Vector2Int(-1, 0),
-            new Vector2Int(1, 1),
-            new Vector2Int(1, -1),
+            new Vector2Int(0, 1),
+            new Vector2Int(0, -1),
         };
 
         Vector2Int targetGridPos;
@@ -421,7 +421,7 @@ public class Hades : GodCore
         GridTile tile = GridManager.Instance.GetGridData(gridPos).tile;
         if (tile != null)
         {
-            tile.SetOnFire(addedState * 2);
+            tile.SetOnFire(addedState * 3);
         }
 
         GridManager.Instance.UpdateGridDataOnFireState(gridPos, addedState);

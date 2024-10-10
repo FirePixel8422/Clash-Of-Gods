@@ -10,9 +10,11 @@ public class GridTile : MonoBehaviour
     [ColorUsage(true, true)]
     public Color[] onFireColors;
 
-    public float colorSwapSpeed;
+    public float colorSwapTime;
 
     public int fireAmount;
+
+    private Coroutine changeColorCO;
 
 
     private void Start()
@@ -26,20 +28,35 @@ public class GridTile : MonoBehaviour
     {
         fireAmount += amount;
 
-        
 
+        if (changeColorCO != null)
+        {
+            StopCoroutine(changeColorCO);
+        }
 
+        changeColorCO = StartCoroutine(ChangeColor(onFireColors[Mathf.Clamp(fireAmount, 0, onFireColors.Length - 1)]));
     }
+
+
+
     [ColorUsage(true, true)]
     private Color color;
 
-    private IEnumerator ChangeColor()
+    private IEnumerator ChangeColor(Color targetColor)
     {
-        while (true)
+        float elapsedTime = 0;
+
+        while (color != targetColor)
         {
             yield return null;
 
-            color = Color.Lerp(color, onFireColors[Mathf.Clamp(fireAmount, 0, onFireColors.Length)], colorSwapSpeed * Time.deltaTime);
+            elapsedTime += Time.deltaTime;
+
+            // Calculate the interpolation factor (clamped to the range [0, 1])
+            float t = Mathf.Clamp01(elapsedTime / colorSwapTime);
+
+
+            color = Color.Lerp(color, targetColor, t * Time.deltaTime);
 
             mat.SetColor("_Emission_Color", color);
         }
