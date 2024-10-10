@@ -122,7 +122,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _GlowPower: 4.4
+    - _GlowPower: 3.36
     - _Metalic_Value: 0
     - _Metallic: 0
     - _Metallic_Smoothness: 0.5
