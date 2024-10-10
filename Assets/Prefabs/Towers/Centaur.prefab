@@ -5102,7 +5102,7 @@ MonoBehaviour:
   startDissolveEffectState: 0.55
   dissolveSpeed: 2
   revertDissolveSpeed: 1.75
-  endDisolveValue: -1
+  endDisolveValue: -1.1
 --- !u!1 &4266825974715145108 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -1402535755461312669, guid: 74cd49ffe73d98e42b0fbc817d60215f, type: 3}

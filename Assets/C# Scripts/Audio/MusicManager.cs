@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.iOS;
 using UnityEngine.SceneManagement;
 
 public class MusicManager : MonoBehaviour
@@ -30,20 +31,21 @@ public class MusicManager : MonoBehaviour
 
     private Coroutine queNextTrackCO;
 
+    public float currentVolume;
+
 
     public void UpdateVolume(float main, float sfx, float music)
     {
-        musicPlayer.volume = main;
-        musicPlayer.volume *= music;
-        musicPlayerAlt.volume = main;
-        musicPlayerAlt.volume *= music;
+        currentVolume = main * music;
+
+        musicPlayer.volume = currentVolume;
+        musicPlayerAlt.volume = currentVolume;
     }
 
 
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
-        clipIndex = Random.Range(0, mainMenuClips.Length);
     }
 
     public void ChangeMusicTrack(bool mainMenu, float fadeSpeed, int winloseMusic = -1)
@@ -104,16 +106,17 @@ public class MusicManager : MonoBehaviour
         yield return new WaitForSeconds(delay - 0.5f);
         StartCoroutine(FadeChangeMusicTrack(clip, 0.5f));
 
+        AudioClip queClip;
 
         if (winloseMusic != -1)
         {
             if (winloseMusic == 1)
             {
-                clip = winMusicClip;
+                queClip = winMusicClip;
             }
             else
             {
-                clip = loseMusicClip;
+                queClip = loseMusicClip;
             }
         }
         else if (mainMenu)
@@ -124,7 +127,7 @@ public class MusicManager : MonoBehaviour
                 clipIndex = 0;
             }
 
-            clip = mainMenuClips[clipIndex];
+            queClip = mainMenuClips[clipIndex];
         }
         else
         {
@@ -134,9 +137,9 @@ public class MusicManager : MonoBehaviour
                 clipIndex = 0;
             }
 
-            clip = battleFieldClips[clipIndex];
+            queClip = battleFieldClips[clipIndex];
         }
-        queNextTrackCO = StartCoroutine(QueNextTracktimer(clip, clip.length, mainMenu, winloseMusic)); ;
+        queNextTrackCO = StartCoroutine(QueNextTracktimer(queClip, clip.length, mainMenu, winloseMusic)); ;
     }
 
     private IEnumerator FadeChangeMusicTrack(AudioClip audioClip, float fadeSpeed)
@@ -149,9 +152,9 @@ public class MusicManager : MonoBehaviour
 
         while (currentSource.volume > 0)
         {
-            currentSource.volume -= fadeSpeed * 0.05f;
-            altSource.volume += fadeSpeed * 0.05f;
-            yield return new WaitForSeconds(0.05f);
+            currentSource.volume = Mathf.MoveTowards(currentSource.volume, 0, fadeSpeed * Time.deltaTime);
+            altSource.volume = Mathf.MoveTowards(altSource.volume, currentVolume, fadeSpeed * Time.deltaTime);
+            yield return null;
         }
 
         currentSource.Stop();

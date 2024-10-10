@@ -9,6 +9,8 @@ public struct GridObjectData
 
     public TowerCore tower;
 
+    public GridTile tile;
+
     public bool full;
 
     public int onFire;

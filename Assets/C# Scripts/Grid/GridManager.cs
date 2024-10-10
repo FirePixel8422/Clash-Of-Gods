@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 
 public class GridManager : NetworkBehaviour
@@ -160,14 +161,20 @@ public class GridManager : NetworkBehaviour
     {
         grid[gridPos.x, gridPos.y].full = newState;
     }
-    public void UpdateGridDataOnFireState(Vector2Int gridPos, bool newState)
+    public void UpdateGridDataOnFireState(Vector2Int gridPos, int addedState)
     {
-        grid[gridPos.x, gridPos.y].onFire += newState ? 1 : -1;
+        grid[gridPos.x, gridPos.y].onFire += addedState;
     }
     public void UpdateGridDataType(Vector2Int gridPos, int type)
     {
         grid[gridPos.x, gridPos.y].type = type;
     }
+
+    public void UpdateGridDataTile(Vector2Int gridPos, GridTile tile)
+    {
+        grid[gridPos.x, gridPos.y].tile = tile;
+    }
+
     public void ResetGridDataFieldType(Vector2Int gridPos)
     {
         grid[gridPos.x, gridPos.y].type = grid[gridPos.x, gridPos.y].coreType;

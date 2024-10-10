@@ -445,7 +445,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.9273514, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 30.999878, y: -4}
+  m_AnchoredPosition: {x: 30.999847, y: -4}
   m_SizeDelta: {x: 62, y: 26}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &14008610
@@ -13450,6 +13450,7 @@ MonoBehaviour:
   clipIndex: 0
   winMusicClip: {fileID: 8300000, guid: b992fe430a851e642a81c90e9b0124fb, type: 3}
   loseMusicClip: {fileID: 8300000, guid: e3ce5af33e8503645b54ac121c52ea33, type: 3}
+  currentVolume: 0
 --- !u!4 &1540229144
 Transform:
   m_ObjectHideFlags: 0
@@ -18142,6 +18143,7 @@ MonoBehaviour:
     gridPos: {x: 0, y: 0}
     worldPos: {x: 0, y: 0, z: 0}
     tower: {fileID: 0}
+    tile: {fileID: 0}
     full: 0
     onFire: 0
     coreType: 0
@@ -18836,7 +18838,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2993827894282270830}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e238107c143a4cf4ab1e10cbea121441, type: 3}
   m_Name: 
@@ -18869,6 +18871,7 @@ MonoBehaviour:
     gridPos: {x: 0, y: 0}
     worldPos: {x: 0, y: 0, z: 0}
     tower: {fileID: 0}
+    tile: {fileID: 0}
     full: 0
     onFire: 0
     coreType: 0

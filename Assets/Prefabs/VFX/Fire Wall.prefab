@@ -129,7 +129,7 @@ VisualEffect:
         m_Overridden: 1
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 22.339624, y: 3.5145366, z: 1.306656, w: 1}
+      - m_Value: {x: 14.807843, y: 1.2423552, z: 0.75294137, w: 1}
         m_Name: Color
         m_Overridden: 1
       - m_Value: {x: 0.07450981, y: 0.07058824, z: 0.10980392, w: 1}
@@ -318,7 +318,7 @@ VisualEffect:
         m_Overridden: 1
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 22.339624, y: 3.5145366, z: 1.306656, w: 1}
+      - m_Value: {x: 14.807843, y: 1.2423552, z: 0.75294137, w: 1}
         m_Name: Color
         m_Overridden: 1
       - m_Value: {x: 0.07450981, y: 0.07058824, z: 0.10980392, w: 1}
@@ -507,7 +507,7 @@ VisualEffect:
         m_Overridden: 1
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 22.339624, y: 3.5145366, z: 1.306656, w: 1}
+      - m_Value: {x: 14.807843, y: 1.2423552, z: 0.75294137, w: 1}
         m_Name: Color
         m_Overridden: 1
       - m_Value: {x: 0.07450981, y: 0.07058824, z: 0.10980392, w: 1}
@@ -616,7 +616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
+  GlobalObjectIdHash: 3425252714
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -754,7 +754,7 @@ VisualEffect:
         m_Overridden: 1
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 22.339624, y: 3.5145366, z: 1.306656, w: 1}
+      - m_Value: {x: 14.807843, y: 1.2423552, z: 0.75294137, w: 1}
         m_Name: Color
         m_Overridden: 1
       - m_Value: {x: 0.07450981, y: 0.07058824, z: 0.10980392, w: 1}
@@ -943,7 +943,7 @@ VisualEffect:
         m_Overridden: 1
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 22.339624, y: 3.5145366, z: 1.306656, w: 1}
+      - m_Value: {x: 14.807843, y: 1.2423552, z: 0.75294137, w: 1}
         m_Name: Color
         m_Overridden: 1
       - m_Value: {x: 0.07450981, y: 0.07058824, z: 0.10980392, w: 1}

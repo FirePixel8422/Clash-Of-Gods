@@ -74,7 +74,7 @@ public class SettingsManager : NetworkBehaviour
 
             audioControllers = FindObjectsOfType<AudioController>().ToList();
 
-            UpdateVolume();
+            UpdateVolume(true);
         }
         else
         {
@@ -85,10 +85,12 @@ public class SettingsManager : NetworkBehaviour
 
         if (SceneManager.GetActiveScene().name == "MainGame")
         {
+            MusicManager.Singleton.clipIndex = Random.Range(0, MusicManager.Singleton.battleFieldClips.Length);
             MusicManager.Singleton.ChangeMusicTrack(false, 0.5f);
         }
         if (SceneManager.GetActiveScene().name == "Marijn")
         {
+            MusicManager.Singleton.clipIndex = Random.Range(0, MusicManager.Singleton.mainMenuClips.Length);
             MusicManager.Singleton.ChangeMusicTrack(true, 0.5f);
         }
 

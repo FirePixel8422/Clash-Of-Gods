@@ -150,8 +150,8 @@ public class Hades : GodCore
             {
                 fireEffectList[i].Stop();
 
-                GridManager.Instance.UpdateGridDataOnFireState(fireEffectGridPosList[i], false);
-                SetFireState_ClientRPC(fireEffectGridPosList[i], false);
+                GridManager.Instance.UpdateGridDataOnFireState(fireEffectGridPosList[i], -1);
+                SetFireState_ClientRPC(fireEffectGridPosList[i], -1);
 
                 StartCoroutine(DestroyDelay(fireEffectList[i].GetComponent<NetworkObject>()));
 
@@ -209,8 +209,8 @@ public class Hades : GodCore
                 fireEffectLifeTimeList.Add(fireLifeTime);
 
 
-                GridManager.Instance.UpdateGridDataOnFireState(gridTilesOwnField[rTile].gridPos, true);
-                SetFireState_ClientRPC(gridTilesOwnField[rTile].gridPos, true);
+                GridManager.Instance.UpdateGridDataOnFireState(gridTilesOwnField[rTile].gridPos, 1);
+                SetFireState_ClientRPC(gridTilesOwnField[rTile].gridPos, 1);
 
                 break;
             }
@@ -346,13 +346,13 @@ public class Hades : GodCore
                 }
                 
 
-                GridManager.Instance.UpdateGridDataOnFireState(fireWallEffectGridPosList[i], false);
-                GridManager.Instance.UpdateGridDataOnFireState(fireWallEffectGridPosList[i] + Vector2Int.up, false);
-                GridManager.Instance.UpdateGridDataOnFireState(fireWallEffectGridPosList[i] + Vector2Int.down, false);
+                GridManager.Instance.UpdateGridDataOnFireState(fireWallEffectGridPosList[i], -1);
+                GridManager.Instance.UpdateGridDataOnFireState(fireWallEffectGridPosList[i] + Vector2Int.up, -1);
+                GridManager.Instance.UpdateGridDataOnFireState(fireWallEffectGridPosList[i] + Vector2Int.down, -1);
 
-                SetFireState_ClientRPC(fireWallEffectGridPosList[i], false);
-                SetFireState_ClientRPC(fireWallEffectGridPosList[i] + Vector2Int.up, false);
-                SetFireState_ClientRPC(fireWallEffectGridPosList[i] + Vector2Int.down, false);
+                SetFireState_ClientRPC(fireWallEffectGridPosList[i], -1);
+                SetFireState_ClientRPC(fireWallEffectGridPosList[i] + Vector2Int.up, -1);
+                SetFireState_ClientRPC(fireWallEffectGridPosList[i] + Vector2Int.down, -1);
 
                 StartCoroutine(DestroyDelay(fireWallEffectList[i].GetComponent<NetworkObject>()));
 
@@ -381,17 +381,49 @@ public class Hades : GodCore
         fireWallEffectLifeTimeList.Add(fireWallLifeTime);
 
 
-        SetFireState_ClientRPC(gridPos, true);
-        SetFireState_ClientRPC(gridPos + Vector2Int.up, true);
-        SetFireState_ClientRPC(gridPos + Vector2Int.down, true);
+        SetFireState_ClientRPC(gridPos, 1);
+        SetFireState_ClientRPC(gridPos + Vector2Int.up, 1);
+        SetFireState_ClientRPC(gridPos + Vector2Int.down, 1);
     }
     #endregion
 
 
 
     [ClientRpc(RequireOwnership = false)]
-    private void SetFireState_ClientRPC(Vector2Int gridPos, bool newState)
+    private void SetFireState_ClientRPC(Vector2Int gridPos, int addedState)
     {
-        GridManager.Instance.UpdateGridDataOnFireState(gridPos, newState);
+        Vector2Int[] gridOffsets = new Vector2Int[4]
+        {
+            new Vector2Int(1, 0),
+            new Vector2Int(-1, 0),
+            new Vector2Int(1, 1),
+            new Vector2Int(1, -1),
+        };
+
+        Vector2Int targetGridPos;
+
+        for (int i = 0; i < gridOffsets.Length; i++)
+        {
+            targetGridPos = gridPos + gridOffsets[i];
+
+            if (GridManager.Instance.IsInGrid(targetGridPos) == false)
+            {
+                continue;
+            }
+
+            GridTile directionTile = GridManager.Instance.GetGridData(targetGridPos).tile;
+            if (directionTile != null)
+            {
+                directionTile.SetOnFire(addedState);
+            }
+        }
+
+        GridTile tile = GridManager.Instance.GetGridData(gridPos).tile;
+        if (tile != null)
+        {
+            tile.SetOnFire(addedState * 2);
+        }
+
+        GridManager.Instance.UpdateGridDataOnFireState(gridPos, addedState);
     }
 }

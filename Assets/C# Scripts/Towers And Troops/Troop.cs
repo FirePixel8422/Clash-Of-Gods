@@ -103,7 +103,7 @@ public class Troop : TowerCore
             transform.position = VectorLogic.InstantMoveTowards(transform.position, targetPos, animatedMoveSpeed * Time.deltaTime);
         }
 
-
+        yield return null;
 
 
         anim.SetTrigger("MoveAttack");
