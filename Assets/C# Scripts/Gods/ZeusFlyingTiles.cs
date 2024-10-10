@@ -5,7 +5,7 @@ using Unity.Netcode;
 
 public class ZeusFlyingTiles : NetworkBehaviour
 {
-    public FlyingTilesStats flyingTilesStats;
+    public FlyingTilesStats flyingTilesStats; 
 
 
     public override void OnNetworkSpawn()

@@ -31,7 +31,7 @@ public class ZeusStorm : MonoBehaviour
 
     private IEnumerator LightningLoop()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(2); 
 
 
         while (true)

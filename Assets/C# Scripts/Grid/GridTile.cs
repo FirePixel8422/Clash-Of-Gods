@@ -11,10 +11,10 @@ public class GridTile : MonoBehaviour
     public Color[] onFireColors;
 
     public float colorSwapTime;
+    public float fadeBackMultiplier;
 
     public int fireAmount;
 
-    private Coroutine changeColorCO;
 
 
     private void Start()
@@ -29,12 +29,16 @@ public class GridTile : MonoBehaviour
         fireAmount += amount;
 
 
-        if (changeColorCO != null)
+        StopAllCoroutines();
+
+        float _colorSwapTime = colorSwapTime;
+        if (amount < 0)
         {
-            StopCoroutine(changeColorCO);
+            _colorSwapTime = colorSwapTime * fadeBackMultiplier;
         }
 
-        changeColorCO = StartCoroutine(ChangeColor(onFireColors[Mathf.Clamp(fireAmount, 0, onFireColors.Length - 1)]));
+
+        StartCoroutine(ChangeColor(onFireColors[Mathf.Clamp(fireAmount, 0, onFireColors.Length - 1)], _colorSwapTime));
     }
 
 
@@ -42,7 +46,7 @@ public class GridTile : MonoBehaviour
     [ColorUsage(true, true)]
     private Color color;
 
-    private IEnumerator ChangeColor(Color targetColor)
+    private IEnumerator ChangeColor(Color targetColor, float colorSwapTime)
     {
         float elapsedTime = 0;
 
@@ -56,7 +60,7 @@ public class GridTile : MonoBehaviour
             float t = Mathf.Clamp01(elapsedTime / colorSwapTime);
 
 
-            color = Color.Lerp(color, targetColor, t * Time.deltaTime);
+            color = Color.Lerp(color, targetColor, t);
 
             mat.SetColor("_Emission_Color", color);
         }

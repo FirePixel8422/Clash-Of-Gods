@@ -9,7 +9,7 @@ public class Random90Rotation : MonoBehaviour
     {
         List<Transform> transforms = GetComponentsInChildren<Transform>().ToList();
         transforms.Remove(transform);
-
+        
 
         for (int i = 0; i < transforms.Count; i++)
         {
