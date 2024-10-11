@@ -332,6 +332,11 @@ public class TowerCore : NetworkBehaviour
         health -= dmg;
         stunned = stun;
 
+        if (stunned)
+        {
+            print("STUNNED");
+        }
+
         if (healthBar != null)
         {
             healthBar.UpdateHealthBar(Mathf.Clamp(health, 0, int.MaxValue));

@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2549726467164411500}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -51,7 +51,7 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 1
+      - m_Value: 2.1
         m_Name: Width
         m_Overridden: 1
       - m_Value: 3
@@ -59,6 +59,9 @@ VisualEffect:
         m_Overridden: 1
       - m_Value: 0.6
         m_Name: ImpactOffset
+        m_Overridden: 1
+      - m_Value: 0.4
+        m_Name: ImpactFlashDelay
         m_Overridden: 1
     m_Vector2f:
       m_Array: []
@@ -79,7 +82,42 @@ VisualEffect:
     m_Matrix4x4f:
       m_Array: []
     m_AnimationCurve:
-      m_Array: []
+      m_Array:
+      - m_Value:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 55.872673
+            outSlope: 55.872673
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.043613706
+          - serializedVersion: 3
+            time: 0.25
+            value: 11.5
+            inSlope: 5.1158857
+            outSlope: 0
+            tangentMode: 65
+            weightedMode: 0
+            inWeight: 0.10280377
+            outWeight: 0.07971082
+          - serializedVersion: 3
+            time: 1
+            value: 11.5
+            inSlope: -0
+            outSlope: 4.262718
+            tangentMode: 5
+            weightedMode: 0
+            inWeight: 0.13972904
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        m_Name: LightningScale
+        m_Overridden: 1
     m_Gradient:
       m_Array: []
     m_NamedObject:

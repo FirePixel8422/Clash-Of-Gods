@@ -112,7 +112,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _Disolve_Active: -1.3
+    - _Disolve_Active: -1.2
     - _Dissolve_Width: 0.015
     - _DstBlend: 0
     - _DstBlendAlpha: 0
@@ -124,7 +124,7 @@ Material:
     - _Metalic_Value: 0
     - _Metallic: 0
     - _Metallic_Smoothness: 0.496
-    - _Noise_Scale: 50
+    - _Noise_Scale: 35
     - _Normal_Strength: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.005

@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Cloud mat
-  m_Shader: {fileID: -6465566751694194690, guid: 3ada7c438f29f2d4f81e4eabaefb2be2, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: e43a60a40b71a784d9b1689a9201fe82, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -110,8 +110,8 @@ Material:
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cloud_Density: 1
-    - _Cloud_Speed: 0.001
-    - _Cloud_size: 1200
+    - _Cloud_Speed: 0.0025
+    - _Cloud_size: 500
     - _Color_Alpha: 5
     - _Cull: 2
     - _Cutoff: 0.5
@@ -142,10 +142,11 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Cloud_Height: {r: 0, g: 3, b: 0, a: 0}
-    - _Color: {r: 6.8831797, g: 1.2061485, b: 0, a: 0}
+    - _Color: {r: 0, g: 0.27272704, b: 0.86039764, a: 0}
     - _Color_1: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Movespeed: {r: 0.1, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _Tiling: {r: 350, g: 350, b: 0, a: 0}
+    - _Tilling: {r: 5, g: 10, b: 0, a: 0}
   m_BuildTextureStacks: []

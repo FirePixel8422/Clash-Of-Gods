@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.VFX;
 
 
-public class Hades : GodCore
+public class Hades : NetworkBehaviour
 {
     public Transform fireWallSelectionSprite;
 
@@ -19,9 +19,9 @@ public class Hades : GodCore
     public int fireWallCharges;
     public int fireWallLifeTime;
 
-    public List<GameObject> fireWallEffectList;
-    public List<Vector2Int> fireWallEffectGridPosList;
-    public List<int> fireWallEffectLifeTimeList;
+    private List<GameObject> fireWallEffectList;
+    private List<Vector2Int> fireWallEffectGridPosList;
+    private List<int> fireWallEffectLifeTimeList;
 
 
 
@@ -58,6 +58,11 @@ public class Hades : GodCore
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        if (GodCore.Instance.IsHades == false)
+        {
+            return;
+        }
+
         mainCam = Camera.main;
 
         if(PlacementManager.Instance != null)
@@ -77,7 +82,7 @@ public class Hades : GodCore
 
     public void OnConfirm()
     {
-        if (TurnManager.Instance.isMyTurn == false)
+        if (TurnManager.Instance.isMyTurn == false || GodCore.Instance.IsHades == false)
         {
             return;
         }
@@ -85,11 +90,12 @@ public class Hades : GodCore
         if (usingDefenseAbility)
         {
             Ray ray = mainCam.ScreenPointToRay(mousePos);
-            if (Physics.Raycast(ray, out RaycastHit hitInfo, 100, PlacementManager.Instance.ownFieldLayers + PlacementManager.Instance.neutralLayers))
+            if (Physics.Raycast(ray, 100, PlacementManager.Instance.ownFieldLayers + PlacementManager.Instance.neutralLayers))
             {
                 PlaceFireWall_ServerRPC(fireWallSelectionSprite.position);
 
                 usingDefenseAbility = false;
+                fireWallSelectionSprite.gameObject.SetActive(false);
                 fireWallSelectionSprite.localPosition = Vector3.zero;
             }
         }
@@ -103,8 +109,11 @@ public class Hades : GodCore
         }
 
         usingDefenseAbility = false;
+        fireWallSelectionSprite.gameObject.SetActive(false);
         fireWallSelectionSprite.localPosition = Vector3.zero;
+
         usingOffensiveAbility = false;
+        offensiveSelectionSprite.gameObject.SetActive(false);
         offensiveSelectionSprite.localPosition = Vector3.zero;
     }
 
@@ -117,20 +126,26 @@ public class Hades : GodCore
 
 
     public bool usingDefenseAbility;
-    public override void UseDefensiveAbility()
+    public void UseDefensiveAbility()
     {
         usingDefenseAbility = true;
         usingOffensiveAbility = false;
 
+        fireWallSelectionSprite.gameObject.SetActive(true);
+
+        offensiveSelectionSprite.gameObject.SetActive(false);
         offensiveSelectionSprite.localPosition = Vector3.zero;
     }
 
     public bool usingOffensiveAbility;
-    public override void UseOffensiveAbility()
+    public void UseOffensiveAbility()
     {
         usingOffensiveAbility = true;
         usingDefenseAbility = false;
 
+        offensiveSelectionSprite.gameObject.SetActive(true);
+
+        fireWallSelectionSprite.gameObject.SetActive(false);
         fireWallSelectionSprite.localPosition = Vector3.zero;
     }
 

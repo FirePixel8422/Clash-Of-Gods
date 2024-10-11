@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class Zeus : GodCore
+public class Zeus : NetworkBehaviour
 {
     public Transform defensiveSelectionSprite;
     public Transform offensiveSelectionSprite;
@@ -28,39 +29,46 @@ public class Zeus : GodCore
 
 
 
-    public void OnCancel(InputAction.CallbackContext ctx)
+    public void OnCancel()
     {
         if (TurnManager.Instance.isMyTurn == false)
         {
             return;
         }
 
-        if (ctx.performed)
-        {
-            usingDefenseAbility = false;
-            defensiveSelectionSprite.localPosition = Vector3.zero;
-            usingOffensiveAbility = false;
-            offensiveSelectionSprite.localPosition = Vector3.zero;
-        }
+
+        usingDefenseAbility = false;
+        defensiveSelectionSprite.gameObject.SetActive(false);
+        defensiveSelectionSprite.localPosition = Vector3.zero;
+
+        usingOffensiveAbility = false;
+        offensiveSelectionSprite.gameObject.SetActive(false);
+        offensiveSelectionSprite.localPosition = Vector3.zero;
     }
 
 
 
     public bool usingDefenseAbility;
-    public override void UseDefensiveAbility()
+    public void UseDefensiveAbility()
     {
         usingDefenseAbility = true;
         usingOffensiveAbility = false;
 
+        defensiveSelectionSprite.gameObject.SetActive(false);
+
+        offensiveSelectionSprite.gameObject.SetActive(true);
         offensiveSelectionSprite.localPosition = Vector3.zero;
     }
 
     public bool usingOffensiveAbility;
-    public override void UseOffensiveAbility()
+    public void UseOffensiveAbility()
     {
         usingOffensiveAbility = true;
         usingDefenseAbility = false;
 
+        offensiveSelectionSprite.gameObject.SetActive(false);
+
+        defensiveSelectionSprite.gameObject.SetActive(true);
         defensiveSelectionSprite.localPosition = Vector3.zero;
     }
 

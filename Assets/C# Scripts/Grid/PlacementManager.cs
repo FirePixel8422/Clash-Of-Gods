@@ -418,6 +418,11 @@ public class PlacementManager : NetworkBehaviour
 
             if (isPlacingTower)
             {
+                if (selectedPreviewTower.CompareTag("Goldmine") && (selectedGridTileData.gridPos.x < (GridManager.Instance.gridSizeX / 2 - 4) || selectedGridTileData.gridPos.x > (GridManager.Instance.gridSizeX / 2 + 4)))
+                {
+                    return;
+                }
+
                 if (selectedGridTileData.full == false && selectedGridTileData.type == (int)localClientId && currency >= selectedPreviewTower.cost)
                 {
                     selectedPreviewTower.towerPreviewRenderer.color = new Color(0.7619722f, 0.8740168f, 0.9547169f);

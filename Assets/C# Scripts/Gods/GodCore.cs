@@ -40,6 +40,10 @@ public class GodCore : NetworkBehaviour
             fails -= 1;
             return true;
         }
+        else
+        {
+            fails += 1;
+        }
         return false;
     }
 
@@ -62,15 +66,4 @@ public class GodCore : NetworkBehaviour
 
 
     public God god;
-
-
-    public virtual void UseDefensiveAbility()
-    {
-
-    }
-
-    public virtual void UseOffensiveAbility()
-    {
-
-    }
 }
