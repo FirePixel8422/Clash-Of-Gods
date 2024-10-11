@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Cloud mat
-  m_Shader: {fileID: -6465566751694194690, guid: e43a60a40b71a784d9b1689a9201fe82, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 3ada7c438f29f2d4f81e4eabaefb2be2, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -29,7 +29,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
@@ -76,6 +76,14 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_4ae85d0eabce4a53bac5114f57f2950c_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: b31ac1f747b505a44920f1bf36414299, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_ea23e80078364d3db4ff2eaacfc82c1c_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: b31ac1f747b505a44920f1bf36414299, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -118,9 +126,11 @@ Material:
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
+    - _PatternSpeed: 0.01
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _ScaleNosie: 1.48
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -132,8 +142,10 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Cloud_Height: {r: 0, g: 3, b: 0, a: 0}
-    - _Color: {r: 0, g: 0.10513687, b: 1, a: 1}
+    - _Color: {r: 6.8831797, g: 1.2061485, b: 0, a: 0}
     - _Color_1: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Movespeed: {r: 0.1, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _Tiling: {r: 350, g: 350, b: 0, a: 0}
   m_BuildTextureStacks: []
