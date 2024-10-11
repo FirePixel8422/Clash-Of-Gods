@@ -48,7 +48,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 0889463ef3dd79a4bbd38e5e7c5185ae, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -96,6 +96,10 @@ Material:
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
+    - _Cloud_Density: 2
+    - _Cloud_Speed: 0.1
+    - _Cloud_size: 30
+    - _Color_Alpha: 0.5
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
@@ -124,11 +128,17 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Cloud_Height: {r: 0, g: 2, b: 0, a: 0}
+    - _Color: {r: 0.63094604, g: 2.0435016, b: 2.1927962, a: 0}
+    - _Color_1: {r: 0.101960786, g: 0.12941177, b: 0.85882354, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Movespeed: {r: 0.24, g: 0.2, b: 0, a: 0}
+    - _Offset: {r: -0.72, g: 0, b: 0, a: 0}
+    - _Output_Wave: {r: -1.66, g: 0.82, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _Tiling: {r: 20, g: 20, b: 0, a: 0}
+    - _Tiling_wave: {r: 1, g: 1, b: 0, a: 0}
+    - _Water_Height: {r: 0, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &6302014208507015780
 MonoBehaviour:
