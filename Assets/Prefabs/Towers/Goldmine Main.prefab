@@ -293,7 +293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 4173483439
+  GlobalObjectIdHash: 3046798891
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -317,7 +317,6 @@ MonoBehaviour:
   dissolves: []
   amountOfDissolves: 0
   cDissolves: 0
-  cost: 6
   health: 0
   dmg: 0
   centerPoint: {fileID: 3190499162408410763}
@@ -337,7 +336,7 @@ MonoBehaviour:
   soundDelay: 0
   underAttack: 0
   mineSpeed: 1
-  coinsOnDeath: 2
+  coinsOnDeath: 3
   generatedCoins: 0
 --- !u!114 &4631243769122649060
 MonoBehaviour:

@@ -28,7 +28,7 @@ public class Tower : TowerCore
 
         attackAnimator.transform.rotation = Quaternion.identity;
 
-        GetComponentInChildren<DirectionArrowValidator>().Init();
+        GetComponentInChildren<DirectionArrowValidator>().Init(Mathf.RoundToInt(transform.rotation.y) == -90);
 
         if (rotPoint != null)
         {

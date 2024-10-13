@@ -17,8 +17,6 @@ public class TowerCore : NetworkBehaviour
     #endregion
 
 
-    public int cost;
-
     public int health;
     public int dmg;
 

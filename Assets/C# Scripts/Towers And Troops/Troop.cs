@@ -24,7 +24,7 @@ public class Troop : TowerCore
     {
         selectStateAnim.transform.rotation = Quaternion.identity;
 
-        GetComponentInChildren<DirectionArrowValidator>().Init();
+        GetComponentInChildren<DirectionArrowValidator>().Init(Mathf.RoundToInt(transform.rotation.y) == -90);
 
         moveArrowRenderers = selectStateAnim.GetComponentsInChildren<SpriteRenderer>();
 

@@ -310,7 +310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 190022705
+  GlobalObjectIdHash: 3016083317
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -335,8 +335,8 @@ MonoBehaviour:
   amountOfDissolves: 0
   cDissolves: 0
   cost: 5
-  health: 5
-  dmg: 7
+  health: 8
+  dmg: 12
   centerPoint: {fileID: 953093416375247198}
   size: 1.8
   drawSizeGizmos: 1

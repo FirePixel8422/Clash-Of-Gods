@@ -19,19 +19,27 @@ public class DirectionArrowValidator : MonoBehaviour
 
 
 
-    public void Init()
+    public void Init(bool flipped)
     {
         for (int i = 0; i < directions.Length; i++)
         {
+            Vector2Int direction = directions[i];
+
+            if (flipped)
+            {
+                direction.x = -direction.x;
+                direction.y = -direction.y;
+            }
+
             GameObject spawnedObj = Instantiate(directionArrowPrefab, transform, true);
 
             DirectionArrow directionArrow = spawnedObj.GetComponent<DirectionArrow>();
 
 
-            directionArrow.transform.localPosition = new Vector3(directions[i].x * GridManager.Instance.tileSize, 0.03f, directions[i].y * GridManager.Instance.tileSize);
+            directionArrow.transform.localPosition = new Vector3(direction.x * GridManager.Instance.tileSize, 0.03f, direction.y * GridManager.Instance.tileSize);
 
 
-            float angle = Mathf.Atan2(directions[i].y, directions[i].x) * Mathf.Rad2Deg;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             
             //Round 45 Degrees upwards to 90 degrees
             angle = Mathf.Ceil(angle / 90) * 90 - 90;
@@ -40,9 +48,9 @@ public class DirectionArrowValidator : MonoBehaviour
             directionArrow.transform.localRotation = Quaternion.Euler(90, 0, angle);
 
 
-            bool diagonalArrow = directions[i].x != 0 && directions[i].y != 0;
+            bool diagonalArrow = direction.x != 0 && direction.y != 0;
 
-            directionArrow.Setup(directions[i], diagonalArrow ? diagonalArrowSprite : arrowSprite);
+            directionArrow.Setup(direction, diagonalArrow ? diagonalArrowSprite : arrowSprite);
         }
 
 
