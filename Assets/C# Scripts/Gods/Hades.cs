@@ -11,12 +11,15 @@ using UnityEngine.VFX;
 
 public class Hades : NetworkBehaviour
 {
+    public Sprite[] uiSprites;
+    public int[] abilityCooldowns;
+
+
     public Transform fireWallSelectionSprite;
 
     public GameObject[] fireWallEffectPrefabs;
 
     public float fwAnimationMoveSpeed;
-    public int fireWallCharges;
     public int fireWallLifeTime;
 
     private List<GameObject> fireWallEffectList;
@@ -25,7 +28,7 @@ public class Hades : NetworkBehaviour
 
 
 
-    public Transform offensiveSelectionSprite;
+    public Transform meteorSelectionSprite;
 
 
     public VisualEffect[] fireEffectPrefabs;
@@ -69,11 +72,13 @@ public class Hades : NetworkBehaviour
         {
             PlacementManager.Instance.OnConfirmEvent.AddListener(() => OnConfirm());
             PlacementManager.Instance.OnCancelEvent.AddListener(() => OnCancel());
-        }
 
-        if (TurnManager.Instance != null)
-        {
-            TurnManager.Instance.OnMyTurnStartedEvent.AddListener(() => OnTurnChanged());
+            TurnManager.Instance.OnMyTurnStartedEvent.AddListener(() => OnTurnGranted());
+
+            AbilityManager.Instance.SetupUI(uiSprites[0], abilityCooldowns[0], uiSprites[1], abilityCooldowns[1]);
+
+            AbilityManager.Instance.ability1Activate.AddListener(() => UseDefensiveAbility());
+            AbilityManager.Instance.ability2Activate.AddListener(() => UseOffensiveAbility());
         }
     }
 
@@ -82,13 +87,15 @@ public class Hades : NetworkBehaviour
 
     public void OnConfirm()
     {
-        if (TurnManager.Instance.isMyTurn == false || GodCore.Instance.IsHades == false)
+        if (TurnManager.Instance.isMyTurn == false)
         {
             return;
         }
 
         if (usingDefenseAbility)
         {
+            AbilityManager.Instance.ConfirmUseAbility(true);
+
             Ray ray = mainCam.ScreenPointToRay(mousePos);
             if (Physics.Raycast(ray, 100, PlacementManager.Instance.ownFieldLayers + PlacementManager.Instance.neutralLayers))
             {
@@ -97,6 +104,20 @@ public class Hades : NetworkBehaviour
                 usingDefenseAbility = false;
                 fireWallSelectionSprite.gameObject.SetActive(false);
                 fireWallSelectionSprite.localPosition = Vector3.zero;
+            }
+        }
+        if (usingOffensiveAbility)
+        {
+            AbilityManager.Instance.ConfirmUseAbility(false);
+
+            Ray ray = mainCam.ScreenPointToRay(mousePos);
+            if (Physics.Raycast(ray, 100, PlacementManager.Instance.fullFieldLayers))
+            {
+                //meteor
+
+                usingOffensiveAbility = false;
+                meteorSelectionSprite.gameObject.SetActive(false);
+                meteorSelectionSprite.localPosition = Vector3.zero;
             }
         }
     }
@@ -113,12 +134,12 @@ public class Hades : NetworkBehaviour
         fireWallSelectionSprite.localPosition = Vector3.zero;
 
         usingOffensiveAbility = false;
-        offensiveSelectionSprite.gameObject.SetActive(false);
-        offensiveSelectionSprite.localPosition = Vector3.zero;
+        meteorSelectionSprite.gameObject.SetActive(false);
+        meteorSelectionSprite.localPosition = Vector3.zero;
     }
 
 
-    public void OnTurnChanged()
+    public void OnTurnGranted()
     {
         CheckForDiscardFireWall_ServerRPC();
         UseMoltenFloor_ServerRPC();
@@ -133,8 +154,8 @@ public class Hades : NetworkBehaviour
 
         fireWallSelectionSprite.gameObject.SetActive(true);
 
-        offensiveSelectionSprite.gameObject.SetActive(false);
-        offensiveSelectionSprite.localPosition = Vector3.zero;
+        meteorSelectionSprite.gameObject.SetActive(false);
+        meteorSelectionSprite.localPosition = Vector3.zero;
     }
 
     public bool usingOffensiveAbility;
@@ -143,7 +164,7 @@ public class Hades : NetworkBehaviour
         usingOffensiveAbility = true;
         usingDefenseAbility = false;
 
-        offensiveSelectionSprite.gameObject.SetActive(true);
+        meteorSelectionSprite.gameObject.SetActive(true);
 
         fireWallSelectionSprite.gameObject.SetActive(false);
         fireWallSelectionSprite.localPosition = Vector3.zero;
@@ -309,13 +330,14 @@ public class Hades : NetworkBehaviour
 
                 if (selectedGridTileData.type == (int)TurnManager.Instance.localClientId)
                 {
-                    offensiveSelectionSprite.position = selectedGridTileData.worldPos;
+                    meteorSelectionSprite.position = selectedGridTileData.worldPos;
                 }
             }
 
-            SyncSelectionSprite_ServerRPC(1, offensiveSelectionSprite.position);
+            SyncSelectionSprite_ServerRPC(1, meteorSelectionSprite.position);
         }
     }
+
 
     [ServerRpc(RequireOwnership = false)]
     private void SyncSelectionSprite_ServerRPC(int abilityId, Vector3 pos, ServerRpcParams rpcParams = default)
@@ -338,7 +360,7 @@ public class Hades : NetworkBehaviour
         }
         else
         {
-            offensiveSelectionSprite.position = pos;
+            meteorSelectionSprite.position = pos;
         }
     }
 
