@@ -2910,7 +2910,7 @@ MonoBehaviour:
   zeusTroopStunChance: 25
   fails: 0
   fireDamage: 2
-  god: 2
+  god: 1
 --- !u!114 &4704391776964601385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2934,6 +2934,13 @@ MonoBehaviour:
   fwAnimationMoveSpeed: 25
   fireWallLifeTime: 2
   meteorSelectionSprite: {fileID: 8875872960242116567}
+  meteorEffectPrefabs:
+  - {fileID: 4292093675666858036, guid: a2e374a6f5cc01d4abe6463c772df7fb, type: 3}
+  meteorDamageDelay: 2
+  meteorFireLifeTime: 2
+  meteorImpactDamageMain: 15
+  meteorImpactDamageClose: 8
+  meteorAnimationMoveSpeed: 25
   fireEffectPrefabs:
   - {fileID: 1457210736911175799, guid: cba13e49f90abdb41b800d7988399a26, type: 3}
   - {fileID: 4140085967648764649, guid: 0708c7414eb1ff64994422de0eed3044, type: 3}
@@ -3035,6 +3042,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: {fileID: 6968593610248176699}
+  onCooldownColor: {r: 0.34509805, g: 0.34509805, b: 0.34509805, a: 1}
+  colorFadeTime: 7
   cooldown1: 0
   cCooldown1: 0
   image1: {fileID: 2766377577897768672}

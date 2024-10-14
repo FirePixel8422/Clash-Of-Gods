@@ -20,6 +20,8 @@ public class ObstacleGenerator : NetworkBehaviour
 
     public FlyingTilesStats flyingTilesStats;
 
+    private bool done;
+
 
 
 
@@ -123,6 +125,10 @@ public class ObstacleGenerator : NetworkBehaviour
             GridManager.Instance.UpdateTowerData(gridPositions[i], obstacle);
         }
 
-        flyingTilesStats.Start(this);
+        if (done == false)
+        {
+            flyingTilesStats.Start(this);
+            done = true;
+        }
     }
 }

@@ -1,7 +1,10 @@
 using System.Collections;
+using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityEngine.VFX;
 
 
@@ -33,11 +36,18 @@ public class Zeus : NetworkBehaviour
 
     public GridObjectData selectedGridTileData;
 
+    public static GraphicRaycaster gfxRayCaster;
+
 
 
     private void Start()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+
+        gfxRayCaster = FindObjectOfType<GraphicRaycaster>(true);
+
+        targetLightningLinePos = lightningLineSelectionSprite.position;
+        targetLightningBoltPos = lightningBoltSelectionSprite.position;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -71,6 +81,18 @@ public class Zeus : NetworkBehaviour
         {
             return;
         }
+
+        PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
+        pointerEventData.position = Input.mousePosition;
+
+        var results = new List<RaycastResult>();
+        gfxRayCaster.Raycast(pointerEventData, results);
+
+        if (results.Count > 0)
+        {
+            return;
+        }
+
 
         if (usingDefenseAbility)
         {
@@ -281,17 +303,18 @@ public class Zeus : NetworkBehaviour
         NetworkObject effectNetwork = effect.GetComponent<NetworkObject>();
         effectNetwork.Spawn(true);
 
-        CallLightningLine_ClientRPC(senderClientId, effectNetwork.NetworkObjectId, pos);
+        CallLightningLine_ClientRPC(senderClientId, pos);
+
+        StartCoroutine(DestroyDelay(effectNetwork));
     }
 
     [ClientRpc(RequireOwnership = false)]
-    private void CallLightningLine_ClientRPC(ulong senderClientId, ulong networkObjectId, Vector3 pos)
+    private void CallLightningLine_ClientRPC(ulong senderClientId, Vector3 pos)
     {
-        NetworkObject effectNetwork = NetworkManager.SpawnManager.SpawnedObjects[networkObjectId];
-        StartCoroutine(LightningLineDamageDelay(senderClientId, effectNetwork, pos));
+        StartCoroutine(LightningLineDamageDelay(senderClientId, pos));
     }
 
-    private IEnumerator LightningLineDamageDelay(ulong senderClientId, NetworkObject effectNetwork, Vector3 pos)
+    private IEnumerator LightningLineDamageDelay(ulong senderClientId, Vector3 pos)
     {
         yield return new WaitForSeconds(lightningLineDmgDelay);
 
@@ -319,9 +342,6 @@ public class Zeus : NetworkBehaviour
                 }
             }
         }
-
-
-        StartCoroutine(DestroyDelay(effectNetwork));
     }
 
     private IEnumerator DestroyDelay(NetworkObject networkObject)

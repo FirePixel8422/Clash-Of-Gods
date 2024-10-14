@@ -15,7 +15,7 @@ public class PlacementManager : NetworkBehaviour
     private void Awake()
     {
         Instance = this;
-        gfxRayCaster = FindObjectOfType<GraphicRaycaster>();
+        gfxRayCaster = FindObjectOfType<GraphicRaycaster>(true);
     }
 
 

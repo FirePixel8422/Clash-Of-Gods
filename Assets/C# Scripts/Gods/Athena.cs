@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Athena : NetworkBehaviour
 {
@@ -20,12 +22,16 @@ public class Athena : NetworkBehaviour
 
     public GridObjectData selectedGridTileData;
 
+    public static GraphicRaycaster gfxRayCaster;
+
 
 
 
     private void Start()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+
+        gfxRayCaster = FindObjectOfType<GraphicRaycaster>(true);
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -34,6 +40,18 @@ public class Athena : NetworkBehaviour
         {
             return;
         }
+
+        PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
+        pointerEventData.position = Input.mousePosition;
+
+        var results = new List<RaycastResult>();
+        gfxRayCaster.Raycast(pointerEventData, results);
+
+        if (results.Count > 0)
+        {
+            return;
+        }
+
 
         mainCam = Camera.main;
 

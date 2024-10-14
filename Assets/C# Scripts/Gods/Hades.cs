@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityEngine.VFX;
 
 
@@ -62,11 +63,15 @@ public class Hades : NetworkBehaviour
 
     public GridObjectData selectedGridTileData;
 
+    public static GraphicRaycaster gfxRayCaster;
+
 
 
     private void Start()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+
+        gfxRayCaster = FindObjectOfType<GraphicRaycaster>(true);
 
         fireWallEffectList = new List<GameObject>();
         fireWallEffectGridPosList = new List<Vector2Int>();
@@ -112,6 +117,18 @@ public class Hades : NetworkBehaviour
         {
             return;
         }
+
+        PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
+        pointerEventData.position = Input.mousePosition;
+
+        var results = new List<RaycastResult>();
+        gfxRayCaster.Raycast(pointerEventData, results);
+
+        if (results.Count > 0)
+        {
+            return;
+        }
+
 
         if (usingDefenseAbility)
         {
@@ -207,7 +224,6 @@ public class Hades : NetworkBehaviour
             {
                 fireEffectList[i].Stop();
 
-                GridManager.Instance.UpdateGridDataOnFireState(fireEffectGridPosList[i], -1);
                 SetFireState_ClientRPC(fireEffectGridPosList[i], -1);
 
                 StartCoroutine(DestroyDelay(fireEffectList[i].GetComponent<NetworkObject>()));
@@ -266,7 +282,6 @@ public class Hades : NetworkBehaviour
                 fireEffectLifeTimeList.Add(fireLifeTime);
 
 
-                GridManager.Instance.UpdateGridDataOnFireState(gridTilesOwnField[rTile].gridPos, 1);
                 SetFireState_ClientRPC(gridTilesOwnField[rTile].gridPos, 1);
 
                 break;
@@ -436,11 +451,6 @@ public class Hades : NetworkBehaviour
                     vfx.Stop();
                 }
 
-
-                GridManager.Instance.UpdateGridDataOnFireState(fireWallEffectGridPosList[i], -1);
-                GridManager.Instance.UpdateGridDataOnFireState(fireWallEffectGridPosList[i] + Vector2Int.up, -1);
-                GridManager.Instance.UpdateGridDataOnFireState(fireWallEffectGridPosList[i] + Vector2Int.down, -1);
-
                 SetFireState_ClientRPC(fireWallEffectGridPosList[i], -1);
                 SetFireState_ClientRPC(fireWallEffectGridPosList[i] + Vector2Int.up, -1);
                 SetFireState_ClientRPC(fireWallEffectGridPosList[i] + Vector2Int.down, -1);
@@ -569,6 +579,8 @@ public class Hades : NetworkBehaviour
         VisualEffect effect = Instantiate(fireEffectPrefabs[rPrefab], spawnFirePos, Quaternion.Euler(0, Random.Range(180, -180), 0));
         effect.GetComponent<NetworkObject>().Spawn(true);
 
+        SetFireState_ClientRPC(gridPos, -1);
+
         fireEffectList.Add(effect);
         fireEffectGridPosList.Add(gridData.gridPos);
         fireEffectLifeTimeList.Add(meteorFireLifeTime);
@@ -587,6 +599,8 @@ public class Hades : NetworkBehaviour
 
                 effect = Instantiate(fireEffectPrefabs[rPrefab], spawnFirePos, Quaternion.Euler(0, Random.Range(180, -180), 0));
                 effect.GetComponent<NetworkObject>().Spawn(true);
+
+                SetFireState_ClientRPC(gridPos + gridPositonOffsets[i], -1);
 
                 fireEffectList.Add(effect);
                 fireEffectGridPosList.Add(gridData.gridPos);
