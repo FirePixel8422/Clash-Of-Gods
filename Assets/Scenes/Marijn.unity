@@ -2667,10 +2667,42 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2324722918444683133, guid: 3e86c31feac17c841848fd84f43a25e9, type: 3}
+      propertyPath: god
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4162703456740091273, guid: 3e86c31feac17c841848fd84f43a25e9, type: 3}
       propertyPath: m_Name
       value: Gods (Abilites etc.)
       objectReference: {fileID: 0}
+    - target: {fileID: 4704391776964601385, guid: 3e86c31feac17c841848fd84f43a25e9, type: 3}
+      propertyPath: meteorDamageDelay
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4704391776964601385, guid: 3e86c31feac17c841848fd84f43a25e9, type: 3}
+      propertyPath: meteorFireLifeTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4704391776964601385, guid: 3e86c31feac17c841848fd84f43a25e9, type: 3}
+      propertyPath: meteorImpactDamageMain
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4704391776964601385, guid: 3e86c31feac17c841848fd84f43a25e9, type: 3}
+      propertyPath: meteorImpactDamageClose
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4704391776964601385, guid: 3e86c31feac17c841848fd84f43a25e9, type: 3}
+      propertyPath: meteorAnimationMoveSpeed
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4704391776964601385, guid: 3e86c31feac17c841848fd84f43a25e9, type: 3}
+      propertyPath: meteorEffectPrefabs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4704391776964601385, guid: 3e86c31feac17c841848fd84f43a25e9, type: 3}
+      propertyPath: meteorEffectPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 4292093675666858036, guid: a2e374a6f5cc01d4abe6463c772df7fb, type: 3}
     - target: {fileID: 7253432052467784338, guid: 3e86c31feac17c841848fd84f43a25e9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

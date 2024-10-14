@@ -6,7 +6,7 @@ using UnityEngine;
 public class LoseWinGame : MonoBehaviour
 {
     public static LoseWinGame Instance;
-    private void Awake()
+    private void Awake() 
     {
         Instance = this;
     }

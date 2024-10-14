@@ -30,6 +30,18 @@ public class Hades : NetworkBehaviour
 
     public Transform meteorSelectionSprite;
 
+    public GameObject[] meteorEffectPrefabs;
+
+    public float meteorDamageDelay;
+
+    public int meteorFireLifeTime;
+
+    public int meteorImpactDamageMain;
+    public int meteorImpactDamageClose;
+
+    public float meteorAnimationMoveSpeed;
+
+
 
     public VisualEffect[] fireEffectPrefabs;
 
@@ -77,7 +89,7 @@ public class Hades : NetworkBehaviour
 
         mainCam = Camera.main;
 
-        if(PlacementManager.Instance != null)
+        if (PlacementManager.Instance != null)
         {
             PlacementManager.Instance.OnConfirmEvent.AddListener(() => OnConfirm());
             PlacementManager.Instance.OnCancelEvent.AddListener(() => OnCancel());
@@ -121,7 +133,8 @@ public class Hades : NetworkBehaviour
             if (Physics.Raycast(ray, 100, PlacementManager.Instance.fullFieldLayers))
             {
                 AbilityManager.Instance.ConfirmUseAbility(false);
-                //meteor
+
+                CallMeteor_ServerRPC(selectedGridTileData.worldPos);
 
                 usingOffensiveAbility = false;
                 meteorSelectionSprite.gameObject.SetActive(false);
@@ -239,7 +252,7 @@ public class Hades : NetworkBehaviour
                     continue;
                 }
 
-                int rPrefab = Random.Range(0, 2);
+                int rPrefab = Random.Range(0, fireEffectPrefabs.Length);
 
                 Vector3 pos = gridTilesOwnField[rTile].worldPos;
                 pos.y += fireEffectPrefabs[rPrefab].transform.position.y;
@@ -279,6 +292,9 @@ public class Hades : NetworkBehaviour
 
     private Vector3 targetFireWallPos;
     private Vector3 savedFireWallpos;
+
+    private Vector3 targetMeteorPos;
+    private Vector3 savedMeteorpos;
 
     private void UpdateSelectionSprite(bool mouseMoved)
     {
@@ -328,7 +344,9 @@ public class Hades : NetworkBehaviour
         }
 
 
-        if (usingOffensiveAbility)
+
+
+        if (usingOffensiveAbility && mouseMoved)
         {
             Ray ray = mainCam.ScreenPointToRay(mousePos);
 
@@ -336,13 +354,41 @@ public class Hades : NetworkBehaviour
             {
                 selectedGridTileData = GridManager.Instance.GridObjectFromWorldPoint(hitInfo.point);
 
-                if (selectedGridTileData.type == (int)TurnManager.Instance.localClientId)
+                float posZOffset = 0;
+
+                if (selectedGridTileData.gridPos.y == (GridManager.Instance.gridSizeZ - 1))
                 {
-                    meteorSelectionSprite.position = selectedGridTileData.worldPos;
+                    posZOffset = -GridManager.Instance.tileSize;
+                }
+                if (selectedGridTileData.gridPos.y == 0)
+                {
+                    posZOffset = GridManager.Instance.tileSize;
+                }
+
+
+                if (meteorSelectionSprite.localPosition == Vector3.zero)
+                {
+                    meteorSelectionSprite.position = selectedGridTileData.worldPos + new Vector3(0, 0, posZOffset);
+                }
+                else if (mouseMoved)
+                {
+                    targetMeteorPos = selectedGridTileData.worldPos + new Vector3(0, 0, posZOffset);
+                    savedMeteorpos = meteorSelectionSprite.position;
                 }
             }
+        }
 
-            SyncSelectionSprite_ServerRPC(1, meteorSelectionSprite.position);
+
+        if (usingOffensiveAbility)
+        {
+            float _meteorMoveSpeed = fwAnimationMoveSpeed * (Vector3.Distance(savedMeteorpos, targetMeteorPos) / GridManager.Instance.tileSize);
+
+            if (Vector3.Distance(meteorSelectionSprite.position, targetMeteorPos) > 0.0001f)
+            {
+                meteorSelectionSprite.position = VectorLogic.InstantMoveTowards(meteorSelectionSprite.position, targetMeteorPos, _meteorMoveSpeed * Time.deltaTime);
+            }
+
+            SyncSelectionSprite_ServerRPC(0, meteorSelectionSprite.position);
         }
     }
 
@@ -389,7 +435,7 @@ public class Hades : NetworkBehaviour
                 {
                     vfx.Stop();
                 }
-                
+
 
                 GridManager.Instance.UpdateGridDataOnFireState(fireWallEffectGridPosList[i], -1);
                 GridManager.Instance.UpdateGridDataOnFireState(fireWallEffectGridPosList[i] + Vector2Int.up, -1);
@@ -470,5 +516,124 @@ public class Hades : NetworkBehaviour
         }
 
         GridManager.Instance.UpdateGridDataOnFireState(gridPos, addedState);
+    }
+
+
+
+
+    [ServerRpc(RequireOwnership = false)]
+    private void CallMeteor_ServerRPC(Vector3 pos, ServerRpcParams rpcParams = default)
+    {
+        ulong senderClientId = rpcParams.Receive.SenderClientId;
+
+        int rPrefab = Random.Range(0, meteorEffectPrefabs.Length);
+
+        GameObject effect = Instantiate(meteorEffectPrefabs[rPrefab], pos, Quaternion.identity);
+        NetworkObject effectNetwork = effect.GetComponent<NetworkObject>();
+        effectNetwork.Spawn(true);
+
+        CallMeteor_ClientRPC(pos);
+
+        StartCoroutine(MeteorDamageDelay(senderClientId, pos));
+
+        StartCoroutine(DestroyDelay(effectNetwork));
+    }
+
+    private IEnumerator MeteorDamageDelay(ulong senderClientId, Vector3 pos)
+    {
+        Vector2Int gridPos = GridManager.Instance.GridObjectFromWorldPoint(pos).gridPos;
+
+        Vector2Int[] gridPositonOffsets = new Vector2Int[8]
+        {
+            new Vector2Int(1, 0),
+            new Vector2Int(-1, 0),
+            new Vector2Int(0, 1),
+            new Vector2Int(0, -1),
+            new Vector2Int(1, 1),
+            new Vector2Int(1, -1),
+            new Vector2Int(-1, 1),
+            new Vector2Int(-1, -1),
+        };
+
+
+
+
+        GridObjectData gridData = GridManager.Instance.GetGridData(gridPos);
+
+        Vector3 spawnFirePos = gridData.worldPos;
+
+        int rPrefab = Random.Range(0, fireEffectPrefabs.Length);
+
+        pos.y += fireEffectPrefabs[rPrefab].transform.position.y;
+
+        VisualEffect effect = Instantiate(fireEffectPrefabs[rPrefab], spawnFirePos, Quaternion.Euler(0, Random.Range(180, -180), 0));
+        effect.GetComponent<NetworkObject>().Spawn(true);
+
+        fireEffectList.Add(effect);
+        fireEffectGridPosList.Add(gridData.gridPos);
+        fireEffectLifeTimeList.Add(meteorFireLifeTime);
+
+        for (int i = 0; i < 8; i++)
+        {
+            if (GridManager.Instance.IsInGrid(gridPos + gridPositonOffsets[i]))
+            {
+                gridData = GridManager.Instance.GetGridData(gridPos + gridPositonOffsets[i]);
+
+                spawnFirePos = gridData.worldPos;
+
+                rPrefab = Random.Range(0, fireEffectPrefabs.Length);
+
+                pos.y += fireEffectPrefabs[rPrefab].transform.position.y;
+
+                effect = Instantiate(fireEffectPrefabs[rPrefab], spawnFirePos, Quaternion.Euler(0, Random.Range(180, -180), 0));
+                effect.GetComponent<NetworkObject>().Spawn(true);
+
+                fireEffectList.Add(effect);
+                fireEffectGridPosList.Add(gridData.gridPos);
+                fireEffectLifeTimeList.Add(meteorFireLifeTime);
+            }
+        }
+
+
+
+
+        yield return new WaitForSeconds(meteorDamageDelay);
+
+        gridData = GridManager.Instance.GetGridData(gridPos);
+
+        if (gridData.tower != null && gridData.tower.OwnerClientId != senderClientId)
+        {
+            gridData.tower.GetAttacked(meteorImpactDamageClose, false);
+        }
+
+        for (int i = 0; i < 8; i++)
+        {
+            if (GridManager.Instance.IsInGrid(gridPos + gridPositonOffsets[i]))
+            {
+                gridData = GridManager.Instance.GetGridData(gridPos + gridPositonOffsets[i]);
+
+                if (gridData.tower != null && gridData.tower.OwnerClientId != senderClientId)
+                {
+                    gridData.tower.GetAttacked(meteorImpactDamageClose, false);
+                }
+            }
+        }
+    }
+
+
+    [ClientRpc(RequireOwnership = false)]
+    private void CallMeteor_ClientRPC(Vector3 pos)
+    {
+        Vector2Int[] gridPositonOffsets = new Vector2Int[8]
+        {
+            new Vector2Int(1, 0),
+            new Vector2Int(-1, 0),
+            new Vector2Int(0, 1),
+            new Vector2Int(0, -1),
+            new Vector2Int(1, 1),
+            new Vector2Int(1, -1),
+            new Vector2Int(-1, 1),
+            new Vector2Int(-1, -1),
+        };
     }
 }
