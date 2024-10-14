@@ -6,7 +6,7 @@ using UnityEngine.VFX;
 
 
 
-public class ChainLightning : MonoBehaviour
+public class ChainLightning : NetworkBehaviour
 {
     private Vector3 prevPos;
 
@@ -27,6 +27,8 @@ public class ChainLightning : MonoBehaviour
 
     public float moveSpeed;
     public float chainDelay;
+
+    public float damageDelay;
 
 
     public Transform rotTransform;
@@ -81,7 +83,7 @@ public class ChainLightning : MonoBehaviour
 
                     GridObjectData newCurrentTile = GridManager.Instance.GetGridData(currentTile.gridPos + direction);
 
-                    if (newCurrentTile.tower != null && newCurrentTile.tower.OwnerClientId != TurnManager.Instance.localClientId && alreadyChainedList.Contains(newCurrentTile) == false)
+                    if (newCurrentTile.tower != null && newCurrentTile.tower.GetComponent<Obstacle>() == null && newCurrentTile.tower.OwnerClientId != OwnerClientId && alreadyChainedList.Contains(newCurrentTile) == false)
                     {
                         switch (prioritizeMode)
                         {
@@ -116,7 +118,7 @@ public class ChainLightning : MonoBehaviour
 
             if (chainOptions.Count == 0)
             {
-                yield break;
+                break;
             }
 
             currentTile = chainOptions[Random.Range(0, chainOptions.Count)];
@@ -127,7 +129,8 @@ public class ChainLightning : MonoBehaviour
             yield return StartCoroutine(MoveBall(targetPos));
 
 
-            currentTile.tower.GetAttacked(currentDamage, applyZeusStunPassive && GodCore.Instance.RandomStunChance());
+            StartCoroutine(DamageDelay(currentTile, currentDamage));
+
 
             yield return new WaitForSeconds(chainDelay);
         }
@@ -138,6 +141,17 @@ public class ChainLightning : MonoBehaviour
             effect.Stop();
         }
     }
+
+
+
+    private IEnumerator DamageDelay(GridObjectData currentTile, int currentDamage)
+    {
+        yield return new WaitForSeconds(damageDelay);
+
+        currentTile.tower.GetAttacked(currentDamage, applyZeusStunPassive && GodCore.Instance.RandomStunChance());
+    }
+
+
 
     [ServerRpc(RequireOwnership = false)]
     private void SyncBallPos_ServerRPC(Vector3 targetPos, ServerRpcParams rpcParams = default)

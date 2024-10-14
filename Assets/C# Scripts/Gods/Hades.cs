@@ -40,9 +40,9 @@ public class Hades : NetworkBehaviour
     public float destroyDelay;
     public bool canSpawnOnFullTile;
 
-    public List<VisualEffect> fireEffectList;
-    public List<Vector2Int> fireEffectGridPosList;
-    public List<int> fireEffectLifeTimeList;
+    private List<VisualEffect> fireEffectList;
+    private List<Vector2Int> fireEffectGridPosList;
+    private List<int> fireEffectLifeTimeList;
 
 
     private Vector3 mousePos;
@@ -55,6 +55,15 @@ public class Hades : NetworkBehaviour
     private void Start()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+
+        fireWallEffectList = new List<GameObject>();
+        fireWallEffectGridPosList = new List<Vector2Int>();
+        fireWallEffectLifeTimeList = new List<int>();
+
+        fireEffectList = new List<VisualEffect>();
+        fireEffectGridPosList = new List<Vector2Int>();
+        fireEffectLifeTimeList = new List<int>();
+
 
         targetFireWallPos = fireWallSelectionSprite.position;
     }
@@ -94,11 +103,11 @@ public class Hades : NetworkBehaviour
 
         if (usingDefenseAbility)
         {
-            AbilityManager.Instance.ConfirmUseAbility(true);
-
             Ray ray = mainCam.ScreenPointToRay(mousePos);
             if (Physics.Raycast(ray, 100, PlacementManager.Instance.ownFieldLayers + PlacementManager.Instance.neutralLayers))
             {
+                AbilityManager.Instance.ConfirmUseAbility(true);
+
                 PlaceFireWall_ServerRPC(fireWallSelectionSprite.position);
 
                 usingDefenseAbility = false;
@@ -108,11 +117,10 @@ public class Hades : NetworkBehaviour
         }
         if (usingOffensiveAbility)
         {
-            AbilityManager.Instance.ConfirmUseAbility(false);
-
             Ray ray = mainCam.ScreenPointToRay(mousePos);
             if (Physics.Raycast(ray, 100, PlacementManager.Instance.fullFieldLayers))
             {
+                AbilityManager.Instance.ConfirmUseAbility(false);
                 //meteor
 
                 usingOffensiveAbility = false;

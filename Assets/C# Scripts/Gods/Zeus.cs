@@ -1,14 +1,23 @@
 using System.Collections;
-using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.VFX;
+
 
 public class Zeus : NetworkBehaviour
 {
     public Sprite[] uiSprites;
     public int[] abilityCooldowns;
+
+    public GameObject[] lightningLineEffectPrefabs;
+    public int lightningLineDamage;
+    public float lightningLineDmgDelay;
+
+    public GameObject[] lightningEffectPrefabs;
+    public GameObject lightningBallPrefab;
+    public int lightningDamage;
+    public float lightningDmgDelay;
 
     public float llAnimationMoveSpeed;
     public float lbAnimationMoveSpeed;
@@ -17,7 +26,7 @@ public class Zeus : NetworkBehaviour
 
     public Transform lightningBoltSelectionSprite;
 
-
+    public float destroyDelay;
 
     private Vector3 mousePos;
     private Camera mainCam;
@@ -70,6 +79,8 @@ public class Zeus : NetworkBehaviour
             {
                 AbilityManager.Instance.ConfirmUseAbility(true);
 
+                CallLightningLine_ServerRPC(selectedGridTileData.worldPos);
+
                 usingDefenseAbility = false;
                 lightningLineSelectionSprite.gameObject.SetActive(false);
                 lightningLineSelectionSprite.localPosition = Vector3.zero;
@@ -82,6 +93,8 @@ public class Zeus : NetworkBehaviour
             if (Physics.Raycast(ray, 100, PlacementManager.Instance.fullFieldLayers))
             {
                 AbilityManager.Instance.ConfirmUseAbility(false);
+
+                CallLightning_ServerRPC(selectedGridTileData.worldPos);
 
                 usingOffensiveAbility = false;
                 lightningBoltSelectionSprite.gameObject.SetActive(false);
@@ -252,5 +265,127 @@ public class Zeus : NetworkBehaviour
         {
             lightningBoltSelectionSprite.position = pos;
         }
+    }
+
+
+
+
+    [ServerRpc(RequireOwnership = false)]
+    private void CallLightningLine_ServerRPC(Vector3 pos, ServerRpcParams rpcParams = default)
+    {
+        ulong senderClientId = rpcParams.Receive.SenderClientId;
+
+        int rPrefab = Random.Range(0, lightningLineEffectPrefabs.Length);
+
+        GameObject effect = Instantiate(lightningLineEffectPrefabs[rPrefab], new Vector3(pos.x, 0, 0), Quaternion.identity);
+        NetworkObject effectNetwork = effect.GetComponent<NetworkObject>();
+        effectNetwork.Spawn(true);
+
+        CallLightningLine_ClientRPC(senderClientId, effectNetwork.NetworkObjectId, pos);
+    }
+
+    [ClientRpc(RequireOwnership = false)]
+    private void CallLightningLine_ClientRPC(ulong senderClientId, ulong networkObjectId, Vector3 pos)
+    {
+        NetworkObject effectNetwork = NetworkManager.SpawnManager.SpawnedObjects[networkObjectId];
+        StartCoroutine(LightningLineDamageDelay(senderClientId, effectNetwork, pos));
+    }
+
+    private IEnumerator LightningLineDamageDelay(ulong senderClientId, NetworkObject effectNetwork, Vector3 pos)
+    {
+        yield return new WaitForSeconds(lightningLineDmgDelay);
+
+        int gridPosX = GridManager.Instance.GridObjectFromWorldPoint(pos).gridPos.x;
+
+        Vector2Int[] gridPositons = new Vector2Int[6]
+        {
+            new Vector2Int(gridPosX, 0),
+            new Vector2Int(gridPosX, 1),
+            new Vector2Int(gridPosX, 2),
+            new Vector2Int(gridPosX, 3),
+            new Vector2Int(gridPosX, 4),
+            new Vector2Int(gridPosX, 5),
+        };
+
+        for (int i = 0; i < 6; i++)
+        {
+            if (GridManager.Instance.IsInGrid(gridPositons[i]))
+            {
+                GridObjectData gridData =  GridManager.Instance.GetGridData(gridPositons[i]);
+
+                if (gridData.tower != null && gridData.tower.OwnerClientId != senderClientId)
+                {
+                    gridData.tower.GetAttacked(lightningLineDamage, GodCore.Instance.RandomStunChance());
+                }
+            }
+        }
+
+
+        StartCoroutine(DestroyDelay(effectNetwork));
+    }
+
+    private IEnumerator DestroyDelay(NetworkObject networkObject)
+    {
+        yield return new WaitForSeconds(destroyDelay);
+
+        networkObject.Despawn(true);
+    }
+
+
+
+
+    [ServerRpc(RequireOwnership = false)]
+    private void CallLightning_ServerRPC(Vector3 pos, ServerRpcParams rpcParams = default)
+    {
+        ulong senderClientId = rpcParams.Receive.SenderClientId;
+
+        int rPrefab = Random.Range(0, lightningEffectPrefabs.Length);
+
+        GameObject effect = Instantiate(lightningEffectPrefabs[rPrefab], pos, Quaternion.identity);
+        NetworkObject effectNetwork = effect.GetComponent<NetworkObject>();
+        effectNetwork.Spawn(true);
+
+        CallLightning_ClientRPC(senderClientId, pos);
+
+        StartCoroutine(DestroyDelay(effectNetwork));
+    }
+
+
+    [ClientRpc(RequireOwnership = false)]
+    private void CallLightning_ClientRPC(ulong senderClientId, Vector3 pos)
+    {
+        StartCoroutine(LightningDamageDelay(senderClientId, pos));
+    }
+
+    private IEnumerator LightningDamageDelay(ulong senderClientId, Vector3 pos)
+    {
+        yield return new WaitForSeconds(lightningDmgDelay);
+
+        GridObjectData gridData = GridManager.Instance.GridObjectFromWorldPoint(pos);
+
+        if (gridData.tower != null && gridData.tower.OwnerClientId != senderClientId)
+        {
+            gridData.tower.GetAttacked(lightningDamage, GodCore.Instance.RandomStunChance());
+        }
+
+        if (IsServer)
+        {
+            CallLightningBall_ServerRPC(selectedGridTileData.worldPos);
+        }
+    }
+
+
+    [ServerRpc(RequireOwnership = false)]
+    private void CallLightningBall_ServerRPC(Vector3 pos, ServerRpcParams rpcParams = default)
+    {
+        ulong senderClientId = rpcParams.Receive.SenderClientId;
+
+        GameObject effect = Instantiate(lightningBallPrefab, pos, Quaternion.identity);
+        NetworkObject effectNetwork = effect.GetComponent<NetworkObject>();
+        effectNetwork.SpawnWithOwnership(senderClientId, true);
+
+        effectNetwork.GetComponent<ChainLightning>().Init();
+
+        StartCoroutine(DestroyDelay(effectNetwork));
     }
 }

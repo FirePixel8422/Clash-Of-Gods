@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 287913474533855496}
+  - component: {fileID: 9163240153236497919}
   m_Layer: 0
   m_Name: Lightning Line
   m_TagString: Untagged
@@ -37,6 +38,27 @@ Transform:
   - {fileID: 5995765387787600332}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9163240153236497919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7081788171278486406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3526080738
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1001 &2075209715262933867
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45,6 +67,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 287913474533855496}
     m_Modifications:
+    - target: {fileID: 1109666990518690927, guid: b715fff9a89d1b1419effc6d44600597, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3526080738
+      objectReference: {fileID: 0}
     - target: {fileID: 2549726467164411500, guid: b715fff9a89d1b1419effc6d44600597, type: 3}
       propertyPath: m_Name
       value: Lightning Bolt (4)
@@ -177,7 +203,8 @@ PrefabInstance:
       propertyPath: m_PropertySheet.m_AnimationCurve.m_Array.Array.data[0].m_Value.m_Curve.Array.data[2].tangentMode
       value: 5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1109666990518690927, guid: b715fff9a89d1b1419effc6d44600597, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -195,6 +222,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 287913474533855496}
     m_Modifications:
+    - target: {fileID: 1109666990518690927, guid: b715fff9a89d1b1419effc6d44600597, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3526080738
+      objectReference: {fileID: 0}
     - target: {fileID: 2549726467164411500, guid: b715fff9a89d1b1419effc6d44600597, type: 3}
       propertyPath: m_Name
       value: Lightning Bolt (1)
@@ -327,7 +358,8 @@ PrefabInstance:
       propertyPath: m_PropertySheet.m_AnimationCurve.m_Array.Array.data[0].m_Value.m_Curve.Array.data[2].tangentMode
       value: 5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1109666990518690927, guid: b715fff9a89d1b1419effc6d44600597, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -345,6 +377,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 287913474533855496}
     m_Modifications:
+    - target: {fileID: 1109666990518690927, guid: b715fff9a89d1b1419effc6d44600597, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3526080738
+      objectReference: {fileID: 0}
     - target: {fileID: 2549726467164411500, guid: b715fff9a89d1b1419effc6d44600597, type: 3}
       propertyPath: m_Name
       value: Lightning Bolt
@@ -477,7 +513,8 @@ PrefabInstance:
       propertyPath: m_PropertySheet.m_AnimationCurve.m_Array.Array.data[0].m_Value.m_Curve.Array.data[2].tangentMode
       value: 5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1109666990518690927, guid: b715fff9a89d1b1419effc6d44600597, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -495,6 +532,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 287913474533855496}
     m_Modifications:
+    - target: {fileID: 1109666990518690927, guid: b715fff9a89d1b1419effc6d44600597, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3526080738
+      objectReference: {fileID: 0}
     - target: {fileID: 2549726467164411500, guid: b715fff9a89d1b1419effc6d44600597, type: 3}
       propertyPath: m_Name
       value: Lightning Bolt (2)
@@ -627,7 +668,8 @@ PrefabInstance:
       propertyPath: m_PropertySheet.m_AnimationCurve.m_Array.Array.data[0].m_Value.m_Curve.Array.data[2].tangentMode
       value: 5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1109666990518690927, guid: b715fff9a89d1b1419effc6d44600597, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -645,6 +687,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 287913474533855496}
     m_Modifications:
+    - target: {fileID: 1109666990518690927, guid: b715fff9a89d1b1419effc6d44600597, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3526080738
+      objectReference: {fileID: 0}
     - target: {fileID: 2549726467164411500, guid: b715fff9a89d1b1419effc6d44600597, type: 3}
       propertyPath: m_Name
       value: Lightning Bolt (3)
@@ -777,7 +823,8 @@ PrefabInstance:
       propertyPath: m_PropertySheet.m_AnimationCurve.m_Array.Array.data[0].m_Value.m_Curve.Array.data[2].tangentMode
       value: 5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1109666990518690927, guid: b715fff9a89d1b1419effc6d44600597, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -795,6 +842,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 287913474533855496}
     m_Modifications:
+    - target: {fileID: 1109666990518690927, guid: b715fff9a89d1b1419effc6d44600597, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3526080738
+      objectReference: {fileID: 0}
     - target: {fileID: 2549726467164411500, guid: b715fff9a89d1b1419effc6d44600597, type: 3}
       propertyPath: m_Name
       value: Lightning Bolt (5)
@@ -927,7 +978,8 @@ PrefabInstance:
       propertyPath: m_PropertySheet.m_AnimationCurve.m_Array.Array.data[0].m_Value.m_Curve.Array.data[2].tangentMode
       value: 5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1109666990518690927, guid: b715fff9a89d1b1419effc6d44600597, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

@@ -328,7 +328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
+  GlobalObjectIdHash: 2289904882
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -529,7 +529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57549bedca3501d4cbfebad4a107c18e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startDmg: 100
+  startDmg: 5
   maxChains: 5
   applyZeusStunPassive: 1
   directions:
@@ -545,17 +545,10 @@ MonoBehaviour:
   - {x: -2, y: 0}
   - {x: 0, y: 2}
   - {x: 0, y: -2}
-  - {x: 2, y: 1}
-  - {x: -2, y: 1}
-  - {x: 2, y: -1}
-  - {x: -2, y: -1}
-  - {x: 1, y: 2}
-  - {x: 1, y: -2}
-  - {x: -1, y: 2}
-  - {x: -1, y: -2}
   prioritizeMode: 2
-  moveSpeed: 25
-  chainDelay: 0.35
+  moveSpeed: 22.5
+  chainDelay: 0.4
+  damageDelay: 0.75
   rotTransform: {fileID: 7425589593988221256}
   coneOffset: {x: 0, y: 0, z: 3}
 --- !u!114 &8033987500603523025
