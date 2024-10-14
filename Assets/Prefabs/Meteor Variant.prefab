@@ -13,6 +13,18 @@ PrefabInstance:
       value: Meteor Variant
       objectReference: {fileID: 0}
     - target: {fileID: 722983626176048906, guid: 74e9d4105981a454783c28fc5e1a19e9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 722983626176048906, guid: 74e9d4105981a454783c28fc5e1a19e9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 722983626176048906, guid: 74e9d4105981a454783c28fc5e1a19e9, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 722983626176048906, guid: 74e9d4105981a454783c28fc5e1a19e9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -60,6 +72,18 @@ PrefabInstance:
       propertyPath: impactZone
       value: 
       objectReference: {fileID: 947742662905351872, guid: 1dcfa26563b7ebd48b272b1d6a3073c4, type: 3}
+    - target: {fileID: 8103423849198422050, guid: 74e9d4105981a454783c28fc5e1a19e9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8103423849198422050, guid: 74e9d4105981a454783c28fc5e1a19e9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8103423849198422050, guid: 74e9d4105981a454783c28fc5e1a19e9, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
