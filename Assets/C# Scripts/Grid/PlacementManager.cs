@@ -429,7 +429,7 @@ public class PlacementManager : NetworkBehaviour
 
                 if (selectedGridTileData.full == false && selectedGridTileData.type == (int)localClientId && currency >= selectedPreviewTower.cost)
                 {
-                    selectedPreviewTower.towerPreviewRenderer.color = new Color(0.7619722f, 0.8740168f, 0.9547169f);
+                    selectedPreviewTower.towerPreviewRenderer.color = new Color(0.03529412f, 1f, 0f);
                     selectedPreviewTower.UpdateTowerPreviewColor(true);
 
                     UpdateTowerPreviewServerRPC(selectedGridTileData.worldPos, towerForwardRotationY);
@@ -437,6 +437,7 @@ public class PlacementManager : NetworkBehaviour
                 else
                 {
                     selectedPreviewTower.towerPreviewRenderer.color = new Color(0.8943396f, 0.2309691f, 0.09955848f);
+
                     selectedPreviewTower.UpdateTowerPreviewColor(false);
                 }
 

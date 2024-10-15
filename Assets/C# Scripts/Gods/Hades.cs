@@ -143,6 +143,7 @@ public class Hades : NetworkBehaviour
             if (Physics.Raycast(ray, 100, PlacementManager.Instance.ownFieldLayers + PlacementManager.Instance.neutralLayers))
             {
                 AbilityManager.Instance.ConfirmUseAbility(true);
+                SyncSelectionSpriteState_ServerRPC(0, false);
 
                 PlaceFireWall_ServerRPC(fireWallSelectionSprite.position);
 
@@ -157,6 +158,7 @@ public class Hades : NetworkBehaviour
             if (Physics.Raycast(ray, 100, PlacementManager.Instance.fullFieldLayers))
             {
                 AbilityManager.Instance.ConfirmUseAbility(false);
+                SyncSelectionSpriteState_ServerRPC(1, false);
 
                 CallMeteor_ServerRPC(selectedGridTileData.worldPos);
 
@@ -177,6 +179,8 @@ public class Hades : NetworkBehaviour
         usingDefenseAbility = false;
         fireWallSelectionSprite.gameObject.SetActive(false);
         fireWallSelectionSprite.localPosition = Vector3.zero;
+
+        SyncSelectionSpriteState_ServerRPC(0, false);
 
         usingOffensiveAbility = false;
         meteorSelectionSprite.gameObject.SetActive(false);
@@ -199,7 +203,7 @@ public class Hades : NetworkBehaviour
 
         fireWallSelectionSprite.gameObject.SetActive(true);
 
-        EnableSelectionSprite_ServerRPC(0);
+        SyncSelectionSpriteState_ServerRPC(0, true);
 
         meteorSelectionSprite.gameObject.SetActive(false);
         meteorSelectionSprite.localPosition = Vector3.zero;
@@ -213,7 +217,7 @@ public class Hades : NetworkBehaviour
 
         meteorSelectionSprite.gameObject.SetActive(true);
 
-        EnableSelectionSprite_ServerRPC(1);
+        SyncSelectionSpriteState_ServerRPC(1, true);
 
         fireWallSelectionSprite.gameObject.SetActive(false);
         fireWallSelectionSprite.localPosition = Vector3.zero;
@@ -221,15 +225,15 @@ public class Hades : NetworkBehaviour
 
 
     [ServerRpc(RequireOwnership = false)]
-    private void EnableSelectionSprite_ServerRPC(int abilityId, ServerRpcParams rpcParams = default)
+    private void SyncSelectionSpriteState_ServerRPC(int abilityId, bool newState, ServerRpcParams rpcParams = default)
     {
         ulong senderClientId = rpcParams.Receive.SenderClientId;
 
-        EnableSelectionSprite_ClientRPC(senderClientId, abilityId);
+        SyncSelectionState_ClientRPC(senderClientId, abilityId, newState);
     }
 
     [ClientRpc(RequireOwnership = false)]
-    private void EnableSelectionSprite_ClientRPC(ulong clientId, int abilityId)
+    private void SyncSelectionState_ClientRPC(ulong clientId, int abilityId, bool newState)
     {
         if (NetworkManager.LocalClientId == clientId)
         {
@@ -238,12 +242,12 @@ public class Hades : NetworkBehaviour
 
         if (abilityId == 0)
         {
-            fireWallSelectionSprite.gameObject.SetActive(true);
+            fireWallSelectionSprite.gameObject.SetActive(newState);
             meteorSelectionSprite.gameObject.SetActive(false);
         }
         else
         {
-            meteorSelectionSprite.gameObject.SetActive(true);
+            meteorSelectionSprite.gameObject.SetActive(newState);
             fireWallSelectionSprite.gameObject.SetActive(false);
         }
     }
@@ -663,7 +667,7 @@ public class Hades : NetworkBehaviour
             {
                 gridData = GridManager.Instance.GetGridData(gridPos + gridPositonOffsets[i]);
 
-                if (gridData.tower != null && gridData.tower.OwnerClientId != senderClientId)
+                if (gridData.tower != null && gridData.tower.GetComponent<PlayerBase>() == null && gridData.tower.OwnerClientId != senderClientId)
                 {
                     gridData.tower.GetAttacked(meteorImpactDamageClose, false);
                 }

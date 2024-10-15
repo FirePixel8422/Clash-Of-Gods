@@ -173,4 +173,39 @@ public class AbilityManager : MonoBehaviour
             }
         }
     }
+
+
+#if UNITY_EDITOR
+    private void Update()
+    {
+        if(Input.GetKey(KeyCode.F5))
+        {
+            cCooldown1 = 0;
+
+            if (cCooldown1 == 0)
+            {
+                StartCoroutine(FadeColor(image1, false));
+                text1.text = "";
+            }
+            else if (cCooldown1 > 0)
+            {
+                text1.text = Mathf.Clamp(cCooldown1, 0, 50).ToString();
+            }
+
+
+            cCooldown2 = 0;
+
+            if (cCooldown2 == 0)
+            {
+                StartCoroutine(FadeColor(image2, false));
+                text2.text = "";
+            }
+            else if (cCooldown2 > 0)
+            {
+                text2.text = Mathf.Clamp(cCooldown2, 0, 50).ToString();
+            }
+        }
+    }
+
+#endif
 }

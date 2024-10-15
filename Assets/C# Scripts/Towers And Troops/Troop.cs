@@ -59,6 +59,12 @@ public class Troop : TowerCore
     #endregion
 
 
+    protected override void OnGetAttacked()
+    {
+        anim.SetTrigger("Hurt");
+    }
+
+
     protected override void OnGrantTurn()
     {
         movesLeft = movesPerTurn;
@@ -103,7 +109,6 @@ public class Troop : TowerCore
             transform.position = VectorLogic.InstantMoveTowards(transform.position, targetPos, animatedMoveSpeed * Time.deltaTime);
         }
 
-        yield return null;
 
 
         anim.SetTrigger("MoveAttack");

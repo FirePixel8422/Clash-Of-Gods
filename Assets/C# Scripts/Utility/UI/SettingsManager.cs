@@ -41,7 +41,19 @@ public class SettingsManager : NetworkBehaviour
 
     public bool displayRefreshRate;
 
-    public List<AudioController> audioControllers;
+    private List<AudioController> audioControllers;
+
+
+    public void AddAudioController(AudioController toAdd)
+    {
+        audioControllers.Add(toAdd);
+
+        toAdd.UpdateVolume(mainAudioSlider.value, sfxAudioSlider.value, musicAudioSlider.value);
+    }
+    public void RemoveAudioController(AudioController toRemove)
+    {
+        audioControllers.Remove(toRemove);
+    }
 
 
     public void ChangeFullScreenState()

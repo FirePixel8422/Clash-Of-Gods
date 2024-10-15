@@ -30,8 +30,7 @@ public class ZeusStorm : MonoBehaviour
 
         StartCoroutine(LightningLoop());
 
-        SettingsManager.SingleTon.audioControllers.Add(audioController);
-        SettingsManager.SingleTon.UpdateVolume();
+        SettingsManager.SingleTon.AddAudioController(audioController);
 
         if (boundsCenter.position.z < 0)
         {
@@ -82,5 +81,10 @@ public class ZeusStorm : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(boundsCenter.position, new Vector3(spawnBox.x * 2, 10, spawnBox.y * 2));
+    }
+
+    private void OnDestroy()
+    {
+        SettingsManager.SingleTon.RemoveAudioController(audioController);
     }
 }

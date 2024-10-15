@@ -8,6 +8,7 @@ public class Tower : TowerCore
     public Animator attackAnimator;
 
     public Transform rotPoint;
+    public bool yRotOnly;
 
     public Transform lookAtTransform;
     public Transform shootPoint;
@@ -59,6 +60,7 @@ public class Tower : TowerCore
 
         yield return new WaitUntil(() => lookingAtTarget == true || rotPoint == null);
 
+
         yield return new WaitForSeconds(animShootTime);
 
         if (target != null)
@@ -82,7 +84,14 @@ public class Tower : TowerCore
 
             Quaternion targetRotation = Quaternion.LookRotation(direction);
 
-            rotPoint.rotation = Quaternion.RotateTowards(rotPoint.rotation, targetRotation, rotSpeed * Time.deltaTime);
+            if (yRotOnly)
+            {
+                rotPoint.rotation = Quaternion.Euler(rotPoint.rotation.x, Quaternion.RotateTowards(rotPoint.rotation, targetRotation, rotSpeed * Time.deltaTime).y, rotPoint.rotation.z);
+            }
+            else
+            {
+                rotPoint.rotation = Quaternion.RotateTowards(rotPoint.rotation, targetRotation, rotSpeed * Time.deltaTime);
+            }
 
             lookingAtTarget = Quaternion.Angle(rotPoint.rotation, targetRotation) < 0.001f;
 

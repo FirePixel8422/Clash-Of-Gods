@@ -4,6 +4,8 @@ using Unity.Netcode;
 using UnityEditor;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioController))]
+[RequireComponent(typeof(AudioController))]
 public class Meteor : NetworkBehaviour
 {
     public float moveSpeed;
@@ -21,12 +23,23 @@ public class Meteor : NetworkBehaviour
     private Rigidbody rb;
     private MeshRenderer meshRenderer;
 
+    public AudioController audioControllerMeteor;
+    public AudioController audioControllerImpact;
+
 
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         meshRenderer = GetComponent<MeshRenderer>();
+
+        audioControllerMeteor.Init();
+        audioControllerImpact.Init();
+
+        SettingsManager.SingleTon.AddAudioController(audioControllerMeteor);
+        SettingsManager.SingleTon.AddAudioController(audioControllerImpact);
+
+        audioControllerMeteor.Play();
 
         endPoint.parent = null;
 
@@ -55,6 +68,8 @@ public class Meteor : NetworkBehaviour
 
 
         meshRenderer.enabled = false;
+
+        audioControllerImpact.Play();
 
         trail.Stop();
         Destroy(trail.gameObject, trail.main.duration + trail.main.startLifetime.constantMax);
@@ -96,5 +111,11 @@ public class Meteor : NetworkBehaviour
             impactNetwork.Despawn();
             //NetworkObject.Despawn();
         }
+    }
+
+    public override void OnDestroy()
+    {
+        SettingsManager.SingleTon.RemoveAudioController(audioControllerMeteor);
+        SettingsManager.SingleTon.RemoveAudioController(audioControllerImpact);
     }
 }

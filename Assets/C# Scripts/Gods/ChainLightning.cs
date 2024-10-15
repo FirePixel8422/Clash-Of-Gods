@@ -83,7 +83,7 @@ public class ChainLightning : NetworkBehaviour
 
                     GridObjectData newCurrentTile = GridManager.Instance.GetGridData(currentTile.gridPos + direction);
 
-                    if (newCurrentTile.tower != null && newCurrentTile.tower.GetComponent<Obstacle>() == null && newCurrentTile.tower.OwnerClientId != OwnerClientId && alreadyChainedList.Contains(newCurrentTile) == false)
+                    if (newCurrentTile.tower != null && newCurrentTile.tower.GetComponent<Obstacle>() == null && newCurrentTile.tower.GetComponent<PlayerBase>() == null && newCurrentTile.tower.OwnerClientId != OwnerClientId && alreadyChainedList.Contains(newCurrentTile) == false)
                     {
                         switch (prioritizeMode)
                         {

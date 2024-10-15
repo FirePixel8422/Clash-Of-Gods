@@ -529,7 +529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57549bedca3501d4cbfebad4a107c18e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startDmg: 5
+  startDmg: 8
   maxChains: 5
   applyZeusStunPassive: 1
   directions:

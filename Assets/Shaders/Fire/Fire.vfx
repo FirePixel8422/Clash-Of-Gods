@@ -131,15 +131,6 @@ MonoBehaviour:
     - model: {fileID: 8926484042661614978}
       id: 0
       isStickyNote: 0
-    - model: {fileID: 8926484042661614754}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661614756}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661614760}
-      id: 0
-      isStickyNote: 0
   - title: Amber
     position:
       serializedVersion: 2
@@ -191,15 +182,6 @@ MonoBehaviour:
       id: 2
       isStickyNote: 0
     - model: {fileID: 8926484042661614946}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661614877}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661614879}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661614883}
       id: 0
       isStickyNote: 0
   stickyNoteInfos: []
@@ -7248,7 +7230,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614829}
   - {fileID: 8926484042661614866}
   dataType: 0
-  capacity: 10000
+  capacity: 100000
   stripCapacity: 16
   particlePerStripCount: 16
   needsComputeBounds: 0

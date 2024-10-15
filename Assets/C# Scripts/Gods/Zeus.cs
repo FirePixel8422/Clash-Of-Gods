@@ -102,6 +102,7 @@ public class Zeus : NetworkBehaviour
             if (Physics.Raycast(ray, 100, PlacementManager.Instance.ownFieldLayers + PlacementManager.Instance.neutralLayers))
             {
                 AbilityManager.Instance.ConfirmUseAbility(true);
+                SyncSelectionSpriteState_ServerRPC(0, false);
 
                 CallLightningLine_ServerRPC(selectedGridTileData.worldPos);
 
@@ -117,6 +118,7 @@ public class Zeus : NetworkBehaviour
             if (Physics.Raycast(ray, 100, PlacementManager.Instance.fullFieldLayers))
             {
                 AbilityManager.Instance.ConfirmUseAbility(false);
+                SyncSelectionSpriteState_ServerRPC(1, false);
 
                 CallLightning_ServerRPC(selectedGridTileData.worldPos);
 
@@ -139,6 +141,8 @@ public class Zeus : NetworkBehaviour
         lightningLineSelectionSprite.gameObject.SetActive(false);
         lightningLineSelectionSprite.localPosition = Vector3.zero;
 
+        SyncSelectionSpriteState_ServerRPC(0, false);
+
         usingOffensiveAbility = false;
         lightningBoltSelectionSprite.gameObject.SetActive(false);
         lightningBoltSelectionSprite.localPosition = Vector3.zero;
@@ -160,7 +164,7 @@ public class Zeus : NetworkBehaviour
 
         lightningBoltSelectionSprite.gameObject.SetActive(false);
 
-        EnableSelectionSprite_ServerRPC(0);
+        SyncSelectionSpriteState_ServerRPC(0, true);
 
         lightningLineSelectionSprite.gameObject.SetActive(true);
         lightningLineSelectionSprite.localPosition = Vector3.zero;
@@ -174,7 +178,7 @@ public class Zeus : NetworkBehaviour
 
         lightningLineSelectionSprite.gameObject.SetActive(false);
 
-        EnableSelectionSprite_ServerRPC(1);
+        SyncSelectionSpriteState_ServerRPC(1, true);
 
         lightningBoltSelectionSprite.gameObject.SetActive(true);
         lightningBoltSelectionSprite.localPosition = Vector3.zero;
@@ -182,15 +186,15 @@ public class Zeus : NetworkBehaviour
 
 
     [ServerRpc(RequireOwnership = false)]
-    private void EnableSelectionSprite_ServerRPC(int abilityId, ServerRpcParams rpcParams = default)
+    private void SyncSelectionSpriteState_ServerRPC(int abilityId, bool newState, ServerRpcParams rpcParams = default)
     {
         ulong senderClientId = rpcParams.Receive.SenderClientId;
 
-        EnableSelectionSprite_ClientRPC(senderClientId, abilityId);
+        SyncSelectionState_ClientRPC(senderClientId, abilityId, newState);
     }
 
     [ClientRpc(RequireOwnership = false)]
-    private void EnableSelectionSprite_ClientRPC(ulong clientId, int abilityId)
+    private void SyncSelectionState_ClientRPC(ulong clientId, int abilityId, bool newState)
     {
         if (NetworkManager.LocalClientId == clientId)
         {
@@ -199,12 +203,12 @@ public class Zeus : NetworkBehaviour
 
         if (abilityId == 0)
         {
-            lightningLineSelectionSprite.gameObject.SetActive(true);
+            lightningLineSelectionSprite.gameObject.SetActive(newState);
             lightningBoltSelectionSprite.gameObject.SetActive(false);
         }
         else
         {
-            lightningBoltSelectionSprite.gameObject.SetActive(true);
+            lightningBoltSelectionSprite.gameObject.SetActive(newState);
             lightningLineSelectionSprite.gameObject.SetActive(false);
         }
     }

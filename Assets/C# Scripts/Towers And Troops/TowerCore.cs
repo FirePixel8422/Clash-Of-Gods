@@ -62,7 +62,7 @@ public class TowerCore : NetworkBehaviour
     public virtual void CoreInit()
     {
         TurnManager.Instance.OnMyTurnStartedEvent.AddListener(() => GrantTurn());
-        if (GodCore.Instance.IsHades == false)
+        if (GodCore.Instance.chosenGods[OwnerClientId] != (int)GodCore.God.Hades)
         {
             TurnManager.Instance.OnTurnChangedEvent.AddListener(() => TurnChanged());
         }
@@ -71,9 +71,10 @@ public class TowerCore : NetworkBehaviour
         underAttackArrowColors.Add(PlacementManager.Instance.playerColors[NetworkObject.OwnerClientId]);
 
         audioController = GetComponent<AudioController>();
+        audioController.Init();
 
 
-        SettingsManager.SingleTon.audioControllers.Add(audioController);
+        SettingsManager.SingleTon.AddAudioController(audioController);
 
         anim = GetComponent<Animator>();
 
@@ -298,9 +299,16 @@ public class TowerCore : NetworkBehaviour
 
     public void GetAttacked(int dmg, bool stun)
     {
+        OnGetAttacked();
+
         StartCoroutine(GetAttackedAnimations(dmg, stun));
 
         GetAttacked_ServerRPC(dmg, stun);
+    }
+
+    protected virtual void OnGetAttacked()
+    {
+
     }
 
 
@@ -375,6 +383,6 @@ public class TowerCore : NetworkBehaviour
 
     public override void OnDestroy()
     {
-        SettingsManager.SingleTon.audioControllers.Remove(audioController);
+        SettingsManager.SingleTon.RemoveAudioController(audioController);
     }
 }

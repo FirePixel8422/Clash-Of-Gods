@@ -3357,7 +3357,6 @@ MonoBehaviour:
   musicAudioSlider: {fileID: 2145711133}
   fullscreenButtonText: {fileID: 183524697}
   displayRefreshRate: 0
-  audioControllers: []
 --- !u!114 &253721717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38761,21 +38760,21 @@ MonoBehaviour:
   uiSprites:
   - {fileID: 21300000, guid: aa6fe948ec9d07e42819f65f266737e5, type: 3}
   - {fileID: 21300000, guid: ca234f74d9202de40b0ba319704351f1, type: 3}
-  abilityCooldowns: 0300000006000000
+  abilityCooldowns: 0300000007000000
   fireWallSelectionSprite: {fileID: 2570532002369196774}
   fireWallEffectPrefabs:
   - {fileID: 6114818731172525320, guid: aa5f485d4748a124188a87b35476381f, type: 3}
   - {fileID: 741398761577744400, guid: d929068af241ad94e97666e3f4af3d3a, type: 3}
   fwAnimationMoveSpeed: 25
-  fireWallLifeTime: 2
+  fireWallLifeTime: 1
   meteorSelectionSprite: {fileID: 8875872960354442878}
   meteorEffectPrefabs:
-  - {fileID: 3080585558972087701, guid: bbaeb59797cbd08459dd42425cc71e9b, type: 3}
+  - {fileID: 3080585558972087701, guid: 07b1cd75fed225345bfdd4899a1dee77, type: 3}
   meteorImpactDelay: 1.25
   meteorDamageDelay: 0.1
-  meteorFireLifeTime: 2
-  meteorImpactDamageMain: 15
-  meteorImpactDamageClose: 8
+  meteorFireLifeTime: 1
+  meteorImpactDamageMain: 12
+  meteorImpactDamageClose: 5
   meteorAnimationMoveSpeed: 25
   fireEffectPrefabs:
   - {fileID: 1457210736911175799, guid: cba13e49f90abdb41b800d7988399a26, type: 3}
@@ -38919,6 +38918,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ff1d65cb2d1fda64dbcab75f4a0d59e1, type: 3}
   abilityCooldowns: 0500000003000000
   defensiveSelectionSprite: {fileID: 0}
+  fwAnimationMoveSpeed: 0
   offensiveSelectionSprite: {fileID: 0}
   selectedGridTileData:
     gridPos: {x: 0, y: 0}
@@ -44248,7 +44248,7 @@ MonoBehaviour:
   uiSprites:
   - {fileID: 21300000, guid: 1bfc46426e683994898aa28297a47874, type: 3}
   - {fileID: 21300000, guid: 5fcfc78a0bc55a94aaf8cce837387bff, type: 3}
-  abilityCooldowns: 0400000006000000
+  abilityCooldowns: 0500000007000000
   lightningLineEffectPrefabs:
   - {fileID: 7081788171278486406, guid: b3ffaca09393fd846b70360d70cd398c, type: 3}
   lightningLineDamage: 10

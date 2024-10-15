@@ -42,12 +42,6 @@ public class AudioController : MonoBehaviour
         defVolume = audioSources[0].volume;
         defPitch = audioSources[0].pitch;
     }
-    private void Start()
-    {
-        audioSources = GetComponents<AudioSource>().ToList();
-        defVolume = audioSources[0].volume;
-        defPitch = audioSources[0].pitch;
-    }
 
 
     public void UpdateVolume(float main, float sfx, float music)

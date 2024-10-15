@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static GodCore;
@@ -199,7 +200,7 @@ public class GodCore : NetworkBehaviour
             Hades.Instance.Init();
             Zeus.Instance.Init();
 
-            FindFirstObjectByType<Canvas>().sortingOrder += 1;
+            GetComponentInChildren<Canvas>().sortingOrder = -1;
         }
     }
 
@@ -223,7 +224,7 @@ public class GodCore : NetworkBehaviour
             Hades.Instance.Init();
             Zeus.Instance.Init();
 
-            FindFirstObjectByType<Canvas>().sortingOrder += 1;
+            GetComponentInChildren<Canvas>().sortingOrder = -1;
         }
     }
 #endif
