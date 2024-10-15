@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1326855395595572280, guid: 0d0f261f0dfd4a34989127d652d4aa80, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 1241086953
+      value: 2897133002
       objectReference: {fileID: 0}
     - target: {fileID: 1326855395595572280, guid: 0d0f261f0dfd4a34989127d652d4aa80, type: 3}
       propertyPath: InScenePlacedSourceGlobalObjectIdHash
@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: clips.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4158689006466531486, guid: 0d0f261f0dfd4a34989127d652d4aa80, type: 3}
+      propertyPath: clips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 58e8d14207849ba4da8e031778c87b16, type: 3}
     - target: {fileID: 4692951415604310307, guid: 0d0f261f0dfd4a34989127d652d4aa80, type: 3}
       propertyPath: m_TagString
       value: TeamColor
