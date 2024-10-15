@@ -22,6 +22,17 @@ public class GodCore : NetworkBehaviour
         }
     }
 
+    public override void OnNetworkSpawn()
+    {
+        if (IsServer)
+        {
+            useObstacleMapButtonObj.SetActive(true);
+        }
+    }
+
+
+
+
     #region God Base Data
 
     public enum God
@@ -85,8 +96,11 @@ public class GodCore : NetworkBehaviour
     public GameObject chooseGodMenu;
     public GameObject confirmGodButton;
 
+    public GameObject useObstacleMapButtonObj;
+
     public bool[] confirmed;
     public Color imageReadyColor;
+    public Color dontUseObstaclesColor;
 
     public int[] chosenGods;
 
@@ -202,6 +216,15 @@ public class GodCore : NetworkBehaviour
         }
     }
 
+
+
+    public void ToggleUseObstaclesState(Image image)
+    {
+        GridManager.Instance.useObstacles = !GridManager.Instance.useObstacles;
+
+        image.color = GridManager.Instance.useObstacles ? imageReadyColor : dontUseObstaclesColor;
+    }
+
     #endregion
 
 
@@ -226,6 +249,7 @@ public class GodCore : NetworkBehaviour
         }
     }
 #endif
+
 
     private void StartGame()
     {

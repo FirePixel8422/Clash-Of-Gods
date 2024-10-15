@@ -336,7 +336,7 @@ MonoBehaviour:
   cDissolves: 0
   nameString: Ballista
   health: 8
-  dmg: 12
+  dmg: 10
   centerPoint: {fileID: 953093416375247198}
   size: 1.8
   drawSizeGizmos: 1

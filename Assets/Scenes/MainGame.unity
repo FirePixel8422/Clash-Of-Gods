@@ -136,7 +136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2793672145029292099, guid: 461ffb21ab3767e469eec91a2883d472, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.1
+      value: -0.15
       objectReference: {fileID: 0}
     - target: {fileID: 2793672145029292099, guid: 461ffb21ab3767e469eec91a2883d472, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5627,7 +5627,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2793672145029292099, guid: 461ffb21ab3767e469eec91a2883d472, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.1
+      value: -0.15
       objectReference: {fileID: 0}
     - target: {fileID: 2793672145029292099, guid: 461ffb21ab3767e469eec91a2883d472, type: 3}
       propertyPath: m_LocalPosition.z
@@ -11067,7 +11067,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2793672145029292099, guid: 461ffb21ab3767e469eec91a2883d472, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.1
+      value: -0.15
       objectReference: {fileID: 0}
     - target: {fileID: 2793672145029292099, guid: 461ffb21ab3767e469eec91a2883d472, type: 3}
       propertyPath: m_LocalPosition.z
@@ -11544,7 +11544,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2793672145029292099, guid: 461ffb21ab3767e469eec91a2883d472, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.1
+      value: -0.15
       objectReference: {fileID: 0}
     - target: {fileID: 2793672145029292099, guid: 461ffb21ab3767e469eec91a2883d472, type: 3}
       propertyPath: m_LocalPosition.z
@@ -12813,7 +12813,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2793672145029292099, guid: 461ffb21ab3767e469eec91a2883d472, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.1
+      value: -0.15
       objectReference: {fileID: 0}
     - target: {fileID: 2793672145029292099, guid: 461ffb21ab3767e469eec91a2883d472, type: 3}
       propertyPath: m_LocalPosition.z
@@ -16906,7 +16906,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2793672145029292099, guid: 461ffb21ab3767e469eec91a2883d472, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.1
+      value: -0.15
       objectReference: {fileID: 0}
     - target: {fileID: 2793672145029292099, guid: 461ffb21ab3767e469eec91a2883d472, type: 3}
       propertyPath: m_LocalPosition.z
@@ -17468,7 +17468,6 @@ GameObject:
   - component: {fileID: 1588799943}
   - component: {fileID: 1588799940}
   - component: {fileID: 1588799942}
-  - component: {fileID: 1588799944}
   m_Layer: 0
   m_Name: Grid/Placement Manager
   m_TagString: Untagged
@@ -17516,6 +17515,7 @@ MonoBehaviour:
   gridSizeZ: 6
   p1GridTiles: []
   p2GridTiles: []
+  useObstacles: 0
 --- !u!4 &1588799941
 Transform:
   m_ObjectHideFlags: 0
@@ -17547,8 +17547,9 @@ MonoBehaviour:
   localClientId: 0
   towerForwardRotationY: 0
   playerColors:
-  - {r: 0.08235294, g: 0.6, b: 0.11764707, a: 1}
-  - {r: 0.1137255, g: 0.1254902, b: 0.6, a: 1}
+  - {r: 0, g: 0.8907395, b: 0.059382576, a: 1}
+  - {r: 0.8907395, g: 0.16608535, b: 0, a: 1}
+  - {r: 0, g: 0.054781392, b: 0.8907395, a: 1}
   selectionSprite: {fileID: 1667772970}
   ownFieldLayers:
     serializedVersion: 2
@@ -17600,47 +17601,6 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &1588799944
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1588799939}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa90c625f104eb64e921429694be16aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obstacles:
-  - {fileID: 8307772784405712219, guid: e3043885dbe45a94693015bb08900ba3, type: 3}
-  obstacleAmount: 8
-  flyingTilesStats:
-    tileTransformList: []
-    startPosY: 72
-    endPosY: 0.6
-    flyGroups:
-    - speedMin: 9
-      speedMax: 12
-      startDelayMin: 0
-      startDelayMax: 0
-      instantMoveTowards: 0
-      tiles: []
-      speeds: []
-    - speedMin: 12
-      speedMax: 15
-      startDelayMin: 0
-      startDelayMax: 0.75
-      instantMoveTowards: 0
-      tiles: []
-      speeds: []
-    - speedMin: 15
-      speedMax: 18
-      startDelayMin: 0.3
-      startDelayMax: 1
-      instantMoveTowards: 0
-      tiles: []
-      speeds: []
 --- !u!1 &1594057029
 GameObject:
   m_ObjectHideFlags: 0

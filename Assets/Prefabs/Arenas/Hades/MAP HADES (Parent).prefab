@@ -1145,11 +1145,11 @@ GameObject:
   m_Component:
   - component: {fileID: 3465907322225627438}
   - component: {fileID: 4867621133769669678}
+  - component: {fileID: 5363554586672858045}
   - component: {fileID: 6370011435255570405}
   - component: {fileID: 2606552555464632858}
   - component: {fileID: 4163299733125570228}
   - component: {fileID: 8615207724871944563}
-  - component: {fileID: 5363554586672858045}
   - component: {fileID: 6671612452846012472}
   - component: {fileID: 4667187835607676712}
   m_Layer: 0
@@ -1167,7 +1167,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7408706923807820834}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1177,7 +1177,7 @@ Transform:
   - {fileID: 5762179534223517359}
   - {fileID: 6964945533995952225}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4867621133769669678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1199,6 +1199,48 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &5363554586672858045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7408706923807820834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04d0eb19ada315046b616b84ff84aab9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dissolves: []
+  amountOfDissolves: 0
+  cDissolves: 0
+  nameString: 
+  health: 30
+  dmg: 0
+  centerPoint: {fileID: 4404308315008796474}
+  size: 23
+  drawSizeGizmos: 1
+  underAttackArrowAnim: {fileID: 5010597460709970622}
+  underAttackArrowColors:
+  - {r: 0.8627451, g: 0.2509804, b: 0.23921569, a: 1}
+  selectStateAnim: {fileID: 0}
+  targets: []
+  anim: {fileID: 0}
+  towerCompleted: 0
+  stunned: 0
+  actionsPerTurn: 0
+  actionsLeft: 0
+  useSelectionFlicker: 0
+  soundDelay: 0
+  underAttack: 0
+  tileTransforms:
+  - {fileID: 6949420668273695552}
+  - {fileID: 7552190106256617121}
+  - {fileID: 8181260672229660042}
+  - {fileID: 6023294069510874870}
+  - {fileID: 4292316220593312078}
+  - {fileID: 447907177952001629}
+  addedDissolve: -0.1
 --- !u!114 &6370011435255570405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1407,47 +1449,6 @@ MonoBehaviour:
   clips: []
   clipOrder: 0
   autoRefillSources: 0
---- !u!114 &5363554586672858045
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7408706923807820834}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04d0eb19ada315046b616b84ff84aab9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dissolves: []
-  amountOfDissolves: 0
-  cDissolves: 0
-  health: 30
-  dmg: 0
-  centerPoint: {fileID: 4404308315008796474}
-  size: 23
-  drawSizeGizmos: 1
-  underAttackArrowAnim: {fileID: 5010597460709970622}
-  underAttackArrowColors:
-  - {r: 0.8627451, g: 0.2509804, b: 0.23921569, a: 1}
-  selectStateAnim: {fileID: 0}
-  targets: []
-  anim: {fileID: 0}
-  towerCompleted: 0
-  stunned: 0
-  actionsPerTurn: 0
-  actionsLeft: 0
-  useSelectionFlicker: 0
-  soundDelay: 0
-  underAttack: 0
-  tileTransforms:
-  - {fileID: 6949420668273695552}
-  - {fileID: 7552190106256617121}
-  - {fileID: 8181260672229660042}
-  - {fileID: 6023294069510874870}
-  - {fileID: 4292316220593312078}
-  - {fileID: 447907177952001629}
-  addedDissolve: -0.1
 --- !u!95 &6671612452846012472
 Animator:
   serializedVersion: 5
@@ -1482,12 +1483,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacles:
-  - {fileID: 8307772784405712219, guid: e3043885dbe45a94693015bb08900ba3, type: 3}
+  - {fileID: 5372126499117212649, guid: 2b6930fae00fd97458e32a389bf857dd, type: 3}
   obstacleAmount: 8
   flyingTilesStats:
     tileTransformList: []
     startPosY: 72
-    endPosY: 0.6
+    endPosY: 0
     flyGroups:
     - speedMin: 9
       speedMax: 12

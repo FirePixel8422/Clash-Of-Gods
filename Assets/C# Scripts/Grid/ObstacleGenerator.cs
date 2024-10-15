@@ -29,47 +29,42 @@ public class ObstacleGenerator : NetworkBehaviour
     private bool done;
 
 
-
-
     public void CreateObstacles(bool firstPlayer)
     {
-        if (IsServer)
+        List<GridObjectData> gridTiles = new List<GridObjectData>(GridManager.Instance.p1GridTiles.Count);
+
+        if (firstPlayer)
         {
-            List<GridObjectData> gridTiles = new List<GridObjectData>(GridManager.Instance.p1GridTiles.Count);
-
-            if (firstPlayer)
+            for (int i = 0; i < GridManager.Instance.p1GridTiles.Count; i++)
             {
-                for (int i = 0; i < GridManager.Instance.p1GridTiles.Count; i++)
-                {
-                    gridTiles.Add(GridManager.Instance.p1GridTiles[i]);
-                }
+                gridTiles.Add(GridManager.Instance.p1GridTiles[i]);
             }
-            else
-            {
-                for (int i = 0; i < GridManager.Instance.p2GridTiles.Count; i++)
-                {
-                    gridTiles.Add(GridManager.Instance.p2GridTiles[i]);
-                }
-            }
-            
-
-
-            Vector3[] positions = new Vector3[obstacleAmount];
-            Vector2Int[] gridPositions = new Vector2Int[obstacleAmount];
-
-
-            for (int i = 0; i < obstacleAmount; i++)
-            {
-                int r = Random.Range(0, gridTiles.Count);
-
-                positions[i] = gridTiles[r].worldPos;
-                gridPositions[i] = gridTiles[r].gridPos;
-
-                gridTiles.RemoveAt(r);
-            }
-
-            SpawnObstacles_ServerRPC(positions, gridPositions);
         }
+        else
+        {
+            for (int i = 0; i < GridManager.Instance.p2GridTiles.Count; i++)
+            {
+                gridTiles.Add(GridManager.Instance.p2GridTiles[i]);
+            }
+        }
+
+
+
+        Vector3[] positions = new Vector3[obstacleAmount];
+        Vector2Int[] gridPositions = new Vector2Int[obstacleAmount];
+
+
+        for (int i = 0; i < obstacleAmount; i++)
+        {
+            int r = Random.Range(0, gridTiles.Count);
+
+            positions[i] = gridTiles[r].worldPos;
+            gridPositions[i] = gridTiles[r].gridPos;
+
+            gridTiles.RemoveAt(r);
+        }
+
+        SpawnObstacles_ServerRPC(positions, gridPositions);
     }
 
 

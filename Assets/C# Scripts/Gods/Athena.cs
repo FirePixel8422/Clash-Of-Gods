@@ -17,12 +17,19 @@ public class Athena : NetworkBehaviour
 
     public Sprite[] uiSprites;
     public int[] abilityCooldowns;
+    public int[] abilityCharges;
 
-    public Transform defensiveSelectionSprite;
 
-    public float fwAnimationMoveSpeed;
+    public float ringAnimationMoveSpeed;
 
     public Transform offensiveSelectionSprite;
+    public SpriteRenderer enhanceSpriteRenderer;
+
+    public Color troopSelectedColor;
+    public Color noTroopSelectedColor;
+
+    public GameObject enhanceParticleEffect;
+    public float enhanceTroopDelay;
 
 
 
@@ -66,7 +73,7 @@ public class Athena : NetworkBehaviour
 
             TurnManager.Instance.OnMyTurnStartedEvent.AddListener(() => OnTurnGranted());
 
-            AbilityManager.Instance.SetupUI(uiSprites[0], abilityCooldowns[0], uiSprites[1], abilityCooldowns[1]);
+            AbilityManager.Instance.SetupUI(uiSprites[0], abilityCooldowns[0], abilityCharges[0], uiSprites[1], abilityCooldowns[1], abilityCharges[1]);
 
             AbilityManager.Instance.ability1Activate.AddListener(() => UseDefensiveAbility());
             AbilityManager.Instance.ability2Activate.AddListener(() => UseOffensiveAbility());
@@ -82,17 +89,24 @@ public class Athena : NetworkBehaviour
             return;
         }
 
-        if (usingDefenseAbility)
+        if (usingOffensiveAbility)
         {
+            Troop troop = selectedGridTileData.tower.GetComponent<Troop>();
+            if (troop == null)
+            {
+                return;
+            }
+
             Ray ray = mainCam.ScreenPointToRay(mousePos);
             if (Physics.Raycast(ray, 100, PlacementManager.Instance.ownFieldLayers + PlacementManager.Instance.neutralLayers))
             {
-                AbilityManager.Instance.ConfirmUseAbility(true);
-                SyncSelectionSpriteState_ServerRPC(0, false);
+                AbilityManager.Instance.ConfirmUseAbility(false);
 
-                usingDefenseAbility = false;
-                defensiveSelectionSprite.gameObject.SetActive(false);
-                defensiveSelectionSprite.localPosition = Vector3.zero;
+                SyncSelectionSpriteState_ServerRPC(false);
+
+                usingOffensiveAbility = false;
+                offensiveSelectionSprite.gameObject.SetActive(false);
+                offensiveSelectionSprite.localPosition = Vector3.zero;
             }
         }
     }
@@ -104,11 +118,7 @@ public class Athena : NetworkBehaviour
             return;
         }
 
-        usingDefenseAbility = false;
-        defensiveSelectionSprite.gameObject.SetActive(false);
-        defensiveSelectionSprite.localPosition = Vector3.zero;
-
-        SyncSelectionSpriteState_ServerRPC(0, false);
+        SyncSelectionSpriteState_ServerRPC(false);
 
         usingOffensiveAbility = false;
         offensiveSelectionSprite.gameObject.SetActive(false);
@@ -122,15 +132,9 @@ public class Athena : NetworkBehaviour
     }
 
 
-    public bool usingDefenseAbility;
     public void UseDefensiveAbility()
     {
-        usingDefenseAbility = true;
         usingOffensiveAbility = false;
-
-        defensiveSelectionSprite.gameObject.SetActive(true);
-
-        SyncSelectionSpriteState_ServerRPC(0, true);
 
         offensiveSelectionSprite.gameObject.SetActive(false);
         offensiveSelectionSprite.localPosition = Vector3.zero;
@@ -140,45 +144,33 @@ public class Athena : NetworkBehaviour
     public void UseOffensiveAbility()
     {
         usingOffensiveAbility = true;
-        usingDefenseAbility = false;
 
         offensiveSelectionSprite.gameObject.SetActive(true);
+        offensiveSelectionSprite.localPosition = Vector3.zero;
 
-        SyncSelectionSpriteState_ServerRPC(1, true);
-
-        defensiveSelectionSprite.gameObject.SetActive(false);
-        defensiveSelectionSprite.localPosition = Vector3.zero;
+        SyncSelectionSpriteState_ServerRPC(false);
     }
 
 
 
 
     [ServerRpc(RequireOwnership = false)]
-    private void SyncSelectionSpriteState_ServerRPC(int abilityId, bool newState, ServerRpcParams rpcParams = default)
+    private void SyncSelectionSpriteState_ServerRPC(bool newState, ServerRpcParams rpcParams = default)
     {
         ulong senderClientId = rpcParams.Receive.SenderClientId;
 
-        SyncSelectionState_ClientRPC(senderClientId, abilityId, newState);
+        SyncSelectionState_ClientRPC(senderClientId, newState);
     }
 
     [ClientRpc(RequireOwnership = false)]
-    private void SyncSelectionState_ClientRPC(ulong clientId, int abilityId, bool newState)
+    private void SyncSelectionState_ClientRPC(ulong clientId, bool newState)
     {
         if (NetworkManager.LocalClientId == clientId)
         {
             return;
         }
 
-        if (abilityId == 0)
-        {
-            defensiveSelectionSprite.gameObject.SetActive(newState);
-            offensiveSelectionSprite.gameObject.SetActive(false);
-        }
-        else
-        {
-            offensiveSelectionSprite.gameObject.SetActive(newState);
-            defensiveSelectionSprite.gameObject.SetActive(false);
-        }
+        offensiveSelectionSprite.gameObject.SetActive(newState);
     }
 
 
@@ -190,71 +182,33 @@ public class Athena : NetworkBehaviour
         mousePos = Input.mousePosition;
     }
 
-
-    private Vector3 targetFireWallPos;
-    private Vector3 savedFireWallpos;
-
-    private Vector3 targetMeteorPos;
-    private Vector3 savedMeteorpos;
+    private Vector3 targetRingPos;
+    private Vector3 savedRingpos;
 
     private void UpdateSelectionSprite(bool mouseMoved)
     {
-        if (usingDefenseAbility && mouseMoved)
-        {
-            Ray ray = mainCam.ScreenPointToRay(mousePos);
-
-            if (Physics.Raycast(ray, out RaycastHit hitInfo, 100, PlacementManager.Instance.ownFieldLayers + PlacementManager.Instance.neutralLayers))
-            {
-                selectedGridTileData = GridManager.Instance.GridObjectFromWorldPoint(hitInfo.point);
-
-                float posZOffset = 0;
-
-                if (selectedGridTileData.gridPos.y == (GridManager.Instance.gridSizeZ - 1))
-                {
-                    posZOffset = -GridManager.Instance.tileSize;
-                }
-                if (selectedGridTileData.gridPos.y == 0)
-                {
-                    posZOffset = GridManager.Instance.tileSize;
-                }
-
-
-                if (defensiveSelectionSprite.localPosition == Vector3.zero)
-                {
-                    defensiveSelectionSprite.position = selectedGridTileData.worldPos + new Vector3(0, 0, posZOffset);
-                }
-                else if (mouseMoved)
-                {
-                    targetFireWallPos = selectedGridTileData.worldPos + new Vector3(0, 0, posZOffset);
-                    savedFireWallpos = defensiveSelectionSprite.position;
-                }
-            }
-        }
-
-
-        if (usingDefenseAbility)
-        {
-            float _fireWallMoveSpeed = fwAnimationMoveSpeed * (Vector3.Distance(savedFireWallpos, targetFireWallPos) / GridManager.Instance.tileSize);
-
-            if (Vector3.Distance(defensiveSelectionSprite.position, targetFireWallPos) > 0.0001f)
-            {
-                defensiveSelectionSprite.position = VectorLogic.InstantMoveTowards(defensiveSelectionSprite.position, targetFireWallPos, _fireWallMoveSpeed * Time.deltaTime);
-            }
-
-            SyncSelectionSprite_ServerRPC(0, defensiveSelectionSprite.position);
-        }
-
-
-
-
         if (usingOffensiveAbility && mouseMoved)
         {
             Ray ray = mainCam.ScreenPointToRay(mousePos);
 
             if (Physics.Raycast(ray, out RaycastHit hitInfo, 100, PlacementManager.Instance.fullFieldLayers))
             {
-                selectedGridTileData = GridManager.Instance.GridObjectFromWorldPoint(hitInfo.point);
+                GridObjectData newGridData = GridManager.Instance.GridObjectFromWorldPoint(hitInfo.point);
 
+                if(selectedGridTileData.gridPos != newGridData.gridPos)
+                {
+                    selectedGridTileData = newGridData;
+
+                    Troop troop = selectedGridTileData.tower.GetComponent<Troop>();
+                    if (troop != null)
+                    {
+                        enhanceSpriteRenderer.color = troopSelectedColor;
+                    }
+                    else
+                    {
+                        enhanceSpriteRenderer.color = noTroopSelectedColor;
+                    }
+                }
 
                 if (offensiveSelectionSprite.localPosition == Vector3.zero)
                 {
@@ -262,8 +216,8 @@ public class Athena : NetworkBehaviour
                 }
                 else if (mouseMoved)
                 {
-                    targetMeteorPos = selectedGridTileData.worldPos;
-                    savedMeteorpos = offensiveSelectionSprite.position;
+                    targetRingPos = selectedGridTileData.worldPos;
+                    savedRingpos = offensiveSelectionSprite.position;
                 }
             }
         }
@@ -271,45 +225,55 @@ public class Athena : NetworkBehaviour
 
         if (usingOffensiveAbility)
         {
-            float _meteorMoveSpeed = fwAnimationMoveSpeed * (Vector3.Distance(savedMeteorpos, targetMeteorPos) / GridManager.Instance.tileSize);
+            float _meteorMoveSpeed = ringAnimationMoveSpeed * (Vector3.Distance(savedRingpos, targetRingPos) / GridManager.Instance.tileSize);
 
-            if (Vector3.Distance(offensiveSelectionSprite.position, targetMeteorPos) > 0.0001f)
+            if (Vector3.Distance(offensiveSelectionSprite.position, targetRingPos) > 0.0001f)
             {
-                offensiveSelectionSprite.position = VectorLogic.InstantMoveTowards(offensiveSelectionSprite.position, targetMeteorPos, _meteorMoveSpeed * Time.deltaTime);
+                offensiveSelectionSprite.position = VectorLogic.InstantMoveTowards(offensiveSelectionSprite.position, targetRingPos, _meteorMoveSpeed * Time.deltaTime);
             }
 
-            SyncSelectionSprite_ServerRPC(1, offensiveSelectionSprite.position);
+            SyncSelectionSprite_ServerRPC(offensiveSelectionSprite.position);
         }
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void SyncSelectionSprite_ServerRPC(int abilityId, Vector3 pos, ServerRpcParams rpcParams = default)
+    private void SyncSelectionSprite_ServerRPC(Vector3 pos, ServerRpcParams rpcParams = default)
     {
         ulong senderClientId = rpcParams.Receive.SenderClientId;
-        SyncSelectionSprite_ClientRPC(senderClientId, abilityId, pos);
+        SyncSelectionSprite_ClientRPC(senderClientId, pos);
     }
 
     [ClientRpc(RequireOwnership = false)]
-    private void SyncSelectionSprite_ClientRPC(ulong clientId, int abilityId, Vector3 pos)
+    private void SyncSelectionSprite_ClientRPC(ulong clientId, Vector3 pos)
     {
         if (NetworkManager.LocalClientId == clientId)
         {
             return;
         }
 
-        if (abilityId == 0)
-        {
-            defensiveSelectionSprite.position = pos;
-        }
-        else
-        {
-            offensiveSelectionSprite.position = pos;
-        }
+        offensiveSelectionSprite.position = pos;
     }
 
 
-    public void Reinforce()
-    {
 
+    public void EnhanceTroop(Vector3 pos, Troop troop)
+    {
+        EnhanceParticleEffect_ServerRPC(pos);
+
+        StartCoroutine(EnhanceTroopDelay(troop));
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void EnhanceParticleEffect_ServerRPC(Vector3 pos)
+    {
+        GameObject enhanceEffect = Instantiate(enhanceParticleEffect, pos, Quaternion.identity);
+        enhanceEffect.GetComponent<NetworkObject>().Spawn();
+    }
+
+    private IEnumerator EnhanceTroopDelay(Troop troop)
+    {
+        yield return new WaitForSeconds(enhanceTroopDelay);
+
+        troop.EnhanceTroop_ServerRPC();
     }
 }

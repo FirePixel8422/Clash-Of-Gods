@@ -35,6 +35,8 @@ public class GridManager : NetworkBehaviour
     public List<GridObjectData> p1GridTiles = new List<GridObjectData>();
     public List<GridObjectData> p2GridTiles = new List<GridObjectData>();
 
+    public bool useObstacles;
+
 
 
 
@@ -132,8 +134,11 @@ public class GridManager : NetworkBehaviour
             }
         }
 
-        ObstacleGenerator.Instance.CreateObstacles(true);
-        ObstacleGenerator.Instance2.CreateObstacles(false);
+        if (IsServer && useObstacles)
+        {
+            ObstacleGenerator.Instance.CreateObstacles(true);
+            ObstacleGenerator.Instance2.CreateObstacles(false);
+        }
     }
 
 

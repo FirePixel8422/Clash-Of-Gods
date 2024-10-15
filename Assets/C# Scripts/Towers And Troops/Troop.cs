@@ -226,13 +226,13 @@ public class Troop : TowerCore
 
 
     [ServerRpc(RequireOwnership = false)]
-    public void BuffTroop_ServerRPC()
+    public void EnhanceTroop_ServerRPC()
     {
-        BuffTroop_ClientRPC();
+        EnhanceTroop_ClientRPC();
     }
 
     [ClientRpc(RequireOwnership = false)]
-    private void BuffTroop_ClientRPC()
+    private void EnhanceTroop_ClientRPC()
     {
         dmg = (int)(dmg * GodCore.Instance.damageMultiplier);
         health = (int)(health * GodCore.Instance.healthMultiplier);

@@ -17,6 +17,7 @@ public class Zeus : NetworkBehaviour
 
     public Sprite[] uiSprites;
     public int[] abilityCooldowns;
+    public int[] abilityCharges;
 
     public GameObject[] lightningLineEffectPrefabs;
     public int lightningLineDamage;
@@ -68,7 +69,7 @@ public class Zeus : NetworkBehaviour
 
             TurnManager.Instance.OnMyTurnStartedEvent.AddListener(() => OnTurnGranted());
 
-            AbilityManager.Instance.SetupUI(uiSprites[0], abilityCooldowns[0], uiSprites[1], abilityCooldowns[1]);
+            AbilityManager.Instance.SetupUI(uiSprites[0], abilityCooldowns[0], abilityCharges[0], uiSprites[1], abilityCooldowns[1], abilityCharges[1]);
 
             AbilityManager.Instance.ability1Activate.AddListener(() => UseDefensiveAbility());
             AbilityManager.Instance.ability2Activate.AddListener(() => UseOffensiveAbility());

@@ -50,6 +50,7 @@ public class PlacementManager : NetworkBehaviour
     public ulong localClientId;
     public int towerForwardRotationY;
 
+    [ColorUsage(true, true)]
     public Color[] playerColors;
 
 
@@ -327,7 +328,7 @@ public class PlacementManager : NetworkBehaviour
             {
                 if (renderer.gameObject.CompareTag("TeamColor"))
                 {
-                    renderer.material.SetColor(Shader.PropertyToID("_Base_Color"), playerColors[fromClientId]);
+                    renderer.material.SetColor(Shader.PropertyToID("_Base_Color"), playerColors[GodCore.Instance.chosenGods[fromClientId]]);
                 }
             }
         }

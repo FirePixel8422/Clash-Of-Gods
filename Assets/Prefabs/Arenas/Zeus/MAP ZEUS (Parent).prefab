@@ -98,7 +98,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 686659084230405721}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -109,7 +109,7 @@ Transform:
   - {fileID: 515878462870706862}
   - {fileID: 6477341225843743622}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6623026309696479636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -590,6 +590,7 @@ MonoBehaviour:
   dissolves: []
   amountOfDissolves: 0
   cDissolves: 0
+  nameString: 
   health: 30
   dmg: 0
   centerPoint: {fileID: 6477341225843743622}
@@ -655,7 +656,7 @@ MonoBehaviour:
   flyingTilesStats:
     tileTransformList: []
     startPosY: 72
-    endPosY: 0.6
+    endPosY: 0
     flyGroups:
     - speedMin: 9
       speedMax: 12

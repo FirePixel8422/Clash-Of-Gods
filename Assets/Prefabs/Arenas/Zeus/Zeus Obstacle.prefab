@@ -124,7 +124,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0caf7d11fa5326b41978938be965da11, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0caf7d11fa5326b41978938be965da11, type: 3}
       propertyPath: m_LocalPosition.z
@@ -164,7 +164,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 4ffd157b490aaa64293c6c1c47ea0b64, type: 2}
     - target: {fileID: 919132149155446097, guid: 0caf7d11fa5326b41978938be965da11, type: 3}
       propertyPath: m_Name
-      value: Zeus Arena obstacle
+      value: Zeus Obstacle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -181,6 +181,9 @@ PrefabInstance:
       addedObject: {fileID: -8824750508181250140}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0caf7d11fa5326b41978938be965da11, type: 3}
       insertIndex: 2
+      addedObject: {fileID: 6139695990931001177}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0caf7d11fa5326b41978938be965da11, type: 3}
+      insertIndex: 3
       addedObject: {fileID: -5529978926881933492}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0caf7d11fa5326b41978938be965da11, type: 3}
       insertIndex: -1
@@ -221,6 +224,21 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &6139695990931001177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8307772784405712219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8705240de06489e4c887355edae1e3d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  min: 1
+  max: 10
+  randomList: []
 --- !u!114 &-5529978926881933492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,7 +254,8 @@ MonoBehaviour:
   dissolves: []
   amountOfDissolves: 0
   cDissolves: 0
-  health: 1
+  nameString: 
+  health: 0
   dmg: 0
   centerPoint: {fileID: 1946235691401410184}
   size: 2.4
