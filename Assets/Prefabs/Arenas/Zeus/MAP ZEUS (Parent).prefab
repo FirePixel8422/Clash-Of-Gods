@@ -591,7 +591,7 @@ MonoBehaviour:
   amountOfDissolves: 0
   cDissolves: 0
   nameString: 
-  health: 30
+  health: 50
   dmg: 0
   centerPoint: {fileID: 6477341225843743622}
   size: 19
@@ -616,7 +616,7 @@ MonoBehaviour:
   - {fileID: 3291057801546747048}
   - {fileID: 3830434159421028371}
   - {fileID: 4810784814959177831}
-  addedDissolve: -0.1
+  addedDissolve: 0
 --- !u!95 &8237890508733858160
 Animator:
   serializedVersion: 5

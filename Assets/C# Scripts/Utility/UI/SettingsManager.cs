@@ -207,19 +207,18 @@ public class SettingsManager : NetworkBehaviour
     private void KillMatch_ServerRPC()
     {
         KillMatch_ClientRPC();
-
-        NetworkManager.Shutdown();
-        Lobbies.Instance.DeleteLobbyAsync(LobbyRelay.Instance._lobbyId);
     }
 
     [ClientRpc(RequireOwnership = false)]
     private void KillMatch_ClientRPC()
     {
         Destroy(GodCore.Instance.gameObject);
-        Destroy(GameSaveLoadFunctions.Instance.gameObject);
         Destroy(LobbyRelay.Instance.gameObject);
         Destroy(NetworkManager.gameObject);
         Destroy(MusicManager.Singleton.gameObject);
+
+        NetworkManager.Shutdown();
+        Lobbies.Instance.DeleteLobbyAsync(LobbyRelay.Instance._lobbyId);
 
         SceneManager.LoadScene(0);
     }

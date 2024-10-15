@@ -144,6 +144,10 @@ PrefabInstance:
       propertyPath: moveArrowColors.Array.data[3].r
       value: 0.424002
       objectReference: {fileID: 0}
+    - target: {fileID: 8126149607645013550, guid: 0d0f261f0dfd4a34989127d652d4aa80, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

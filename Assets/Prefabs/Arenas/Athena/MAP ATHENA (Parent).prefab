@@ -266,7 +266,7 @@ MonoBehaviour:
   amountOfDissolves: 0
   cDissolves: 0
   nameString: 
-  health: 30
+  health: 50
   dmg: 0
   centerPoint: {fileID: 2432402529358042470}
   size: 16
@@ -291,7 +291,7 @@ MonoBehaviour:
   - {fileID: 1803851581580173238}
   - {fileID: 444046928475692104}
   - {fileID: 1301651790022851774}
-  addedDissolve: -0.1
+  addedDissolve: 0
 --- !u!114 &8851999115426081220
 MonoBehaviour:
   m_ObjectHideFlags: 0
