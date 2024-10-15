@@ -5149,7 +5149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3907625525
+  GlobalObjectIdHash: 1971970347
   InScenePlacedSourceGlobalObjectIdHash: 3907625525
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -5235,7 +5235,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioType: 1
-  clips: []
+  clips:
+  - {fileID: 8300000, guid: 9e59f23ef8234ab49b528433b1556729, type: 3}
   clipOrder: 0
   autoRefillSources: 0
 --- !u!82 &2862107074316816270
