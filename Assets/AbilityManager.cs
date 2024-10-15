@@ -63,7 +63,7 @@ public class AbilityManager : MonoBehaviour
             StartCoroutine(FadeColor(image1, false));
             text1.text = "";
         }
-        else
+        else if (cCooldown1 > 0)
         {
             text1.text = Mathf.Clamp(cCooldown1, 0, 50).ToString();
         }
@@ -76,7 +76,7 @@ public class AbilityManager : MonoBehaviour
             StartCoroutine(FadeColor(image2, false));
             text2.text = "";
         }
-        else
+        else if (cCooldown2 > 0)
         {
             text2.text = Mathf.Clamp(cCooldown2, 0, 50).ToString();
         }
@@ -92,9 +92,6 @@ public class AbilityManager : MonoBehaviour
 
         cooldown1 = _cooldown1;
         cooldown2 = _cooldown2;
-
-        text1.text = Mathf.Clamp(cCooldown1, 0, 50).ToString();
-        text2.text = Mathf.Clamp(cCooldown2, 0, 50).ToString();
     }
 
     public void TryUseAbility(bool first)

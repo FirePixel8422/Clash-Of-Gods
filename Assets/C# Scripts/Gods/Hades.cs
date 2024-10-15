@@ -12,6 +12,12 @@ using UnityEngine.VFX;
 
 public class Hades : NetworkBehaviour
 {
+    public static Hades Instance;
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     public Sprite[] uiSprites;
     public int[] abilityCooldowns;
 
@@ -33,6 +39,7 @@ public class Hades : NetworkBehaviour
 
     public GameObject[] meteorEffectPrefabs;
 
+    public float meteorImpactDelay;
     public float meteorDamageDelay;
 
     public int meteorFireLifeTime;
@@ -67,10 +74,10 @@ public class Hades : NetworkBehaviour
 
 
 
-    private void Start()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
 
+
+    public void Init()
+    {
         gfxRayCaster = FindObjectOfType<GraphicRaycaster>(true);
 
         fireWallEffectList = new List<GameObject>();
@@ -83,14 +90,13 @@ public class Hades : NetworkBehaviour
 
 
         targetFireWallPos = fireWallSelectionSprite.position;
-    }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
         if (GodCore.Instance.IsHades == false)
         {
             return;
         }
+
+
 
         mainCam = Camera.main;
 
@@ -289,14 +295,12 @@ public class Hades : NetworkBehaviour
         }
     }
 
-    private IEnumerator DestroyDelay(NetworkObject networkObject)
-    {
-        yield return new WaitForSeconds(destroyDelay);
-
-        networkObject.Despawn(true);
-    }
     #endregion
 
+
+
+
+    #region Update Selection Sprite
 
     private void Update()
     {
@@ -369,25 +373,14 @@ public class Hades : NetworkBehaviour
             {
                 selectedGridTileData = GridManager.Instance.GridObjectFromWorldPoint(hitInfo.point);
 
-                float posZOffset = 0;
-
-                if (selectedGridTileData.gridPos.y == (GridManager.Instance.gridSizeZ - 1))
-                {
-                    posZOffset = -GridManager.Instance.tileSize;
-                }
-                if (selectedGridTileData.gridPos.y == 0)
-                {
-                    posZOffset = GridManager.Instance.tileSize;
-                }
-
 
                 if (meteorSelectionSprite.localPosition == Vector3.zero)
                 {
-                    meteorSelectionSprite.position = selectedGridTileData.worldPos + new Vector3(0, 0, posZOffset);
+                    meteorSelectionSprite.position = selectedGridTileData.worldPos;
                 }
                 else if (mouseMoved)
                 {
-                    targetMeteorPos = selectedGridTileData.worldPos + new Vector3(0, 0, posZOffset);
+                    targetMeteorPos = selectedGridTileData.worldPos;
                     savedMeteorpos = meteorSelectionSprite.position;
                 }
             }
@@ -406,6 +399,7 @@ public class Hades : NetworkBehaviour
             SyncSelectionSprite_ServerRPC(0, meteorSelectionSprite.position);
         }
     }
+
 
 
     [ServerRpc(RequireOwnership = false)]
@@ -432,6 +426,9 @@ public class Hades : NetworkBehaviour
             meteorSelectionSprite.position = pos;
         }
     }
+
+    #endregion
+
 
 
 
@@ -490,6 +487,7 @@ public class Hades : NetworkBehaviour
 
 
 
+
     [ClientRpc(RequireOwnership = false)]
     private void SetFireState_ClientRPC(Vector2Int gridPos, int addedState)
     {
@@ -529,7 +527,15 @@ public class Hades : NetworkBehaviour
     }
 
 
+    private IEnumerator DestroyDelay(NetworkObject networkObject)
+    {
+        yield return new WaitForSeconds(destroyDelay);
 
+        networkObject.Despawn(true);
+    }
+
+
+    #region Call Down Meteor On Network
 
     [ServerRpc(RequireOwnership = false)]
     private void CallMeteor_ServerRPC(Vector3 pos, ServerRpcParams rpcParams = default)
@@ -538,19 +544,17 @@ public class Hades : NetworkBehaviour
 
         int rPrefab = Random.Range(0, meteorEffectPrefabs.Length);
 
-        GameObject effect = Instantiate(meteorEffectPrefabs[rPrefab], pos, Quaternion.identity);
+        GameObject effect = Instantiate(meteorEffectPrefabs[rPrefab], pos + meteorEffectPrefabs[rPrefab].transform.position, Quaternion.identity);
         NetworkObject effectNetwork = effect.GetComponent<NetworkObject>();
         effectNetwork.Spawn(true);
 
-        CallMeteor_ClientRPC(pos);
-
         StartCoroutine(MeteorDamageDelay(senderClientId, pos));
-
-        StartCoroutine(DestroyDelay(effectNetwork));
     }
 
     private IEnumerator MeteorDamageDelay(ulong senderClientId, Vector3 pos)
     {
+        yield return new WaitForSeconds(meteorImpactDelay);
+
         Vector2Int gridPos = GridManager.Instance.GridObjectFromWorldPoint(pos).gridPos;
 
         Vector2Int[] gridPositonOffsets = new Vector2Int[8]
@@ -579,7 +583,7 @@ public class Hades : NetworkBehaviour
         VisualEffect effect = Instantiate(fireEffectPrefabs[rPrefab], spawnFirePos, Quaternion.Euler(0, Random.Range(180, -180), 0));
         effect.GetComponent<NetworkObject>().Spawn(true);
 
-        SetFireState_ClientRPC(gridPos, -1);
+        SetFireState_ClientRPC(gridPos, 1);
 
         fireEffectList.Add(effect);
         fireEffectGridPosList.Add(gridData.gridPos);
@@ -600,7 +604,7 @@ public class Hades : NetworkBehaviour
                 effect = Instantiate(fireEffectPrefabs[rPrefab], spawnFirePos, Quaternion.Euler(0, Random.Range(180, -180), 0));
                 effect.GetComponent<NetworkObject>().Spawn(true);
 
-                SetFireState_ClientRPC(gridPos + gridPositonOffsets[i], -1);
+                SetFireState_ClientRPC(gridPos + gridPositonOffsets[i], 1);
 
                 fireEffectList.Add(effect);
                 fireEffectGridPosList.Add(gridData.gridPos);
@@ -617,7 +621,7 @@ public class Hades : NetworkBehaviour
 
         if (gridData.tower != null && gridData.tower.OwnerClientId != senderClientId)
         {
-            gridData.tower.GetAttacked(meteorImpactDamageClose, false);
+            gridData.tower.GetAttacked(meteorImpactDamageMain, false);
         }
 
         for (int i = 0; i < 8; i++)
@@ -634,20 +638,5 @@ public class Hades : NetworkBehaviour
         }
     }
 
-
-    [ClientRpc(RequireOwnership = false)]
-    private void CallMeteor_ClientRPC(Vector3 pos)
-    {
-        Vector2Int[] gridPositonOffsets = new Vector2Int[8]
-        {
-            new Vector2Int(1, 0),
-            new Vector2Int(-1, 0),
-            new Vector2Int(0, 1),
-            new Vector2Int(0, -1),
-            new Vector2Int(1, 1),
-            new Vector2Int(1, -1),
-            new Vector2Int(-1, 1),
-            new Vector2Int(-1, -1),
-        };
-    }
+    #endregion
 }

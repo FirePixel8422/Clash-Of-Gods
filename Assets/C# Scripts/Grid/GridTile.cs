@@ -21,8 +21,16 @@ public class GridTile : MonoBehaviour
     {
         mat = GetComponent<Renderer>().material;
 
+        StartCoroutine(WaitForGrid());
+    }
+
+    private IEnumerator WaitForGrid()
+    {
+        yield return new WaitUntil(() => GridManager.Instance.gridSizeX != 0);
+
         GridManager.Instance.UpdateGridDataTile(GridManager.Instance.GridObjectFromWorldPoint(transform.position).gridPos, this);
     }
+
 
     public void SetOnFire(int amount)
     {

@@ -10,6 +10,13 @@ using UnityEngine.VFX;
 
 public class Zeus : NetworkBehaviour
 {
+    public static Zeus Instance;
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+
     public Sprite[] uiSprites;
     public int[] abilityCooldowns;
 
@@ -40,18 +47,15 @@ public class Zeus : NetworkBehaviour
 
 
 
-    private void Start()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
 
+
+    public void Init()
+    {
         gfxRayCaster = FindObjectOfType<GraphicRaycaster>(true);
 
         targetLightningLinePos = lightningLineSelectionSprite.position;
         targetLightningBoltPos = lightningBoltSelectionSprite.position;
-    }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
         if (GodCore.Instance.IsZeus == false)
         {
             return;

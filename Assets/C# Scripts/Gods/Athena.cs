@@ -8,6 +8,13 @@ using UnityEngine.UI;
 
 public class Athena : NetworkBehaviour
 {
+    public static Athena Instance;
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+
     public Sprite[] uiSprites;
     public int[] abilityCooldowns;
 
@@ -27,15 +34,10 @@ public class Athena : NetworkBehaviour
 
 
 
-    private void Start()
+    public void Init()
     {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-
         gfxRayCaster = FindObjectOfType<GraphicRaycaster>(true);
-    }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
         if (GodCore.Instance.IsAthena == false)
         {
             return;

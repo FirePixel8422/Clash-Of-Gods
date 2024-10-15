@@ -276,6 +276,7 @@ GameObject:
   - component: {fileID: 3248637148207079323}
   - component: {fileID: 2781031384302260257}
   - component: {fileID: 4381187135083475961}
+  - component: {fileID: -2058604263397161326}
   - component: {fileID: 2707897958744510841}
   - component: {fileID: 8033987500603523025}
   - component: {fileID: 6476884657575687451}
@@ -471,6 +472,27 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &-2058604263397161326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4866773627078445332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3090475033
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &2707897958744510841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -510,6 +532,7 @@ MonoBehaviour:
   prioritizeMode: 2
   moveSpeed: 20
   chainDelay: 0.15
+  damageDelay: 0
   rotTransform: {fileID: 7425589593988221256}
   coneOffset: {x: 0, y: 0, z: 3}
 --- !u!114 &8033987500603523025

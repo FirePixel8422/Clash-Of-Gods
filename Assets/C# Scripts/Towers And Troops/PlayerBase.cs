@@ -5,22 +5,10 @@ using UnityEngine;
 
 public class PlayerBase : TowerCore
 {
-    public ulong ownerId;
-
     public Transform[] tileTransforms;
 
     private int maxHealth;
     public float addedDissolve;
-
-
-
-    public override void OnNetworkSpawn()
-    {
-        if (IsServer)
-        {
-            NetworkObject.ChangeOwnership(ownerId);
-        }
-    }
 
     private void Start()
     {
@@ -54,6 +42,6 @@ public class PlayerBase : TowerCore
     {
         base.RevertCompleted();
 
-        LoseWinGame.Instance.WinLoseGame_ServerRPC((ulong)(ownerId == 1 ? 0 : 1));
+        LoseWinGame.Instance.WinLoseGame_ServerRPC((ulong)(OwnerClientId == 1 ? 0 : 1));
     }
 }

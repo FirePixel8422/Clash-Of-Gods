@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 
 public class GridManager : NetworkBehaviour
@@ -39,8 +38,10 @@ public class GridManager : NetworkBehaviour
 
 
 
-    public override void OnNetworkSpawn()
+    public void Init(PlayerBase[] _bases)
     {
+        bases = _bases;
+
         CreateGrid();
 
         PlacementManager.Instance.Init(NetworkManager.LocalClientId == 0 ? p1 : p2, neutral, p1 + p2 + neutral, NetworkManager.LocalClientId);
@@ -222,11 +223,7 @@ public class GridManager : NetworkBehaviour
             {
                 for (int z = 0; z < gridSizeZ; z++)
                 {
-                    if (grid[x, z].full)
-                    {
-                        Gizmos.color = Color.gray;
-                    }
-                    else if (grid[x, z].type == 10)
+                    if (grid[x, z].type == 10)
                     {
                         Gizmos.color = Color.black;
                     }
@@ -242,7 +239,11 @@ public class GridManager : NetworkBehaviour
                     {
                         Gizmos.color = Color.white;
                     }
-                    
+                    else if (grid[x, z].full)
+                    {
+                        Gizmos.color = Color.gray;
+                    }
+
                     Gizmos.DrawCube(worldBottomLeft + Vector3.right * (x * tileSize + tileSize / 2) + Vector3.forward * (z * tileSize + tileSize / 2), new Vector3(tileSize / 2, tileSize / 2, tileSize / 2));
                 }
             }
