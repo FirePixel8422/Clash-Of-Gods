@@ -178,8 +178,10 @@ public class AbilityManager : MonoBehaviour
 #if UNITY_EDITOR
     private void Update()
     {
-        if(Input.GetKey(KeyCode.F5))
+        if(Input.GetKeyDown(KeyCode.F5))
         {
+            //reset cooldown
+
             cCooldown1 = 0;
 
             if (cCooldown1 == 0)

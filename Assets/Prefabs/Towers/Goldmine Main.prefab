@@ -317,7 +317,8 @@ MonoBehaviour:
   dissolves: []
   amountOfDissolves: 0
   cDissolves: 0
-  health: 0
+  nameString: Goldmine
+  health: 5
   dmg: 0
   centerPoint: {fileID: 3190499162408410763}
   size: 2.4

@@ -17,6 +17,7 @@ public class TowerCore : NetworkBehaviour
     #endregion
 
 
+    public string nameString;
     public int health;
     public int dmg;
 
@@ -62,7 +63,7 @@ public class TowerCore : NetworkBehaviour
     public virtual void CoreInit()
     {
         TurnManager.Instance.OnMyTurnStartedEvent.AddListener(() => GrantTurn());
-        if (GodCore.Instance.chosenGods[OwnerClientId] != (int)GodCore.God.Hades)
+        if (GodCore.Instance.chosenGods[OwnerClientId] != (int)GodCore.God.Hades && GetComponent<PlayerBase>() == false)
         {
             TurnManager.Instance.OnTurnChangedEvent.AddListener(() => TurnChanged());
         }
@@ -126,6 +127,8 @@ public class TowerCore : NetworkBehaviour
             anim.SetTrigger("Select");
         }
 
+        TroopInfoManager.Instance.SelectTower(nameString, health.ToString(), dmg.ToString());
+
         OnSelectTower();
     }
     protected virtual void OnSelectTower()
@@ -151,6 +154,8 @@ public class TowerCore : NetworkBehaviour
             target.GetTargetted(false, actionsLeft != 0);
         }
         targets.Clear();
+
+        TroopInfoManager.Instance.DeselectTower();
 
         OnDeSelectTower();
     }

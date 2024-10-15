@@ -1,13 +1,8 @@
-using JetBrains.Annotations;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static GodCore;
 
 public class GodCore : NetworkBehaviour
 {
@@ -37,6 +32,9 @@ public class GodCore : NetworkBehaviour
     };
 
 
+    public float damageMultiplier;
+    public float healthMultiplier;
+    public int addedMoves;
     public bool IsAthena
     {
         get

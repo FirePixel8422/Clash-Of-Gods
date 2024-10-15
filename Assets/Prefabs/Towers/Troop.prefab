@@ -183,6 +183,7 @@ MonoBehaviour:
   dissolves: []
   amountOfDissolves: 0
   cDissolves: 0
+  nameString: Troop
   health: 5
   dmg: 6
   centerPoint: {fileID: 898086536465411847}
