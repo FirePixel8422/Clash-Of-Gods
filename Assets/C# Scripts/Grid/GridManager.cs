@@ -132,7 +132,8 @@ public class GridManager : NetworkBehaviour
             }
         }
 
-        ObstacleGenerator.Instance.CreateObstacles();
+        ObstacleGenerator.Instance.CreateObstacles(true);
+        ObstacleGenerator.Instance2.CreateObstacles(false);
     }
 
 

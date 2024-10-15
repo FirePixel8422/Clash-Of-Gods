@@ -36,6 +36,12 @@ public class AudioController : MonoBehaviour
 
 
 
+    public void Init()
+    {
+        audioSources = GetComponents<AudioSource>().ToList();
+        defVolume = audioSources[0].volume;
+        defPitch = audioSources[0].pitch;
+    }
     private void Start()
     {
         audioSources = GetComponents<AudioSource>().ToList();

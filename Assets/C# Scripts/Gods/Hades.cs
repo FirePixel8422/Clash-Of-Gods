@@ -90,6 +90,7 @@ public class Hades : NetworkBehaviour
 
 
         targetFireWallPos = fireWallSelectionSprite.position;
+        targetMeteorPos = meteorSelectionSprite.position;
 
         if (GodCore.Instance.IsHades == false)
         {
@@ -198,6 +199,8 @@ public class Hades : NetworkBehaviour
 
         fireWallSelectionSprite.gameObject.SetActive(true);
 
+        EnableSelectionSprite_ServerRPC(0);
+
         meteorSelectionSprite.gameObject.SetActive(false);
         meteorSelectionSprite.localPosition = Vector3.zero;
     }
@@ -210,10 +213,40 @@ public class Hades : NetworkBehaviour
 
         meteorSelectionSprite.gameObject.SetActive(true);
 
+        EnableSelectionSprite_ServerRPC(1);
+
         fireWallSelectionSprite.gameObject.SetActive(false);
         fireWallSelectionSprite.localPosition = Vector3.zero;
     }
 
+
+    [ServerRpc(RequireOwnership = false)]
+    private void EnableSelectionSprite_ServerRPC(int abilityId, ServerRpcParams rpcParams = default)
+    {
+        ulong senderClientId = rpcParams.Receive.SenderClientId;
+
+        EnableSelectionSprite_ClientRPC(senderClientId, abilityId);
+    }
+
+    [ClientRpc(RequireOwnership = false)]
+    private void EnableSelectionSprite_ClientRPC(ulong clientId, int abilityId)
+    {
+        if (NetworkManager.LocalClientId == clientId)
+        {
+            return;
+        }
+
+        if (abilityId == 0)
+        {
+            fireWallSelectionSprite.gameObject.SetActive(true);
+            meteorSelectionSprite.gameObject.SetActive(false);
+        }
+        else
+        {
+            meteorSelectionSprite.gameObject.SetActive(true);
+            fireWallSelectionSprite.gameObject.SetActive(false);
+        }
+    }
 
 
 
@@ -396,7 +429,7 @@ public class Hades : NetworkBehaviour
                 meteorSelectionSprite.position = VectorLogic.InstantMoveTowards(meteorSelectionSprite.position, targetMeteorPos, _meteorMoveSpeed * Time.deltaTime);
             }
 
-            SyncSelectionSprite_ServerRPC(0, meteorSelectionSprite.position);
+            SyncSelectionSprite_ServerRPC(1, meteorSelectionSprite.position);
         }
     }
 

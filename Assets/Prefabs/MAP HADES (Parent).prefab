@@ -1150,6 +1150,8 @@ GameObject:
   - component: {fileID: 4163299733125570228}
   - component: {fileID: 8615207724871944563}
   - component: {fileID: 5363554586672858045}
+  - component: {fileID: 6671612452846012472}
+  - component: {fileID: 4667187835607676712}
   m_Layer: 0
   m_Name: MAP HADES (Parent)
   m_TagString: Untagged
@@ -1420,7 +1422,7 @@ MonoBehaviour:
   dissolves: []
   amountOfDissolves: 0
   cDissolves: 0
-  health: 28
+  health: 30
   dmg: 0
   centerPoint: {fileID: 4404308315008796474}
   size: 23
@@ -1446,6 +1448,68 @@ MonoBehaviour:
   - {fileID: 4292316220593312078}
   - {fileID: 447907177952001629}
   addedDissolve: -0.1
+--- !u!95 &6671612452846012472
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7408706923807820834}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4667187835607676712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7408706923807820834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa90c625f104eb64e921429694be16aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacles:
+  - {fileID: 8307772784405712219, guid: e3043885dbe45a94693015bb08900ba3, type: 3}
+  obstacleAmount: 8
+  flyingTilesStats:
+    tileTransformList: []
+    startPosY: 72
+    endPosY: 0.6
+    flyGroups:
+    - speedMin: 9
+      speedMax: 12
+      startDelayMin: 0
+      startDelayMax: 0
+      instantMoveTowards: 0
+      tiles: []
+      speeds: []
+    - speedMin: 12
+      speedMax: 15
+      startDelayMin: 0
+      startDelayMax: 0.75
+      instantMoveTowards: 0
+      tiles: []
+      speeds: []
+    - speedMin: 15
+      speedMax: 18
+      startDelayMin: 0.3
+      startDelayMax: 1
+      instantMoveTowards: 0
+      tiles: []
+      speeds: []
 --- !u!1 &7597309739096098758
 GameObject:
   m_ObjectHideFlags: 0

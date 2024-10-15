@@ -94,7 +94,7 @@ public class Meteor : NetworkBehaviour
         if (IsServer)
         {
             impactNetwork.Despawn();
-            NetworkObject.Despawn();
+            //NetworkObject.Despawn();
         }
     }
 }

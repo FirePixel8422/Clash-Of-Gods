@@ -125,6 +125,8 @@ public class Athena : NetworkBehaviour
 
         defensiveSelectionSprite.gameObject.SetActive(true);
 
+        EnableSelectionSprite_ServerRPC(0);
+
         offensiveSelectionSprite.gameObject.SetActive(false);
         offensiveSelectionSprite.localPosition = Vector3.zero;
     }
@@ -137,7 +139,38 @@ public class Athena : NetworkBehaviour
 
         offensiveSelectionSprite.gameObject.SetActive(true);
 
+        EnableSelectionSprite_ServerRPC(1);
+
         defensiveSelectionSprite.gameObject.SetActive(false);
         defensiveSelectionSprite.localPosition = Vector3.zero;
+    }
+
+
+    [ServerRpc(RequireOwnership = false)]
+    private void EnableSelectionSprite_ServerRPC(int abilityId, ServerRpcParams rpcParams = default)
+    {
+        ulong senderClientId = rpcParams.Receive.SenderClientId;
+
+        EnableSelectionSprite_ClientRPC(senderClientId, abilityId);
+    }
+
+    [ClientRpc(RequireOwnership = false)]
+    private void EnableSelectionSprite_ClientRPC(ulong clientId, int abilityId)
+    {
+        if (NetworkManager.LocalClientId == clientId)
+        {
+            return;
+        }
+
+        if (abilityId == 0)
+        {
+            defensiveSelectionSprite.gameObject.SetActive(true);
+            offensiveSelectionSprite.gameObject.SetActive(false);
+        }
+        else
+        {
+            offensiveSelectionSprite.gameObject.SetActive(true);
+            defensiveSelectionSprite.gameObject.SetActive(false);
+        }
     }
 }

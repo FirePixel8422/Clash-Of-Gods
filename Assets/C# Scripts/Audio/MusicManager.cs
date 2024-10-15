@@ -30,13 +30,18 @@ public class MusicManager : MonoBehaviour
 
     public float currentVolume;
 
+    private bool transitioning;
+
 
     public void UpdateVolume(float main, float sfx, float music)
     {
         currentVolume = main * music;
 
-        musicPlayer.volume = currentVolume;
-        musicPlayerAlt.volume = currentVolume;
+        if (transitioning == false)
+        {
+            musicPlayer.volume = currentVolume;
+            musicPlayerAlt.volume = currentVolume;
+        }
     }
 
 
@@ -141,13 +146,15 @@ public class MusicManager : MonoBehaviour
 
     private IEnumerator FadeChangeMusicTrack(AudioClip audioClip, float fadeSpeed)
     {
+        transitioning = true;
+
         AudioSource currentSource = altMusicPlayerActive ? musicPlayerAlt : musicPlayer;
         AudioSource altSource = altMusicPlayerActive ? musicPlayer : musicPlayerAlt;
 
         altSource.clip = audioClip;
         altSource.Play();
 
-        while (currentSource.volume > 0)
+        while (currentSource.volume > 0 || altSource.volume != currentVolume)
         {
             currentSource.volume = Mathf.MoveTowards(currentSource.volume, 0, fadeSpeed * Time.deltaTime);
             altSource.volume = Mathf.MoveTowards(altSource.volume, currentVolume, fadeSpeed * Time.deltaTime);
@@ -157,5 +164,7 @@ public class MusicManager : MonoBehaviour
         currentSource.Stop();
 
         altMusicPlayerActive = !altMusicPlayerActive;
+
+        transitioning = false;
     }
 }

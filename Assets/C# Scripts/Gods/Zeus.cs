@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.VFX;
 
 
 public class Zeus : NetworkBehaviour
@@ -162,6 +160,8 @@ public class Zeus : NetworkBehaviour
 
         lightningBoltSelectionSprite.gameObject.SetActive(false);
 
+        EnableSelectionSprite_ServerRPC(0);
+
         lightningLineSelectionSprite.gameObject.SetActive(true);
         lightningLineSelectionSprite.localPosition = Vector3.zero;
     }
@@ -174,8 +174,39 @@ public class Zeus : NetworkBehaviour
 
         lightningLineSelectionSprite.gameObject.SetActive(false);
 
+        EnableSelectionSprite_ServerRPC(1);
+
         lightningBoltSelectionSprite.gameObject.SetActive(true);
         lightningBoltSelectionSprite.localPosition = Vector3.zero;
+    }
+
+
+    [ServerRpc(RequireOwnership = false)]
+    private void EnableSelectionSprite_ServerRPC(int abilityId, ServerRpcParams rpcParams = default)
+    {
+        ulong senderClientId = rpcParams.Receive.SenderClientId;
+
+        EnableSelectionSprite_ClientRPC(senderClientId, abilityId);
+    }
+
+    [ClientRpc(RequireOwnership = false)]
+    private void EnableSelectionSprite_ClientRPC(ulong clientId, int abilityId)
+    {
+        if (NetworkManager.LocalClientId == clientId)
+        {
+            return;
+        }
+
+        if (abilityId == 0)
+        {
+            lightningLineSelectionSprite.gameObject.SetActive(true);
+            lightningBoltSelectionSprite.gameObject.SetActive(false);
+        }
+        else
+        {
+            lightningBoltSelectionSprite.gameObject.SetActive(true);
+            lightningLineSelectionSprite.gameObject.SetActive(false);
+        }
     }
 
 

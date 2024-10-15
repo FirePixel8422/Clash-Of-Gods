@@ -15,11 +15,16 @@ public class GridTile : MonoBehaviour
 
     public int fireAmount;
 
+    [ColorUsage(true, true)]
+    private Color color;
+
 
 
     private void Start()
     {
         mat = GetComponent<Renderer>().material;
+
+        color = mat.GetColor("_Emission_Color");
 
         StartCoroutine(WaitForGrid());
     }
@@ -50,9 +55,6 @@ public class GridTile : MonoBehaviour
     }
 
 
-
-    [ColorUsage(true, true)]
-    private Color color;
 
     private IEnumerator ChangeColor(Color targetColor, float colorSwapTime)
     {

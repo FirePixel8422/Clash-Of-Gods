@@ -206,6 +206,28 @@ public class GodCore : NetworkBehaviour
     #endregion
 
 
+#if UNITY_EDITOR
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (IsServer)
+            {
+                StartGame();
+            }
+
+            chooseGodMenu.SetActive(false);
+
+            Athena.Instance.Init();
+            Hades.Instance.Init();
+            Zeus.Instance.Init();
+
+            FindFirstObjectByType<Canvas>().sortingOrder += 1;
+        }
+    }
+#endif
+
     private void StartGame()
     {
         GameObject map0 = Instantiate(godMaps[chosenGods[0]], Vector3.zero, Quaternion.Euler(0, 180, 0));

@@ -108,6 +108,8 @@ public class PlacementManager : NetworkBehaviour
 
 
 
+
+    public bool initialized;
     public void Init(LayerMask _ownFieldLayers, LayerMask _neutralLayers, LayerMask _fullFieldLayers, ulong _localClientId)
     {
         TurnManager.Instance.OnMyTurnStartedEvent.AddListener(() => GrantTurn());
@@ -135,6 +137,8 @@ public class PlacementManager : NetworkBehaviour
         };
 
         Currency += 0;
+
+        initialized = true;
     }
 
 
@@ -401,7 +405,7 @@ public class PlacementManager : NetworkBehaviour
 
     private void Update()
     {
-        if (Input.mousePosition != mousePos)
+        if (initialized && Input.mousePosition != mousePos)
         {
             mousePos = Input.mousePosition;
             UpdateTowerPlacementPreview();

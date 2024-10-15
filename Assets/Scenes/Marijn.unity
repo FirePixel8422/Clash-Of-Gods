@@ -579,7 +579,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.9273514, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 30.999878, y: -4}
+  m_AnchoredPosition: {x: 30.999847, y: -4}
   m_SizeDelta: {x: 62, y: 26}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &14008610
@@ -38770,7 +38770,7 @@ MonoBehaviour:
   fireWallLifeTime: 2
   meteorSelectionSprite: {fileID: 8875872960354442878}
   meteorEffectPrefabs:
-  - {fileID: 4471227799323666919, guid: 07b1cd75fed225345bfdd4899a1dee77, type: 3}
+  - {fileID: 3080585558972087701, guid: bbaeb59797cbd08459dd42425cc71e9b, type: 3}
   meteorImpactDelay: 1.25
   meteorDamageDelay: 0.1
   meteorFireLifeTime: 2

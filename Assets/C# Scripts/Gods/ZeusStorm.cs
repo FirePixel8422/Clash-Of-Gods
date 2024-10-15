@@ -26,7 +26,17 @@ public class ZeusStorm : MonoBehaviour
     private void Start()
     {
         audioController = GetComponent<AudioController>();
+        audioController.Init();
+
         StartCoroutine(LightningLoop());
+
+        SettingsManager.SingleTon.audioControllers.Add(audioController);
+        SettingsManager.SingleTon.UpdateVolume();
+
+        if (boundsCenter.position.z < 0)
+        {
+            boundsCenter.position = new Vector3(boundsCenter.position.x, boundsCenter.position.y, -boundsCenter.position.z);
+        }
     }
 
     private IEnumerator LightningLoop()
