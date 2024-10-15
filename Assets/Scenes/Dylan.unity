@@ -687,6 +687,79 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!1001 &301529577
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1494203681182707090, guid: c216a76a75666db48a193f0a927ae096, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a10656f8a8ea3c448a6cc422971d55f4, type: 2}
+    - target: {fileID: 2738269672689903018, guid: c216a76a75666db48a193f0a927ae096, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 23a5008314a6de647919fc057ac6ace9, type: 2}
+    - target: {fileID: 2738269672689903018, guid: c216a76a75666db48a193f0a927ae096, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 035291e678ed0f8499ebc983e62304d3, type: 2}
+    - target: {fileID: 4815074379832482314, guid: c216a76a75666db48a193f0a927ae096, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1119537583
+      objectReference: {fileID: 0}
+    - target: {fileID: 6150379080919893983, guid: c216a76a75666db48a193f0a927ae096, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1853.9105
+      objectReference: {fileID: 0}
+    - target: {fileID: 6150379080919893983, guid: c216a76a75666db48a193f0a927ae096, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6150379080919893983, guid: c216a76a75666db48a193f0a927ae096, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3407.2417
+      objectReference: {fileID: 0}
+    - target: {fileID: 6150379080919893983, guid: c216a76a75666db48a193f0a927ae096, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6150379080919893983, guid: c216a76a75666db48a193f0a927ae096, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6150379080919893983, guid: c216a76a75666db48a193f0a927ae096, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6150379080919893983, guid: c216a76a75666db48a193f0a927ae096, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6150379080919893983, guid: c216a76a75666db48a193f0a927ae096, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6150379080919893983, guid: c216a76a75666db48a193f0a927ae096, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6150379080919893983, guid: c216a76a75666db48a193f0a927ae096, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6778297443848625509, guid: c216a76a75666db48a193f0a927ae096, type: 3}
+      propertyPath: m_Name
+      value: FullMinotaur (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c216a76a75666db48a193f0a927ae096, type: 3}
 --- !u!1001 &317524243
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4091,6 +4164,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 035291e678ed0f8499ebc983e62304d3, type: 2}
+    - target: {fileID: 4815074379832482314, guid: c216a76a75666db48a193f0a927ae096, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3917825569
+      objectReference: {fileID: 0}
     - target: {fileID: 6150379080919893983, guid: c216a76a75666db48a193f0a927ae096, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.6844897
@@ -4438,3 +4515,4 @@ SceneRoots:
   - {fileID: 8343818703466015815}
   - {fileID: 227029302204089388}
   - {fileID: 5968784492604924473}
+  - {fileID: 301529577}
