@@ -372,7 +372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3974497368
+  GlobalObjectIdHash: 3492402950
   InScenePlacedSourceGlobalObjectIdHash: 1917400985
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -396,7 +396,7 @@ MonoBehaviour:
   dissolves: []
   amountOfDissolves: 0
   cDissolves: 0
-  cost: 5
+  nameString: Troop On Crack
   health: 12
   dmg: 8
   centerPoint: {fileID: 898086536465411847}

@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1326855395595572280, guid: 0d0f261f0dfd4a34989127d652d4aa80, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 1241086953
+      value: 2897133002
       objectReference: {fileID: 0}
     - target: {fileID: 1326855395595572280, guid: 0d0f261f0dfd4a34989127d652d4aa80, type: 3}
       propertyPath: InScenePlacedSourceGlobalObjectIdHash
@@ -68,6 +68,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6f2b9e542a66b5f478b3eba0ee551a9f, type: 2}
+    - target: {fileID: 7046331254013934316, guid: 0d0f261f0dfd4a34989127d652d4aa80, type: 3}
+      propertyPath: nameString
+      value: Gladiator
+      objectReference: {fileID: 0}
     - target: {fileID: 7046331254013934316, guid: 0d0f261f0dfd4a34989127d652d4aa80, type: 3}
       propertyPath: animatedMoveSpeed
       value: 10

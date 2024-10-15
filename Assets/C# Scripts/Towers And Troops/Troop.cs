@@ -62,6 +62,27 @@ public class Troop : TowerCore
     protected override void OnGetAttacked()
     {
         anim.SetTrigger("Hurt");
+
+        SyncHurtAnimation_ServerRPC();
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void SyncHurtAnimation_ServerRPC(ServerRpcParams rpcParams = default)
+    {
+        ulong senderClientId = rpcParams.Receive.SenderClientId;
+
+        SyncHurtAnimation_ClientRPC(senderClientId);
+    }
+
+    [ClientRpc(RequireOwnership = false)]
+    private void SyncHurtAnimation_ClientRPC(ulong clientId)
+    {
+        if (NetworkManager.LocalClientId == clientId)
+        {
+            return;
+        }
+
+        anim.SetTrigger("Hurt");
     }
 
 
@@ -203,4 +224,26 @@ public class Troop : TowerCore
     #endregion
 
 
+
+    [ServerRpc(RequireOwnership = false)]
+    public void BuffTroop_ServerRPC()
+    {
+        BuffTroop_ClientRPC();
+    }
+
+    [ClientRpc(RequireOwnership = false)]
+    private void BuffTroop_ClientRPC()
+    {
+        dmg = (int)(dmg * GodCore.Instance.damageMultiplier);
+        health = (int)(health * GodCore.Instance.healthMultiplier);
+
+        movesLeft += GodCore.Instance.addedMoves;
+
+        Renderer[] renderers = GetComponentsInChildren<Renderer>();
+
+        foreach (Renderer renderer in renderers)
+        {
+            renderer.material.SetInt("_GlowPower", 1);
+        }
+    }
 }

@@ -310,7 +310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 190022705
+  GlobalObjectIdHash: 3016083317
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -334,6 +334,7 @@ MonoBehaviour:
   dissolves: []
   amountOfDissolves: 0
   cDissolves: 0
+  nameString: Ballista
   health: 8
   dmg: 12
   centerPoint: {fileID: 953093416375247198}
@@ -354,6 +355,7 @@ MonoBehaviour:
   underAttack: 0
   attackAnimator: {fileID: 2102326649516397412}
   rotPoint: {fileID: 803137898017259879}
+  yRotOnly: 0
   lookAtTransform: {fileID: 0}
   shootPoint: {fileID: 8209633914638450713}
   towerPreviewRenderer: {fileID: 0}

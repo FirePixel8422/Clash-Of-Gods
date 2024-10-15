@@ -5603,13 +5603,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 562492000}
+  - component: {fileID: 562492001}
   m_Layer: 5
   m_Name: Abilities/TroopInfo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &562492000
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5631,6 +5632,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &562492001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 562491999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0538860fcdffd846a92983dc8c5ad87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  troopInfoUI: {fileID: 7010765977437200532}
+  text1: {fileID: 463359817639542307}
+  text2: {fileID: 7403007397516208978}
+  text3: {fileID: 2139596307878484815}
 --- !u!1 &566269345
 GameObject:
   m_ObjectHideFlags: 0
@@ -26956,7 +26973,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -27886,7 +27903,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -27976,7 +27993,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &2239324721008521710
 GameObject:
   m_ObjectHideFlags: 0
@@ -32864,6 +32881,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c73f4054d565a4f4090ac06f7300da87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageMultiplier: 0
+  healthMultiplier: 0
+  addedMoves: 0
   zeusTroopStunChance: 25
   fails: 0
   fireDamage: 4
@@ -33172,7 +33192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99d7ce9477c492343b07d2f8c4385eb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ui: {fileID: 562491999}
+  ui: {fileID: 2142727538634287150}
   onCooldownColor: {r: 0.34509805, g: 0.34509805, b: 0.34509805, a: 1}
   colorFadeTime: 7
   cooldown1: 0
@@ -38318,7 +38338,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.7584905, g: 0.7584905, b: 0.7584905, a: 0.5019608}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -38774,7 +38794,7 @@ MonoBehaviour:
   meteorDamageDelay: 0.1
   meteorFireLifeTime: 1
   meteorImpactDamageMain: 12
-  meteorImpactDamageClose: 5
+  meteorImpactDamageClose: 1
   meteorAnimationMoveSpeed: 25
   fireEffectPrefabs:
   - {fileID: 1457210736911175799, guid: cba13e49f90abdb41b800d7988399a26, type: 3}
@@ -44662,7 +44682,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7069800624340777925
 RectTransform:
   m_ObjectHideFlags: 0
@@ -49664,7 +49684,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
