@@ -64,7 +64,7 @@ public class ObstacleGenerator : NetworkBehaviour
             gridTiles.RemoveAt(r);
         }
 
-        SpawnObstacles_ServerRPC(positions, gridPositions);
+        SpawnObstacles_ServerRPC(positions, gridPositions, firstPlayer);
     }
 
 
@@ -75,7 +75,7 @@ public class ObstacleGenerator : NetworkBehaviour
 
 
     [ServerRpc(RequireOwnership = false)]
-    private void SpawnObstacles_ServerRPC(Vector3[] positions, Vector2Int[] _gridPositions)
+    private void SpawnObstacles_ServerRPC(Vector3[] positions, Vector2Int[] _gridPositions, bool firstPlayer)
     {
         networkObjectIds = new ulong[positions.Length];
         gridPositions = _gridPositions;
@@ -87,7 +87,7 @@ public class ObstacleGenerator : NetworkBehaviour
             GameObject obj = Instantiate(obstacles[r], positions[i] + obstacles[r].transform.position, Quaternion.Euler(0, Random.Range(1, 5) * 90, 0));
 
             NetworkObject networkObject = obj.GetComponent<NetworkObject>();
-            networkObject.SpawnWithOwnership((ulong)(i < obstacleAmount ? 10 : 20), true);
+            networkObject.SpawnWithOwnership((ulong)(firstPlayer ? 10 : 20), true);
 
             networkObjectIds[i] = networkObject.NetworkObjectId;
         }

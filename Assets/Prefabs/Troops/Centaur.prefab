@@ -5149,7 +5149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1971970347
+  GlobalObjectIdHash: 3907625525
   InScenePlacedSourceGlobalObjectIdHash: 3907625525
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -5201,6 +5201,8 @@ MonoBehaviour:
   - {r: 0.8627451, g: 0.2509804, b: 0.23921569, a: 1}
   - {r: 0.23921569, g: 0.58431375, b: 0.8627451, a: 1}
   - {r: 0.90943396, g: 0.8273518, b: 0.38951227, a: 1}
+  - {r: 0.424002, g: 0.9098039, b: 0.3882353, a: 1}
+  isBuffed: 0
 --- !u!95 &7600932725323545177
 Animator:
   serializedVersion: 5

@@ -18,6 +18,9 @@ public class Troop : TowerCore
     public Color[] moveArrowColors;
 
 
+    public bool isBuffed;
+
+
 
 
     protected override void OnSetupTower()
@@ -228,6 +231,8 @@ public class Troop : TowerCore
     [ServerRpc(RequireOwnership = false)]
     public void EnhanceTroop_ServerRPC()
     {
+        isBuffed = true;
+
         EnhanceTroop_ClientRPC();
     }
 
@@ -243,7 +248,7 @@ public class Troop : TowerCore
 
         foreach (Renderer renderer in renderers)
         {
-            renderer.material.SetInt("_GlowPower", 1);
+            renderer.material.SetInt("_BooleanGlow", 1);
         }
     }
 }

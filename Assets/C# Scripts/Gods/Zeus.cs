@@ -66,6 +66,7 @@ public class Zeus : NetworkBehaviour
         {
             PlacementManager.Instance.OnConfirmEvent.AddListener(() => OnConfirm());
             PlacementManager.Instance.OnCancelEvent.AddListener(() => OnCancel());
+            PlacementManager.Instance.OnSelectEvent.AddListener(() => OnCancel());
 
             TurnManager.Instance.OnMyTurnStartedEvent.AddListener(() => OnTurnGranted());
 
@@ -160,6 +161,8 @@ public class Zeus : NetworkBehaviour
     public bool usingDefenseAbility;
     public void UseDefensiveAbility()
     {
+        PlacementManager.Instance.Cancel();
+
         usingDefenseAbility = true;
         usingOffensiveAbility = false;
 
@@ -174,6 +177,8 @@ public class Zeus : NetworkBehaviour
     public bool usingOffensiveAbility;
     public void UseOffensiveAbility()
     {
+        PlacementManager.Instance.Cancel();
+
         usingOffensiveAbility = true;
         usingDefenseAbility = false;
 

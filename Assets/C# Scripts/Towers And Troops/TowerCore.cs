@@ -254,11 +254,11 @@ public class TowerCore : NetworkBehaviour
 
         float combinedSize = (target.size + size) / 2;
 
-        AttackTarget_ServerRPC(target.transform.position, combinedSize);
+        AttackTarget_ServerRPC(target.centerPoint.position, combinedSize);
 
         StartCoroutine(SoundDelay(soundDelay));
 
-        StartCoroutine(AttackTargetAnimation(target.transform.position, combinedSize, target));
+        StartCoroutine(AttackTargetAnimation(target.centerPoint.position, combinedSize, target));
 
         PlacementManager.Instance.playedAnything = true;
     }
@@ -343,10 +343,6 @@ public class TowerCore : NetworkBehaviour
         health -= dmg;
         stunned = stun;
 
-        if (stunned)
-        {
-            print("STUNNED");
-        }
 
         if (healthBar != null)
         {

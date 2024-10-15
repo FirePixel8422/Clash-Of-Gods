@@ -18,23 +18,14 @@ public class PlayerBase : TowerCore
 
     public override IEnumerator GetAttackedAnimations(int dmg, bool stun)
     {
-        health -= dmg;
-        stunned = stun;
-
-        underAttackArrowAnim.SetBool("Enabled", false);
+        StartCoroutine(base.GetAttackedAnimations(dmg, stun));
 
         foreach (var dissolve in dissolves)
         {
             dissolve.RevertPercent((float)health / (float)maxHealth + addedDissolve);
         }
 
-
-        yield return null;
-
-        if (health <= 0)
-        {
-            OnDeath();
-        }
+        yield break;
     }
 
 

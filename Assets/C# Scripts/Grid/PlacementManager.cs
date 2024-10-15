@@ -186,9 +186,14 @@ public class PlacementManager : NetworkBehaviour
         if (ctx.performed)
         {
             OnCancelEvent.Invoke();
-        }
 
-        if (TurnManager.Instance.isMyTurn == false || interactable == false || ctx.performed == false)
+            Cancel();
+        }
+    }
+
+    public void Cancel()
+    {
+        if (TurnManager.Instance.isMyTurn == false || interactable == false)
         {
             return;
         }
@@ -205,6 +210,7 @@ public class PlacementManager : NetworkBehaviour
     }
 
     public UnityEvent OnCancelEvent;
+    public UnityEvent OnSelectEvent;
 
 
 
@@ -216,6 +222,8 @@ public class PlacementManager : NetworkBehaviour
         {
             return;
         }
+
+        OnSelectEvent.Invoke();
 
 
         if (isPlacingTower && selectedPreviewTower != towerPreviews[id])
@@ -289,7 +297,7 @@ public class PlacementManager : NetworkBehaviour
         isPlacingTower = false;
     }
 
-    private void PlaceTower()
+    public void PlaceTower()
     {
         playedAnything = true;
 
