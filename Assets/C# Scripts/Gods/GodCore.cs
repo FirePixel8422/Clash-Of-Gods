@@ -18,12 +18,21 @@ public class GodCore : NetworkBehaviour
     {
         if (arg0.name == "MainGame")
         {
+            if(chooseGodMenu == null)
+            {
+                print("null");
+            }
             chooseGodMenu.SetActive(true);
         }
     }
 
     public override void OnNetworkSpawn()
     {
+        if (SceneManager.GetActiveScene().name == "MainGame")
+        {
+            chooseGodMenu.SetActive(true);
+        }
+
         if (IsServer)
         {
             useObstacleMapButtonObj.SetActive(true);

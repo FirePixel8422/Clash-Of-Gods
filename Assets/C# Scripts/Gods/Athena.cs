@@ -105,7 +105,7 @@ public class Athena : NetworkBehaviour
             {
                 GridObjectData selectedTile = GridManager.Instance.GridObjectFromWorldPoint(hitInfo.point);
 
-                Troop troop = null;
+                Troop troop;
                 if (selectedTile.tower != null)
                 {
                     troop = selectedTile.tower.GetComponent<Troop>();
@@ -114,6 +114,10 @@ public class Athena : NetworkBehaviour
                     {
                         return;
                     }
+                }
+                else
+                {
+                    return;
                 }
 
                 AbilityManager.Instance.ConfirmUseAbility(false);

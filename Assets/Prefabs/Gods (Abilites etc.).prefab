@@ -101,7 +101,7 @@ Transform:
   m_GameObject: {fileID: 387084216098694784}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -156,7 +156,7 @@ SpriteRenderer:
   m_Size: {x: 10.24, y: 10.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &613147458329212499
@@ -13362,7 +13362,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2030111480269411783
 Transform:
   m_ObjectHideFlags: 0
@@ -14557,7 +14557,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5051143440219841518}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -14578,8 +14578,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1218591602
-  InScenePlacedSourceGlobalObjectIdHash: 3290586351
+  GlobalObjectIdHash: 526260754
+  InScenePlacedSourceGlobalObjectIdHash: 4050775084
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -14605,11 +14605,13 @@ MonoBehaviour:
   zeusTroopStunChance: 25
   fails: 0
   fireDamage: 4
-  god: 1
+  god: 0
   chooseGodMenu: {fileID: 8377597709699513470}
   confirmGodButton: {fileID: 1810335365956856613}
+  useObstacleMapButtonObj: {fileID: 805629731245542322}
   confirmed: 0000
   imageReadyColor: {r: 0.3075614, g: 0.87169814, b: 0.4463478, a: 1}
+  dontUseObstaclesColor: {r: 0.87169814, g: 0.16979127, b: 0.16282657, a: 1}
   chosenGods: 0100000000000000
   zeusNames:
   - {fileID: 4051919739271200393}
@@ -14640,6 +14642,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: aa6fe948ec9d07e42819f65f266737e5, type: 3}
   - {fileID: 21300000, guid: ca234f74d9202de40b0ba319704351f1, type: 3}
   abilityCooldowns: 0300000007000000
+  abilityCharges: 0100000001000000
   fireWallSelectionSprite: {fileID: 62935073040640280}
   fireWallEffectPrefabs:
   - {fileID: 6114818731172525320, guid: aa5f485d4748a124188a87b35476381f, type: 3}
@@ -14688,7 +14691,8 @@ MonoBehaviour:
   uiSprites:
   - {fileID: 21300000, guid: 1bfc46426e683994898aa28297a47874, type: 3}
   - {fileID: 21300000, guid: 5fcfc78a0bc55a94aaf8cce837387bff, type: 3}
-  abilityCooldowns: 0500000007000000
+  abilityCooldowns: 0400000006000000
+  abilityCharges: 0100000001000000
   lightningLineEffectPrefabs:
   - {fileID: 7081788171278486406, guid: b3ffaca09393fd846b70360d70cd398c, type: 3}
   lightningLineDamage: 10
@@ -14730,9 +14734,17 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b8f8c2dbcfc291643a2d1d5780bc02d6, type: 3}
   - {fileID: 21300000, guid: ff1d65cb2d1fda64dbcab75f4a0d59e1, type: 3}
   abilityCooldowns: 0600000002000000
-  defensiveSelectionSprite: {fileID: 0}
-  fwAnimationMoveSpeed: 0
+  abilityCharges: 0100000003000000
+  ringAnimationMoveSpeed: 15
   offensiveSelectionSprite: {fileID: 2030111480269411783}
+  enhanceSpriteRenderer: {fileID: 4229757955875644035}
+  troopSelectedColor: {r: 0.2727229, g: 0.9622642, b: 0.13616933, a: 1}
+  noTroopSelectedColor: {r: 0.90188676, g: 0.10720536, b: 0.10720536, a: 1}
+  enhanceParticleEffect: {fileID: 5687393403651781773, guid: 3a556e9be136ad04cbe3b8f6bb212af2, type: 3}
+  enhanceTroopDelay: 1.75
+  gladiatorPrefab: {fileID: 2039770327467754811, guid: 65e004c1cc277a4458b8877f0e80c324, type: 3}
+  spawnAmount: 3
+  lifeTimeTurns: 3
   selectedGridTileData:
     gridPos: {x: 0, y: 0}
     worldPos: {x: 0, y: 0, z: 0}
@@ -14742,7 +14754,8 @@ MonoBehaviour:
     onFire: 0
     coreType: 0
     type: 0
-  usingDefenseAbility: 0
+  gladiators: []
+  gladiatorsLifeLeft: 
   usingOffensiveAbility: 0
 --- !u!114 &7577244283247060561
 MonoBehaviour:
@@ -14763,10 +14776,16 @@ MonoBehaviour:
   cCooldown1: 0
   image1: {fileID: 7228901283304936289}
   text1: {fileID: 5436502978738645332}
+  textCharges1: {fileID: 3616229271539682685}
+  maxCharges1: 0
+  cCharges1: 0
   cooldown2: 0
   cCooldown2: 0
   image2: {fileID: 3596020464254983906}
   text2: {fileID: 8381854378498197864}
+  textCharges2: {fileID: 1612214878101188025}
+  maxCharges2: 0
+  cCharges2: 0
   ability1Activate:
     m_PersistentCalls:
       m_Calls: []
@@ -36673,11 +36692,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -7295180944635222696, guid: 0708c7414eb1ff64994422de0eed3044, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 4259317935
+      value: 3897927109
       objectReference: {fileID: 0}
     - target: {fileID: -7295180944635222696, guid: 0708c7414eb1ff64994422de0eed3044, type: 3}
       propertyPath: InScenePlacedSourceGlobalObjectIdHash
-      value: 4264605506
+      value: 4050775084
       objectReference: {fileID: 0}
     - target: {fileID: 392320997855793104, guid: 0708c7414eb1ff64994422de0eed3044, type: 3}
       propertyPath: m_Enabled
@@ -36771,11 +36790,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -4155546478012520040, guid: cba13e49f90abdb41b800d7988399a26, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3805554294
+      value: 1385113944
       objectReference: {fileID: 0}
     - target: {fileID: -4155546478012520040, guid: cba13e49f90abdb41b800d7988399a26, type: 3}
       propertyPath: InScenePlacedSourceGlobalObjectIdHash
-      value: 745973065
+      value: 4050775084
       objectReference: {fileID: 0}
     - target: {fileID: 1457210736911175799, guid: cba13e49f90abdb41b800d7988399a26, type: 3}
       propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.data[0].m_Value.x
