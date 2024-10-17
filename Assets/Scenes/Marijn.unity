@@ -5646,6 +5646,22 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 526260754
       objectReference: {fileID: 0}
+    - target: {fileID: 2917374039013712749, guid: 3e86c31feac17c841848fd84f43a25e9, type: 3}
+      propertyPath: chosenGods.Array.data[0]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2917374039013712749, guid: 3e86c31feac17c841848fd84f43a25e9, type: 3}
+      propertyPath: chosenGods.Array.data[1]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3072584379432387380, guid: 3e86c31feac17c841848fd84f43a25e9, type: 3}
+      propertyPath: spawnAmount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3072584379432387380, guid: 3e86c31feac17c841848fd84f43a25e9, type: 3}
+      propertyPath: lifeTimeTurns
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4288931459038003460, guid: 3e86c31feac17c841848fd84f43a25e9, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 3897927109

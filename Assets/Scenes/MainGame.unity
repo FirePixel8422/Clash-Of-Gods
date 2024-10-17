@@ -17027,7 +17027,7 @@ MonoBehaviour:
   localClientId: 0
   towerForwardRotationY: 0
   playerColors:
-  - {r: 0, g: 0.3056603, b: 0.020197842, a: 1}
+  - {r: 0, g: 0.6301887, b: 0.04109933, a: 1}
   - {r: 0.8907395, g: 0.16608535, b: 0, a: 1}
   - {r: 0.8901961, g: 0.6459857, b: 0, a: 1}
   selectionSprite: {fileID: 1667772970}

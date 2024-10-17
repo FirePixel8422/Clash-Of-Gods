@@ -192,7 +192,7 @@ public class Athena : NetworkBehaviour
         offensiveSelectionSprite.gameObject.SetActive(true);
         offensiveSelectionSprite.localPosition = Vector3.zero;
 
-        SyncSelectionSpriteState_ServerRPC(false);
+        SyncSelectionSpriteState_ServerRPC(true);
     }
 
 
