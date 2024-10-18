@@ -123,7 +123,7 @@ Material:
     - _GlossyReflections: 0
     - _Metalic_Value: 0
     - _Metallic: 0
-    - _Metallic_Smoothness: 0.496
+    - _Metallic_Smoothness: 0.39
     - _Noise_Scale: 35
     - _Normal_Strength: 1
     - _OcclusionStrength: 1

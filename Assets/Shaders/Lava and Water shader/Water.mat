@@ -48,7 +48,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 0889463ef3dd79a4bbd38e5e7c5185ae, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9a663eecc33007e4f803fd7f21d7ea98, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -136,8 +136,8 @@ Material:
     - _Offset: {r: -0.72, g: 0, b: 0, a: 0}
     - _Output_Wave: {r: -1.66, g: 0.82, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _Tiling: {r: 20, g: 20, b: 0, a: 0}
-    - _Tiling_wave: {r: 1, g: 1, b: 0, a: 0}
+    - _Tiling: {r: 100, g: 100, b: 0, a: 0}
+    - _Tiling_wave: {r: 100, g: 100, b: 0, a: 0}
     - _Water_Height: {r: 0, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &6302014208507015780
