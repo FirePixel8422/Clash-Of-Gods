@@ -60,13 +60,19 @@ public class Tower : TowerCore
 
         yield return new WaitUntil(() => lookingAtTarget == true || rotPoint == null);
 
-
+        StartCoroutine(SoundDelay(soundDelay));
         yield return new WaitForSeconds(animShootTime);
 
         if (target != null)
         {
             target.GetAttacked(dmg, GodCore.Instance.RandomStunChance());
         }
+    }
+
+    private IEnumerator SoundDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        audioController.Play();
     }
 
 

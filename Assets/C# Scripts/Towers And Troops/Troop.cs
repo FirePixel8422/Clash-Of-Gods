@@ -134,8 +134,8 @@ public class Troop : TowerCore
         }
 
 
+        StartCoroutine(SoundDelay(soundDelay));
 
-        anim.SetTrigger("MoveAttack");
 
         yield return new WaitForSeconds(attackAnimationTime);
 
@@ -156,6 +156,12 @@ public class Troop : TowerCore
         {
             target.GetAttacked(dmg, GodCore.Instance.RandomStunChance());
         }
+    }
+
+    private IEnumerator SoundDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        audioController.Play();
     }
 
 

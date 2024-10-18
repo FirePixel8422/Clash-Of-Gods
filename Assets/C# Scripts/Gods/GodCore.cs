@@ -252,6 +252,8 @@ public class GodCore : NetworkBehaviour
 
             chooseGodMenu.SetActive(false);
 
+            CameraController.Instance.control = true;
+
             Athena.Instance.Init();
             Hades.Instance.Init();
             Zeus.Instance.Init();

@@ -27,7 +27,7 @@ public class DirectionMoveArrow : DirectionArrow
         GridObjectData arrow_GridObjectData = GridManager.Instance.GetGridData(troop_GridObjectData.gridPos + dir);
 
 
-        bool inGrid = GridManager.Instance.IsInGrid(arrow_GridObjectData.gridPos);
+        bool inGrid = GridManager.Instance.IsInGrid(troop_GridObjectData.gridPos + dir);
 
         bool validMovement = inGrid && (arrow_GridObjectData.full == false);
 

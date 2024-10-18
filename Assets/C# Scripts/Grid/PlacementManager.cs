@@ -145,16 +145,12 @@ public class PlacementManager : NetworkBehaviour
 
     public void OnConfirm(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
-        {
-            OnConfirmEvent.Invoke();
-        }
-
-
-        if (TurnManager.Instance.isMyTurn == false || interactable == false || ctx.performed == false)
+        if (initialized == false || TurnManager.Instance.isMyTurn == false || interactable == false || ctx.performed == false)
         {
             return;
         }
+
+        OnConfirmEvent.Invoke();
 
 
         PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
@@ -168,13 +164,19 @@ public class PlacementManager : NetworkBehaviour
             return;
         }
 
-        if (isPlacingTower && TurnManager.Instance.isMyTurn)
+
+        Ray ray = mainCam.ScreenPointToRay(mousePos);
+
+        if (Physics.Raycast(ray, 100, fullFieldLayers))
         {
-            TryPlaceTower();
-        }
-        else
-        {
-            TrySelectTower();
+            if (isPlacingTower && TurnManager.Instance.isMyTurn)
+            {
+                TryPlaceTower();
+            }
+            else
+            {
+                TrySelectTower();
+            }
         }
     }
 
@@ -183,7 +185,7 @@ public class PlacementManager : NetworkBehaviour
 
     public void OnCancel(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
+        if (initialized && ctx.performed)
         {
             OnCancelEvent.Invoke();
 
@@ -473,10 +475,11 @@ public class PlacementManager : NetworkBehaviour
     [ClientRpc(RequireOwnership = false)]
     private void UpdateTowerPreviewClientRPC(ulong fromClientId, Vector3 pos, int rotY, bool resetPos)
     {
-        if (localClientId == fromClientId)
+        if (localClientId == fromClientId || selectedPreviewTower == null)
         {
             return;
         }
+
 
         selectedPreviewTower.towerPreviewRenderer.color = new Color(0.7619722f, 0.8740168f, 0.9547169f);
         selectedPreviewTower.UpdateTowerPreviewColor(true);

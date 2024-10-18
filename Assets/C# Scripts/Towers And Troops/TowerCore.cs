@@ -30,7 +30,7 @@ public class TowerCore : NetworkBehaviour
     protected MeshRenderer underAttackArrowRenderer;
     public List<Color> underAttackArrowColors;
 
-    private AudioController audioController;
+    protected AudioController audioController;
 
     public Animator selectStateAnim;
 
@@ -204,7 +204,7 @@ public class TowerCore : NetworkBehaviour
 
 
 
-    #region On Grant/Lose Turn
+    #region On Grant/Lose/Change Turn
 
     public void GrantTurn()
     {
@@ -256,20 +256,11 @@ public class TowerCore : NetworkBehaviour
 
         AttackTarget_ServerRPC(target.centerPoint.position, combinedSize);
 
-        StartCoroutine(SoundDelay(soundDelay));
-
         StartCoroutine(AttackTargetAnimation(target.centerPoint.position, combinedSize, target));
 
         PlacementManager.Instance.playedAnything = true;
     }
 
-   
-
-    private IEnumerator SoundDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        audioController.Play();
-    }
 
     [ServerRpc(RequireOwnership = false)]
     private void AttackTarget_ServerRPC(Vector3 targetPos, float combinedSize, ServerRpcParams rpcParams = default)

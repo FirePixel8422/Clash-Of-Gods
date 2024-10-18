@@ -68,8 +68,6 @@ public class Zeus : NetworkBehaviour
             PlacementManager.Instance.OnCancelEvent.AddListener(() => OnCancel());
             PlacementManager.Instance.OnSelectEvent.AddListener(() => OnCancel());
 
-            TurnManager.Instance.OnMyTurnStartedEvent.AddListener(() => OnTurnGranted());
-
             AbilityManager.Instance.SetupUI(uiSprites[0], abilityCooldowns[0], abilityCharges[0], uiSprites[1], abilityCooldowns[1], abilityCharges[1]);
 
             AbilityManager.Instance.ability1Activate.AddListener(() => UseDefensiveAbility());
@@ -151,12 +149,6 @@ public class Zeus : NetworkBehaviour
     }
 
 
-    public void OnTurnGranted()
-    {
-
-    }
-
-
 
     public bool usingDefenseAbility;
     public void UseDefensiveAbility()
@@ -172,6 +164,7 @@ public class Zeus : NetworkBehaviour
 
         lightningLineSelectionSprite.gameObject.SetActive(true);
         lightningLineSelectionSprite.localPosition = Vector3.zero;
+        targetLightningLinePos = lightningLineSelectionSprite.localPosition;
     }
 
     public bool usingOffensiveAbility;
@@ -188,6 +181,7 @@ public class Zeus : NetworkBehaviour
 
         lightningBoltSelectionSprite.gameObject.SetActive(true);
         lightningBoltSelectionSprite.localPosition = Vector3.zero;
+        targetLightningBoltPos = lightningBoltSelectionSprite.localPosition;
     }
 
 
@@ -252,7 +246,7 @@ public class Zeus : NetworkBehaviour
                 }
                 else if (mouseMoved)
                 {
-                    targetLightningLinePos =  new Vector3(selectedGridTileData.worldPos.x, 0, 0);
+                    targetLightningLinePos = new Vector3(selectedGridTileData.worldPos.x, 0, 0);
                     savedLightningLinepos = lightningLineSelectionSprite.position;
                 }
             }
@@ -261,6 +255,8 @@ public class Zeus : NetworkBehaviour
         if (usingDefenseAbility)
         {
             float _llMoveSpeed = llAnimationMoveSpeed * (Vector3.Distance(savedLightningLinepos, targetLightningLinePos) / GridManager.Instance.tileSize);
+
+            print(_llMoveSpeed);
 
             if (Vector3.Distance(lightningLineSelectionSprite.position, targetLightningLinePos) > 0.0001f)
             {

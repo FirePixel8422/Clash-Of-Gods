@@ -82,6 +82,7 @@ public class Athena : NetworkBehaviour
             PlacementManager.Instance.OnCancelEvent.AddListener(() => OnCancel());
             PlacementManager.Instance.OnSelectEvent.AddListener(() => OnCancel());
 
+            print("call");
             AbilityManager.Instance.SetupUI(uiSprites[0], abilityCooldowns[0], abilityCharges[0], uiSprites[1], abilityCooldowns[1], abilityCharges[1]);
 
             AbilityManager.Instance.ability1Activate.AddListener(() => UseDefensiveAbility());
@@ -110,7 +111,7 @@ public class Athena : NetworkBehaviour
                 {
                     troop = selectedTile.tower.GetComponent<Troop>();
 
-                    if (troop == null || troop.isBuffed)
+                    if (troop == null || troop.OwnerClientId != NetworkManager.LocalClientId || troop.isBuffed)
                     {
                         return;
                     }
@@ -191,6 +192,7 @@ public class Athena : NetworkBehaviour
 
         offensiveSelectionSprite.gameObject.SetActive(true);
         offensiveSelectionSprite.localPosition = Vector3.zero;
+        targetRingPos = offensiveSelectionSprite.localPosition;
 
         SyncSelectionSpriteState_ServerRPC(true);
     }
@@ -247,7 +249,7 @@ public class Athena : NetworkBehaviour
                     {
                         Troop troop = selectedGridTileData.tower.GetComponent<Troop>();
 
-                        if (troop != null && troop.isBuffed == false)
+                        if (troop != null && troop.OwnerClientId == NetworkManager.LocalClientId && troop.isBuffed == false)
                         {
                             enhanceSpriteRenderer.color = troopSelectedColor;
                         }

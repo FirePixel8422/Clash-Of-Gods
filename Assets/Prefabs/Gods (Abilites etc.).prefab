@@ -14612,7 +14612,7 @@ MonoBehaviour:
   confirmed: 0000
   imageReadyColor: {r: 0.3075614, g: 0.87169814, b: 0.4463478, a: 1}
   dontUseObstaclesColor: {r: 0.87169814, g: 0.16979127, b: 0.16282657, a: 1}
-  chosenGods: 0100000000000000
+  chosenGods: ffffffffffffffff
   zeusNames:
   - {fileID: 4051919739271200393}
   - {fileID: 5223081002950251400}
@@ -14744,7 +14744,7 @@ MonoBehaviour:
   enhanceTroopDelay: 1.75
   gladiatorPrefab: {fileID: 2039770327467754811, guid: 65e004c1cc277a4458b8877f0e80c324, type: 3}
   spawnAmount: 3
-  lifeTimeTurns: 3
+  lifeTimeTurns: 4
   selectedGridTileData:
     gridPos: {x: 0, y: 0}
     worldPos: {x: 0, y: 0, z: 0}

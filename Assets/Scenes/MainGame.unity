@@ -23244,7 +23244,7 @@ MonoBehaviour:
   scrollForMaxZoom: 10
   cScroll: 0
   altRotating: 0
-  control: 1
+  control: 0
 --- !u!1 &3485687909983658099
 GameObject:
   m_ObjectHideFlags: 0

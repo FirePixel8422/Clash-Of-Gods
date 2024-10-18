@@ -211,6 +211,7 @@ public class Hades : NetworkBehaviour
 
         meteorSelectionSprite.gameObject.SetActive(false);
         meteorSelectionSprite.localPosition = Vector3.zero;
+        targetMeteorPos = meteorSelectionSprite.localPosition;
     }
 
     public bool usingOffensiveAbility;
@@ -227,6 +228,7 @@ public class Hades : NetworkBehaviour
 
         fireWallSelectionSprite.gameObject.SetActive(false);
         fireWallSelectionSprite.localPosition = Vector3.zero;
+        targetFireWallPos = meteorSelectionSprite.localPosition;
     }
 
 
@@ -366,27 +368,33 @@ public class Hades : NetworkBehaviour
 
             if (Physics.Raycast(ray, out RaycastHit hitInfo, 100, PlacementManager.Instance.ownFieldLayers + PlacementManager.Instance.neutralLayers))
             {
-                selectedGridTileData = GridManager.Instance.GridObjectFromWorldPoint(hitInfo.point);
+                GridObjectData newSelectedGridTileData = GridManager.Instance.GridObjectFromWorldPoint(hitInfo.point);
 
                 float posZOffset = 0;
 
-                if (selectedGridTileData.gridPos.y == (GridManager.Instance.gridSizeZ - 1))
+                if (newSelectedGridTileData.gridPos.y == (GridManager.Instance.gridSizeZ - 1))
                 {
                     posZOffset = -GridManager.Instance.tileSize;
                 }
-                if (selectedGridTileData.gridPos.y == 0)
+                if (newSelectedGridTileData.gridPos.y == 0)
                 {
                     posZOffset = GridManager.Instance.tileSize;
+                }
+
+                //only if selected a proper Tile
+                if (posZOffset == 0)
+                {
+                    selectedGridTileData = newSelectedGridTileData;
                 }
 
 
                 if (fireWallSelectionSprite.localPosition == Vector3.zero)
                 {
-                    fireWallSelectionSprite.position = selectedGridTileData.worldPos + new Vector3(0, 0, posZOffset);
+                    fireWallSelectionSprite.position = newSelectedGridTileData.worldPos + new Vector3(0, 0, posZOffset);
                 }
                 else if (mouseMoved)
                 {
-                    targetFireWallPos = selectedGridTileData.worldPos + new Vector3(0, 0, posZOffset);
+                    targetFireWallPos = newSelectedGridTileData.worldPos + new Vector3(0, 0, posZOffset);
                     savedFireWallpos = fireWallSelectionSprite.position;
                 }
             }
@@ -572,9 +580,22 @@ public class Hades : NetworkBehaviour
 
     private IEnumerator DestroyDelay(NetworkObject networkObject)
     {
+        StopFire_ClientRPC(networkObject.NetworkObjectId);
+
         yield return new WaitForSeconds(destroyDelay);
 
         networkObject.Despawn(true);
+    }
+
+    [ClientRpc(RequireOwnership = false)]
+    public void StopFire_ClientRPC(ulong networkObjectId)
+    {
+        NetworkObject fireGameObject = NetworkManager.SpawnManager.SpawnedObjects[networkObjectId];
+
+        foreach(VisualEffect fireEffect in fireGameObject.GetComponentsInChildren<VisualEffect>())
+        {
+            fireEffect.Stop();
+        }
     }
 
 
@@ -632,11 +653,13 @@ public class Hades : NetworkBehaviour
         fireEffectGridPosList.Add(gridData.gridPos);
         fireEffectLifeTimeList.Add(meteorFireLifeTime);
 
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < gridPositonOffsets.Length; i++)
         {
-            if (GridManager.Instance.IsInGrid(gridPos + gridPositonOffsets[i]))
+            Vector2Int targetGridPos = gridPos + gridPositonOffsets[i];
+
+            if (GridManager.Instance.IsInGrid(targetGridPos) && targetGridPos.x != 0 && targetGridPos.x != (GridManager.Instance.gridSizeX -1))
             {
-                gridData = GridManager.Instance.GetGridData(gridPos + gridPositonOffsets[i]);
+                gridData = GridManager.Instance.GetGridData(targetGridPos);
 
                 spawnFirePos = gridData.worldPos;
 
@@ -647,7 +670,7 @@ public class Hades : NetworkBehaviour
                 effect = Instantiate(fireEffectPrefabs[rPrefab], spawnFirePos, Quaternion.Euler(0, Random.Range(180, -180), 0));
                 effect.GetComponent<NetworkObject>().Spawn(true);
 
-                SetFireState_ClientRPC(gridPos + gridPositonOffsets[i], 1);
+                SetFireState_ClientRPC(targetGridPos, 1);
 
                 fireEffectList.Add(effect);
                 fireEffectGridPosList.Add(gridData.gridPos);
