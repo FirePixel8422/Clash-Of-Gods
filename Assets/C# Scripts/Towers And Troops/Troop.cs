@@ -249,6 +249,7 @@ public class Troop : TowerCore
         health = (int)(health * GodCore.Instance.healthMultiplier);
 
         movesLeft += GodCore.Instance.addedMoves;
+        movesPerTurn += GodCore.Instance.addedMoves;
 
         Renderer[] renderers = GetComponentsInChildren<Renderer>();
 

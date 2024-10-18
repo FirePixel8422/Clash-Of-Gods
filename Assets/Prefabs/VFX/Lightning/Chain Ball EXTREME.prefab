@@ -530,7 +530,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startDmg: 12
-  maxChains: 10
+  maxChains: 5
   applyZeusStunPassive: 1
   directions:
   - {x: 1, y: 0}

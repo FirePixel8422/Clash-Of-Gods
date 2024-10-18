@@ -75,7 +75,7 @@ public class AbilityManager : MonoBehaviour
                 if (maxCharges1 != 1)
                 {
                     cCharges1 += 1;
-                    textCharges1.text = cCharges1 > 1 ? "+" + (cCharges1 - 1).ToString() : "";
+                    textCharges1.text = maxCharges1 > 1 ? "x" + cCharges1.ToString() : "";
                     cCooldown1 = cooldown1;
                 }
 
@@ -100,7 +100,7 @@ public class AbilityManager : MonoBehaviour
                 if (maxCharges2 != 1)
                 {
                     cCharges2 += 1;
-                    textCharges2.text = cCharges2 > 1 ? "+" + (cCharges2 - 1).ToString() : "";
+                    textCharges2.text = maxCharges2 > 1 ? "x" + cCharges2.ToString() : "";
                     cCooldown2 = cooldown2;
                 }
 
@@ -196,7 +196,7 @@ public class AbilityManager : MonoBehaviour
             else
             {
                 cCharges1 -= 1;
-                textCharges1.text = cCharges1 > 1 ? "+" + (cCharges1 - 1).ToString() : "";
+                textCharges1.text = maxCharges1 > 1 ? "x" + cCharges1.ToString() : "";
 
                 text1.text = cooldown1.ToString();
 
@@ -219,7 +219,7 @@ public class AbilityManager : MonoBehaviour
             else
             {
                 cCharges2 -= 1;
-                textCharges2.text = cCharges2 > 1 ? "+" + (cCharges2 - 1).ToString() : "";
+                textCharges2.text = maxCharges2 > 1 ? "x" + cCharges2.ToString() : "";
 
                 text2.text = cooldown2.ToString();
 
@@ -267,7 +267,7 @@ public class AbilityManager : MonoBehaviour
     }
 
 
-#if UNITY_EDITOR
+
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.F5))
@@ -300,6 +300,4 @@ public class AbilityManager : MonoBehaviour
             }
         }
     }
-
-#endif
 }

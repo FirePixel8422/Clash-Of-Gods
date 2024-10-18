@@ -34,6 +34,8 @@ public class TowerCore : NetworkBehaviour
 
     public Animator selectStateAnim;
 
+    public Animator onTurnStateAnim;
+
     private HealthBar healthBar;
 
 
@@ -57,6 +59,9 @@ public class TowerCore : NetworkBehaviour
     public float soundDelay;
 
     public bool underAttack;
+
+
+
 
     #region Tower Setup And Initialize
 
@@ -214,6 +219,11 @@ public class TowerCore : NetworkBehaviour
             return;
         }
 
+        if (onTurnStateAnim != null && NetworkManager.LocalClientId == OwnerClientId)
+        {
+            onTurnStateAnim.SetTrigger("StartTurn");
+        }
+
         actionsLeft = actionsPerTurn;
         OnGrantTurn();
     }
@@ -234,6 +244,11 @@ public class TowerCore : NetworkBehaviour
     {
         actionsLeft -= 1;
         OnLoseAction();
+
+        if (onTurnStateAnim != null && NetworkManager.LocalClientId == OwnerClientId)
+        {
+            onTurnStateAnim.SetTrigger("EndTurn");
+        }
     }
     public virtual void OnLoseAction()
     {

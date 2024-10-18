@@ -431,16 +431,14 @@ public class Zeus : NetworkBehaviour
 
         if (IsServer)
         {
-            CallLightningBall_ServerRPC(selectedGridTileData.worldPos);
+            CallLightningBall_ServerRPC(senderClientId, selectedGridTileData.worldPos);
         }
     }
 
 
     [ServerRpc(RequireOwnership = false)]
-    private void CallLightningBall_ServerRPC(Vector3 pos, ServerRpcParams rpcParams = default)
+    private void CallLightningBall_ServerRPC(ulong senderClientId, Vector3 pos)
     {
-        ulong senderClientId = rpcParams.Receive.SenderClientId;
-
         GameObject effect = Instantiate(lightningBallPrefab, pos, Quaternion.identity);
         NetworkObject effectNetwork = effect.GetComponent<NetworkObject>();
         effectNetwork.SpawnWithOwnership(senderClientId, true);

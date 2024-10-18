@@ -171,6 +171,11 @@ public class PlacementManager : NetworkBehaviour
         {
             if (isPlacingTower && TurnManager.Instance.isMyTurn)
             {
+                if (selectedPreviewTower.CompareTag("Goldmine") && (selectedGridTileData.gridPos.x < (GridManager.Instance.gridSizeX / 2 - 4) || selectedGridTileData.gridPos.x > (GridManager.Instance.gridSizeX / 2 + 4)))
+                {
+                    return;
+                }
+
                 TryPlaceTower();
             }
             else

@@ -293,7 +293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3046798891
+  GlobalObjectIdHash: 4173483439
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -524,7 +524,7 @@ MonoBehaviour:
   startDissolveEffectState: 0.5
   dissolveSpeed: 0.4
   revertDissolveSpeed: 0.75
-  endDisolveValue: -0.5
+  endDisolveValue: -0.7
 --- !u!1 &5339339646250898404 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8416272007918961125, guid: da5ecb47cabb590408e067ede6415261, type: 3}
@@ -548,7 +548,7 @@ MonoBehaviour:
   startDissolveEffectState: 0.7
   dissolveSpeed: 0.25
   revertDissolveSpeed: 0.4
-  endDisolveValue: -1.2
+  endDisolveValue: -1.3
 --- !u!1001 &7008233842824526579
 PrefabInstance:
   m_ObjectHideFlags: 0
