@@ -71,6 +71,7 @@ public class TowerCore : NetworkBehaviour
         if (GodCore.Instance.chosenGods[OwnerClientId] != (int)GodCore.God.Hades && GetComponent<PlayerBase>() == false)
         {
             TurnManager.Instance.OnTurnChangedEvent.AddListener(() => TurnChanged());
+            TurnManager.Instance.OnMyTurnEndedEvent.AddListener(() => OnTurnEnd());
         }
 
         underAttackArrowRenderer = underAttackArrowAnim.GetComponentInChildren<MeshRenderer>();
@@ -253,6 +254,14 @@ public class TowerCore : NetworkBehaviour
     public virtual void OnLoseAction()
     {
         return;
+    }
+
+    public void OnTurnEnd()
+    {
+        if (onTurnStateAnim != null && NetworkManager.LocalClientId == OwnerClientId)
+        {
+            onTurnStateAnim.SetTrigger("EndTurn");
+        }
     }
     #endregion
 

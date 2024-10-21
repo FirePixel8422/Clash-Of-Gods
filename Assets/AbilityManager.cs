@@ -21,6 +21,7 @@ public class AbilityManager : MonoBehaviour
     public Color onCooldownColor;
     public float colorFadeTime;
 
+    public Image image0;
 
     public int cooldown1;
     public int cCooldown1;
@@ -116,10 +117,11 @@ public class AbilityManager : MonoBehaviour
     }
 
 
-    public void SetupUI(Sprite sprite1, int _cooldown1, int _maxCharges1, Sprite sprite2, int _cooldown2, int _maxCharges2)
+    public void SetupUI(Sprite sprite1, int _cooldown1, int _maxCharges1, Sprite sprite2, int _cooldown2, int _maxCharges2, Sprite sprite0)
     {
         gameObject.SetActive(true);
 
+        image0.sprite = sprite0;
         image1.sprite = sprite1;
         image2.sprite = sprite2;
 
