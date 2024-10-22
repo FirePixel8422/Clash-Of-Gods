@@ -1150,7 +1150,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.26428568}
-  m_AnchoredPosition: {x: -4, y: 1}
+  m_AnchoredPosition: {x: 37, y: -38}
   m_SizeDelta: {x: -10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &106583139
@@ -2245,7 +2245,7 @@ GameObject:
   - component: {fileID: 216255328}
   - component: {fileID: 216255327}
   m_Layer: 5
-  m_Name: Button (4)
+  m_Name: CentaurButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3015,7 +3015,7 @@ GameObject:
   - component: {fileID: 267176521}
   - component: {fileID: 267176520}
   m_Layer: 5
-  m_Name: Button (6)
+  m_Name: KatapultButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3617,7 +3617,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.26428568}
-  m_AnchoredPosition: {x: -4, y: 1}
+  m_AnchoredPosition: {x: 37, y: -38}
   m_SizeDelta: {x: -10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &291664154
@@ -4063,7 +4063,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 70, y: -0.25}
+  m_AnchoredPosition: {x: -82.4, y: -0.25}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &338209337
@@ -4381,7 +4381,7 @@ GameObject:
   - component: {fileID: 358458930}
   - component: {fileID: 358458933}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: ArcheryButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4549,7 +4549,7 @@ RectTransform:
   m_GameObject: {fileID: 361091955}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.482238, y: 0.482238, z: 0.482238}
+  m_LocalScale: {x: 0.2640012, y: 0.2640012, z: 0.2640012}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 402830010}
@@ -4624,7 +4624,7 @@ RectTransform:
   m_GameObject: {fileID: 361752525}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.482238, y: 0.482238, z: 0.482238}
+  m_LocalScale: {x: 0.2640012, y: 0.2640012, z: 0.2640012}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 506229401}
@@ -5465,7 +5465,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.26428568}
-  m_AnchoredPosition: {x: -4, y: 1}
+  m_AnchoredPosition: {x: 37, y: -38}
   m_SizeDelta: {x: -10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &402830011
@@ -6605,7 +6605,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.26428568}
-  m_AnchoredPosition: {x: -4, y: 1}
+  m_AnchoredPosition: {x: 37, y: -38}
   m_SizeDelta: {x: -10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &488404040
@@ -6975,7 +6975,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.26428568}
-  m_AnchoredPosition: {x: -4, y: 1}
+  m_AnchoredPosition: {x: 37, y: -38}
   m_SizeDelta: {x: -10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &506229402
@@ -8447,7 +8447,7 @@ GameObject:
   - component: {fileID: 710852498}
   - component: {fileID: 710852501}
   m_Layer: 5
-  m_Name: Button
+  m_Name: GladiatorButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8549,7 +8549,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2bebcaf49da69794c81baaaee60694fa, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6085569a3d675e141be4c92842724195, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9710,7 +9710,7 @@ RectTransform:
   m_GameObject: {fileID: 814975846}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.482238, y: 0.482238, z: 0.482238}
+  m_LocalScale: {x: 0.2640012, y: 0.2640012, z: 0.2640012}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 291664153}
@@ -9785,7 +9785,7 @@ RectTransform:
   m_GameObject: {fileID: 823846689}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.482238, y: 0.482238, z: 0.482238}
+  m_LocalScale: {x: 0.2640012, y: 0.2640012, z: 0.2640012}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 488404039}
@@ -11585,7 +11585,7 @@ GameObject:
   - component: {fileID: 1050301323}
   - component: {fileID: 1050301326}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: BallistaButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12094,7 +12094,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 140, y: 140}
-  m_Spacing: {x: 36, y: 10}
+  m_Spacing: {x: 28.93, y: 10}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!1 &1083396115
@@ -12867,7 +12867,7 @@ RectTransform:
   m_GameObject: {fileID: 1143440492}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.482238, y: 0.482238, z: 0.482238}
+  m_LocalScale: {x: 0.2640012, y: 0.2640012, z: 0.2640012}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 106583138}
@@ -13965,7 +13965,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.26428568}
-  m_AnchoredPosition: {x: -4, y: 1}
+  m_AnchoredPosition: {x: 37, y: -38}
   m_SizeDelta: {x: -10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1218422743
@@ -14167,7 +14167,7 @@ RectTransform:
   m_GameObject: {fileID: 1223652083}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.482238, y: 0.482238, z: 0.482238}
+  m_LocalScale: {x: 0.2640012, y: 0.2640012, z: 0.2640012}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1218422742}
@@ -14984,10 +14984,10 @@ RectTransform:
   - {fileID: 338209336}
   m_Father: {fileID: 4011299458054424006}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.125, y: 0.9341482}
-  m_AnchorMax: {x: 0.17, y: 1}
-  m_AnchoredPosition: {x: 0, y: -5}
-  m_SizeDelta: {x: 0, y: -10}
+  m_AnchorMin: {x: 0.175, y: 0.9341482}
+  m_AnchorMax: {x: 0.218, y: 0.99}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1318557542
 MonoBehaviour:
@@ -15009,7 +15009,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 17
+  m_text: '17
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b420fb9b9d018694396635fe4202d84e, type: 2}
   m_sharedMaterial: {fileID: 7024010240853396501, guid: b420fb9b9d018694396635fe4202d84e, type: 2}
@@ -15044,7 +15046,7 @@ MonoBehaviour:
   m_fontSizeMax: 58
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -15762,7 +15764,7 @@ GameObject:
   - component: {fileID: 1393862109}
   - component: {fileID: 1393862108}
   m_Layer: 5
-  m_Name: Button (3)
+  m_Name: MinotaurButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15885,7 +15887,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f17a86de87a3c4d41aa100797272630a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: de775ff35d9fc304fa6d50dce4f4f619, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -15953,7 +15955,7 @@ GameObject:
   - component: {fileID: 1415031916}
   - component: {fileID: 1415031915}
   m_Layer: 5
-  m_Name: Button (5)
+  m_Name: GoldMineButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21379,7 +21381,7 @@ RectTransform:
   m_GameObject: {fileID: 1942632882}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.482238, y: 0.482238, z: 0.482238}
+  m_LocalScale: {x: 0.2640012, y: 0.2640012, z: 0.2640012}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1998221016}
@@ -21742,7 +21744,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.26428568}
-  m_AnchoredPosition: {x: -4, y: 1}
+  m_AnchoredPosition: {x: 37, y: -38}
   m_SizeDelta: {x: -10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1998221017
