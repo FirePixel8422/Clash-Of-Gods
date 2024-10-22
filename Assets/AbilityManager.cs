@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using WebSocketSharp;
+
 
 public class AbilityManager : MonoBehaviour
 {
@@ -20,6 +20,8 @@ public class AbilityManager : MonoBehaviour
 
     public Color onCooldownColor;
     public float colorFadeTime;
+
+    public string[] abilityInfo;
 
     public Image image0;
 
@@ -117,7 +119,7 @@ public class AbilityManager : MonoBehaviour
     }
 
 
-    public void SetupUI(Sprite sprite1, int _cooldown1, int _maxCharges1, Sprite sprite2, int _cooldown2, int _maxCharges2, Sprite sprite0)
+    public void SetupUI(Sprite sprite1, int _cooldown1, int _maxCharges1, Sprite sprite2, int _cooldown2, int _maxCharges2, Sprite sprite0, string[] _abilityInfo)
     {
         gameObject.SetActive(true);
 
@@ -146,7 +148,7 @@ public class AbilityManager : MonoBehaviour
 
         maxCharges2 = _maxCharges2;
 
-        if(maxCharges2 != 1)
+        if (maxCharges2 != 1)
         {
             cCooldown2 = cooldown2;
             text2.text = cCooldown2.ToString();
@@ -154,6 +156,21 @@ public class AbilityManager : MonoBehaviour
         cCharges2 = 1;
         text2.text = "";
         textCharges2.text = "";
+
+
+        abilityInfo = _abilityInfo;
+
+        ClickableCollider clickableImage0 = image0.GetComponent<ClickableCollider>();
+        ClickableCollider clickableImage1 = image1.GetComponent<ClickableCollider>();
+        ClickableCollider clickableImage2 = image2.GetComponent<ClickableCollider>();
+
+        clickableImage0.OnMouseEnterEvent.AddListener(() => TroopInfoManager.Instance.ShowAbility(abilityInfo[0]));
+        clickableImage1.OnMouseEnterEvent.AddListener(() => TroopInfoManager.Instance.ShowAbility(abilityInfo[1]));
+        clickableImage2.OnMouseEnterEvent.AddListener(() => TroopInfoManager.Instance.ShowAbility(abilityInfo[2]));
+
+        clickableImage0.OnMouseExitEvent.AddListener(() => TroopInfoManager.Instance.ReselectTower());
+        clickableImage1.OnMouseExitEvent.AddListener(() => TroopInfoManager.Instance.ReselectTower());
+        clickableImage2.OnMouseExitEvent.AddListener(() => TroopInfoManager.Instance.ReselectTower());
     }
 
     public void TryUseAbility(bool first)

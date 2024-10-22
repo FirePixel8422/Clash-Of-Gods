@@ -70,7 +70,7 @@ public class Zeus : NetworkBehaviour
             PlacementManager.Instance.OnCancelEvent.AddListener(() => OnCancel());
             PlacementManager.Instance.OnSelectEvent.AddListener(() => OnCancel());
 
-            AbilityManager.Instance.SetupUI(uiSprites[0], abilityCooldowns[0], abilityCharges[0], uiSprites[1], abilityCooldowns[1], abilityCharges[1], uiSprites[2]);
+            AbilityManager.Instance.SetupUI(uiSprites[0], abilityCooldowns[0], abilityCharges[0], uiSprites[1], abilityCooldowns[1], abilityCharges[1], uiSprites[2], abilityInfo);
 
             AbilityManager.Instance.ability1Activate.AddListener(() => UseDefensiveAbility());
             AbilityManager.Instance.ability2Activate.AddListener(() => UseOffensiveAbility());
