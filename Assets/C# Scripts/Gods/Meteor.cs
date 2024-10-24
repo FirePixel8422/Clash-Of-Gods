@@ -110,6 +110,8 @@ public class Meteor : NetworkBehaviour
         {
             impactNetwork.Despawn();
             NetworkObject.Despawn();
+
+            Destroy(endPoint.gameObject);
         }
     }
 

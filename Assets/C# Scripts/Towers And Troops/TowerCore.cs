@@ -68,10 +68,11 @@ public class TowerCore : NetworkBehaviour
     public virtual void CoreInit()
     {
         TurnManager.Instance.OnMyTurnStartedEvent.AddListener(() => GrantTurn());
+        TurnManager.Instance.OnMyTurnEndedEvent.AddListener(() => OnTurnEnd());
+
         if (GodCore.Instance.chosenGods[OwnerClientId] != (int)GodCore.God.Hades && GetComponent<PlayerBase>() == false)
         {
             TurnManager.Instance.OnTurnChangedEvent.AddListener(() => TurnChanged());
-            TurnManager.Instance.OnMyTurnEndedEvent.AddListener(() => OnTurnEnd());
         }
 
         underAttackArrowRenderer = underAttackArrowAnim.GetComponentInChildren<MeshRenderer>();
@@ -383,6 +384,15 @@ public class TowerCore : NetworkBehaviour
         }
         GridObjectData gridObjectData = GridManager.Instance.GridObjectFromWorldPoint(transform.position);
         GridManager.Instance.UpdateTowerData(gridObjectData.gridPos, null);
+
+
+        TurnManager.Instance.OnMyTurnStartedEvent.RemoveListener(() => GrantTurn());
+        TurnManager.Instance.OnMyTurnEndedEvent.RemoveListener(() => OnTurnEnd());
+
+        if (GodCore.Instance.chosenGods[OwnerClientId] != (int)GodCore.God.Hades && GetComponent<PlayerBase>() == false)
+        {
+            TurnManager.Instance.OnTurnChangedEvent.RemoveListener(() => TurnChanged());
+        }
     }
     #endregion
 

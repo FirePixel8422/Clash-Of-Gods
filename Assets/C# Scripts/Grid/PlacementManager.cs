@@ -97,7 +97,7 @@ public class PlacementManager : NetworkBehaviour
         }
         set
         {
-            currency = value;
+            currency = Mathf.Clamp(value, 0, 99);
             currencyTextObj.text = useGreekCurrency ? RomanNumeralConverter.IntToRoman(currency) : currency.ToString();
         }
     }
