@@ -336,17 +336,16 @@ public class PlacementManager : NetworkBehaviour
         selectedTower = NetworkManager.SpawnManager.SpawnedObjects[spawnedTowerNetworkObjectId].GetComponent<TowerCore>();
         selectedTower.CoreInit();
 
-        if(selectedTower.TryGetComponent(out Troop _))
+
+        Renderer[] renderers = selectedTower.transform.GetComponentsInChildren<Renderer>(true);
+        foreach (Renderer renderer in renderers)
         {
-            Renderer[] renderers = selectedTower.transform.GetComponentsInChildren<Renderer>(true);
-            foreach (Renderer renderer in renderers)
+            if (renderer.gameObject.CompareTag("TeamColor"))
             {
-                if (renderer.gameObject.CompareTag("TeamColor"))
-                {
-                    renderer.material.SetColor(Shader.PropertyToID("_Base_Color"), playerColors[GodCore.Instance.chosenGods[fromClientId]]);
-                }
+                renderer.material.SetColor(Shader.PropertyToID("_Base_Color"), playerColors[GodCore.Instance.chosenGods[fromClientId]]);
             }
         }
+
 
         GridManager.Instance.UpdateTowerData(gridPos, selectedTower);
         selectedTower = null;

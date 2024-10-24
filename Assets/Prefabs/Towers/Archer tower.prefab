@@ -195,7 +195,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 4.1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5497414888773622614}
@@ -650,6 +650,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &5488906273544175457
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1853548587210442249}
+  m_Layer: 0
+  m_Name: ShootPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1853548587210442249
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5488906273544175457}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.6599998, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7252957417636976845}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5540577143981476505
 GameObject:
   m_ObjectHideFlags: 0
@@ -873,7 +904,7 @@ Transform:
   m_GameObject: {fileID: 8365377333314515613}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.66, z: 0.25}
+  m_LocalPosition: {x: 0, y: 0.90999997, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1200,6 +1231,9 @@ PrefabInstance:
       addedObject: {fileID: 6421080980380361639}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8e5ed062fd4f4fa4a88adfb797c68d89, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 1853548587210442249}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8e5ed062fd4f4fa4a88adfb797c68d89, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 506728606830641702}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8e5ed062fd4f4fa4a88adfb797c68d89, type: 3}
       insertIndex: -1
@@ -1285,7 +1319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3348013395
+  GlobalObjectIdHash: 3787495505
   InScenePlacedSourceGlobalObjectIdHash: 3787495505
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -1313,7 +1347,7 @@ MonoBehaviour:
   health: 22
   dmg: 10
   centerPoint: {fileID: 6421080980380361639}
-  size: 2.2
+  size: 1.9
   drawSizeGizmos: 1
   underAttackArrowAnim: {fileID: 6672323234097376814}
   underAttackArrowColors:
@@ -1332,12 +1366,11 @@ MonoBehaviour:
   attackAnimator: {fileID: 837659766498736537}
   rotPoint: {fileID: 0}
   yRotOnly: 0
-  lookAtTransform: {fileID: 0}
-  shootPoint: {fileID: 0}
+  shootPoint: {fileID: 1853548587210442249}
   towerPreviewRenderer: {fileID: 0}
   rotSpeed: 0
-  projectileTransform: {fileID: 0}
-  animShootTime: 1
+  animShootTime: 0.25
+  projectilePrefab: {fileID: 5608645031521967343, guid: 9df73182977b3554f84803f96ae9e30d, type: 3}
   lookingAtTarget: 0
 --- !u!95 &7760853491214676331
 Animator:

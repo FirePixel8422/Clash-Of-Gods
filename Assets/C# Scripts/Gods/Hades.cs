@@ -278,7 +278,7 @@ public class Hades : NetworkBehaviour
 
                 SetFireState_ClientRPC(fireEffectGridPosList[i], -1);
 
-                StartCoroutine(DestroyDelay(fireEffectList[i].GetComponent<NetworkObject>()));
+                StartCoroutine(DestroyDelay(fireEffectList[i].GetComponent<NetworkObject>(), destroyDelay));
 
                 fireEffectList.RemoveAt(i);
                 fireEffectGridPosList.RemoveAt(i);
@@ -504,7 +504,7 @@ public class Hades : NetworkBehaviour
                 SetFireState_ClientRPC(fireWallEffectGridPosList[i] + Vector2Int.up, -1);
                 SetFireState_ClientRPC(fireWallEffectGridPosList[i] + Vector2Int.down, -1);
 
-                StartCoroutine(DestroyDelay(fireWallEffectList[i].GetComponent<NetworkObject>()));
+                StartCoroutine(DestroyDelay(fireWallEffectList[i].GetComponent<NetworkObject>(), destroyDelay));
 
                 fireWallEffectList.RemoveAt(i);
                 fireWallEffectGridPosList.RemoveAt(i);
@@ -579,7 +579,7 @@ public class Hades : NetworkBehaviour
     }
 
 
-    private IEnumerator DestroyDelay(NetworkObject networkObject)
+    private IEnumerator DestroyDelay(NetworkObject networkObject, float destroyDelay)
     {
         StopFire_ClientRPC(networkObject.NetworkObjectId);
 
@@ -612,6 +612,8 @@ public class Hades : NetworkBehaviour
         GameObject effect = Instantiate(meteorEffectPrefabs[rPrefab], pos + meteorEffectPrefabs[rPrefab].transform.position, Quaternion.identity);
         NetworkObject effectNetwork = effect.GetComponent<NetworkObject>();
         effectNetwork.Spawn(true);
+
+        StartCoroutine(DestroyDelay(effectNetwork, 15));
 
         StartCoroutine(MeteorDamageDelay(senderClientId, pos));
     }

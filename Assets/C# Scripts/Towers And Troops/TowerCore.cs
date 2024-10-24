@@ -205,7 +205,7 @@ public class TowerCore : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void DespawnTower_ServerRPC()
     {
-        NetworkObject.Despawn(gameObject);
+        NetworkObject.Despawn(true);
     }
     #endregion
 

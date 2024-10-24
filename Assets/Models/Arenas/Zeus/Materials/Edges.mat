@@ -113,7 +113,7 @@ Material:
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _Disolve_Active: -1
-    - _Dissolve_Width: 0.01
+    - _Dissolve_Width: 0.035
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _Emission_Multiplier: 2
@@ -146,7 +146,7 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Base_Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Edge_Color: {r: 19.42665, g: 10.315537, b: 2.602438, a: 1}
+    - _Edge_Color: {r: 18.136913, g: 10.748734, b: 0.9239545, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Emission_Color: {r: 1, g: 1, b: 1, a: 0}
     - _NoiseOffset: {r: 0, g: 0, b: 0, a: 0}

@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 3845163292237753395}
   - component: {fileID: 6361344059081361539}
   - component: {fileID: 1478502523789674209}
+  - component: {fileID: 5806196767669547219}
   m_Layer: 0
   m_Name: Cube.007 (5)
   m_TagString: Untagged
@@ -114,6 +115,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &5806196767669547219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 870231726609330807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7484502d80ba5c4c921a8fb469f952f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dissolveMaterial: {fileID: 0}
+  startDelay: 0
+  revertDelay: 0
+  startDissolveEffectState: 0.6
+  dissolveSpeed: 0.15
+  revertDissolveSpeed: 0.25
+  endDisolveValue: -0.9
 --- !u!1 &1218917413462902268
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,6 +176,7 @@ GameObject:
   - component: {fileID: 2389485008746298039}
   - component: {fileID: 4286735967828851651}
   - component: {fileID: 8658936346394820874}
+  - component: {fileID: 8651746289282596646}
   m_Layer: 0
   m_Name: Cube.007 (11)
   m_TagString: Untagged
@@ -228,6 +249,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8651746289282596646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1330790451261726127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7484502d80ba5c4c921a8fb469f952f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dissolveMaterial: {fileID: 0}
+  startDelay: 0
+  revertDelay: 0
+  startDissolveEffectState: 0.6
+  dissolveSpeed: 0.15
+  revertDissolveSpeed: 0.25
+  endDisolveValue: -0.9
 --- !u!1 &1612987715320767278
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,6 +279,7 @@ GameObject:
   - component: {fileID: 2211943695090004570}
   - component: {fileID: 4915896688676115524}
   - component: {fileID: 2596444486163958201}
+  - component: {fileID: 3970009308281455390}
   m_Layer: 0
   m_Name: Cube.007 (3)
   m_TagString: Untagged
@@ -311,6 +352,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3970009308281455390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1612987715320767278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7484502d80ba5c4c921a8fb469f952f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dissolveMaterial: {fileID: 0}
+  startDelay: 0
+  revertDelay: 0
+  startDissolveEffectState: 0.6
+  dissolveSpeed: 0.15
+  revertDissolveSpeed: 0.25
+  endDisolveValue: -0.9
 --- !u!1 &1687951600790827981
 GameObject:
   m_ObjectHideFlags: 0
@@ -322,6 +382,7 @@ GameObject:
   - component: {fileID: 7809740066509451810}
   - component: {fileID: 399675919868709446}
   - component: {fileID: 5739664707835393552}
+  - component: {fileID: 3948739829395858326}
   m_Layer: 0
   m_Name: Cube.007 (7)
   m_TagString: Untagged
@@ -394,6 +455,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3948739829395858326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1687951600790827981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7484502d80ba5c4c921a8fb469f952f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dissolveMaterial: {fileID: 0}
+  startDelay: 0
+  revertDelay: 0
+  startDissolveEffectState: 0.6
+  dissolveSpeed: 0.15
+  revertDissolveSpeed: 0.25
+  endDisolveValue: -0.9
 --- !u!1 &1858389631579016813
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,6 +485,7 @@ GameObject:
   - component: {fileID: 392353616359373355}
   - component: {fileID: 4786639072171481830}
   - component: {fileID: 1652494875960251969}
+  - component: {fileID: 7539689963129375284}
   m_Layer: 0
   m_Name: Corner (1)
   m_TagString: Untagged
@@ -477,6 +558,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7539689963129375284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1858389631579016813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7484502d80ba5c4c921a8fb469f952f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dissolveMaterial: {fileID: 0}
+  startDelay: 0
+  revertDelay: 0
+  startDissolveEffectState: 0.6
+  dissolveSpeed: 0.15
+  revertDissolveSpeed: 0.25
+  endDisolveValue: -0.9
 --- !u!1 &2820569256594366361
 GameObject:
   m_ObjectHideFlags: 0
@@ -488,6 +588,7 @@ GameObject:
   - component: {fileID: 93096024490403789}
   - component: {fileID: 5728816541478718260}
   - component: {fileID: 7986045571349925434}
+  - component: {fileID: 5120092256356445941}
   m_Layer: 0
   m_Name: Cube.007 (6)
   m_TagString: Untagged
@@ -560,6 +661,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &5120092256356445941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2820569256594366361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7484502d80ba5c4c921a8fb469f952f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dissolveMaterial: {fileID: 0}
+  startDelay: 0
+  revertDelay: 0
+  startDissolveEffectState: 0.6
+  dissolveSpeed: 0.15
+  revertDissolveSpeed: 0.25
+  endDisolveValue: -0.9
 --- !u!1 &3448083159982258822
 GameObject:
   m_ObjectHideFlags: 0
@@ -602,6 +722,7 @@ GameObject:
   - component: {fileID: 2890095314902804280}
   - component: {fileID: 4880798681506343957}
   - component: {fileID: 8862164013568550903}
+  - component: {fileID: 1156872739563607844}
   m_Layer: 0
   m_Name: Cube.007 (2)
   m_TagString: Untagged
@@ -674,6 +795,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1156872739563607844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3810756005295896857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7484502d80ba5c4c921a8fb469f952f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dissolveMaterial: {fileID: 0}
+  startDelay: 0
+  revertDelay: 0
+  startDissolveEffectState: 0.6
+  dissolveSpeed: 0.15
+  revertDissolveSpeed: 0.25
+  endDisolveValue: -0.9
 --- !u!1 &4040885687151143514
 GameObject:
   m_ObjectHideFlags: 0
@@ -783,6 +923,7 @@ GameObject:
   - component: {fileID: 165883337368739213}
   - component: {fileID: 6985835903322842151}
   - component: {fileID: 4336955182485634751}
+  - component: {fileID: 1609621832196692051}
   m_Layer: 0
   m_Name: Cube.007 (4)
   m_TagString: Untagged
@@ -855,6 +996,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1609621832196692051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4833108310800320556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7484502d80ba5c4c921a8fb469f952f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dissolveMaterial: {fileID: 0}
+  startDelay: 0
+  revertDelay: 0
+  startDissolveEffectState: 0.6
+  dissolveSpeed: 0.15
+  revertDissolveSpeed: 0.25
+  endDisolveValue: -0.9
 --- !u!1 &5853471675579792015
 GameObject:
   m_ObjectHideFlags: 0
@@ -866,6 +1026,7 @@ GameObject:
   - component: {fileID: 5333464877129150436}
   - component: {fileID: 3698234888971795438}
   - component: {fileID: 9025982657267079716}
+  - component: {fileID: 7281927695313341984}
   m_Layer: 0
   m_Name: Cube.007 (1)
   m_TagString: Untagged
@@ -938,6 +1099,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7281927695313341984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5853471675579792015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7484502d80ba5c4c921a8fb469f952f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dissolveMaterial: {fileID: 0}
+  startDelay: 0
+  revertDelay: 0
+  startDissolveEffectState: 0.6
+  dissolveSpeed: 0.15
+  revertDissolveSpeed: 0.25
+  endDisolveValue: -0.9
 --- !u!1 &6285539767654704257
 GameObject:
   m_ObjectHideFlags: 0
@@ -949,6 +1129,7 @@ GameObject:
   - component: {fileID: 1433299935140819959}
   - component: {fileID: 8095254340219567624}
   - component: {fileID: 2322546066550652844}
+  - component: {fileID: 8778081120782575687}
   m_Layer: 0
   m_Name: Cube.007 (8)
   m_TagString: Untagged
@@ -1021,6 +1202,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8778081120782575687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6285539767654704257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7484502d80ba5c4c921a8fb469f952f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dissolveMaterial: {fileID: 0}
+  startDelay: 0
+  revertDelay: 0
+  startDissolveEffectState: 0.6
+  dissolveSpeed: 0.15
+  revertDissolveSpeed: 0.25
+  endDisolveValue: -0.9
 --- !u!1 &6491151226748598903
 GameObject:
   m_ObjectHideFlags: 0
@@ -1032,6 +1232,7 @@ GameObject:
   - component: {fileID: 2023498275224896024}
   - component: {fileID: 2963037539597285095}
   - component: {fileID: 4089256540034962853}
+  - component: {fileID: 8562176473783892372}
   m_Layer: 0
   m_Name: Cube.007 (10)
   m_TagString: Untagged
@@ -1104,6 +1305,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8562176473783892372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6491151226748598903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7484502d80ba5c4c921a8fb469f952f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dissolveMaterial: {fileID: 0}
+  startDelay: 0
+  revertDelay: 0
+  startDissolveEffectState: 0.6
+  dissolveSpeed: 0.15
+  revertDissolveSpeed: 0.25
+  endDisolveValue: -0.9
 --- !u!1 &7066253855138103682
 GameObject:
   m_ObjectHideFlags: 0
@@ -1190,7 +1410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3579357199
+  GlobalObjectIdHash: 3579476784
   InScenePlacedSourceGlobalObjectIdHash: 3579357199
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -1224,6 +1444,7 @@ MonoBehaviour:
   underAttackArrowColors:
   - {r: 0.8627451, g: 0.2509804, b: 0.23921569, a: 1}
   selectStateAnim: {fileID: 0}
+  onTurnStateAnim: {fileID: 0}
   targets: []
   anim: {fileID: 0}
   towerCompleted: 0
@@ -1522,6 +1743,7 @@ GameObject:
   - component: {fileID: 6411615382501175811}
   - component: {fileID: 5697301515107811801}
   - component: {fileID: 6317797982612167318}
+  - component: {fileID: 8391146400413189416}
   m_Layer: 0
   m_Name: Cube.007 (9)
   m_TagString: Untagged
@@ -1594,6 +1816,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8391146400413189416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7597309739096098758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7484502d80ba5c4c921a8fb469f952f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dissolveMaterial: {fileID: 0}
+  startDelay: 0
+  revertDelay: 0
+  startDissolveEffectState: 0.6
+  dissolveSpeed: 0.15
+  revertDissolveSpeed: 0.25
+  endDisolveValue: -0.9
 --- !u!1 &8395009438021040787
 GameObject:
   m_ObjectHideFlags: 0
@@ -4588,8 +4829,116 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 757624015115624543, guid: 0d3425d265cc6ad49a4b8fdc3843d6ae, type: 3}
       insertIndex: 13
       addedObject: {fileID: 2211943695090004570}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5053107215132752735, guid: 0d3425d265cc6ad49a4b8fdc3843d6ae, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3207346160823547284}
+    - targetCorrespondingSourceObject: {fileID: 8076025009963230247, guid: 0d3425d265cc6ad49a4b8fdc3843d6ae, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3070672159831363037}
+    - targetCorrespondingSourceObject: {fileID: 7968256128995986076, guid: 0d3425d265cc6ad49a4b8fdc3843d6ae, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2186026545222718571}
+    - targetCorrespondingSourceObject: {fileID: 3398199965413625680, guid: 0d3425d265cc6ad49a4b8fdc3843d6ae, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7209509876767451173}
   m_SourcePrefab: {fileID: 100100000, guid: 0d3425d265cc6ad49a4b8fdc3843d6ae, type: 3}
+--- !u!1 &341997267703726754 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7968256128995986076, guid: 0d3425d265cc6ad49a4b8fdc3843d6ae, type: 3}
+  m_PrefabInstance: {fileID: 7650465714909743166}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2186026545222718571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 341997267703726754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7484502d80ba5c4c921a8fb469f952f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dissolveMaterial: {fileID: 0}
+  startDelay: 0
+  revertDelay: 0
+  startDissolveEffectState: 0.6
+  dissolveSpeed: 0.15
+  revertDissolveSpeed: 0.25
+  endDisolveValue: -0.9
+--- !u!1 &1889304013871475737 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8076025009963230247, guid: 0d3425d265cc6ad49a4b8fdc3843d6ae, type: 3}
+  m_PrefabInstance: {fileID: 7650465714909743166}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3070672159831363037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1889304013871475737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7484502d80ba5c4c921a8fb469f952f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dissolveMaterial: {fileID: 0}
+  startDelay: 0
+  revertDelay: 0
+  startDissolveEffectState: 0.6
+  dissolveSpeed: 0.15
+  revertDissolveSpeed: 0.25
+  endDisolveValue: -0.9
+--- !u!1 &3173863690779980641 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5053107215132752735, guid: 0d3425d265cc6ad49a4b8fdc3843d6ae, type: 3}
+  m_PrefabInstance: {fileID: 7650465714909743166}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3207346160823547284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3173863690779980641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7484502d80ba5c4c921a8fb469f952f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dissolveMaterial: {fileID: 0}
+  startDelay: 0
+  revertDelay: 0
+  startDissolveEffectState: 0.6
+  dissolveSpeed: 0.15
+  revertDissolveSpeed: 0.25
+  endDisolveValue: -0.9
+--- !u!1 &4972887500540954478 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3398199965413625680, guid: 0d3425d265cc6ad49a4b8fdc3843d6ae, type: 3}
+  m_PrefabInstance: {fileID: 7650465714909743166}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7209509876767451173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4972887500540954478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7484502d80ba5c4c921a8fb469f952f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dissolveMaterial: {fileID: 0}
+  startDelay: 0
+  revertDelay: 0
+  startDissolveEffectState: 0.6
+  dissolveSpeed: 0.15
+  revertDissolveSpeed: 0.25
+  endDisolveValue: -0.9
 --- !u!4 &6964945533995952225 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 757624015115624543, guid: 0d3425d265cc6ad49a4b8fdc3843d6ae, type: 3}

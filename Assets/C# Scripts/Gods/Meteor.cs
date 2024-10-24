@@ -46,6 +46,8 @@ public class Meteor : NetworkBehaviour
         Vector3 direction = (endPoint.position - transform.position).normalized;
         var rotation = Quaternion.LookRotation(direction);
 
+        Destroy(endPoint.gameObject);
+
         transform.rotation = rotation;
 
         rb.velocity = transform.forward * moveSpeed;
@@ -108,10 +110,7 @@ public class Meteor : NetworkBehaviour
 
         if (IsServer)
         {
-            impactNetwork.Despawn();
-            NetworkObject.Despawn();
-
-            Destroy(endPoint.gameObject);
+            impactNetwork.Despawn(true);
         }
     }
 

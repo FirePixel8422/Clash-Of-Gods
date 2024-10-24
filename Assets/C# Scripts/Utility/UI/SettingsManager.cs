@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using TMPro;
 using Unity.Netcode;
 using Unity.Services.Lobbies;
@@ -212,13 +213,36 @@ public class SettingsManager : NetworkBehaviour
     [ClientRpc(RequireOwnership = false)]
     private void KillMatch_ClientRPC()
     {
-        Destroy(GodCore.Instance.gameObject);
-        Destroy(LobbyRelay.Instance.gameObject);
-        Destroy(NetworkManager.gameObject);
-        Destroy(MusicManager.Singleton.gameObject);
+        Task destroyLobbyTask = Lobbies.Instance.DeleteLobbyAsync(LobbyRelay.Instance._lobbyId);
+
+        StartCoroutine(LoadSceneDelay(destroyLobbyTask));
+    }
+
+
+    private IEnumerator LoadSceneDelay(Task destroyLobbyTask)
+    {
+        yield return new WaitUntil(() => destroyLobbyTask.IsCompleted);
 
         NetworkManager.Shutdown();
-        Lobbies.Instance.DeleteLobbyAsync(LobbyRelay.Instance._lobbyId);
+
+        yield return null;
+        yield return new WaitForEndOfFrame();
+
+        Destroy(GodCore.Instance.gameObject);
+        GodCore.Instance = null;
+
+        Destroy(LobbyRelay.Instance.gameObject);
+        LobbyRelay.Instance = null;
+
+        Destroy(NetworkManager.gameObject);
+
+        Destroy(MusicManager.Singleton.gameObject);
+        MusicManager.Singleton = null;
+
+        yield return null;
+        yield return new WaitForEndOfFrame();
+
+        yield return new WaitForSeconds(2);
 
         SceneManager.LoadScene(0);
     }

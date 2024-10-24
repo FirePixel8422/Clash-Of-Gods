@@ -19,17 +19,11 @@ public class DirectionArrowValidator : MonoBehaviour
 
 
 
-    public void Init(bool flipped)
+    public void Init()
     {
         for (int i = 0; i < directions.Length; i++)
         {
             Vector2Int direction = directions[i];
-
-            if (flipped)
-            {
-                direction.x = -direction.x;
-                direction.y = -direction.y;
-            }
 
             GameObject spawnedObj = Instantiate(directionArrowPrefab, transform, true);
 

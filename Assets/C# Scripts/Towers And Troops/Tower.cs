@@ -10,7 +10,7 @@ public class Tower : TowerCore
     public Transform rotPoint;
     public bool yRotOnly;
 
-    public Transform lookAtTransform;
+    private Transform lookAtTransform;
     public Transform shootPoint;
 
     [HideInInspector]
@@ -18,8 +18,9 @@ public class Tower : TowerCore
 
     public float rotSpeed;
 
-    public Transform projectileTransform;
     public float animShootTime;
+
+    public GameObject projectilePrefab;
 
 
 
@@ -29,7 +30,7 @@ public class Tower : TowerCore
 
         attackAnimator.transform.rotation = Quaternion.identity;
 
-        GetComponentInChildren<DirectionArrowValidator>().Init(Mathf.RoundToInt(transform.rotation.y) == -90);
+        GetComponentInChildren<DirectionArrowValidator>().Init();
 
         if (rotPoint != null)
         {
@@ -54,19 +55,48 @@ public class Tower : TowerCore
 
     protected override IEnumerator AttackTargetAnimation(Vector3 targetPos, float combinedSize, TowerCore target = null)
     {
-        lookAtTransform = target.centerPoint;
-
-        anim.SetTrigger("Attack");
-
+        if (target != null)
+        {
+            lookAtTransform = target.centerPoint;
+        }
         yield return new WaitUntil(() => lookingAtTarget == true || rotPoint == null);
 
+        lookingAtTarget = false;
+
+        anim.SetTrigger("Attack");
         StartCoroutine(SoundDelay(soundDelay));
+
         yield return new WaitForSeconds(animShootTime);
 
         if (target != null)
         {
-            target.GetAttacked(dmg, GodCore.Instance.RandomStunChance());
+            ulong targetId = target.NetworkObjectId;
+            SpawnProjectile_ServerRPC(targetId, dmg);
         }
+    }
+
+
+    [ServerRpc(RequireOwnership = false)]
+    private void SpawnProjectile_ServerRPC(ulong targetId, int damage)
+    {
+        Vector3 forwardDirection;
+        if (shootPoint != null)
+        {
+            forwardDirection = shootPoint.forward;
+        }
+        else
+        {
+            forwardDirection = centerPoint.position - NetworkManager.SpawnManager.SpawnedObjects[targetId].transform.position;
+        }
+        Quaternion rotation = Quaternion.LookRotation(forwardDirection);
+
+        GameObject projectileObj = Instantiate(projectilePrefab, shootPoint.position, rotation);
+        NetworkObject projectileNetwork = projectileObj.GetComponent<NetworkObject>();
+        Projectile projectile = projectileObj.GetComponent<Projectile>();
+
+        projectileNetwork.Spawn(true);
+
+        projectile.Init(NetworkManager.SpawnManager.SpawnedObjects[targetId].GetComponent<TowerCore>(), damage);
     }
 
     private IEnumerator SoundDelay(float delay)
@@ -86,13 +116,20 @@ public class Tower : TowerCore
             yield return null;
             yield return new WaitUntil(() => lookAtTransform != null);
 
-            Vector3 direction = lookAtTransform.position - rotPoint.position;
+            Vector3 targetPosition = lookAtTransform.position;
+            if (yRotOnly)
+            {
+                targetPosition.y = rotPoint.position.y;
+            }
+
+            Vector3 direction = targetPosition - rotPoint.position;
 
             Quaternion targetRotation = Quaternion.LookRotation(direction);
 
+
             if (yRotOnly)
             {
-                rotPoint.rotation = Quaternion.Euler(rotPoint.rotation.x, Quaternion.RotateTowards(rotPoint.rotation, targetRotation, rotSpeed * Time.deltaTime).y, rotPoint.rotation.z);
+                rotPoint.rotation = Quaternion.Euler(rotPoint.rotation.x, Quaternion.RotateTowards(rotPoint.rotation, targetRotation, rotSpeed * Time.deltaTime).eulerAngles.y, rotPoint.rotation.z);
             }
             else
             {

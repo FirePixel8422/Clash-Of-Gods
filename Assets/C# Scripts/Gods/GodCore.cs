@@ -18,7 +18,7 @@ public class GodCore : NetworkBehaviour
     {
         if (arg0.name == "MainGame")
         {
-            if(chooseGodMenu == null)
+            if (chooseGodMenu == null)
             {
                 print("null");
             }

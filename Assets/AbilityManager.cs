@@ -133,14 +133,15 @@ public class AbilityManager : MonoBehaviour
 
         maxCharges1 = _maxCharges1;
 
+        cCharges1 = 1;
+        text1.text = "";
+        textCharges1.text = maxCharges1 > 1 ? ("x" + cCharges1.ToString()) : "";
+
         if (maxCharges1 != 1)
         {
             cCooldown1 = cooldown1;
             text1.text = cCooldown1.ToString();
         }
-        cCharges1 = 1;
-        text1.text = "";
-        textCharges1.text = "";
 
 
 
@@ -148,14 +149,16 @@ public class AbilityManager : MonoBehaviour
 
         maxCharges2 = _maxCharges2;
 
+        cCharges2 = 1;
+        text2.text = "";
+        textCharges2.text = maxCharges2 > 1 ? ("x" + cCharges2.ToString()) : "";
+
         if (maxCharges2 != 1)
         {
             cCooldown2 = cooldown2;
             text2.text = cCooldown2.ToString();
+            textCharges2.text = "";
         }
-        cCharges2 = 1;
-        text2.text = "";
-        textCharges2.text = "";
 
 
         abilityInfo = _abilityInfo;
