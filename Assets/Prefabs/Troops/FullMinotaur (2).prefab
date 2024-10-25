@@ -653,7 +653,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioType: 0
-  clips: []
+  clips:
+  - {fileID: 8300000, guid: 1f5acc00296e36d4691326a209d93794, type: 3}
   clipOrder: 0
   autoRefillSources: 0
 --- !u!82 &7497829304460221446
