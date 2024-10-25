@@ -8002,7 +8002,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60bae8d50d58edb428e44418b3e4c6ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerPrefab: {fileID: 7121271770734493371, guid: 777c39578536aa24587a993987e0b41f, type: 3}
+  towerPrefab: {fileID: 993162113587608453, guid: fc21286b42e5ff840a707272e6657698, type: 3}
   cost: 7
   xrayControllers: []
   towerPreviewRenderer: {fileID: 0}

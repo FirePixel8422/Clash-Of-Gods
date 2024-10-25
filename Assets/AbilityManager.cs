@@ -50,6 +50,9 @@ public class AbilityManager : MonoBehaviour
     [HideInInspector]
     public UnityEvent ability2Activate;
 
+    public AudioController audioController1;
+    public AudioController audioController2;
+
 
 
 
@@ -64,6 +67,9 @@ public class AbilityManager : MonoBehaviour
         {
             ui.SetActive(true);
             TurnManager.Instance.OnMyTurnStartedEvent.AddListener(() => OnTurnGranted());
+
+            SettingsManager.SingleTon.AddAudioController(audioController1);
+            SettingsManager.SingleTon.AddAudioController(audioController2);
         }
     }
 
@@ -207,6 +213,8 @@ public class AbilityManager : MonoBehaviour
     {
         if (first)
         {
+            audioController1.Play();
+
             if (maxCharges1 == 1)
             {
                 cCooldown1 = cooldown1;
@@ -230,6 +238,8 @@ public class AbilityManager : MonoBehaviour
         }
         else
         {
+            audioController2.Play();
+
             if (maxCharges2 == 1)
             {
                 cCooldown2 = cooldown2;
