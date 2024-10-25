@@ -125,7 +125,7 @@ public class AbilityManager : MonoBehaviour
     }
 
 
-    public void SetupUI(Sprite sprite1, int _cooldown1, int _maxCharges1, Sprite sprite2, int _cooldown2, int _maxCharges2, Sprite sprite0, string[] _abilityInfo)
+    public void SetupUI(Sprite sprite1, int _cooldown1, int _maxCharges1, Sprite sprite2, int _cooldown2, int _maxCharges2, Sprite sprite0, string[] _abilityInfo, AudioClip[] clips)
     {
         gameObject.SetActive(true);
 
@@ -149,6 +149,9 @@ public class AbilityManager : MonoBehaviour
             text1.text = cCooldown1.ToString();
         }
 
+        audioController1.clips = new AudioClip[1] { clips[0] };
+
+
 
 
         cooldown2 = _cooldown2;
@@ -165,6 +168,8 @@ public class AbilityManager : MonoBehaviour
             text2.text = cCooldown2.ToString();
             textCharges2.text = "";
         }
+
+        audioController2.clips = new AudioClip[1] { clips[1] };
 
 
         abilityInfo = _abilityInfo;

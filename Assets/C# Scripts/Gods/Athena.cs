@@ -19,6 +19,7 @@ public class Athena : NetworkBehaviour
     public int[] abilityCooldowns;
     public int[] abilityCharges;
     public string[] abilityInfo;
+    public AudioClip[] abilitySounds;
 
 
     public float ringAnimationMoveSpeed;
@@ -83,7 +84,7 @@ public class Athena : NetworkBehaviour
             PlacementManager.Instance.OnCancelEvent.AddListener(() => OnCancel());
             PlacementManager.Instance.OnSelectEvent.AddListener(() => OnCancel());
 
-            AbilityManager.Instance.SetupUI(uiSprites[0], abilityCooldowns[0], abilityCharges[0], uiSprites[1], abilityCooldowns[1], abilityCharges[1], uiSprites[2], abilityInfo);
+            AbilityManager.Instance.SetupUI(uiSprites[0], abilityCooldowns[0], abilityCharges[0], uiSprites[1], abilityCooldowns[1], abilityCharges[1], uiSprites[2], abilityInfo, abilitySounds);
 
             AbilityManager.Instance.ability1Activate.AddListener(() => UseDefensiveAbility());
             AbilityManager.Instance.ability2Activate.AddListener(() => UseOffensiveAbility());
