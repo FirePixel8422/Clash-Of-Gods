@@ -97,9 +97,9 @@ public class TurnManager : NetworkBehaviour
         {
             isMyTurn = false;
 
-            OnMyTurnEndedEvent.Invoke();
-
             NextTurn_ServerRPC();
+
+            OnMyTurnEndedEvent.Invoke();
         }
     }
 
@@ -126,10 +126,11 @@ public class TurnManager : NetworkBehaviour
         if (nextClientOnTurnId == localClientId)
         {
             isMyTurn = true;
-            OnMyTurnStartedEvent.Invoke();
 
             yourTurnText.SetTrigger("YourTurn");
             endTurnButton.SetActive(true);
+
+            OnMyTurnStartedEvent.Invoke();
         }
     }
     #endregion

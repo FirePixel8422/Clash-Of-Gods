@@ -5718,6 +5718,10 @@ PrefabInstance:
       propertyPath: abilityCooldowns.Array.data[1]
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 335491348168595867, guid: 3e86c31feac17c841848fd84f43a25e9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 577563415390847606, guid: 3e86c31feac17c841848fd84f43a25e9, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.815

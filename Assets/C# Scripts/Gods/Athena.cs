@@ -126,6 +126,7 @@ public class Athena : NetworkBehaviour
 
                 SyncSelectionSpriteState_ServerRPC(false);
 
+                troop.isBuffed = true;
                 EnhanceTroop(selectedGridTileData.worldPos, troop);
 
                 usingOffensiveAbility = false;
