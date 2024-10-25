@@ -17520,7 +17520,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NetworkConfig:
-    ProtocolVersion: 0
+    ProtocolVersion: 8422
     NetworkTransport: {fileID: 3829379997678020902}
     PlayerPrefab: {fileID: 0}
     Prefabs:

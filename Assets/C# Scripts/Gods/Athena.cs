@@ -64,17 +64,6 @@ public class Athena : NetworkBehaviour
             return;
         }
 
-        PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
-        pointerEventData.position = Input.mousePosition;
-
-        var results = new List<RaycastResult>();
-        gfxRayCaster.Raycast(pointerEventData, results);
-
-        if (results.Count > 0)
-        {
-            return;
-        }
-
 
         mainCam = Camera.main;
 
