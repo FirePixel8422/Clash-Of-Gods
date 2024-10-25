@@ -148,8 +148,10 @@ public class AbilityManager : MonoBehaviour
             cCooldown1 = cooldown1;
             text1.text = cCooldown1.ToString();
         }
-
-        audioController1.clips = new AudioClip[1] { clips[0] };
+        if (audioController1 != null)
+        {
+            audioController1.clips = new AudioClip[1] { clips[0] };
+        }
 
 
 
@@ -169,7 +171,10 @@ public class AbilityManager : MonoBehaviour
             textCharges2.text = "";
         }
 
-        audioController2.clips = new AudioClip[1] { clips[1] };
+        if (audioController2 != null)
+        {
+            audioController2.clips = new AudioClip[1] { clips[1] };
+        }
 
 
         abilityInfo = _abilityInfo;
@@ -218,7 +223,10 @@ public class AbilityManager : MonoBehaviour
     {
         if (first)
         {
-            audioController1.Play();
+            if (audioController1 != null)
+            {
+                audioController1.Play();
+            }
 
             if (maxCharges1 == 1)
             {
@@ -243,7 +251,10 @@ public class AbilityManager : MonoBehaviour
         }
         else
         {
-            audioController2.Play();
+            if (audioController2 != null)
+            {
+                audioController2.Play();
+            }
 
             if (maxCharges2 == 1)
             {

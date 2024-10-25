@@ -46,8 +46,6 @@ public class Meteor : NetworkBehaviour
         Vector3 direction = (endPoint.position - transform.position).normalized;
         var rotation = Quaternion.LookRotation(direction);
 
-        Destroy(endPoint.gameObject);
-
         transform.rotation = rotation;
 
         rb.velocity = transform.forward * moveSpeed;
@@ -72,6 +70,8 @@ public class Meteor : NetworkBehaviour
         meshRenderer.enabled = false;
 
         audioControllerImpact.Play();
+
+        gameObject.SetActive(false);
 
         trail.Stop();
         Destroy(trail.gameObject, trail.main.duration + trail.main.startLifetime.constantMax);
@@ -110,6 +110,7 @@ public class Meteor : NetworkBehaviour
 
         if (IsServer)
         {
+            Destroy(endPoint.gameObject);
             impactNetwork.Despawn(true);
         }
     }

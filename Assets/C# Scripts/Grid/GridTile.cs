@@ -33,7 +33,10 @@ public class GridTile : MonoBehaviour
     {
         yield return new WaitUntil(() => GridManager.Instance.gridSizeX != 0);
 
-        GridManager.Instance.UpdateGridDataTile(GridManager.Instance.GridObjectFromWorldPoint(transform.position).gridPos, this);
+        Vector3 pos = transform.position;
+        pos.y = 0;
+
+        GridManager.Instance.UpdateGridDataTile(GridManager.Instance.GridObjectFromWorldPoint(pos).gridPos, this);
     }
 
 

@@ -11,14 +11,16 @@ public class TowerPreview : MonoBehaviour
     [HideInInspector]
     public XrayController[] xrayControllers;
 
-    [HideInInspector]
-    public SpriteRenderer towerPreviewRenderer;
+    
+    private SpriteRenderer[] ranges;
+
+
     private int cPlaceable = 2;
 
 
     private void Start()
     {
-        towerPreviewRenderer = GetComponentInChildren<SpriteRenderer>();
+        ranges = GetComponentsInChildren<SpriteRenderer>();
 
         xrayControllers = GetComponentsInChildren<XrayController>();
     }
@@ -33,6 +35,11 @@ public class TowerPreview : MonoBehaviour
         foreach (var d in xrayControllers)
         {
             d.dissolveMaterial.SetInt(Shader.PropertyToID("_Placable"), placeable ? 1 : 0);
+        }
+
+        foreach (var range in ranges)
+        {
+            range.color = placeable ? new Color(0.03529412f, 1f, 0f) : new Color(0.8943396f, 0.2309691f, 0.09955848f);
         }
     }
 }

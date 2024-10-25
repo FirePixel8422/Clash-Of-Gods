@@ -2597,6 +2597,7 @@ MonoBehaviour:
   musicAudioSlider: {fileID: 2145711133}
   fullscreenButtonText: {fileID: 183524697}
   displayRefreshRate: 0
+  audioControllers: []
 --- !u!114 &253721717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5696,6 +5697,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: ef42132088eebf04f98751c922178420, type: 3}
     - target: {fileID: 253629554193190488, guid: 3e86c31feac17c841848fd84f43a25e9, type: 3}
+      propertyPath: abilitySounds.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 253629554193190488, guid: 3e86c31feac17c841848fd84f43a25e9, type: 3}
       propertyPath: abilityInfo.Array.data[0]
       value: Every turn 3 random tiles shoot up flames that damage the enemy while
         your troops are immune to fire damage and when a troop dies they combust
@@ -5777,6 +5782,10 @@ PrefabInstance:
       propertyPath: uiSprites.Array.data[2]
       value: 
       objectReference: {fileID: 21300000, guid: fb99998276a7a5d4a9f6f48ae8121238, type: 3}
+    - target: {fileID: 1605595269332721995, guid: 3e86c31feac17c841848fd84f43a25e9, type: 3}
+      propertyPath: abilitySounds.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1605595269332721995, guid: 3e86c31feac17c841848fd84f43a25e9, type: 3}
       propertyPath: abilityInfo.Array.data[0]
       value: Your troops have a chance to stun the enemy when you attack their troops
@@ -5900,11 +5909,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2917374039013712749, guid: 3e86c31feac17c841848fd84f43a25e9, type: 3}
       propertyPath: chosenGods.Array.data[0]
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 2917374039013712749, guid: 3e86c31feac17c841848fd84f43a25e9, type: 3}
       propertyPath: chosenGods.Array.data[1]
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 3072584379432387380, guid: 3e86c31feac17c841848fd84f43a25e9, type: 3}
       propertyPath: uiSprites.Array.size
@@ -5918,6 +5927,10 @@ PrefabInstance:
       propertyPath: uiSprites.Array.data[2]
       value: 
       objectReference: {fileID: 21300000, guid: 5b80304d831895c429b942159cb7dd28, type: 3}
+    - target: {fileID: 3072584379432387380, guid: 3e86c31feac17c841848fd84f43a25e9, type: 3}
+      propertyPath: abilitySounds.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3072584379432387380, guid: 3e86c31feac17c841848fd84f43a25e9, type: 3}
       propertyPath: abilityInfo.Array.data[0]
       value: Immediately move your troops when placed

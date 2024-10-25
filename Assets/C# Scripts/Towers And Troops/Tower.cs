@@ -138,24 +138,26 @@ public class Tower : TowerCore
 
             lookingAtTarget = Quaternion.Angle(rotPoint.rotation, targetRotation) < 0.001f;
 
-            SyncYRotationServerRPC(rotPoint.rotation);
+            SyncYRotationServerRPC(rotPoint.rotation, lookingAtTarget);
         }
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void SyncYRotationServerRPC(Quaternion rotation, ServerRpcParams rpcParams = default)
+    private void SyncYRotationServerRPC(Quaternion rotation, bool lookingAtTarget, ServerRpcParams rpcParams = default)
     {
         ulong senderClientId = rpcParams.Receive.SenderClientId;
-        SyncYRotation_ClientRPC(senderClientId, rotation);
+        SyncYRotation_ClientRPC(senderClientId, lookingAtTarget, rotation);
     }
 
     [ClientRpc(RequireOwnership = false)]
-    private void SyncYRotation_ClientRPC(ulong clientId, Quaternion rotation)
+    private void SyncYRotation_ClientRPC(ulong clientId, bool _lookingAtTarget, Quaternion rotation)
     {
         if(NetworkManager.LocalClientId == clientId)
         {
             return;
         }
+
+        lookingAtTarget = _lookingAtTarget;
         rotPoint.rotation = rotation;
     }
 }

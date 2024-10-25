@@ -121,4 +121,4 @@ MonoBehaviour:
   dmg: 0
   targetSize: 0
   size: 0.1
-  moveSpeed: 22
+  moveSpeed: 21

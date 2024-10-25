@@ -8005,7 +8005,7 @@ MonoBehaviour:
   towerPrefab: {fileID: 993162113587608453, guid: fc21286b42e5ff840a707272e6657698, type: 3}
   cost: 7
   xrayControllers: []
-  towerPreviewRenderer: {fileID: 0}
+  c: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &622516320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22304,7 +22304,7 @@ MonoBehaviour:
   towerPrefab: {fileID: 6230911748676805975, guid: 205b1eb57c4b8c4409090fdc0af93e85, type: 3}
   cost: 8
   xrayControllers: []
-  towerPreviewRenderer: {fileID: 0}
+  c: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1998221015
 GameObject:
   m_ObjectHideFlags: 0
@@ -24383,7 +24383,7 @@ MonoBehaviour:
   towerPrefab: {fileID: 2854945369113933053, guid: e1ff7d63272e079459b66f97ec0b1726, type: 3}
   cost: 5
   xrayControllers: []
-  towerPreviewRenderer: {fileID: 0}
+  c: {r: 0, g: 0, b: 0, a: 0}
 --- !u!23 &2093417559646658722
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -29294,7 +29294,7 @@ MonoBehaviour:
   towerPrefab: {fileID: 6867936383081267567, guid: 65e004c1cc277a4458b8877f0e80c324, type: 3}
   cost: 5
   xrayControllers: []
-  towerPreviewRenderer: {fileID: 0}
+  c: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &4527208075033533687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29470,6 +29470,7 @@ GameObject:
   - component: {fileID: 1552348736471131301}
   - component: {fileID: 1590573831338080669}
   - component: {fileID: 1495358892742980634}
+  - component: {fileID: 4882957252227605941}
   m_Layer: 0
   m_Name: Cube.002
   m_TagString: Untagged
@@ -29477,6 +29478,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &4882957252227605941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4882957252227605940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ca1636460d0c3044bb36b6e300c0b9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dissolveMaterial: {fileID: 0}
 --- !u!4 &5329401403840064830
 Transform:
   m_ObjectHideFlags: 0
@@ -34640,7 +34654,7 @@ MonoBehaviour:
   towerPrefab: {fileID: 1116517094300245886, guid: 2061248e8e53e2244beb27ad6e2d075b, type: 3}
   cost: 8
   xrayControllers: []
-  towerPreviewRenderer: {fileID: 0}
+  c: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &6416473634422032101
 GameObject:
   m_ObjectHideFlags: 0
@@ -39529,7 +39543,7 @@ MonoBehaviour:
   towerPrefab: {fileID: 6342332295250148791, guid: 85add2b08fab9674f9eddfac5c57f7c7, type: 3}
   cost: 8
   xrayControllers: []
-  towerPreviewRenderer: {fileID: 0}
+  c: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &8027316603336123934 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5738534144478411004, guid: 8308c3557a75ad940a1ebb32853ac4ac, type: 3}
@@ -39762,6 +39776,7 @@ MonoBehaviour:
   musicAudioSlider: {fileID: 261628787}
   fullscreenButtonText: {fileID: 587972385}
   displayRefreshRate: 0
+  audioControllers: []
 --- !u!114 &8704379221742568062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39966,6 +39981,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: abe5918bf9b257c49a65df20030f9c9f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 9164815480831004591}
+    - targetCorrespondingSourceObject: {fileID: -516098083770646512, guid: abe5918bf9b257c49a65df20030f9c9f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9164815480831004593}
   m_SourcePrefab: {fileID: 100100000, guid: abe5918bf9b257c49a65df20030f9c9f, type: 3}
 --- !u!1 &9164815480831004590 stripped
 GameObject:
@@ -39987,7 +40005,25 @@ MonoBehaviour:
   towerPrefab: {fileID: 3222560536269224309, guid: e150d16c21c0eed419e13413aff3f925, type: 3}
   cost: 8
   xrayControllers: []
-  towerPreviewRenderer: {fileID: 0}
+  c: {r: 0.02, g: 1, b: 0, a: 1}
+--- !u!1 &9164815480831004592 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -516098083770646512, guid: abe5918bf9b257c49a65df20030f9c9f, type: 3}
+  m_PrefabInstance: {fileID: 9164815480831004589}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &9164815480831004593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9164815480831004592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ca1636460d0c3044bb36b6e300c0b9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dissolveMaterial: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

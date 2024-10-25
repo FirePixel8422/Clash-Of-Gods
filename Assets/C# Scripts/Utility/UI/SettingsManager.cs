@@ -42,14 +42,16 @@ public class SettingsManager : NetworkBehaviour
 
     public bool displayRefreshRate;
 
-    private List<AudioController> audioControllers;
+    public List<AudioController> audioControllers;
 
 
     public void AddAudioController(AudioController toAdd)
     {
-        audioControllers.Add(toAdd);
-
-        toAdd.UpdateVolume(mainAudioSlider.value, sfxAudioSlider.value, musicAudioSlider.value);
+        if (toAdd != null)
+        {
+            audioControllers.Add(toAdd);
+            toAdd.UpdateVolume(mainAudioSlider.value, sfxAudioSlider.value, musicAudioSlider.value);
+        }
     }
     public void RemoveAudioController(AudioController toRemove)
     {

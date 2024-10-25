@@ -308,7 +308,6 @@ public class PlacementManager : NetworkBehaviour
     {
         playedAnything = true;
 
-        selectedPreviewTower.towerPreviewRenderer.color = new Color(0.7619722f, 0.8740168f, 0.9547169f);
         selectedPreviewTower.UpdateTowerPreviewColor(true);
 
         selectedPreviewTower.transform.localPosition = Vector3.zero;
@@ -444,15 +443,12 @@ public class PlacementManager : NetworkBehaviour
 
                 if (selectedGridTileData.full == false && selectedGridTileData.type == (int)localClientId && currency >= selectedPreviewTower.cost)
                 {
-                    selectedPreviewTower.towerPreviewRenderer.color = new Color(0.03529412f, 1f, 0f);
                     selectedPreviewTower.UpdateTowerPreviewColor(true);
 
                     UpdateTowerPreviewServerRPC(selectedGridTileData.worldPos, towerForwardRotationY);
                 }
                 else
                 {
-                    selectedPreviewTower.towerPreviewRenderer.color = new Color(0.8943396f, 0.2309691f, 0.09955848f);
-
                     selectedPreviewTower.UpdateTowerPreviewColor(false);
                 }
 
@@ -485,7 +481,6 @@ public class PlacementManager : NetworkBehaviour
         }
 
 
-        selectedPreviewTower.towerPreviewRenderer.color = new Color(0.7619722f, 0.8740168f, 0.9547169f);
         selectedPreviewTower.UpdateTowerPreviewColor(true);
 
         if (resetPos)

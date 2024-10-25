@@ -133,7 +133,7 @@ MonoBehaviour:
   startDissolveEffectState: 0.6
   dissolveSpeed: 0.15
   revertDissolveSpeed: 0.25
-  endDisolveValue: -0.9
+  endDisolveValue: -1
 --- !u!1 &1218917413462902268
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,7 +267,7 @@ MonoBehaviour:
   startDissolveEffectState: 0.6
   dissolveSpeed: 0.15
   revertDissolveSpeed: 0.25
-  endDisolveValue: -0.9
+  endDisolveValue: -1
 --- !u!1 &1612987715320767278
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,7 +370,7 @@ MonoBehaviour:
   startDissolveEffectState: 0.6
   dissolveSpeed: 0.15
   revertDissolveSpeed: 0.25
-  endDisolveValue: -0.9
+  endDisolveValue: -1
 --- !u!1 &1687951600790827981
 GameObject:
   m_ObjectHideFlags: 0
@@ -473,7 +473,7 @@ MonoBehaviour:
   startDissolveEffectState: 0.6
   dissolveSpeed: 0.15
   revertDissolveSpeed: 0.25
-  endDisolveValue: -0.9
+  endDisolveValue: -1
 --- !u!1 &1858389631579016813
 GameObject:
   m_ObjectHideFlags: 0
@@ -576,7 +576,7 @@ MonoBehaviour:
   startDissolveEffectState: 0.6
   dissolveSpeed: 0.15
   revertDissolveSpeed: 0.25
-  endDisolveValue: -0.9
+  endDisolveValue: -1
 --- !u!1 &2820569256594366361
 GameObject:
   m_ObjectHideFlags: 0
@@ -679,7 +679,7 @@ MonoBehaviour:
   startDissolveEffectState: 0.6
   dissolveSpeed: 0.15
   revertDissolveSpeed: 0.25
-  endDisolveValue: -0.9
+  endDisolveValue: -1
 --- !u!1 &3448083159982258822
 GameObject:
   m_ObjectHideFlags: 0
@@ -813,7 +813,7 @@ MonoBehaviour:
   startDissolveEffectState: 0.6
   dissolveSpeed: 0.15
   revertDissolveSpeed: 0.25
-  endDisolveValue: -0.9
+  endDisolveValue: -1
 --- !u!1 &4040885687151143514
 GameObject:
   m_ObjectHideFlags: 0
@@ -1014,7 +1014,7 @@ MonoBehaviour:
   startDissolveEffectState: 0.6
   dissolveSpeed: 0.15
   revertDissolveSpeed: 0.25
-  endDisolveValue: -0.9
+  endDisolveValue: -1
 --- !u!1 &5853471675579792015
 GameObject:
   m_ObjectHideFlags: 0
@@ -1117,7 +1117,7 @@ MonoBehaviour:
   startDissolveEffectState: 0.6
   dissolveSpeed: 0.15
   revertDissolveSpeed: 0.25
-  endDisolveValue: -0.9
+  endDisolveValue: -1
 --- !u!1 &6285539767654704257
 GameObject:
   m_ObjectHideFlags: 0
@@ -1220,7 +1220,7 @@ MonoBehaviour:
   startDissolveEffectState: 0.6
   dissolveSpeed: 0.15
   revertDissolveSpeed: 0.25
-  endDisolveValue: -0.9
+  endDisolveValue: -1
 --- !u!1 &6491151226748598903
 GameObject:
   m_ObjectHideFlags: 0
@@ -1323,7 +1323,7 @@ MonoBehaviour:
   startDissolveEffectState: 0.6
   dissolveSpeed: 0.15
   revertDissolveSpeed: 0.25
-  endDisolveValue: -0.9
+  endDisolveValue: -1
 --- !u!1 &7066253855138103682
 GameObject:
   m_ObjectHideFlags: 0
@@ -1834,7 +1834,7 @@ MonoBehaviour:
   startDissolveEffectState: 0.6
   dissolveSpeed: 0.15
   revertDissolveSpeed: 0.25
-  endDisolveValue: -0.9
+  endDisolveValue: -1
 --- !u!1 &8395009438021040787
 GameObject:
   m_ObjectHideFlags: 0
@@ -4866,7 +4866,7 @@ MonoBehaviour:
   startDissolveEffectState: 0.6
   dissolveSpeed: 0.15
   revertDissolveSpeed: 0.25
-  endDisolveValue: -0.9
+  endDisolveValue: -1
 --- !u!1 &1889304013871475737 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8076025009963230247, guid: 0d3425d265cc6ad49a4b8fdc3843d6ae, type: 3}
@@ -4890,7 +4890,7 @@ MonoBehaviour:
   startDissolveEffectState: 0.6
   dissolveSpeed: 0.15
   revertDissolveSpeed: 0.25
-  endDisolveValue: -0.9
+  endDisolveValue: -1
 --- !u!1 &3173863690779980641 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5053107215132752735, guid: 0d3425d265cc6ad49a4b8fdc3843d6ae, type: 3}
@@ -4914,7 +4914,7 @@ MonoBehaviour:
   startDissolveEffectState: 0.6
   dissolveSpeed: 0.15
   revertDissolveSpeed: 0.25
-  endDisolveValue: -0.9
+  endDisolveValue: -1
 --- !u!1 &4972887500540954478 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3398199965413625680, guid: 0d3425d265cc6ad49a4b8fdc3843d6ae, type: 3}
@@ -4938,7 +4938,7 @@ MonoBehaviour:
   startDissolveEffectState: 0.6
   dissolveSpeed: 0.15
   revertDissolveSpeed: 0.25
-  endDisolveValue: -0.9
+  endDisolveValue: -1
 --- !u!4 &6964945533995952225 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 757624015115624543, guid: 0d3425d265cc6ad49a4b8fdc3843d6ae, type: 3}
