@@ -349,6 +349,11 @@ public class TowerCore : NetworkBehaviour
         }
 
         StartCoroutine(GetAttackedAnimations(dmg, stun));
+
+        if (stun)
+        {
+            GodCore.Instance.stunAudio.Play();
+        }
     }
 
 

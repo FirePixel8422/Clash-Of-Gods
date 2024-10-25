@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
-public class AbilityManager : MonoBehaviour
+public class AbilityManager : NetworkBehaviour
 {
     public static AbilityManager Instance;
     private void Awake()
@@ -280,6 +281,39 @@ public class AbilityManager : MonoBehaviour
             }
         }
     }
+
+
+    //[ServerRpc(RequireOwnership = false)]
+    //private void SyncSound_ServerRPC(bool first, ServerRpcParams rpcParams = default)
+    //{
+    //    ulong senderClientId = rpcParams.Receive.SenderClientId;
+
+    //    SyncSound_ClientRPC(senderClientId, first);
+    //}
+
+    //[ClientRpc(RequireOwnership = false)]
+    //private void SyncSound_ClientRPC(ulong senderClientId, bool first)
+    //{
+    //    if(NetworkManager.LocalClientId == senderClientId)
+    //    {
+    //        return;
+    //    }
+
+    //    if (first)
+    //    {
+    //        if (audioController1 != null)
+    //        {
+    //            audioController1.Play();
+    //        }
+    //    }
+    //    else
+    //    {
+    //        if (audioController2 != null)
+    //        {
+    //            audioController2.Play();
+    //        }
+    //    }
+    //}
 
 
 

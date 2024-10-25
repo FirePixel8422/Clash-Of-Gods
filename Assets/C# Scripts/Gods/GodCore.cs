@@ -79,6 +79,9 @@ public class GodCore : NetworkBehaviour
         return false;
     }
 
+    public AudioController stunAudio;
+
+
     public int fireDamage;
     public bool IsHades
     {
