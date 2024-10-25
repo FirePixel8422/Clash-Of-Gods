@@ -7,7 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class AudioController : MonoBehaviour
 {
-    private List<AudioSource> audioSources;
+    public List<AudioSource> audioSources;
 
     public Audio_Type audioType;
     public enum Audio_Type
@@ -46,6 +46,11 @@ public class AudioController : MonoBehaviour
 
     public void UpdateVolume(float main, float sfx, float music)
     {
+        if(audioSources.Count == 0)
+        {
+            return;
+        }
+
         foreach (AudioSource source in audioSources)
         {
             source.volume = main;

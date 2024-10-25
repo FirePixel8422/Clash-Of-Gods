@@ -151,6 +151,7 @@ public class AbilityManager : MonoBehaviour
         if (audioController1 != null)
         {
             audioController1.clips = new AudioClip[1] { clips[0] };
+            audioController1.Init();
         }
 
 
@@ -174,6 +175,7 @@ public class AbilityManager : MonoBehaviour
         if (audioController2 != null)
         {
             audioController2.clips = new AudioClip[1] { clips[1] };
+            audioController2.Init();
         }
 
 
