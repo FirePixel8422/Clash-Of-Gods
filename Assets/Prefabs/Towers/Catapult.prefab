@@ -1752,7 +1752,7 @@ MonoBehaviour:
   actionsPerTurn: 1
   actionsLeft: 0
   useSelectionFlicker: 0
-  soundDelay: 0
+  soundDelay: 1.1
   underAttack: 0
   attackAnimator: {fileID: 7130330409028988296}
   rotPoint: {fileID: 6259808292519990467}
@@ -1797,7 +1797,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioType: 0
-  clips: []
+  clips:
+  - {fileID: 8300000, guid: 2d77befc59025d542b01f4d5cd3fce25, type: 3}
   clipOrder: 0
   autoRefillSources: 0
 --- !u!82 &6805479873598083920

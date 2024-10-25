@@ -1361,7 +1361,7 @@ MonoBehaviour:
   actionsPerTurn: 1
   actionsLeft: 0
   useSelectionFlicker: 0
-  soundDelay: 2
+  soundDelay: 0.2
   underAttack: 0
   attackAnimator: {fileID: 837659766498736537}
   rotPoint: {fileID: 0}

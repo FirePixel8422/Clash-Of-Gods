@@ -311,7 +311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3016083317
+  GlobalObjectIdHash: 190022705
   InScenePlacedSourceGlobalObjectIdHash: 3016083317
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -353,7 +353,7 @@ MonoBehaviour:
   actionsPerTurn: 1
   actionsLeft: 0
   useSelectionFlicker: 0
-  soundDelay: 0
+  soundDelay: 2
   underAttack: 0
   attackAnimator: {fileID: 2102326649516397412}
   rotPoint: {fileID: 803137898017259879}
@@ -398,7 +398,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioType: 0
-  clips: []
+  clips:
+  - {fileID: 8300000, guid: 61104dca9836f4e448fb2b19e5ed3e6c, type: 3}
   clipOrder: 0
   autoRefillSources: 0
 --- !u!82 &4879585077398866193

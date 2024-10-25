@@ -627,7 +627,7 @@ MonoBehaviour:
   actionsPerTurn: 1
   actionsLeft: 0
   useSelectionFlicker: 0
-  soundDelay: 0
+  soundDelay: 0.6
   underAttack: 0
   animatedMoveSpeed: 3
   animatedRotSpeed: 360
