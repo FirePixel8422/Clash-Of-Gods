@@ -71,7 +71,7 @@ MonoBehaviour:
   dmg: 0
   targetSize: 0
   size: 0.1
-  moveSpeed: 8
+  moveSpeed: 4
 --- !u!1001 &6162196472659400316
 PrefabInstance:
   m_ObjectHideFlags: 0

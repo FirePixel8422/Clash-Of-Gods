@@ -261,7 +261,7 @@ public class GodCore : NetworkBehaviour
             Hades.Instance.Init();
             Zeus.Instance.Init();
 
-            GetComponentInChildren<Canvas>().sortingOrder = -1;
+            GetComponentInChildren<Canvas>().sortingOrder = -3;
         }
     }
 #endif

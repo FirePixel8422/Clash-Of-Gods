@@ -354,7 +354,7 @@ public class AbilityManager : NetworkBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.F5))
+        if(Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftAlt) && Input.GetKeyDown(KeyCode.F5))
         {
             //reset cooldown
 

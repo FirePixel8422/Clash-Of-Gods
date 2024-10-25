@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 956821607
+  GlobalObjectIdHash: 4113558909
   InScenePlacedSourceGlobalObjectIdHash: 4113558909
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -71,7 +71,7 @@ MonoBehaviour:
   dmg: 0
   targetSize: 0
   size: -0.25
-  moveSpeed: 3.5
+  moveSpeed: 6
 --- !u!1001 &5711017921991311057
 PrefabInstance:
   m_ObjectHideFlags: 0
