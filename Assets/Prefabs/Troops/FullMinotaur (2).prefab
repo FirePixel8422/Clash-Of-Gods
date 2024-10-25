@@ -652,6 +652,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be5b7b48bffae364c8fc865cf840e5e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSources: []
   audioType: 0
   clips:
   - {fileID: 8300000, guid: 1f5acc00296e36d4691326a209d93794, type: 3}
@@ -821,7 +822,7 @@ MonoBehaviour:
   startDissolveEffectState: 0.75
   dissolveSpeed: 2
   revertDissolveSpeed: 2
-  endDisolveValue: -1.05
+  endDisolveValue: -1.15
 --- !u!1 &5160338076352109290 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6017510239773530926, guid: 8308c3557a75ad940a1ebb32853ac4ac, type: 3}

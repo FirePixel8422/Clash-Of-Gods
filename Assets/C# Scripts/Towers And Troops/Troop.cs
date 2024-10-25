@@ -91,6 +91,11 @@ public class Troop : TowerCore
 
     protected override void OnGrantTurn()
     {
+        if (stunned)
+        {
+            return;
+        }
+
         movesLeft = movesPerTurn;
     }
 

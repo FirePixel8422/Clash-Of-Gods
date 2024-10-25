@@ -5804,6 +5804,14 @@ PrefabInstance:
       value: Throw a lightning strike that will chain between enemies
       objectReference: {fileID: 0}
     - target: {fileID: 1605595269332721995, guid: 3e86c31feac17c841848fd84f43a25e9, type: 3}
+      propertyPath: abilitySounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 0cdac4bb3d5efdb499f9b83b925b1953, type: 3}
+    - target: {fileID: 1605595269332721995, guid: 3e86c31feac17c841848fd84f43a25e9, type: 3}
+      propertyPath: abilitySounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 0cdac4bb3d5efdb499f9b83b925b1953, type: 3}
+    - target: {fileID: 1605595269332721995, guid: 3e86c31feac17c841848fd84f43a25e9, type: 3}
       propertyPath: abilityCooldowns.Array.data[1]
       value: 5
       objectReference: {fileID: 0}

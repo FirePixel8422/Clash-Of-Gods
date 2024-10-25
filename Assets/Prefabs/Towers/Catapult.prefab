@@ -1736,7 +1736,7 @@ MonoBehaviour:
   cDissolves: 0
   nameString: Catapult
   health: 0
-  dmg: 20
+  dmg: 15
   centerPoint: {fileID: 1118918854618070006}
   size: 2.2
   drawSizeGizmos: 1
@@ -1796,6 +1796,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be5b7b48bffae364c8fc865cf840e5e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSources: []
   audioType: 0
   clips:
   - {fileID: 8300000, guid: 2d77befc59025d542b01f4d5cd3fce25, type: 3}

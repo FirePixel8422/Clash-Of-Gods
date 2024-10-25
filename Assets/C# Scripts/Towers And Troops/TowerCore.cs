@@ -223,7 +223,8 @@ public class TowerCore : NetworkBehaviour
 
         if (onTurnStateAnim != null && NetworkManager.LocalClientId == OwnerClientId)
         {
-            onTurnStateAnim.SetTrigger("StartTurn");
+            onTurnStateAnim.SetBool("HasTurn", true);
+            onTurnStateAnim.SetTrigger("GrantTurn");
         }
 
         actionsLeft = actionsPerTurn;
@@ -247,9 +248,9 @@ public class TowerCore : NetworkBehaviour
         actionsLeft -= 1;
         OnLoseAction();
 
-        if (onTurnStateAnim != null && NetworkManager.LocalClientId == OwnerClientId)
+        if (actionsLeft == 0 && onTurnStateAnim != null && NetworkManager.LocalClientId == OwnerClientId)
         {
-            onTurnStateAnim.SetTrigger("EndTurn");
+            onTurnStateAnim.SetBool("HasTurn", false);
         }
     }
     public virtual void OnLoseAction()
@@ -261,7 +262,7 @@ public class TowerCore : NetworkBehaviour
     {
         if (onTurnStateAnim != null && NetworkManager.LocalClientId == OwnerClientId)
         {
-            onTurnStateAnim.SetTrigger("EndTurn");
+            onTurnStateAnim.SetBool("HasTurn", false);
         }
     }
     #endregion
@@ -349,11 +350,6 @@ public class TowerCore : NetworkBehaviour
         }
 
         StartCoroutine(GetAttackedAnimations(dmg, stun));
-
-        if (stun)
-        {
-            GodCore.Instance.stunAudio.Play();
-        }
     }
 
 
@@ -378,6 +374,13 @@ public class TowerCore : NetworkBehaviour
         if (health <= 0)
         {
             OnDeath();
+        }
+
+        yield return new WaitForSeconds(0.75f);
+
+        if (stun)
+        {
+            GodCore.Instance.stunAudio.Play();
         }
     }
     public virtual void OnDeath()
