@@ -5900,6 +5900,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2917374039013712749, guid: 3e86c31feac17c841848fd84f43a25e9, type: 3}
+      propertyPath: stunAudio
+      value: 
+      objectReference: {fileID: 736978143}
+    - target: {fileID: 2917374039013712749, guid: 3e86c31feac17c841848fd84f43a25e9, type: 3}
       propertyPath: addedMoves
       value: 1
       objectReference: {fileID: 0}
@@ -6257,6 +6261,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5051143440219841518, guid: 3e86c31feac17c841848fd84f43a25e9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 736978138}
+    - targetCorrespondingSourceObject: {fileID: 5051143440219841518, guid: 3e86c31feac17c841848fd84f43a25e9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 736978143}
     - targetCorrespondingSourceObject: {fileID: 6969684166506037774, guid: 3e86c31feac17c841848fd84f43a25e9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1899561607}
@@ -6500,6 +6507,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &736978143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736978137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be5b7b48bffae364c8fc865cf840e5e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSources: []
+  audioType: 1
+  clips:
+  - {fileID: 8300000, guid: 1b45c41c7c24e52428341ac681139387, type: 3}
+  clipOrder: 0
+  autoRefillSources: 0
 --- !u!1 &740818959
 GameObject:
   m_ObjectHideFlags: 0
