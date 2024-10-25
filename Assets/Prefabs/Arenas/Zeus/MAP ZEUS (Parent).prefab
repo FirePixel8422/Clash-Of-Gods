@@ -268,8 +268,8 @@ MonoBehaviour:
   soundDelay: 1
   randomPitchMin: 1.1
   randomPitchMax: 0.9
-  randomVolumeMin: 0.3
-  randomVolumeMax: 0.5
+  randomVolumeMin: 0.15
+  randomVolumeMax: 0.25
 --- !u!114 &7412775021633968296
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1761,7 +1761,7 @@ MonoBehaviour:
   towerPreviewRenderer: {fileID: 0}
   rotSpeed: 360
   animShootTime: 0.75
-  projectilePrefab: {fileID: 5372126499117212649, guid: e690e9c7c7ad1134db592fa322f599dc, type: 3}
+  projectilePrefab: {fileID: 3187576636766039687, guid: e690e9c7c7ad1134db592fa322f599dc, type: 3}
   lookingAtTarget: 0
 --- !u!95 &2080586591081109956
 Animator:

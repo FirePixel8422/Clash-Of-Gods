@@ -15,11 +15,16 @@ public class Projectile : NetworkBehaviour
     public float moveSpeed;
 
 
+    private float _speed;
+
 
     public void Init(TowerCore _target, int _dmg)
     {
         target = _target;
         dmg = _dmg;
+
+        _speed = Vector3.Distance(transform.position, target.centerPoint.position) / GridManager.Instance.tileSize * moveSpeed;
+
         StartCoroutine(Updateloop());
     }
 
@@ -47,7 +52,7 @@ public class Projectile : NetworkBehaviour
             }
             else
             {
-                transform.position = VectorLogic.InstantMoveTowards(transform.position, target.centerPoint.position, moveSpeed * Time.deltaTime);
+                transform.position = VectorLogic.InstantMoveTowards(transform.position, target.centerPoint.position, _speed * Time.deltaTime);
 
                 SyncPositionClientRPC(transform.position);
             }
