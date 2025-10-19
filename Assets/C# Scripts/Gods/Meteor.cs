@@ -48,7 +48,7 @@ public class Meteor : NetworkBehaviour
 
         transform.rotation = rotation;
 
-        rb.velocity = transform.forward * moveSpeed;
+        rb.linearVelocity = transform.forward * moveSpeed;
         rb.AddTorque(new Vector3(Random.Range(-1, 1f), Random.Range(-1, 1f), Random.Range(-1, 1f)) * rotateSpeed);
     }
 
